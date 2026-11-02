@@ -1,0 +1,290 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-useradmin-d.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-authentication-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wsutils-d"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-useradmin-d.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-useradmin.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-authentication"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-useradmin.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ArrayOf_xsd_string.cpp"/>
+			<F N="../../ArrayOfGroup.cpp"/>
+			<F N="../../ArrayOfUser.cpp"/>
+			<F N="../../ArrayOfUserGroup.cpp"/>
+			<F N="../../AxisServiceException.cpp"/>
+			<F N="../../Group.cpp"/>
+			<F N="../../Group_Array.cpp"/>
+			<F N="../../User.cpp"/>
+			<F N="../../User_Array.cpp"/>
+			<F N="../../UserAdmin.cpp"/>
+			<F N="../../UserAdminService.cpp"/>
+			<F N="../../UserAdminWrapper.cpp"/>
+			<F N="../../UserGroup.cpp"/>
+			<F N="../../UserGroup_Array.cpp"/>
+			<F N="../../UsersAndGroups.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ArrayOf_xsd_string.hpp"/>
+			<F N="../../ArrayOfGroup.hpp"/>
+			<F N="../../ArrayOfUser.hpp"/>
+			<F N="../../ArrayOfUserGroup.hpp"/>
+			<F N="../../AxisServiceException.hpp"/>
+			<F N="../../Group.hpp"/>
+			<F N="../../Group_Array.hpp"/>
+			<F N="../../User.hpp"/>
+			<F N="../../User_Array.hpp"/>
+			<F N="../../UserAdmin.hpp"/>
+			<F N="../../UserAdminWrapper.hpp"/>
+			<F N="../../UserGroup.hpp"/>
+			<F N="../../UserGroup_Array.hpp"/>
+			<F N="../../UsersAndGroups.hpp"/>
+		</Folder>
+		<Folder
+			Name="Impl"
+			Filters="">
+			<F N="../../ArrayOf_tns2_WsKeyValue.cpp"/>
+			<F N="../../ArrayOf_tns2_WsKeyValue.hpp"/>
+			<F N="../../Impl/UserAdminImpl.cpp"/>
+			<F N="../../Impl/UserAdminImpl.h"/>
+			<F N="../../Impl/UserAdminUtils.cpp"/>
+			<F N="../../Impl/UserAdminUtils.h"/>
+			<F
+				N="UserAdminWs.mak"
+				Type="Makefile"/>
+			<F N="../../WsKeyValue.cpp"/>
+			<F N="../../WsKeyValue.hpp"/>
+			<F N="../../WsKeyValue_Array.cpp"/>
+			<F N="../../WsKeyValue_Array.hpp"/>
+			<F N="../../WsKeyValuePairs.cpp"/>
+			<F N="../../WsKeyValuePairs.hpp"/>
+		</Folder>
+	</Files>
+</Project>

@@ -1,0 +1,16 @@
+com/etlforge/integration/client/admin/server/DownloadServerFileCallback.class
+com/etlforge/integration/client/admin/server/DownloadServerFileCallback$*.class
+com/etlforge/integration/client/admin/server/GetServerFileListCallback.class
+com/etlforge/integration/client/admin/server/GetServerFileListCallback$*.class
+com/etlforge/integration/client/admin/server/MigrateUsersAndGroupsCallback.class
+com/etlforge/integration/client/admin/server/MigrateUsersAndGroupsCallback$*.class
+com/etlforge/integration/client/admin/server/ServerAdministration.class
+com/etlforge/integration/client/admin/server/ServerAdministration$*.class
+com/etlforge/integration/client/admin/server/ServerConfigurationFile.class
+com/etlforge/integration/client/admin/server/ServerConfigurationFile$*.class
+com/etlforge/integration/client/admin/server/ServerFileLocator.class
+com/etlforge/integration/client/admin/server/ServerFileLocator$*.class
+com/etlforge/integration/client/admin/server/UploadServerConfigurationFileCallback.class
+com/etlforge/integration/client/admin/server/UploadServerConfigurationFileCallback$*.class
+com/etlforge/integration/client/admin/server/ViewServerConfigurationFileCallback.class
+com/etlforge/integration/client/admin/server/ViewServerConfigurationFileCallback$*.class

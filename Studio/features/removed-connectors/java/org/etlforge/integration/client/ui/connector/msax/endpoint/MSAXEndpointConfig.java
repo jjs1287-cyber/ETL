@@ -1,0 +1,50 @@
+package org.etlforge.integration.client.ui.connector.msax.endpoint;
+
+import org.etlforge.application.ui.window.ApplicationWindow;
+import org.etlforge.integration.client.entity.valuecache.ValueCache;
+import org.etlforge.integration.client.ui.connector.EndpointSearchValuesCollector;
+import org.etlforge.integration.client.ui.connector.TestConnectionAction;
+import org.etlforge.integration.client.ui.connector.msax.endpoint.page.MSAXEndpointPage;
+import org.etlforge.integration.client.ui.connector.msax.endpoint.page.MSAXEndpointPageConfig;
+import org.etlforge.integration.client.ui.interchange.component.page.entity.IntegrationEntityPage;
+import org.etlforge.integration.client.ui.interchange.component.page.entity.PageConfig;
+import org.etlforge.integration.client.ui.interchange.entity.AbstractEntityConfig;
+import org.etlforge.integration.data.connector.MSAXEndpoint;
+import org.etlforge.integration.data.entity.EntityType;
+import org.etlforge.integration.data.entity.IntegrationEntity;
+import org.etlforge.integration.data.persist.ProjectPersistor;
+import org.etlforge.integration.data.project.IntegrationProject;
+
+public final class MSAXEndpointConfig extends AbstractEntityConfig {
+   private TestConnectionAction testConnectionAction;
+   private ValueCache<MSAXEndpoint> valueCache = ValueCache.EMPTY;
+
+   public MSAXEndpointConfig() {
+      super(EntityType.MSAXEndpoint);
+      this.setSearchValuesCollector(new EndpointSearchValuesCollector());
+      this.setSearchAndReplaceMetaData(new MSAXEndpointSearchAndReplaceProperties());
+   }
+
+   public void setTestConnectionAction(TestConnectionAction var1) {
+      this.testConnectionAction = var1;
+   }
+
+   public void setValueCache(ValueCache<MSAXEndpoint> var1) {
+      this.valueCache = var1;
+   }
+
+   @Override
+   protected PageConfig createPageConfig(ApplicationWindow var1, IntegrationEntity var2, ProjectPersistor var3) {
+      return new MSAXEndpointPageConfig(var1, var3, this.testConnectionAction);
+   }
+
+   @Override
+   protected IntegrationEntityPage createNewPage(IntegrationEntity var1) {
+      return new MSAXEndpointPage((MSAXEndpoint)var1, this.valueCache);
+   }
+
+   @Override
+   public void updateValueCache(IntegrationProject var1) {
+      this.valueCache.update(var1.getAllEntitiesOfClass(MSAXEndpoint.class));
+   }
+}

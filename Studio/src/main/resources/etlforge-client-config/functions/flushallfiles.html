@@ -1,0 +1,14 @@
+<html><p>
+				Persists data written to a file buffer with <tt>WriteFile()</tt>.
+				If FlushAllFiles are called with a target_id as argument, all files
+				written using that target will be flushed (see FlushFile()).
+				If FlushAllFiles is called without any argument,
+				all files written using WriteFile() will be persisted to their respective
+				targets.
+				</p><br><h2>Example:</h2><code><font size="4">
+				WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents);<br>
+				WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents, "copy.txt");<br>
+				<br>
+				// Writes both files to the target<br>
+				FlushAllFiles("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;");<br>
+				</font></code></html>

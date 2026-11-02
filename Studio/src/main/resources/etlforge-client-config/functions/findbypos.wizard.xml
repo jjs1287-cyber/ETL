@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>Enter the &amp;position (1-based) of the instance you are looking for:</Label>
+		<Description>The instance to retrieve. If less than zero counting will begin with the last row.</Description>
+	</Argument>
+	<Argument>
+		<Label>Enter the loop &amp;node that you are looking in:</Label>
+		<Description></Description>
+	</Argument>
+</Wizard>

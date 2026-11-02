@@ -1,0 +1,30 @@
+<html>
+This function let the user generate the target loop elements according to the ordering of one or more arrays.
+<p>
+The first argument is the name of the target loop elements to sort.
+The subsequent arguments are a list of arrays to sort. All the sorting arrays must have the same size as the number of target instances.
+<p>
+The sorting order is assumed to be ascending, and an optional scalar argument can be put next to the sorting array to override the default sorting order.
+If the scalar argument is false, the sorting order is descending.
+<p>
+The first appeared sorting array will get sort first, and then the next... 
+<p>
+The call of this function must be made in the mappings of the parent node.
+If there is no field to map in the parent node, user can just create a script or a condition for that.
+<p>
+Notice that if a source data element is used to define a array for ordering, 
+a '#' mark will be automatically 
+inserted to the source data element path-name when the expression is saved.
+
+<p>
+A null data element is return from this function, and should be ignored.
+<p>
+Example:
+<p>
+<code><font size="4">
+SortInstances("detail", Invoice$Item#.price, false, Invoice$Item#.quantity);<br>
+// '#' is auto inserted when mapping is saved
+//  the target sub elements detail will be ordered with price from high to low and, if the prices are the same, ordered with quantity from low to high
+</font></code>
+<p>
+</html>

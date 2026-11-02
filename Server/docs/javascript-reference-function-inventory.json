@@ -1,0 +1,298 @@
+{
+  "source": "C:\\SFTP\\endowance\\NewETL\\Jitterbit Studio 11.67 compiled\\lib\\jitterbit-studio-config-1.0.0-SNAPSHOT.jar",
+  "resource": "FormulaBuilder.JavaScriptFunctions.xml",
+  "resource_sha256": "3ca33864d899cb5db5cf46de59b2a71ea3334fcd57d2a3b078ebe4e7b75aca40",
+  "note": "Observed editor catalog; not an exhaustive runtime allowlist. Grammar zero placeholders for built-ins are not authoritative arities. ETLForge host namespace will be ETLForge.",
+  "categories": [
+    {
+      "category": "Jitterbit",
+      "entries": [
+        {
+          "name": "Jitterbit.ReadFile",
+          "signature": "string Jitterbit.ReadFile(string source_id[, string file_name])",
+          "grammar": "Jitterbit.ReadFile;s?"
+        },
+        {
+          "name": "Jitterbit.WriteFile",
+          "signature": "void Jitterbit.WriteFile(string target_id, type file_contents[, string file_name])",
+          "grammar": "Jitterbit.WriteFile;ss?"
+        },
+        {
+          "name": "Jitterbit.DbExecute",
+          "signature": "type Jitterbit.DbExecute(string database_id, string sql_str, ...)",
+          "grammar": "Jitterbit.DbExecute;ss."
+        },
+        {
+          "name": "Jitterbit.DbLookup",
+          "signature": "string Jitterbit.DbLookup(string database_id, string sql_str)",
+          "grammar": "Jitterbit.DbLookup;2"
+        },
+        {
+          "name": "Jitterbit.GetVar",
+          "signature": "string Jitterbit.GetVar(string jitterbit_variable_name)",
+          "grammar": "Jitterbit.GetVar;1"
+        },
+        {
+          "name": "Jitterbit.SetVar",
+          "signature": "string Jitterbit.SetVar(string jitterbit_variable_name, string value)",
+          "grammar": "Jitterbit.SetVar;2"
+        },
+        {
+          "name": "WriteToOperationLog",
+          "signature": "String WriteToOperationLog(String message)",
+          "grammar": "WriteToOperationLog;1"
+        },
+        {
+          "name": "SetScriptResult",
+          "signature": "void SetScriptResult(String data)",
+          "grammar": "SetScriptResult;1"
+        },
+        {
+          "name": "SetScriptOutput",
+          "signature": "void SetScriptOutput(String data)",
+          "grammar": "SetScriptOutput;1"
+        }
+      ]
+    },
+    {
+      "category": "Keywords",
+      "entries": [
+        {
+          "name": "try",
+          "signature": "try",
+          "grammar": "try;0"
+        },
+        {
+          "name": "catch",
+          "signature": "catch",
+          "grammar": "catch;0"
+        },
+        {
+          "name": "switch",
+          "signature": "switch",
+          "grammar": "switch;0"
+        },
+        {
+          "name": "while",
+          "signature": "while",
+          "grammar": "while;0"
+        },
+        {
+          "name": "break",
+          "signature": "break",
+          "grammar": "break;0"
+        },
+        {
+          "name": "continue",
+          "signature": "continue",
+          "grammar": "continue;0"
+        },
+        {
+          "name": "do",
+          "signature": "do",
+          "grammar": "do;0"
+        },
+        {
+          "name": "for",
+          "signature": "for",
+          "grammar": "for;0"
+        },
+        {
+          "name": "in",
+          "signature": "in",
+          "grammar": "in;0"
+        },
+        {
+          "name": "function",
+          "signature": "function",
+          "grammar": "function;0"
+        },
+        {
+          "name": "if",
+          "signature": "if",
+          "grammar": "if;0"
+        },
+        {
+          "name": "else",
+          "signature": "else",
+          "grammar": "else;0"
+        },
+        {
+          "name": "return",
+          "signature": "return",
+          "grammar": "return;0"
+        },
+        {
+          "name": "throw",
+          "signature": "throw",
+          "grammar": "throw;0"
+        },
+        {
+          "name": "finally",
+          "signature": "finally",
+          "grammar": "finally;0"
+        },
+        {
+          "name": "typeof",
+          "signature": "typeof",
+          "grammar": "typeof;0"
+        },
+        {
+          "name": "delete",
+          "signature": "delete",
+          "grammar": "delete;0"
+        },
+        {
+          "name": "instanceof",
+          "signature": "instanceof",
+          "grammar": "instanceof;0"
+        },
+        {
+          "name": "void",
+          "signature": "void",
+          "grammar": "void;0"
+        },
+        {
+          "name": "var",
+          "signature": "var",
+          "grammar": "var;0"
+        },
+        {
+          "name": "Infinity",
+          "signature": "Infinity",
+          "grammar": "Infinity;0"
+        },
+        {
+          "name": "NaN",
+          "signature": "NaN",
+          "grammar": "NaN;0"
+        },
+        {
+          "name": "undefined",
+          "signature": "undefined",
+          "grammar": "undefined;0"
+        }
+      ]
+    },
+    {
+      "category": "Common Functions",
+      "entries": [
+        {
+          "name": "decodeURI",
+          "signature": "decodeURI",
+          "grammar": "decodeURI;0"
+        },
+        {
+          "name": "decodeURIComponent",
+          "signature": "decodeURIComponent",
+          "grammar": "decodeURIComponent;0"
+        },
+        {
+          "name": "encodeURI",
+          "signature": "encodeURI",
+          "grammar": "encodeURI;0"
+        },
+        {
+          "name": "encodeURIComponent",
+          "signature": "encodeURIComponent",
+          "grammar": "encodeURIComponent;0"
+        },
+        {
+          "name": "eval",
+          "signature": "eval",
+          "grammar": "eval;0"
+        },
+        {
+          "name": "isFinite",
+          "signature": "isFinite",
+          "grammar": "isFinite;0"
+        },
+        {
+          "name": "isNaN",
+          "signature": "isNaN",
+          "grammar": "isNaN;0"
+        },
+        {
+          "name": "Number",
+          "signature": "Number",
+          "grammar": "Number;0"
+        },
+        {
+          "name": "parseFloat",
+          "signature": "parseFloat",
+          "grammar": "parseFloat;0"
+        },
+        {
+          "name": "parseInt",
+          "signature": "parseInt",
+          "grammar": "parseInt;0"
+        },
+        {
+          "name": "String",
+          "signature": "String",
+          "grammar": "String;0"
+        },
+        {
+          "name": "JSON.parse",
+          "signature": "JSON.parse",
+          "grammar": "JSON.parse;0"
+        },
+        {
+          "name": "JSON.stringify",
+          "signature": "JSON.stringify",
+          "grammar": "JSON.stringify;0"
+        }
+      ]
+    },
+    {
+      "category": "Math",
+      "entries": [
+        {
+          "name": "Math.abs",
+          "signature": "Math.abs",
+          "grammar": "Math.abs;0"
+        },
+        {
+          "name": "Math.ceil",
+          "signature": "Math.ceil",
+          "grammar": "Math.ceil;0"
+        },
+        {
+          "name": "Math.exp",
+          "signature": "Math.exp",
+          "grammar": "Math.exp;0"
+        },
+        {
+          "name": "Math.floor",
+          "signature": "Math.floor",
+          "grammar": "Math.floor;0"
+        },
+        {
+          "name": "Math.max",
+          "signature": "Math.max",
+          "grammar": "Math.max;0"
+        },
+        {
+          "name": "Math.min",
+          "signature": "Math.min",
+          "grammar": "Math.min;0"
+        },
+        {
+          "name": "Math.pow",
+          "signature": "Math.pow",
+          "grammar": "Math.pow;0"
+        },
+        {
+          "name": "Math.random",
+          "signature": "Math.random",
+          "grammar": "Math.random;0"
+        },
+        {
+          "name": "Math.sqrt",
+          "signature": "Math.sqrt",
+          "grammar": "Math.sqrt;0"
+        }
+      ]
+    }
+  ]
+}

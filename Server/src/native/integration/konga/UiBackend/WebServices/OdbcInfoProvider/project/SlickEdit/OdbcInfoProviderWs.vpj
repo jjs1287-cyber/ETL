@@ -1,0 +1,301 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-odbc_infoprovider-d.so"
+		CompilerConfigName="GCC-3.4.2-i386-redhat-linux"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../../.."/>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-odbc_infoprovider-d.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-authentication-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-operationcontext-d"/>
+			<Lib File="-lkonga-schemainfo-d"/>
+			<Lib File="-lkonga-trandbutils-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wsutils-d"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-odbc_infoprovider.so"
+		CompilerConfigName="GCC-3.4.2-i386-redhat-linux"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../../.."/>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-odbc_infoprovider.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-authentication"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-operationcontext"/>
+			<Lib File="-lkonga-schemainfo"/>
+			<Lib File="-lkonga-trandbutils"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ArrayOf_xsd_string.cpp"/>
+			<F N="../../ArrayOfWsDatabaseColumn.cpp"/>
+			<F N="../../ArrayOfWsDatabaseObject.cpp"/>
+			<F N="../../ArrayOfWsOdbcDriverDescriptor.cpp"/>
+			<F N="../../AxisServiceException.cpp"/>
+			<F N="../../OdbcInfoProvider.cpp"/>
+			<F N="../../OdbcInfoProviderService.cpp"/>
+			<F N="../../OdbcInfoProviderWrapper.cpp"/>
+			<F N="../../WsDatabaseColumn.cpp"/>
+			<F N="../../WsDatabaseColumn_Array.cpp"/>
+			<F N="../../WsDatabaseDriverInfo.cpp"/>
+			<F N="../../WsDatabaseInfo.cpp"/>
+			<F N="../../WsDatabaseObject.cpp"/>
+			<F N="../../WsDatabaseObject_Array.cpp"/>
+			<F N="../../WsOdbcDriverDescriptor.cpp"/>
+			<F N="../../WsOdbcDriverDescriptor_Array.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ArrayOf_xsd_string.hpp"/>
+			<F N="../../ArrayOfWsDatabaseColumn.hpp"/>
+			<F N="../../ArrayOfWsDatabaseObject.hpp"/>
+			<F N="../../ArrayOfWsOdbcDriverDescriptor.hpp"/>
+			<F N="../../AxisServiceException.hpp"/>
+			<F N="../../OdbcInfoProvider.hpp"/>
+			<F N="../../OdbcInfoProviderWrapper.hpp"/>
+			<F N="../../WsDatabaseColumn.hpp"/>
+			<F N="../../WsDatabaseColumn_Array.hpp"/>
+			<F N="../../WsDatabaseDriverInfo.hpp"/>
+			<F N="../../WsDatabaseInfo.hpp"/>
+			<F N="../../WsDatabaseObject.hpp"/>
+			<F N="../../WsDatabaseObject_Array.hpp"/>
+			<F N="../../WsOdbcDriverDescriptor.hpp"/>
+			<F N="../../WsOdbcDriverDescriptor_Array.hpp"/>
+		</Folder>
+		<Folder
+			Name="Impl"
+			Filters="">
+			<F N="../../Impl/OdbcInfoProviderImpl.cpp"/>
+			<F N="../../Impl/OdbcInfoProviderImpl.h"/>
+			<F
+				N="OdbcInfoProviderWs.mak"
+				Type="Makefile"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="*.wsdd,*.bat,*.wsdl">
+			<F N="../../deploy.wsdd"/>
+			<F N="../../generate_stubs.bat"/>
+			<F N="../../generate_wsdl.bat"/>
+			<F N="../../konga_odbc_infoprovider.wsdl"/>
+			<F N="../../undeploy.wsdd"/>
+			<F N="../../wsdl_generation_settings.bat"/>
+		</Folder>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

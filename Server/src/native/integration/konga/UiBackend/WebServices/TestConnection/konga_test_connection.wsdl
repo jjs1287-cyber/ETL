@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.connection.TestConnection" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.connection.TestConnection" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.connection.TestConnection" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.connection.TestConnection" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="testFileTypeConnection">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="impl:ConnectionInfo"/>
+      <element name="in3" type="xsd:string"/>
+      <element name="in4" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ConnectionInfo">
+    <sequence>
+     <element name="Keys" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="KeyValues" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <element name="testFileTypeConnectionResponse">
+    <complexType>
+     <sequence>
+      <element name="testFileTypeConnectionReturn" type="impl:FileList"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="FileList">
+    <sequence>
+     <element name="Files" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <element name="testDatabaseConnection">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="impl:ConnectionInfo"/>
+      <element name="in3" type="xsd:string"/>
+      <element name="in4" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testDatabaseConnectionResponse">
+    <complexType>
+     <sequence>
+      <element name="testDatabaseConnectionReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testLdapConnection">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="impl:ConnectionInfo"/>
+      <element name="in3" type="xsd:string"/>
+      <element name="in4" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testLdapConnectionResponse">
+    <complexType>
+     <sequence>
+      <element name="testLdapConnectionReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="testDatabaseConnectionResponse">
+
+      <wsdl:part element="impl:testDatabaseConnectionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testLdapConnectionResponse">
+
+      <wsdl:part element="impl:testLdapConnectionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testFileTypeConnectionResponse">
+
+      <wsdl:part element="impl:testFileTypeConnectionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testLdapConnectionRequest">
+
+      <wsdl:part element="impl:testLdapConnection" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testFileTypeConnectionRequest">
+
+      <wsdl:part element="impl:testFileTypeConnection" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testDatabaseConnectionRequest">
+
+      <wsdl:part element="impl:testDatabaseConnection" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="TestConnection">
+
+      <wsdl:operation name="testFileTypeConnection">
+
+         <wsdl:input message="impl:testFileTypeConnectionRequest" name="testFileTypeConnectionRequest"/>
+
+         <wsdl:output message="impl:testFileTypeConnectionResponse" name="testFileTypeConnectionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testDatabaseConnection">
+
+         <wsdl:input message="impl:testDatabaseConnectionRequest" name="testDatabaseConnectionRequest"/>
+
+         <wsdl:output message="impl:testDatabaseConnectionResponse" name="testDatabaseConnectionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testLdapConnection">
+
+         <wsdl:input message="impl:testLdapConnectionRequest" name="testLdapConnectionRequest"/>
+
+         <wsdl:output message="impl:testLdapConnectionResponse" name="testLdapConnectionResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_test_connectionSoapBinding" type="impl:TestConnection">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="testFileTypeConnection">
+
+         <wsdlsoap:operation soapAction="konga_test_connection#testFileTypeConnection"/>
+
+         <wsdl:input name="testFileTypeConnectionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testFileTypeConnectionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testDatabaseConnection">
+
+         <wsdlsoap:operation soapAction="konga_test_connection#testDatabaseConnection"/>
+
+         <wsdl:input name="testDatabaseConnectionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testDatabaseConnectionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testLdapConnection">
+
+         <wsdlsoap:operation soapAction="konga_test_connection#testLdapConnection"/>
+
+         <wsdl:input name="testLdapConnectionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testLdapConnectionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TestConnectionService">
+
+      <wsdl:port binding="impl:konga_test_connectionSoapBinding" name="konga_test_connection">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_test_connection"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

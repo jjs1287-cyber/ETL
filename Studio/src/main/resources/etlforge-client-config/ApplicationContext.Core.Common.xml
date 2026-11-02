@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="platform.Home"
+		class="org.etlforge.integration.client.runtime.ClientPlatform"
+		factory-method="getApplicationHome" />
+		
+	<bean id="platform.ServerDir" class="org.etlforge.integration.client.runtime.appdir.ServerDirectoryImpl">
+		<constructor-arg ref="platform.Home" />
+	</bean>
+		
+	<bean id="platform.ProjectDir" class="org.etlforge.integration.client.runtime.appdir.ProjectDirectoryImpl">
+		<constructor-arg ref="platform.Home" />
+	</bean>
+		
+	<bean id="platform.BackupDir" class="org.etlforge.integration.client.runtime.appdir.BackupDirectoryImpl">
+		<constructor-arg ref="platform.Home" />
+	</bean>
+
+	<bean id="platform.AppDir" class="org.etlforge.integration.client.runtime.appdir.ClientApplicationDirectoryImpl">
+		<constructor-arg ref="platform.Home" />
+		<constructor-arg ref="platform.ServerDir" />
+		<constructor-arg ref="platform.ProjectDir" />
+		<constructor-arg ref="platform.BackupDir" />
+	</bean>
+		
+	<bean id="platform.CacheDir"
+		factory-bean="platform.AppDir"
+		factory-method="getCacheDirectory" />
+		
+	<bean id="platform.CacheDirLocation"
+		factory-bean="platform.CacheDir"
+		factory-method="getLocation" />
+
+	<bean id="platform.Init.Condition" class="org.etlforge.integration.client.runtime.ClientPlatformInitializationCondition" />
+
+	<bean id="platform.FileInputHandler" class="org.etlforge.integration.client.runtime.FileInputArgumentHandlerImpl" />
+	<bean id="platform.InstanceLock" class="org.etlforge.integration.client.runtime.lock.SocketLock">
+		<property name="fileInputHandler">
+			<ref bean="platform.FileInputHandler" />
+		</property>
+	</bean>
+	<bean id="platform.CommandLineParser" class="org.etlforge.application.commandline.JakartaCLICommandLineParser">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.runtime.appdir.AppDirOption" />
+				<bean class="org.etlforge.integration.client.runtime.JitterPackOption">
+					<constructor-arg ref="platform.FileInputHandler" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.core.ViewStartupOption" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="platform.UserManager" class="org.etlforge.integration.client.server.user.DefaultUserManager" />
+	
+	<bean id="platform.DebugService" class="org.etlforge.integration.debug.client.DebugService" lazy-init="true">
+		<property name="testInProgressStrategy">
+			<bean class="org.etlforge.integration.client.ui.debug.InteractiveTestInProgressStrategy">
+				<constructor-arg>
+					<bean class="org.etlforge.integration.client.project.CurrentProjectEntityLookup">
+						<constructor-arg ref="platform.ProjectManager" />
+					</bean>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="platform.BackupService" class="org.etlforge.integration.client.project.backup.ProjectBackupServiceImpl" lazy-init="true">
+		<constructor-arg ref="platform.BackupDir" />
+	</bean>
+	
+	<!-- EntityTypes.Edition defines a list of EntityTypes that are available only in 
+		 certain client editions. For example, the connector types are enterprise only. 
+		 The bean is defined as an empty list by default. -->
+	<bean id="EntityTypes.Edition" class="java.util.Collections" factory-method="emptyList" />
+	<bean id="EntityTypes" class="org.etlforge.integration.data.entity.EntityTypes">
+		<constructor-arg>
+			<util:list value-type="org.etlforge.integration.data.entity.EntityType">
+				<value>Operation</value>
+				<value>Transformation</value>
+				<value>Source</value>
+				<value>Target</value>
+				<value>WebServiceCall</value>
+				<value>HttpEndpoint</value>
+				<value>Document</value>
+				<value>Schedule</value>
+				<value>EmailMessage</value>
+				<value>Script</value><value>XsltTransform</value><value>ProjectVariable</value>
+				<value>SalesforceConnector</value>
+				<value>SalesforceQuery</value>
+				<value>SalesforceUpsert</value>
+				<value>SalesforceCreate</value>
+				<value>SalesforceUpdate</value>
+				<value>SalesforceDelete</value>
+				<value>SalesforceBulkLoad</value>
+				<value>DatabaseToDatabaseConnect</value>
+				<value>DatabaseToTextConnect</value>
+				<value>DatabaseToXmlConnect</value>
+				<value>TextToDatabaseConnect</value>
+				<value>XmlToDatabaseConnect</value>
+			</util:list>
+		</constructor-arg>
+		<constructor-arg ref="EntityTypes.Edition" />
+	</bean>
+	<bean id="EntityTypes.Wizards" factory-bean="EntityTypes" factory-method="wizardTypes" />
+
+	<!-- OperationTypes.Edition defines a list of OperationTypes that are available only in 
+		 certain client editions. For example, the connector types are enterprise only. 
+		 The bean is defined as an empty list by default. -->
+	<bean id="OperationTypes.Edition" class="java.util.Collections" factory-method="emptyList" />
+	<bean id="OperationTypes" class="org.etlforge.integration.data.entity.operation.OperationTypes">
+		<constructor-arg>
+			<util:list>
+				<util:constant static-field="org.etlforge.integration.data.entity.operation.TransformationOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.operation.ScriptOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.operation.ArchiveOperationType.TYPE" /><util:constant static-field="org.etlforge.integration.data.entity.operation.XsltOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.operation.WebServiceOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.operation.HostedWebServiceOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.sfdc.BulkLoadOperationType.TYPE" />
+				<util:constant static-field="org.etlforge.integration.data.entity.sfdc.BulkQueryOperationType.TYPE" />
+			</util:list>
+		</constructor-arg>
+		<constructor-arg ref="OperationTypes.Edition" />
+	</bean>
+
+	<bean id="core.RecentProjects" class="org.etlforge.integration.client.project.RecentProjectsImpl" lazy-init="true">
+		<constructor-arg>
+			<bean class="java.io.File">
+				<constructor-arg ref="platform.Home" />
+				<constructor-arg value="recent_projects.xml" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="platform.ProjectManager" class="org.etlforge.integration.client.project.ProjectManager" lazy-init="true">
+		<constructor-arg ref="platform.ProjectDir" />
+		<constructor-arg ref="EntityTypes" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.project.persistor.v20.ProjectDataLoaderFactoryImpl">
+				<property name="logger">
+					<util:constant static-field="org.etlforge.integration.client.project.ProjectDataLoaderLog.LOG" />
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="core.RecentProjects" />
+		<constructor-arg ref="platform.BackupService" />
+		<constructor-arg ref="jitterpack.exporter" />
+		<property name="upgradeStrategy">
+			<bean class="org.etlforge.integration.client.ui.interchange.InteractiveUpgradeStrategy">
+				<constructor-arg ref="platform.ProjectManager" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="core.CurrentProject" class="org.etlforge.integration.client.project.CurrentProjectServiceImpl" 
+			factory-method="create"
+			lazy-init="true">
+		<constructor-arg ref="platform.ProjectManager" />
+	</bean>
+
+	<bean id="platform.DeployManager" class="org.etlforge.integration.client.project.deploy.DeployManager" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.project.deploy.DeployBackup">
+					<constructor-arg ref="platform.ProjectManager" />
+				</bean>
+			</list>
+		</constructor-arg>
+		<property name="preDeployJobFactories" ref="core.PreDeployJobs" />
+	</bean>
+
+	<bean id="platform.ServerInfoStore" factory-bean="platform.ServerDir" factory-method="getInformationStore" />
+	
+	<bean id="platform.ServerManager" class="org.etlforge.integration.client.server.ServerManager">
+		<constructor-arg ref="platform.ServerInfoStore" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.server.ClientServerPorts" />
+		</constructor-arg>
+		<constructor-arg ref="platform.UserManager" />
+		<property name="loginApi">
+			<ref bean="server.LoginApi" />
+		</property>
+		<property name="userAdmin">
+			<ref bean="server.UserAdmin" />
+		</property>
+	</bean>
+
+	<bean id="platform.LoginService" factory-bean="platform.ServerManager" factory-method="getLoginService" />
+
+	<bean id="platform.ErrorDetailsGenerator" class="org.etlforge.integration.client.runtime.ClientErrorDetailsFactory">
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	
+	<bean id="ui.ViewManager" class="org.etlforge.integration.client.ui.ViewManagerImpl" />
+
+	<bean id="ui.CommandConsole" class="org.etlforge.cli.ui.CommandConsole" lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.cli.ui.CommandLineField">
+				<property name="width" value="100" />
+			</bean>
+		</constructor-arg>
+	</bean>
+			
+	<bean id="ui.AppWin" class="org.etlforge.integration.client.ui.core.window.MainWindow" lazy-init="true">
+		<constructor-arg ref="ui.ViewManager" />
+		<constructor-arg ref="ui.CommandConsole" />
+		<property name="sections">
+			<map>
+				<entry key="CENTER">
+					<bean class="org.etlforge.application.ui.window.section.SingleContentWindowSection">
+						<constructor-arg ref="ui.AppWin" />
+					</bean>
+				</entry>
+				<entry key="WEST">
+					<bean class="org.etlforge.application.ui.window.section.MultiContentWindowSection">
+						<constructor-arg ref="ui.AppWin" />
+						<constructor-arg><value>false</value></constructor-arg>
+						<constructor-arg><value>false</value></constructor-arg>
+					</bean>
+				</entry>
+				<entry key="EAST">
+					<bean class="org.etlforge.application.ui.window.section.MultiContentWindowSection">
+						<constructor-arg ref="ui.AppWin" />
+						<constructor-arg><value>true</value></constructor-arg>
+						<constructor-arg><value>false</value></constructor-arg>
+					</bean>
+				</entry>
+				<entry key="SOUTH">
+					<bean class="org.etlforge.application.ui.window.section.MultiContentWindowSection">
+						<constructor-arg ref="ui.AppWin" />
+						<constructor-arg><value>true</value></constructor-arg>
+						<constructor-arg><value>false</value></constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ui.ActiveObjectService" factory-bean="ui.AppWin" factory-method="getActiveObjectService" lazy-init="true" />
+
+	<bean id="ui.EditorService" factory-bean="ui.AppWin" factory-method="getEditorService" lazy-init="true" />
+	<bean id="ui.RecentlyClosedEditors" class="org.etlforge.application.ui.window.editor.service.RecentlyClosedEditors" lazy-init="true">
+		<constructor-arg ref="ui.EditorService" />
+	</bean>
+
+	<bean id="ui.StartupJitterpackHandler" class="org.etlforge.integration.client.ui.jitterpack.StartupJitterPackHandlerImpl" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="jitterpack.importer.factory" />
+		<property name="condition">
+			<ref bean="platform.Init.Condition" />
+		</property>
+	</bean>
+
+	<bean id="ui.StartupJitterpackHandler.Callback" class="org.etlforge.integration.client.ui.StartupJitterpackUnpackCallback" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ui.OpeningScreen" />
+	</bean>
+
+	<bean id="contextMenu.Separator" class="org.etlforge.application.ui.action.popup.PopupMenuSeparatorFactory" factory-method="instance" />
+
+	<bean id="activity.action.Log" class="org.etlforge.integration.activity.ui.core.action.ShowLogAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationLogProvider" />
+	</bean>
+	<bean id="activity.action.Queue" class="org.etlforge.integration.activity.ui.core.action.ShowQueueAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationQueueProvider" />
+	</bean>
+	<bean id="activity.action.History" class="org.etlforge.integration.activity.ui.core.action.ShowHistoryAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationHistoryProvider" />
+		<constructor-arg ref="server.SourceHistoryProvider" />
+	</bean>
+	<bean id="ui.AppWin.Publisher" class="org.etlforge.integration.client.ui.ApplicationWindowPublisher" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="ui.OpeningScreen" />
+		<constructor-arg ref="ui.ViewManager" />
+		<constructor-arg>
+			<list>
+				<ref bean="interchange.Shell" />
+				<ref bean="admin.Shell" />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="ui.CommandConsole" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.core.main.ConnectionStatusPanel" />
+		</constructor-arg>
+		<property name="connectionService" ref="platform.ServerManager" />
+		<property name="fileInputHandler" ref="platform.FileInputHandler" />
+		<property name="loginAction" ref="action.core.Login" />
+		<property name="menus">
+			<list>
+				<ref bean="menu.File" />
+				<ref bean="menu.Edit" />
+				<ref bean="menu.View" />
+				<ref bean="menu.Actions" />
+                <ref bean="menu.SourceControl" />
+				<null />
+				<ref bean="menu.Windows" />
+				<ref bean="menu.Help" />
+				<ref bean="menu.Debug" />
+			</list>
+		</property>
+		<property name="menuExtensions">
+			<list>
+				<bean class="org.etlforge.application.ui.window.menu.ViewMenuExtension">
+					<constructor-arg>
+						<list>
+							<ref bean="action.core.KnownServers" />
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.window.menu.ActionsMenuExtension">
+					<constructor-arg>
+						<list>
+							<ref bean="action.sourcecontrol.commit" />
+                            <ref bean="action.core.Login" />
+							<ref bean="action.core.LoginDebug" />
+							<ref bean="action.core.Logout" />
+							<ref bean="action.core.UpdateUserProfile" />
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.window.menu.HelpMenuExtension"><constructor-arg>
+						<list>
+							<ref bean="action.core.Forum" />
+							<ref bean="action.core.Tutorial" />
+						</list>
+					</constructor-arg></bean>
+			</list>
+		</property>
+		<property name="toolbars">
+			<list>
+				<ref bean="toolbar.File" />
+				<ref bean="toolbar.Navigation" />
+				<ref bean="toolbar.Edit" />
+				<ref bean="toolbar.Actions" />
+			</list>
+		</property>
+		<property name="reopenLastClosedEditorAction">
+			<bean factory-bean="ui.RecentlyClosedEditors" factory-method="getReOpenLastClosedAction" />
+		</property>
+		<property name="commandActions">
+			<map>
+				<entry key="login" value-ref="action.core.Login" />
+				<entry key="logout" value-ref="action.core.Logout" />
+				<entry key="servers" value-ref="action.core.KnownServers" />
+				<entry key="save" value-ref="action.Save" />
+				<entry key="save all" value-ref="action.SaveAll" />
+				<entry key="undo" value-ref="action.Undo" />
+				<entry key="redo" value-ref="action.Redo" />
+				<entry key="errors" value-ref="action.ErrorLog" />
+				<entry key="logs" value-ref="action.Logs" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ui.OpeningScreen" class="org.etlforge.integration.client.ui.core.main.OpeningScreen" lazy-init="true">
+		<constructor-arg ref="interchange.Launcher" />
+		<constructor-arg ref="administration.Launcher" />
+	</bean>
+
+	<bean id="GroovyConsole" class="org.etlforge.application.ui.groovy.GroovyConsole" lazy-init="true">
+		<property name="commonImports">
+			<bean class="org.etlforge.integration.internal.groovy.ClientCommonImports" />
+		</property>
+	</bean>
+
+	<bean id="jitterpack.importer.factory" class="org.etlforge.integration.jitterpack.impl.ImporterFactoryImpl">
+		<constructor-arg ref="platform.ProjectManager" />
+	</bean>
+
+	<bean id="jitterpack.exporter" class="org.etlforge.integration.jitterpack.impl.DefaultExporter" />
+
+	<bean id="jitterpack.locator" class="org.etlforge.integration.jitterpack.impl.DefaultJitterPackLocator" scope="prototype" />
+
+	<bean id="platform.DataCacheService" class="org.etlforge.application.cache.DefaultDataCacheService">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.database.DatabaseDriverServerCacheFactory">
+					<constructor-arg ref="platform.ServerDir" />
+					<constructor-arg ref="platform.LoginService" />
+				</bean>
+				<bean class="org.etlforge.integration.client.plugin.pipeline.cache.PipelinePluginManifestServerCacheFactory">
+					<constructor-arg ref="platform.ServerDir" />
+					<constructor-arg ref="platform.LoginService" />
+					<constructor-arg ref="server.PluginInfoProvider" />
+				</bean>
+				<bean class="org.etlforge.integration.client.wsdl.cache.WsdlFileServerCacheFactory">
+					<constructor-arg ref="platform.ServerDir" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.FileShareLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.DatabaseLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.FtpLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.LdapLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.HttpLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.ldap.client.cache.LdapStructureServerCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.TemporaryStorageLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.datalocation.cache.LocalFileLocationCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.sfdc.wsdl.SalesforceWsdlInfoCacheFactory">
+					<constructor-arg ref="platform.CacheDirLocation" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="platform.Preferences" class="org.etlforge.application.ui.prefs.ApplicationPreferences" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.GeneralPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.UiPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.GeneralProjectPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.ProjectUiPreferencesPage" />
+				<bean class="org.etlforge.integration.client.project.backup.BackupPreferencesPage" />
+				<bean class="org.etlforge.application.ui.wizard.prefs.WizardPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.operation.prefs.OperationPreferencesPage" />
+				<bean class="org.etlforge.integration.client.scheduler.prefs.SchedulePreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.prefs.OperationGraphPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.prefs.TransformationPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.webservice.prefs.WebServiceCallPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.LocatableGeneralPreferencesPage" />
+				<bean class="org.etlforge.integration.client.ui.script.prefs.ScriptPreferencesPage" />
+				<bean class="org.etlforge.application.ui.viewer.error.log.ErrorLogPreferencesPage" />
+				<bean class="com.etlforge.integration.client.ui.admin.prefs.EnterpriseAdminPreferencesPage" />
+				<bean class="com.etlforge.integration.client.ui.interchange.project.prefs.ProjectRestorePreferencesPage" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.wizard.prefs.SalesforceWizardsPreferencesPage" />
+				<ref bean="preferences.page.Deploy" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="core.EntityValueCacheFactory"
+			class="org.etlforge.integration.client.entity.valuecache.ClientValueCacheFactory"
+			lazy-init="true">
+		<constructor-arg ref="platform.CacheDirLocation" />
+		<constructor-arg value="100" />
+	</bean>
+	
+	<!-- Defines the edition specific MappingStructureFactory implementations.
+		 Empty in the base configuration, can be overridden in the edition specific configuration. -->
+	<bean id="core.MappingStructureFactory.Additional"
+			class="java.util.Collections"
+			factory-method="emptyList"
+			lazy-init="true" />
+	<bean id="MappingStructureFactory.Base" abstract="true">
+		<property name="logger">
+			<util:constant static-field="org.etlforge.integration.client.mapping.MappingStructureLog.LOG" />
+		</property>
+	</bean>
+	<bean id="MappingStructureFactory.WS" parent="MappingStructureFactory.Base" abstract="true">
+		<constructor-arg ref="server.TreeMapperInfoProvider" />
+		<constructor-arg ref="Sfdc.ConnectionFactory" />
+		<constructor-arg ref="Sfdc.SchemaProviderFactory" />
+	</bean>
+	<bean id="core.MappingStructureFactory"
+			class="org.etlforge.integration.client.mapping.MappingStructureFactories"
+			lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.mapping.NoMappingStructureFactory" />
+				<bean class="org.etlforge.integration.client.mapping.text.SimpleTextMappingStructureFactory" parent="MappingStructureFactory.Base" />
+				<bean class="org.etlforge.integration.client.mapping.text.ComplexTextMappingStructureFactory" parent="MappingStructureFactory.Base" />
+				<bean class="org.etlforge.integration.client.mapping.db.DbMappingStructureFactory" parent="MappingStructureFactory.Base" />
+				<bean class="org.etlforge.integration.client.mapping.xml.XmlMappingStructureFactory" parent="MappingStructureFactory.Base">
+					<constructor-arg ref="server.TreeMapperInfoProvider" />
+				</bean>
+				<bean class="org.etlforge.integration.client.mapping.json.JsonMappingStructureFactory" parent="MappingStructureFactory.Base">
+					<constructor-arg ref="server.TreeMapperInfoProvider" />
+				</bean>
+				<bean class="org.etlforge.integration.client.mapping.ldap.LdapMappingStructureFactory" parent="MappingStructureFactory.Base">
+					<constructor-arg ref="server.LdapInfoProvider" />
+				</bean>
+				<bean class="org.etlforge.integration.client.mapping.webservice.WebServiceRequestMappingStructureFactory" parent="MappingStructureFactory.WS" />
+				<bean class="org.etlforge.integration.client.mapping.webservice.WebServiceResponseMappingStructureFactory" parent="MappingStructureFactory.WS" />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="core.MappingStructureFactory.Additional" />
+	</bean>
+
+	<bean id="ui.EditorSaver" class="org.etlforge.application.ui.window.editor.EditorSaver" lazy-init="true">
+		<constructor-arg ref="ui.EditorService" />
+	</bean>
+	<bean id="action.Save" class="org.etlforge.application.ui.window.action.SaveActiveEditorAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ui.EditorSaver" />
+	</bean>
+	<bean id="action.SaveAs" class="org.etlforge.application.ui.window.action.SaveEditorAsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.SaveAll" class="org.etlforge.application.ui.window.action.SaveAllEditorsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ui.EditorSaver" />
+	</bean>
+	<bean id="action.Close" class="org.etlforge.application.ui.window.action.CloseActiveEditorAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.CloseOthers" class="org.etlforge.application.ui.window.action.CloseOtherEditorsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.CloseAll" class="org.etlforge.application.ui.window.action.CloseAllEditorsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.Exit" class="org.etlforge.application.ui.window.action.ExitAction" lazy-init="true" />
+	<bean id="action.Undo" class="org.etlforge.application.ui.window.action.UndoAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.Redo" class="org.etlforge.application.ui.window.action.RedoAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.Preferences" class="org.etlforge.application.ui.window.action.ViewPreferencesAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.ProcessConsole" class="org.etlforge.application.ui.window.action.ShowProcessConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.ErrorLog" class="org.etlforge.application.ui.window.action.ShowErrorLogAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.NextEditor" class="org.etlforge.application.ui.window.action.MoveToNextEditorAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.PreviousEditor" class="org.etlforge.application.ui.window.action.MoveToPreviousEditorAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.Logs" class="org.etlforge.application.ui.window.action.ViewApplicationLogsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.OpenAppDir" class="org.etlforge.application.ui.window.action.OpenApplicationFolderAction" lazy-init="true" />
+	<bean id="action.GroovyConsole" class="org.etlforge.application.ui.window.action.OpenGroovyConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.ActiveObjects" class="org.etlforge.application.ui.window.action.WriteActiveObjectsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.core.Login" class="org.etlforge.integration.client.ui.core.window.action.LoginAction" lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.core.LoginDebug" class="org.etlforge.integration.client.ui.core.window.action.LoginToDebugServerAction" lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.core.Logout" class="org.etlforge.integration.client.ui.core.window.action.LogoutAction" lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.core.KnownServers" class="org.etlforge.integration.client.ui.core.window.action.ShowKnownServersAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.core.UpdateUserProfile" class="org.etlforge.integration.client.ui.core.window.action.UpdateUserProfileAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.core.Forum" class="org.etlforge.integration.client.ui.core.window.action.GotoSupportForumAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.core.Tutorial" class="org.etlforge.integration.client.ui.core.window.action.GotoTutorialAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.debug.Stop" class="org.etlforge.integration.client.ui.debug.action.StopDebuggingAction" lazy-init="true">
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="action.debug.Resume" class="org.etlforge.integration.client.ui.debug.action.ResumeDebuggingAction" lazy-init="true">
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="action.debug.Pause" class="org.etlforge.integration.client.ui.debug.action.PauseDebuggingAction" lazy-init="true">
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="action.debug.Step" class="org.etlforge.integration.client.ui.debug.action.StepDebuggingAction" lazy-init="true">
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="action.debug.All" class="org.etlforge.integration.client.ui.debug.action.DebugActions" lazy-init="true">
+		<constructor-arg ref="action.debug.Stop" />
+		<constructor-arg ref="action.debug.Resume" />
+		<constructor-arg ref="action.debug.Step" />
+	</bean>
+
+	<bean id="menu.File" class="org.etlforge.application.ui.window.menu.FileMenu" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.Close" />
+				<ref bean="action.CloseAll" />
+				<ref bean="action.CloseOthers" />
+				<null />
+				<ref bean="action.Save" />
+				<ref bean="action.SaveAs" />
+				<ref bean="action.SaveAll" />
+				<null />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="action.Exit" />
+	</bean>
+	<bean id="menu.Edit" class="org.etlforge.application.ui.window.menu.EditMenu" lazy-init="true">
+		<constructor-arg ref="action.Undo" />
+		<constructor-arg ref="action.Redo" />
+		<constructor-arg ref="action.Preferences" />
+	</bean>
+	<bean id="menu.View" class="org.etlforge.application.ui.window.menu.ViewMenu" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.ProcessConsole" />
+				<ref bean="action.ErrorLog" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="menu.Actions" class="org.etlforge.application.ui.window.menu.ActionsMenu" lazy-init="true" />
+	<bean id="menu.Windows" class="org.etlforge.application.ui.window.menu.WindowMenu" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.NextEditor" />
+				<ref bean="action.PreviousEditor" />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="ui.RecentlyClosedEditors" />
+	</bean>
+	<bean id="menu.Help" class="org.etlforge.application.ui.window.menu.HelpMenu" lazy-init="true">
+		<constructor-arg ref="action.Logs" />
+	</bean>
+	<bean id="menu.Debug" class="org.etlforge.application.ui.window.menu.DebugMenu" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.OpenAppDir" />
+				<ref bean="action.GroovyConsole" />
+				<ref bean="action.ActiveObjects" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="toolbar.File" class="org.etlforge.application.ui.window.toolbar.FileToolBar" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.Save" />
+				<ref bean="action.SaveAll" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="toolbar.Navigation" class="org.etlforge.application.ui.window.toolbar.NavigationToolBar" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg>
+			<list>
+				<ref bean="action.PreviousEditor" />
+				<ref bean="action.NextEditor" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="toolbar.Edit" class="org.etlforge.application.ui.window.toolbar.EditToolBar" lazy-init="true" />
+	<bean id="toolbar.Actions" class="org.etlforge.application.ui.window.toolbar.ActionsToolBar" lazy-init="true" />
+	
+
+<bean id="menu.SourceControl" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlMenu"><constructor-arg><list><ref bean="action.sourcecontrol.connect" /><ref bean="action.sourcecontrol.identity" /><ref bean="action.sourcecontrol.commit" /><ref bean="action.sourcecontrol.push" /><ref bean="action.sourcecontrol.status" /><ref bean="action.sourcecontrol.history" /></list></constructor-arg></bean>
+<bean id="action.sourcecontrol.connect" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="connect"/><constructor-arg value="Connect to GitHub..."/></bean>
+<bean id="action.sourcecontrol.commit" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="commit"/><constructor-arg value="Commit and Push..."/></bean>
+<bean id="action.sourcecontrol.push" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="push"/><constructor-arg value="Push"/></bean>
+<bean id="action.sourcecontrol.status" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="status"/><constructor-arg value="Changed Files..."/></bean>
+<bean id="action.sourcecontrol.history" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="history"/><constructor-arg value="Commit History..."/></bean>
+<bean id="action.sourcecontrol.identity" class="org.etlforge.integration.client.ui.project.sourcecontrol.SourceControlAction"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="core.CurrentProject"/><constructor-arg ref="ic.SaveAllGate"/><constructor-arg value="identity"/><constructor-arg value="Git Identity..."/></bean>
+</beans>

@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/cmake/NativeJavaScript.cmake');s=p.read_text();b=Path('C:/ETL/Archives/endpoint-compression-20261029/Server/cmake/NativeJavaScript.cmake');b.parent.mkdir(parents=True,exist_ok=True);b.write_text(s)
+s=s.replace('etlforge_frontend_projectadministration etlforge_frontend_admin)','etlforge_frontend_projectadministration etlforge_frontend_admin etlforge_authenticate etlforge_frontend_checkoutinterchangedata etlforge_frontend_activity etlforge_frontend_jobcontrol etlforge_frontend_filemanagement etlforge_frontend_xmlinfoprovider etlforge_frontend_odbcinfoprovider etlforge_frontend_testconnection etlforge_frontend_webserviceinfoprovider etlforge_frontend_pluginmanagement etlforge_frontend_useradmin)');p.write_text(s)

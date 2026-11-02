@@ -1,0 +1,16 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+	<Projects>
+		<Project File="../../../../../Authentication/project/SlickEdit/Authentication.vpj"/>
+		<Project File="../../../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+		<Project File="../../../../../DbRelations/project/SlickEdit/DbRelations.vpj"/>
+		<Project File="../../../../../Db/DbUtils/project/SlickEdit/DbUtils.vpj"/>
+		<Project File="../../../../../Db/DtlDbUtils/project/SlickEdit/DtlDbUtils.vpj"/>
+		<Project File="../../../../../Db/DtlTranDb/project/SlickEdit/DtlTranDb.vpj"/>
+		<Project File="../../../../../ItemAccess/project/SlickEdit/ItemAccess.vpj"/>
+		<Project File="../../../../../Db/TranDb/project/SlickEdit/TranDb.vpj"/>
+		<Project File="../../../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+		<Project File="WsUtils.vpj"/>
+		<Project File="../../Test/project/SlickEdit/WsUtilsTest.vpj"/>
+	</Projects>
+</Workspace>

@@ -1,0 +1,58 @@
+/*
+ * Copyright (c) 1998-2009 Jitterbit, Inc.
+ *
+ */
+                                                                        
+  
+
+#include <iostream>
+#include <boost/scoped_array.hpp>
+
+#include <konga/Utils/CrException.h>
+#include <konga/Utils/DateUtils.h>
+#include <konga/Crypto/Crypto.h>
+
+#include <konga/Server/Server.h>
+
+using namespace konga;
+using namespace std;
+
+void testKeyValues();
+void testKeyValuesCatch();
+
+int main(int argc, char* argv[])
+{
+                   
+	testKeyValuesCatch();
+            
+
+                      
+}
+
+void testKeyValuesCatch() {
+	try {
+		testKeyValues();
+	}
+	catch( const CrException& ex ) {
+		cout << ex.GetErrorString() << endl;
+	}
+}
+
+void testKeyValues() {
+	cout << GetKeyValue("CR_APPLIANCE_NAME", "Not found!!") << endl;
+
+	string key("TEST_KEY");
+	SetKeyValue(key, "Test Value");
+	cout << GetKeyValue(key, "should be there!!") << endl;
+
+	cout << GetServerGUID() << endl;
+	const Version v = GetDbVersion();
+	cout << v.GetLongVersionString() << endl;
+
+	key = "BIG_TEST_KEY";
+	cout << GetBigKeyValue(key, "not there") << endl;
+	SetBigKeyValue(key, "asdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffffasdfjkfjkfjkfjkfjkfjkfjkffffffffffffffffffffffffffffffffffffffffffffff");
+	cout << GetBigKeyValue(key, "should be there!!");
+
+}
+

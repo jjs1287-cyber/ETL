@@ -1,0 +1,385 @@
+/*
+ * Copyright (c) 1998-2005 Jitterbit, Inc.
+ *
+ */
+
+#ifdef WIN32
+#include <time.h>	// tzset()
+#endif
+
+#include <sys/timeb.h> // struct _timeb
+#include <string.h>
+
+#include <konga/Utils/util.h>			// getTmpFileName()
+#include <konga/Utils/AutoCleanup.h>	// AutoArrayDelete<>
+#include <konga/Utils/StringUtils.h>	// TrimString
+
+#include "cr_smtp.h"
+
+using namespace konga;
+
+/*
+	Usage:
+
+	smtp s;
+	s.Server("euro");
+	s.To("joe@company.com");
+	s.From("mary@company.com");
+	s.Subject("A test!");
+	s.Body("Hi There,\r\nHow's it going?\r\n\t-Mary");
+	s.Send();
+*/
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+smtp::smtp() : SockProtocol(25), // port 25
+	m_FailStatusPermanent(false), m_MaxRetryCounter(0), m_RetryCounter(0)
+{
+//	m_MaxRetryCounter = ::GetRegistryInt(HKEY_LOCAL_MACHINE,"konga/Settings/ErrorHandling","EmailMaxNumRetries",5);
+//	if( m_MaxRetryCounter < 0 ) m_MaxRetryCounter = 0;
+}
+
+smtp::~smtp()
+{
+}
+
+bool smtp::GetResponse(std::string& response)
+{
+	response = "";
+	std::string res;
+	do
+	{
+		ReadString(res);
+		if( res.length() > 4 )
+		{
+			response += res.substr(res.length()-4,4);
+//			response += res.Right( res.length() - 4 );
+		}
+		else
+			response += res;
+	} while( !IsEndOfResponse(res) );
+
+	if( IsErrorResponse(res) )
+	{
+		throw protocol_exception("Server error.", 0, response);
+	}
+
+	return true;
+}
+
+bool smtp::Send()
+{
+	void (smtp ::* pDoSend)() = &smtp :: DoSend;
+	return DoAction( (void(SockProtocol::*)()) pDoSend );
+}
+
+void smtp::DoSend()
+{
+	ResetConnection();
+
+	std::string res;
+	GetResponse(res);
+
+	std::string cmd = "HELO ";
+	cmd += LocalHost() + "\r\n";
+	SendCommand(cmd, res);
+
+	std::string to = "To: "; to += m_to; to += "\r\n";
+	std::string cc;
+	if( !m_cc.empty() ) { cc = "CC: "; cc += m_cc; cc += "\r\n"; }
+
+    // Set time zone from TZ environment variable. If TZ is not set,
+    // the operating system is queried to obtain the default value 
+    // for the variable. 
+    tzset();
+	time_t t;
+	time(&t);
+	struct tm *now = localtime( &t );
+	struct timeb tstruct;
+	ftime( &tstruct );
+	char buf[512];
+	strftime(buf,512,"Date: %a, %#d %b %Y %H:%M:%S",now);
+	std::string date = buf;
+	sprintf(buf," -0%d00\r\n",tstruct.timezone/60-tstruct.dstflag);
+	date += buf;
+
+	std::string from = "From: "; from += m_from; from += "\r\n";
+	std::string subject = "Subject: "; subject += m_subject; subject += "\r\n";
+	std::string xmailer = "X-Mailer: Jitterbit Server"; xmailer += "\r\n";
+	std::string replyTo;
+	if( !m_replyTo.empty() )
+	{
+		replyTo = "Reply-To: ";
+		replyTo += m_replyTo; 
+		replyTo += "\r\n";
+	}
+
+	std::string priority;
+	switch( m_priority )
+	{
+		case prHighest:
+			priority = "X-Priority: 1 (Highest)\r\n";
+			break;
+		case prHigh:
+			priority = "X-Priority: 2 (High)\r\n";
+			break;
+		case prNormal:
+			priority = "X-Priority: 3 (Normal)\r\n";
+			break;
+		case prLow:
+			priority = "X-Priority: 4 (Low)\r\n";
+			break;
+		case prLowest:
+			priority = "X-Priority: 5 (Lowest)\r\n";
+			break;
+		default:
+			priority = "X-Priority: 3 (Normal)\r\n";
+	}
+
+	if( m_from.find_first_of('@',0) == std::string::npos )
+	{							  
+		// Not found
+		cmd = "MAIL FROM:<";
+		cmd += m_from + LocalHost() + ">\r\n";
+	}
+	else
+	{
+		cmd = "MAIL FROM:<";
+		cmd += m_from + ">\r\n";
+	}
+	SendCommand(cmd, res);
+
+	std::string email="", to_tmp=m_to;
+
+	int nTries = 0, nFailures = 0;
+	protocol_exception ce;
+	for(; ExtractEmailAddress(to_tmp,email); ++nTries)
+	{
+		try {
+			cmd = "RCPT TO:<"; cmd += email + ">\r\n";
+			SendCommand(cmd, res);
+		} catch(const protocol_exception& e)
+		{
+			++nFailures;
+			ce = e;
+		}
+	}
+	if(nTries == nFailures)
+	{
+		Close();
+		throw ce;
+	}
+
+	to_tmp = m_cc;
+	for(; ExtractEmailAddress(to_tmp,email); ++nTries)
+	{
+		try {
+			cmd = "RCPT TO:<"; cmd += email + ">\r\n";
+			SendCommand(cmd, res);
+		} catch(const protocol_exception& e)
+		{
+			++nFailures;
+			ce = e;
+		}
+	}
+
+	to_tmp = m_bcc;
+	for(; ExtractEmailAddress(to_tmp,email); ++nTries)
+	{
+		try {
+			cmd = "RCPT TO:<"; cmd += email + ">\r\n";
+			SendCommand(cmd, res);
+		} catch(const protocol_exception& e)
+		{
+			++nFailures;
+			ce = e;
+		}
+	}
+
+	cmd = "DATA\r\n";
+	SendCommand(cmd, res);
+
+	cmd = date + to + from;
+	if( !cc.empty() ) cmd += cc;
+	cmd += subject;
+	std::string mimeHeaders = GetMimeHeaders();
+	if( !mimeHeaders.empty() ) cmd += mimeHeaders;
+	if( !priority.empty() ) cmd += priority;
+	if( !replyTo.empty() ) cmd += replyTo;
+	cmd += xmailer; cmd += "\r\n"; 
+	cmd += m_body;
+	cmd += "\r\n.\r\n";
+
+/*	FILE*f=fopen("d:\\temp\\test.eml","wb");
+	if( f )
+	{
+		fprintf(f,"%s",(LPCTSTR)cmd);
+		fclose(f);
+	}
+*/
+	SendCommand(cmd, res);
+
+	cmd = "QUIT\r\n";
+	SendCommand(cmd, res);
+
+	Close();
+}
+
+std::string smtp::GetMimeHeaders()
+{
+	if( !m_htmlFileName.empty() )
+	{
+//		tstring HtmlFileName = (LPCTSTR)m_htmlFileName;
+//		tstring OriginalUrl = (LPCTSTR)m_htmlOriginalUrl;
+//		bool IsUnicode = false;
+		m_body.insert(0, "This is a multi-part message in MIME format.\r\n\r\n");
+
+		if( m_AttMgr.NumberOfAttachments() )
+		{
+			m_body += "--";
+			m_body += m_AttMgr.BoundaryString().c_str();
+//			m_body += "\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"";
+//			m_body += m_Mime.BoundaryString().c_str();
+//			m_body += "\"\r\n\r\n";
+			m_body += "\r\n";
+			m_headers = "MIME-Version: 1.0\r\nContent-Type: multipart/mixed; boundary=\"";
+			m_headers += m_AttMgr.BoundaryString().c_str();
+			m_headers += "\"\r\n";
+			if( m_Mime.ProcessMessage() == 0)
+			{
+				m_body += m_Mime.GetBody().c_str();
+				m_body += "\r\n";
+			}
+		}
+		else
+		{
+			if( m_Mime.ProcessMessage() == 0)
+			{
+				m_body += "--";
+				m_body += m_Mime.BoundaryString().c_str();
+				m_body += "\r\n";
+				m_body += m_Mime.GetBody().c_str();
+			}
+			m_headers = m_Mime.GetMimeHeaders().c_str();
+		}	
+
+		if( m_AttMgr.NumberOfAttachments() )
+		{
+			m_body += m_AttMgr.GetBody().c_str();
+		}
+
+	}
+	else if( m_AttMgr.NumberOfAttachments() )
+	{
+		std::string mimeHeader = "This is a multi-part message in MIME format.\r\n\r\n--";
+		mimeHeader += m_AttMgr.BoundaryString().c_str();
+		mimeHeader += "\r\nContent-Type: text/plain\r\nContent-Transfer-Encoding: 7bit\r\n\r\n";
+		m_body.insert(0, mimeHeader);
+		m_body += "\r\n\r\n";
+		m_body += m_AttMgr.GetBody().c_str();
+		m_headers = m_AttMgr.GetMimeHeaders().c_str();
+	}
+
+	return m_headers;
+}
+
+bool smtp::VerifyConnection()
+{
+	void (smtp ::* pVerifyConnection)() = &smtp :: DoVerifyConnection;
+	return DoAction( (void(SockProtocol::*)()) pVerifyConnection );
+}
+
+void smtp::DoVerifyConnection()
+{
+	ResetConnection();
+
+	std::string res;
+	GetResponse(res);
+
+	std::string cmd = "HELO ";
+	cmd += LocalHost() + "\r\n";
+	SendCommand(cmd, res);
+
+	cmd = "QUIT\r\n";
+	SendCommand(cmd, res);
+
+	Close();
+}
+
+bool smtp::ExtractEmailAddress(std::string& toList, std::string& email)
+{
+	if( toList.empty() ) return false;
+	std::string::size_type n = toList.find_first_of(";,"); // Search email list for a delimitor character
+	if( n != std::string::npos ) // Found
+	{
+		email = toList.substr(0, n);
+		toList.erase(0,n+1); // delete leading characters including the delimitor
+	}
+	else
+	{
+		email = toList;
+		toList = "";
+	}
+
+	if( (n=email.find_first_of('<',0)) != std::string::npos )
+	{
+		email.erase(0,n+1);
+		n = email.find_first_of('>',0);
+		if( n != std::string::npos )
+			email.erase(n, email.length()-n);
+	}
+
+	TrimString(email);
+//	email.TrimLeft();
+//	email.TrimRight();
+
+	return true;
+}
+
+//
+//	This is purely for debugging:
+//
+std::string smtp::GetFullMessage()
+{
+	std::string to = "To: "; to += m_to; to += "\r\n";
+	std::string cc;
+	if( !m_cc.empty() )
+		{ cc = "CC: "; cc += m_cc; cc += "\r\n"; }
+	std::string from = "From: "; from += m_from; from += "\r\n";
+	std::string subject = "Subject: "; subject += m_subject; subject += "\r\n";
+	std::string xmailer = "X-Mailer: Jitterbit Server"; xmailer += "\r\n";
+
+	std::string email="", to_tmp=m_to;
+	std::string cmd = to + from;
+	if( !cc.empty() )
+		cmd += cc;
+	cmd += subject;
+	std::string mimeHeaders = GetMimeHeaders();
+	if( !mimeHeaders.empty() ) cmd += mimeHeaders;
+	cmd += xmailer;
+	cmd += "\r\n"; cmd += m_body + "\r\n.\r\n";
+	return cmd;
+}
+
+//decide whether this error is transient or permant
+void smtp::ResetFailStatusPermanent()
+{
+	m_FailStatusPermanent = true;
+
+	//transient error
+	//should be only one transient error which is the server done
+	//but if server name is wrong, still give the same
+	//error message. This situation should belong to permanent error, 
+	//but currently fail to differ them based on the current information
+	//leave here -- liq 01/11/01
+	std::string s = "Failed to connect to ";
+	s += Server();
+	s += ':';
+	char buf[64];
+	s += itoa(Port(), buf, 10);
+
+	if (strstr(LastError().c_str(), s.c_str()))
+		m_FailStatusPermanent = false; 
+}

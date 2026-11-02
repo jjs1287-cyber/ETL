@@ -1,0 +1,300 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-transformationutils-d.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lkonga-dataelement-d"/>
+			<Lib File="-lkonga-dbrelations-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-debugger-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-itemproperties-d"/>
+			<Lib File="-lkonga-jdbcutils-d"/>
+			<Lib File="-lkonga-ldap-d"/>
+			<Lib File="-lkonga-mailclient-d"/>
+			<Lib File="-lkonga-messaging-d"/>
+			<Lib File="-lkonga-operationcontext-d"/>
+			<Lib File="-lkonga-operationdataelements-d"/>
+			<Lib File="-lkonga-operationobjects-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-utils-d"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-transformationutils-d.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-transformationutils.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-dataelement"/>
+			<Lib File="-lkonga-dbrelations"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-debugger"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-itemproperties"/>
+			<Lib File="-lkonga-jdbcutils"/>
+			<Lib File="-lkonga-ldap"/>
+			<Lib File="-lkonga-mailclient"/>
+			<Lib File="-lkonga-messaging"/>
+			<Lib File="-lkonga-operationcontext"/>
+			<Lib File="-lkonga-operationdataelements"/>
+			<Lib File="-lkonga-operationobjects"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-utils"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-transformationutils.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../CachedDbLookup.cpp"/>
+			<F N="../../DateFormatParser.cpp"/>
+			<F N="../../DateFormatUtils.cpp"/>
+			<F N="../../DbLocationConnectionInfo.cpp"/>
+			<F N="../../DbLookupCache.cpp"/>
+			<F N="../../FileTypeTargetCache.cpp"/>
+			<F N="../../IntegrationBreakpointLocation.cpp"/>
+			<F N="../../IntegrationDebugUtils.cpp"/>
+			<F N="../../LdapExecutor.cpp"/>
+			<F N="../../ReadFileImpl.cpp"/>
+			<F N="../../RunOperationImpl.cpp"/>
+			<F N="../../ScriptCache.cpp"/>
+			<F N="../../SendTransformationEmail.cpp"/>
+			<F N="../../TranDBUtils.cpp"/>
+			<F N="../../TransformationDataHolder.cpp"/>
+			<F N="../../TransformationStatistics.cpp"/>
+			<F N="../../TransformationWebServiceInfo.cpp"/>
+			<F N="../../TransformFcnUtils.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../CachedDbLookup.h"/>
+			<F N="../../DateFormatParser.h"/>
+			<F N="../../DateFormatUtils.h"/>
+			<F N="../../DbLocationConnectionInfo.h"/>
+			<F N="../../DbLookupCache.h"/>
+			<F N="../../Definitions.h"/>
+			<F N="../../FileTypeTargetCache.h"/>
+			<F N="../../IntegrationBreakpointLocation.h"/>
+			<F N="../../IntegrationDebugUtils.h"/>
+			<F N="../../LdapExecutor.h"/>
+			<F N="../../ReadFileImpl.h"/>
+			<F N="../../RunOperationImpl.h"/>
+			<F N="../../ScriptCache.h"/>
+			<F N="../../SendTransformationEmail.h"/>
+			<F N="../../TranDBUtils.h"/>
+			<F N="../../TransformationDataHolder.h"/>
+			<F N="../../TransformationStatistics.h"/>
+			<F N="../../TransformationWebServiceInfo.h"/>
+			<F N="../../TransformFcnUtils.h"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="">
+			<F
+				N="TransformationUtils.mak"
+				Type="Makefile"/>
+		</Folder>
+	</Files>
+</Project>

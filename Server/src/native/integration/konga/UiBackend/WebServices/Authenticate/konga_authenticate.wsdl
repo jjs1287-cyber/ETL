@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.authenticate.Authenticate" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.authenticate.Authenticate" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.authenticate.Authenticate" xmlns:tns2="http://webservice.implementation.server.integration.etlforge.invalid" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.authenticate.Authenticate" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservice.implementation.server.integration.etlforge.invalid"/>
+   <element name="login">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loginResponse">
+    <complexType>
+     <sequence>
+      <element name="loginReturn" type="impl:AuthenticateResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_WsKeyValue">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:WsKeyValue"/>
+    </sequence>
+   </complexType>
+   <complexType name="AuthenticateResult">
+    <sequence>
+     <element name="serverGuid" nillable="true" type="xsd:string"/>
+     <element name="userGuid" nillable="true" type="xsd:string"/>
+     <element name="versionString" nillable="true" type="xsd:string"/>
+     <element name="keyValues" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <element name="loginWithVersion">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="version" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loginWithVersionResponse">
+    <complexType>
+     <sequence>
+      <element name="loginWithVersionReturn" type="impl:AuthenticateResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loginWithVersionAndKeyValues">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="version" type="xsd:string"/>
+      <element name="keyValues" type="tns2:WsKeyValuePairs"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loginWithVersionAndKeyValuesResponse">
+    <complexType>
+     <sequence>
+      <element name="loginWithVersionAndKeyValuesReturn" type="impl:AuthenticateResult"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.implementation.server.integration.etlforge.invalid" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.authenticate.Authenticate"/>
+   <complexType name="WsKeyValue">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsKeyValuePairs">
+    <sequence>
+     <element name="keyValues" nillable="true" type="impl:ArrayOf_tns2_WsKeyValue"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="loginWithVersionAndKeyValuesRequest">
+
+      <wsdl:part element="impl:loginWithVersionAndKeyValues" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginWithVersionResponse">
+
+      <wsdl:part element="impl:loginWithVersionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginWithVersionAndKeyValuesResponse">
+
+      <wsdl:part element="impl:loginWithVersionAndKeyValuesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part element="impl:login" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part element="impl:loginResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginWithVersionRequest">
+
+      <wsdl:part element="impl:loginWithVersion" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Authenticate">
+
+      <wsdl:operation name="login">
+
+         <wsdl:input message="impl:loginRequest" name="loginRequest"/>
+
+         <wsdl:output message="impl:loginResponse" name="loginResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginWithVersion">
+
+         <wsdl:input message="impl:loginWithVersionRequest" name="loginWithVersionRequest"/>
+
+         <wsdl:output message="impl:loginWithVersionResponse" name="loginWithVersionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginWithVersionAndKeyValues">
+
+         <wsdl:input message="impl:loginWithVersionAndKeyValuesRequest" name="loginWithVersionAndKeyValuesRequest"/>
+
+         <wsdl:output message="impl:loginWithVersionAndKeyValuesResponse" name="loginWithVersionAndKeyValuesResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_authenticateSoapBinding" type="impl:Authenticate">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction="login"/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginWithVersion">
+
+         <wsdlsoap:operation soapAction="loginWithVersion"/>
+
+         <wsdl:input name="loginWithVersionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginWithVersionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginWithVersionAndKeyValues">
+
+         <wsdlsoap:operation soapAction="loginWithVersionAndKeyValues"/>
+
+         <wsdl:input name="loginWithVersionAndKeyValuesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginWithVersionAndKeyValuesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AuthenticateService">
+
+      <wsdl:port binding="impl:konga_authenticateSoapBinding" name="konga_authenticate">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_authenticate"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

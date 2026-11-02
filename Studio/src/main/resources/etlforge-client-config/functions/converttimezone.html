@@ -1,0 +1,27 @@
+<html>
+<h3>
+Takes the given datetime and converts from one time zone to another.  <br>
+</h3>
+<br>
+Parameters:<br>
+<b>fromTZ and toTZ</b><br>
+These time zone parameters are one of the standard TZ codes:<br>
+An abbreviation such as 'PST', or a full name such as "America/Los_Angeles", or a custom ID such as "GMT-8:00". 
+<br>Note: TZ codes are case sensitive. <br><br>
+An unofficial list of TZ codes can currently be found here: <br>
+<a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">http://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>
+<br> <br>
+<b>is_european_format</b><br>
+This optional flag causes the month and day to be swapped.<br>  As false, the format is month then day. <br>
+<br>
+<b>ignoreDST</b><br>
+By default, daylight savings is accounted for when converting between the four major US time zones. <br>
+Set this optional flag to override this action. <br>
+<br>
+<h2>Example:</h2>
+<code><font size="4">
+ConvertTimeZone("02/06/2014 5:25:00", "PST", "EST");
+// Returns '02/06/2014 09:25:00'
+</font>
+</code>
+</html>

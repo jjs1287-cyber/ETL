@@ -1,0 +1,22 @@
+<html>
+<h3>
+Adds a specified interval of datepart to the provided datetime (Date arithmetic)  <br>
+</h3>
+<br>
+Parameters:<br>
+<b>DatePart</b><br>
+A String representing the datetime part to add <br>
+This function works much like the DateAdd function in MS-SQL Server <br>
+"YY" = year, "MM" = month, "WK" = week, "DD" = day, "MI" = minute, "SS" = second<br><br>
+<b>Number</b><br>
+Integer of the interval to add<br>
+<br>
+<b>Date</b><br>
+Datetime to apply add to<br><br>
+<h2>Example:</h2>
+<code><font size="4">
+DateAdd("MM", 2, "08/15/2014 05:25:00");
+// Returns '10/15/2014 05:25:00'
+</font>
+</code>
+</html>

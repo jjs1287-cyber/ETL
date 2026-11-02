@@ -1,0 +1,105 @@
+package org.etlforge.integration.server.implementation.webservice.interchange.checkout.client;
+
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import javax.xml.namespace.QName;
+import org.apache.axis.description.ElementDesc;
+import org.apache.axis.description.TypeDesc;
+import org.apache.axis.encoding.Deserializer;
+import org.apache.axis.encoding.Serializer;
+import org.apache.axis.encoding.ser.BeanDeserializer;
+import org.apache.axis.encoding.ser.BeanSerializer;
+
+public class RequiredFiles implements Serializable {
+   private RequiredFile[] files;
+   private Object __equalsCalc = null;
+   private boolean __hashCodeCalc = false;
+   private static TypeDesc typeDesc = new TypeDesc(RequiredFiles.class, true);
+
+   public RequiredFiles() {
+   }
+
+   public RequiredFiles(RequiredFile[] var1) {
+      this.files = var1;
+   }
+
+   public RequiredFile[] getFiles() {
+      return this.files;
+   }
+
+   public void setFiles(RequiredFile[] var1) {
+      this.files = var1;
+   }
+
+   @Override
+   public synchronized boolean equals(Object var1) {
+      if (!(var1 instanceof RequiredFiles)) {
+         return false;
+      }
+
+      RequiredFiles var2 = (RequiredFiles)var1;
+      if (var1 == null) {
+         return false;
+      }
+
+      if (this == var1) {
+         return true;
+      }
+
+      if (this.__equalsCalc != null) {
+         return this.__equalsCalc == var1;
+      }
+
+      this.__equalsCalc = var1;
+      boolean var3 = this.files == null && var2.getFiles() == null || this.files != null && Arrays.equals(this.files, var2.getFiles());
+      this.__equalsCalc = null;
+      return var3;
+   }
+
+   @Override
+   public synchronized int hashCode() {
+      if (this.__hashCodeCalc) {
+         return 0;
+      }
+
+      this.__hashCodeCalc = true;
+      int var1 = 1;
+      if (this.getFiles() != null) {
+         for (int var2 = 0; var2 < Array.getLength(this.getFiles()); var2++) {
+            Object var3 = Array.get(this.getFiles(), var2);
+            if (var3 != null && !var3.getClass().isArray()) {
+               var1 += var3.hashCode();
+            }
+         }
+      }
+
+      this.__hashCodeCalc = false;
+      return var1;
+   }
+
+   public static TypeDesc getTypeDesc() {
+      return typeDesc;
+   }
+
+   public static Serializer getSerializer(String var0, Class var1, QName var2) {
+      return new BeanSerializer(var1, var2, typeDesc);
+   }
+
+   public static Deserializer getDeserializer(String var0, Class var1, QName var2) {
+      return new BeanDeserializer(var1, var2, typeDesc);
+   }
+
+   static {
+      typeDesc.setXmlType(
+         new QName("urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData", "RequiredFiles")
+      );
+      ElementDesc var0 = new ElementDesc();
+      var0.setFieldName("files");
+      var0.setXmlName(new QName("urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData", "Files"));
+      var0.setXmlType(new QName("urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData", "RequiredFile"));
+      var0.setNillable(true);
+      var0.setItemQName(new QName("urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData", "item"));
+      typeDesc.addFieldDesc(var0);
+   }
+}

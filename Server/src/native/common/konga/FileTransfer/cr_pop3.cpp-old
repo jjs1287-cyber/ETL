@@ -1,0 +1,183 @@
+/*
+ * Copyright (c) 1998-2005 Jitterbit, Inc.
+ *
+ */
+#include <konga/Utils/ErrorResolver.h>
+#include <konga/Utils/AutoFileCleanup.h>	// AutoFileHandle
+#include <konga/Utils/StringUtils.h>	// itoa
+#include <konga/Utils/PortDefs.h>		// strncasecmp
+
+#include "cr_pop3.h"
+
+using namespace konga;
+
+// POP3 = 110
+pop3::pop3() : SockProtocol(110) , m_msg_count(-1), m_connected(false)
+{
+}
+
+pop3::~pop3()
+{
+	if( IsConnected() ) Disconnect();
+	Close();
+}
+
+bool pop3::GetResponse(std::string& response)
+{
+	response = "";
+	std::string res;
+	ReadString(res);
+	if( strncasecmp(res.c_str(),"+OK",3) == 0 )
+		response += res.substr(res.length()-4,4);
+	else
+		response += res; // Multiline response, or error (-ERR) response
+
+	if( IsErrorResponse(res) )
+	{
+		throw pop3_exception("Server error.", response);
+	}
+
+	return true;
+}
+
+bool pop3::GetMultiLineResponse(std::string& response)
+{
+	response = "";
+	std::string res;
+	while(true)
+	{
+		ReadString(res);
+		if( res == "." ) break;
+		if( strncasecmp(res.c_str(),"+OK",3) == 0 ) {
+			response += res.substr(res.length()-4,4);
+			response += "\n";
+		}
+		else
+			response += res + "\n";
+	}
+
+	return true;
+}
+
+bool pop3::GetMessage(const std::string& filename, int msg_num)
+{
+	m_msg_filename = filename;
+	m_msg_current = msg_num;
+	void (pop3 ::* pMF)() = &pop3 :: DoGetMessage;
+	return DoAction( (void(SockProtocol::*)()) pMF );
+}
+
+void pop3::DoGetMessage()
+{
+	if( !IsConnected() )
+	{
+		if( !Connect() )
+			throw pop3_exception("Failed to connect to POP3 server");
+	}
+
+	std::string cmd = "RETR ", res;
+	char buf[64];
+	cmd += itoa(m_msg_current ,buf,10);
+	cmd += "\r\n";
+	SendCommand(cmd,res);
+	GetMultiLineResponse(res);
+
+	FILE* f = fopen(m_msg_filename.c_str(),"w+");
+	if( !f )
+	{
+		int err = GetLastError();
+		std::string stErr = "Failed to open file for writing incoming message. ";
+		stErr += ErrorResolver().Resolve(err);
+		throw pop3_exception(stErr);
+	}
+	AutoFileHandle adopt_f(f);
+	if( res.length() > 0 && fputs(res.c_str(),f)<0 )
+	{
+		int err = GetLastError();
+		std::string stErr = "Failed to write incoming message to file. ";
+		stErr += ErrorResolver().Resolve(err);
+		throw pop3_exception(stErr);
+	}
+}
+
+int pop3::GetMessageCount()
+{
+	void (pop3 ::* pMF)() = &pop3 :: DoGetMessageCount;
+	if( DoAction( (void(SockProtocol::*)()) pMF ) )	return m_msg_count;
+	else return -1;
+}
+
+void pop3::DoGetMessageCount()
+{
+	if( !IsConnected() )
+	{
+		if( !Connect() )
+			throw pop3_exception("Failed to connect to POP3 server");
+	}
+	std::string res;
+	std::string cmd = "STAT\r\n";
+	SendCommand(cmd, res);
+
+	m_msg_count = atoi(res.c_str());
+}
+
+bool pop3::Connect()
+{
+	if( IsConnected() ) return true;
+	void (pop3 ::* pMF)() = &pop3 :: DoConnect;
+	return DoAction( (void(SockProtocol::*)()) pMF );
+}
+
+void pop3::DoConnect()
+{
+	ResetConnection();
+
+	std::string res;
+	GetResponse(res);
+
+	std::string cmd = "USER ";
+	cmd += m_user + "\r\n";
+	SendCommand(cmd, res);
+
+	cmd = "PASS ";
+	cmd += m_passwd + "\r\n";
+	SendCommand(cmd, res);
+
+	m_connected = true;
+}
+
+bool pop3::Disconnect()
+{
+	if( !IsConnected() ) return true;
+	void (pop3 ::* pMF)() = &pop3 :: DoDisconnect;
+	return DoAction( (void(SockProtocol::*)()) pMF );
+}
+
+void pop3::DoDisconnect()
+{
+	std::string cmd = "QUIT\r\n", res;
+	SendCommand(cmd, res);
+	m_connected = false;
+	Close();
+}
+
+bool pop3::DeleteMessage(int msg_num)
+{
+	if( msg_num > 0 ) m_msg_current = msg_num;
+	void (pop3 ::* pMF)() = &pop3 :: DoDeleteMessage;
+	return DoAction( (void(SockProtocol::*)()) pMF );
+}
+
+void pop3::DoDeleteMessage()
+{
+	if( !IsConnected() )
+	{
+		if( !Connect() )
+			throw pop3_exception("Failed to connect to POP3 server");
+	}
+	std::string cmd = "DELE ", res;
+	char buf[64];
+	cmd += itoa(m_msg_current ,buf,10);
+	cmd += "\r\n";
+	SendCommand(cmd, res);
+}

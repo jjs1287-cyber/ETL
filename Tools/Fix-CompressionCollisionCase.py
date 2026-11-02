@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/integration/konga/OperationObjects/EndpointCompression.cpp');s=p.read_text().replace('std::set<std::string> names;','std::set<std::wstring> names;').replace('auto lower=archiveName;std::transform(lower.begin(),lower.end(),lower.begin(),[](unsigned char c){return (char)tolower(c);});','auto lower=fs::u8path(archiveName).wstring();CharLowerBuffW(lower.data(),static_cast<DWORD>(lower.size()));');p.write_text(s,encoding='utf-8')

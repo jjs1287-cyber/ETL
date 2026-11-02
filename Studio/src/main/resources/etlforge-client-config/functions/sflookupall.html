@@ -1,0 +1,36 @@
+<html>
+Logs in to Salesforce (if necessary) and retrives the result of the query from Salesforce.
+The return dataelement is an array of records, and each record is an array of named-fields.
+<p>
+The login call is made using the credentials in the specified Salesforce Org.
+<code><font size="4">null</font></code> is returned if either login or query returns no record. 
+API fails. Use <code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+There are some limitations if relationship query are used.<br>
+1. only immediate relationship can be retrieved. namely query cannot include grand child relationship<br>
+2. for each query record, each child cannot have multiple records.<br>
+3. in the query statement, the fields under the same child should be grouped together.<br>
+ 
+<p>
+Example 1:
+<p>
+<code><font size="4">
+records = SFLookupAll("&lt;TAG&gt;Salesforce Orgs/...&lt;/TAG&gt;", "SELECT Id, Name FROM Account");<br>
+first_id=records[0][0];<br>
+first_account_name=records[0]["name"];<br>
+</font></code>
+<p>
+Example 2:
+<p>
+<code><font size="4">
+soql="SELECT Id, AccountNumber, Name, CreatedBy.ContactId, CreatedBy.FirstName, CreatedBy.LastName FROM Account";<br>
+rs=SfLookupAll("&lt;TAG&gt;Salesforce Orgs/feng.zheng@etlforge.invalid&lt;/TAG&gt;",soql);<br>
+first_id=rs[0][0];<br>
+first_account_name=rs[0]["name"];<br>
+first_name=rs[0]["CreatedBy.FirstName"];<br>
+// or first_name=rs[0][4];<br>
+</font></code>
+<p>
+
+As an alternative to this function, see <code><font size="4">SFLookup()</font></code> and <code><font size="4">SFLookupAllToFile()</font></code>.
+</html>

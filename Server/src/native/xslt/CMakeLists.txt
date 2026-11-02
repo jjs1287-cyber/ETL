@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.27)
+project(ETLForgeXslt LANGUAGES C CXX)
+set(CMAKE_CXX_STANDARD 17)
+add_subdirectory(C:/ETL/Dependencies/saxonc-12.10.1/src saxonc)
+add_executable(ETLForgeXsltWorker ETLForgeXsltWorker.cpp)
+target_link_libraries(ETLForgeXsltWorker PRIVATE SaxonCHE::saxonc-he)
+set_target_properties(ETLForgeXsltWorker saxonc-he PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")

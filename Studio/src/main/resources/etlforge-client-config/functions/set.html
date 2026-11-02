@@ -1,0 +1,27 @@
+<html><p>
+				Sets the value of the global variable with the given <code><font size="4">name</font></code>
+				to <code><font size="4">value</font></code>, and returns the value.
+				If the first argument is an array or the name of an array data element
+				you can set the value of an array element by specifying its index (or indices
+				for multi-dimensional arrays) as the third argument.
+        </p>
+        <p>
+				Arrays are zero indexed, i.e.
+				the first element is at index 0 and the last element is at index size-1.
+				To append data to an array, pass a negative index value or the size of the array.
+        Setting an element with index larger than the size of the array results in an index out of range error.
+				Setting non-array data elements can also be done using the $de_name syntax,
+				see examples below.
+        </p><br><h2>Example:</h2><code><font size="4">// Increases the variable Count by 1, and then returns the value of Count<br>
+				Set("Count",Get("Count")+1)<br><br>
+				// This does the same thing<br>
+				$Count = $Count + 1<br><br>
+				// Set the n:th entry in an array to the string "value"<br>
+				Set($arr, "value", n-1)<br><br>
+				// Set the n:th entry of the m:th array<br>
+				Set($record_set, "value", m-1, n-1)<br><br>
+				// Append a value to the array.<br>
+				Set($arr, "value", -1)<br><br>
+				// This does the same thing.<br>
+				Set($arr, "value", Length($arr))
+				</font></code></html>

@@ -1,0 +1,7 @@
+ETLForge reconstructed development build
+
+Upstream source attribution retained from the supplied source distribution:
+Copyright (c) 1998-2008 Jitterbit, Inc.
+Copyright 1998-2015 Jitterbit, Inc.
+
+Original source notices, licenses and reference archives are preserved. Third-party libraries retain their own license notices. The ETLForge product rename does not replace upstream authorship notices.

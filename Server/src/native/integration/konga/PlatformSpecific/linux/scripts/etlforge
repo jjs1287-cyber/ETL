@@ -1,0 +1,925 @@
+#!/bin/bash
+# Copyright (c) 1998-2011 Jitterbit, Inc.
+# All rights reserved.
+#
+# Author: Emanuel Norrbin <emanuel.norrbin@jitterbit.com>
+#
+# Script for controlling the Jitterbit Server processes.
+# Accepts commands start, stop, restart among others
+#
+# This is needed for chkconfig on RedHat.
+#
+# chkconfig: 35 99 01
+# description: Jitterbit Server
+#
+#
+# This is needed for LSB compliant startup scripts e.g. Suse
+#
+### BEGIN INIT INFO
+# Provides: jitterbit
+# Required-Start: postgresql
+# Required-Stop:
+# Default-Start: 3 5
+# Default-Stop: 0 1 2 6
+# Description: Start Jitterbit Server
+### END INIT INFO
+
+# Define some variables.
+#
+PRODUCT_NAME="Jitterbit Integration Server"
+FORUM_URL="http://www.jitterbit.com/forums"
+JB_ENV_SET=
+
+system=`uname`
+if [ "$system" != "Linux" ] && [ "$system" != "SunOS" ];then
+    echo "System not supported: $system"
+    exit 1
+fi
+
+jitterbit_user=jitterbit
+su_cmd="su -s /bin/sh"
+if [ "$system" = "SunOS" ]; then
+    jitterbit_user=jitterb
+    su_cmd=su
+fi
+
+# Sets JITTERBIT_HOME and LD_LIBRARY_PATH
+set_jitterbit_env() {
+
+    # Only do this once
+    if [ -z "$JB_ENV_SET" ]; then
+	JB_ENV_SET=1
+    else
+	return 0
+    fi
+
+    if [ -f /etc/sysconfig/jitterbit ]; then
+	. /etc/sysconfig/jitterbit
+    elif [  -f /etc/jitterbit ]; then
+	. /etc/jitterbit
+    fi
+    
+    if [ -z "$JITTERBIT_HOME" ]; then
+        # JITTERBIT_HOME is not set, check the most likely locations
+	if [ -f /usr/local/jitterbit/jitterbit.conf ]; then
+	    JITTERBIT_HOME=/usr/local/jitterbit
+	elif [ -f /opt/jitterbit/jitterbit.conf ]; then
+	    JITTERBIT_HOME=/opt/jitterbit
+	elif [ -f /usr/jitterbit/jitterbit.conf ]; then
+	    JITTERBIT_HOME=/usr/jitterbit
+	fi
+	
+	if [ -z "$JITTERBIT_HOME" ]; then
+	    echo "Operation failed:"
+	    echo "The environment variable JITTERBIT_HOME has not been set and no"
+	    echo "existing installation could be found."
+	    exit 1
+	fi
+	echo "Warning: The environment variable JITTERBIT_HOME has not been set,"
+	echo "however an installation was found at $JITTERBIT_HOME. We will continue..."
+    fi
+    
+    if [ ! -d $JITTERBIT_HOME ]; then
+	echo "Operation failed:"
+	echo "JITTERBIT_HOME was set to $JITTERBIT_HOME"
+	echo "but this directory does not exist."
+	echo "Please set JITTERBIT_HOME to the home directory"
+	echo "of your Jitterbit installation."
+	exit 1
+    fi
+    
+    if [ -z "$LD_LIBRARY_PATH" ]; then
+	LD_LIBRARY_PATH="$JITTERBIT_HOME/lib"
+    else
+	LD_LIBRARY_PATH="$JITTERBIT_HOME/lib:$LD_LIBRARY_PATH"
+    fi
+    export JITTERBIT_HOME
+    export LD_LIBRARY_PATH
+
+    if [ "$ENABLE_JMS" = "0" ] || [ "$ENABLE_JMS" = ""  ] || [ "$ENABLE_JMS" = "false" ]; then
+	ENABLE_JMS=0
+    else
+	ENABLE_JMS=1
+    fi
+}
+
+# Checks if the first argument is a "yes" or a "no" answer
+# Returns 1 on "yes", 0 on "no" and 2 on "neither".
+check_yes_no() {
+    case $1 in 
+	[yY] | [yY][eE][sS])
+            return 1
+            ;;
+	[nN] | [nN][oO])
+	    return 0
+            ;;
+    esac
+    return 2
+}
+
+# Reads a reply and checks for a yes/no result.
+# If no reply is given $default is used.
+# The result from check_yes_no() is written to $reply
+read_yes_no_reply() {
+    reply=
+    read reply
+    if [ -z "$reply" ]; then
+	reply=$default
+    fi
+    check_yes_no $reply
+    reply=$?
+    return $reply
+}
+
+# The user is asked for the postgres administrative user name.
+# The variable postgres_user is set.
+ask_postgres_user() {
+    postgres_user=
+    default=postgres
+    echo
+    echo -n "PostgreSQL administrative user name: [$default] "
+    read postgres_user
+    if [ -z "$postgres_user" ]; then
+	postgres_user=$default
+    fi
+    echo "Ok, using $postgres_user"
+}
+
+# Asks for the pgsql admin password.
+# The variable postgres_password is set.
+ask_postgres_password() {
+    pwd_done=0
+    postgres_password=
+    while [ $pwd_done -eq 0 ]; do
+	echo
+	echo -n "Password: "
+	read -s postgres_password
+	echo
+	echo -n "Retype Password: "
+	retyped=
+	read -s retyped
+	echo
+	if [ "$retyped" = "$postgres_password" ]; then
+	    pwd_done=1
+	else
+	    echo
+	    echo "Passwords do not match"
+	fi
+    done
+}
+
+# Asks the user for the PostgreSQL port.
+# Sets the variable postgres_port
+ask_postgres_port() {
+    echo
+    echo "What port is PostgreSQL running on?"
+    echo "If you don't know the default is probably correct."
+    echo
+    default=5432
+    echo -n "Specify PostgreSQL port: [$default] "
+    read postgres_port
+    if [ -z "$postgres_port" ]; then
+	postgres_port=$default
+    fi
+    echo "Ok, using " $postgres_port
+}
+
+# Prompts the user for the postgres administrative credentials
+# postgres_user and postgres_password are set
+ask_postgres_info() {
+    echo
+    echo "Database administrative credentials:"
+    echo
+    echo "Please provide the administrative credentials for your PostgreSQL"
+    echo "database. These will be used to create the databases that this application requires."
+    echo "If you do not know what the administrative credentials are"
+    echo "hit Ctrl-C now to set up PostgreSQL"
+
+    ask_postgres_user	
+    ask_postgres_password
+    ask_postgres_port
+ }
+
+# Prompts for a password, checks if it is empty and asks for confirmation
+# Repeats until the confirmation matches the first password specified.
+# The password is written into the variable $pwd
+create_pwd() {
+    pwd_done=0
+    password=
+    pwd=
+    while [ $pwd_done -eq 0 ]; do
+	echo -n "Password: "
+	read -s password
+	if [ -z "$password" ]; then
+	    echo
+	    echo "Are you sure you want to use an empty password?"
+	    echo "An empty password could be a security problem."
+	    echo
+	    default=n
+	    echo -n "Use empty password? [$default] "
+	    read_yes_no_reply
+	    if [ $reply -eq 1 ]; then
+		pwd_done=0
+	    else
+		pwd_done=2
+	    fi
+	fi
+	if [ $pwd_done -ne 2 ]; then
+	    pwd_done=0
+	    echo
+	    echo -n "Retype Password: "
+	    retyped=
+	    read -s retyped
+	    echo
+	    if [ "$retyped" = "$password" ]; then
+		pwd_done=1
+	    else
+		echo "Passwords do not match"
+		echo
+	    fi
+	else
+	    pwd_done=0
+	fi
+    done
+    pwd=$password
+    return 0
+}
+
+select_driver() {
+# Find the driver to use for PostgreSQL
+    driver=
+    if [ $is_update -eq 1 ]; then
+	driver=
+    else
+#	driver="PostgreSQL-psql"
+	if [ -f /usr/local/etc/odbcinst.ini ]; then
+	    echo "You seem to have unixODBC installed in /usr/local."
+	    default=y
+	    echo -n "Do you want to use a driver from /usr/local/etc/odbcinst.ini ? [$default] "
+	    read_yes_no_reply
+	    if [ $reply -ne 0 ]; then
+		echo
+		echo "You need to pick a driver to use for PostgreSQL."
+		echo
+		if [ -x /usr/local/bin/odbcinst ]; then
+		    echo "Available drivers are:"
+		    /usr/local/bin/odbcinst -q -d
+		else
+		    echo "Failed to get installed drivers."
+		fi
+		echo
+		default="PostgreSQL-psql"
+		echo -n "Please pick the driver to use for PostgreSQL [$default] "
+		read driver
+		if [ -z "$driver" ]; then
+		    driver=$default
+		fi
+	    fi
+	fi
+	if [ -z "$driver" -a -f /etc/odbcinst.ini ]; then
+	    if [ -x /usr/bin/odbcinst ]; then
+		echo "You seem to have unixODBC installed in /usr."
+		echo "You need to pick a driver to use for PostgreSQL."
+		echo "Available drivers are:"
+		/usr/bin/odbcinst -q -d
+	    else
+		echo "Failed to get installed drivers."
+	    fi
+	    default="PostgreSQL-psql"
+	    echo "Please pick the driver to use for PostgreSQL [$default] "
+	    read driver
+	    if [ -z "$driver" ]; then
+		driver=$default
+	    fi
+	fi
+	
+    # If the driver is not set, set it to PostgreSQL and hope for the best.
+	if [ -z "$driver" ]; then
+	    echo "WARNING: Could not find unixODBC installation. Using default \"PostgreSQL\" driver"
+	    echo "However, this might not work. If installation fails please install unixODBC"
+	    echo "and run the installer again."
+	    driver=PostgreSQL
+	fi
+    fi
+}
+
+write_jitterbit_conf() {
+    TempInstallWritten=0
+    if [ ! -z "$postgres_user" ]; then
+	echo "[TempInstall]
+TempInstallDbAdminUser='$postgres_user'
+TempInstallDbAdminPassword='$postgres_password'" >> $JITTERBIT_CONF
+	TempInstallWritten=1
+    fi
+
+    if [ $admin_password_specified -eq 1 ]; then
+	if [ $TempInstallWritten -eq 0 ]; then
+	    echo "[TempInstall]" >> $JITTERBIT_CONF	
+	fi
+	echo "TempInstallKongaAdminPassword='$admin_password'" >> $JITTERBIT_CONF
+    fi
+}
+
+# Call this before exiting the config script so that things can be cleaned up.
+cleanup_and_exit() {
+    if [ -z "$1" ]; then
+	RETVAL=0
+    else
+	RETVAL=$1
+    fi
+
+    if [ $RETVAL -ne 0 ]; then
+	echo "Installation failed, see INSTALL.txt for troubleshooting instructions."
+	echo "Also visit our forum: $FORUM_URL."
+    fi
+    echo
+    exit $RETVAL
+}
+
+# Configures the database for the Jitterbit Server.
+jconfig() {
+    echo
+    echo "This command configures the Jitterbit back-end databases."
+    echo "PostgreSQL must be running and set up to accept TCP/IP connections,"
+    echo "unixODBC and a PostgreSQL ODBC driver has to be installed."
+    echo "See the documentation for details."
+    echo
+
+    set_jitterbit_env
+
+    if [ ! -x $JITTERBIT_HOME/bin/JitterbitDbInstallUtils ]; then
+	echo "Could not find JitterbitDbInstallUtils."
+	echo "Jitterbit does not seem to be correctly installed."
+	exit 1
+    fi
+#    konga_installed=1
+
+# Check if we can connect to the backend database.
+    can_connect=0
+    is_update=0
+    advanced=1
+    create_db=1
+    $JITTERBIT_HOME/bin/JitterbitDbInstallUtils --test-connection --quiet >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+	can_connect=1
+	echo
+	echo "Successfully connected to the backend database."
+	echo
+	echo "Do you want to upgrade the system or re-install the databases?"
+	echo "If you answer no to the following question all your back-end"
+	echo "databases will be overwritten!"
+	echo
+	default=y
+	echo -n "Do you want to upgrade the system? [$default] "
+
+	read_yes_no_reply
+	if [ $reply -eq 1 ]; then
+	    is_update=1
+	    create_db=0
+	fi
+    else
+	echo
+	echo "Failed to connect to the backend database."
+	echo "Continuing with the assumption that this is a new installation."
+    fi
+
+    if [ $is_update -eq 0 ]; then
+	ask_postgres_info
+    fi
+
+# Ask for administrative password.
+#
+    admin_password_specified=0
+    admin_password=
+    if [ $is_update -eq 0 ]; then
+	default=y
+	if [ $can_connect -eq 1 ]; then
+	    default=n
+	    echo
+	    echo -n "Do you want to assign a new administrative password for the application? [$default] "
+	else
+	    echo
+	    echo -n "Do you want to assign an administrative password for the application? [$default] "
+	fi
+	read_yes_no_reply
+	
+	if [ $reply -eq 1 ]; then
+	    echo
+	    echo "Application Administrative Credentials"
+	    echo
+	    echo "Please enter the password you wish to use to"
+	    echo "login to the $PRODUCT_NAME"
+	    echo "Admin user name: Admin (remeber this user name!)"
+	    echo
+	    
+	    create_pwd
+	    admin_password=$pwd
+	    
+	    echo
+	    echo "Please remember this password!"
+	    echo "You will need it when you log in to the application as Admin."
+	    echo "Once logged in as Admin you can create new users."
+	    
+	    admin_password_specified=1
+	fi
+    fi
+    
+    if [ $is_update -ne 0 ]; then
+	$JITTERBIT_HOME/bin/jitterbit stop
+    fi
+
+    if [ $create_db -eq 1 ]; then
+	echo
+	echo "Now we need to create the PostgreSQL databases"
+	echo "All existing backend databases will be overwritten!"
+    elif [ $is_update -eq 1 ]; then
+	$JITTERBIT_HOME/bin/JitterbitDbInstallUtils --db-update-needs-admin > /dev/null 2> /dev/null
+	if [ $? -ne 0 ]; then
+	    if [ -z "$postgres_user" ]; then
+		echo
+		echo "This upgrade needs the administrative database credentials, please specify them."
+		set_postgres_info
+	    fi
+	fi
+	echo
+	echo "Backend databases will be updated"
+    fi
+    echo
+    
+    if [ $is_update -ne 1 ]; then
+	echo -n "Press any key to continue or hit Ctrl-C to abort now! "
+	read -s -n 1
+	echo
+    fi
+
+    select_driver
+
+    JITTERBIT_CONF=$JITTERBIT_HOME/jitterbit.conf
+
+    write_jitterbit_conf
+
+    opts=
+    if [ $is_update -eq 1 ]; then
+	opts=--update-databases
+    elif [ $create_db -eq 1 ]; then
+	opts=--create-databases
+    else
+	opts=--update-databases
+    fi
+    
+    if [ ! -z "$driver" ]; then
+	opts="$opts --driver $driver"
+    fi
+    opts="$opts --port $postgres_port"
+
+# Debug
+#echo "DEBUG: opts=$opts"
+#echo "press a key to run JitterbitDbInstallUtils!!"
+#read -s -n 1
+# Debug
+    $JITTERBIT_HOME/bin/JitterbitDbInstallUtils $opts
+    retval=$?
+    chgrp $jitterbit_user $JITTERBIT_CONF
+    if [ $? -eq 0 ]; then
+	chmod 640 $JITTERBIT_CONF
+    else
+	echo "Failed to change ownership of the file"
+	echo "$JITTERBIT_CONF"
+	echo "You need to change it yourself if required."
+    fi
+
+    if [ $retval -ne 0 ]; then
+	echo "Failed to install databases."
+	echo "Make sure that PostgreSQL is running and accepting tcp/ip connections"
+	echo "from the local host and that no other processes are accessing"
+	echo "the database. You might want to stop httpd and make sure that no"
+	echo "$PRODUCT_NAME related services are running."
+	echo
+	cleanup_and_exit $retval
+    fi
+
+    if [ $is_update -eq 0 ]; then
+	default=y
+	echo
+	echo -n "Do you want to start the backend services? [$default] "
+	read_yes_no_reply
+	if [ $reply -eq 1 ]; then
+	    $JITTERBIT_HOME/bin/jitterbit start
+	fi
+	
+	if [ -d /etc/init.d ]; then
+	    default=y
+	    echo
+	    echo "Do you want to configure the system to start"
+	    echo -n "PostgreSQL and Jitterbit Server when the system boots? [$default] "
+	    read_yes_no_reply
+	    if [ $reply -eq 1 ]; then
+		echo
+		$JITTERBIT_HOME/bin/jitterbit config_sysv_init
+	    fi
+	fi
+    else
+	echo
+	$JITTERBIT_HOME/bin/jitterbit start
+    fi
+    
+    echo
+    echo "Congratulations! You have successfully installed $PRODUCT_NAME"
+    echo
+    echo "You can control the Jitterbit services using the following command:"
+    echo "$JITTERBIT_HOME/bin/jitterbit [start|stop|restart]"
+    echo
+    echo "Please visit the Jitterbit forum if you have any questions."
+    echo "$FORUM_URL"
+    
+    cleanup_and_exit 0
+}
+
+# Sets the variable JVM to the current JVM
+set_jvm() {
+    # First check if JVM was defined in the config file.
+    if [ ! -z "$JVM" ]; then
+	which $JVM >/dev/null 2>/dev/null
+	if [ $? -eq 0 ]; then
+	    return 0
+	else
+	    echo "$JVM not found... trying default java instead"
+	    JVM=
+	fi
+    fi
+
+    # Check if the java command is in the standard path
+    which_jvm=`which java`
+    if [ $? -eq 0 ]; then
+	JVM=$which_jvm
+	return 0
+    fi
+
+# What else can we try to do???
+
+    if [ -z "$JVM" ]; then
+	echo
+	echo "Failed to start the Jitterbit JMS Engine."
+	echo "No Java Virtual Machine could be found."
+	echo "Make sure the command \"java\" is in the standard path"
+	echo "or set the environment variable JVM to the full path of"
+	echo "your JVM. (configurable in /etc/sysconfig/jitterbit or /etc/jitterbit)"
+	echo
+	return 1
+    fi
+}
+
+# Sets AXISCPP_DEPLOY. If it has not been set before derive it from JITTERBIT_HOME.
+set_axis_env() {
+    set_jitterbit_env
+    if [ -z "$AXISCPP_DEPLOY" ]; then
+	export AXISCPP_DEPLOY=$JITTERBIT_HOME/axis
+    fi
+
+    if [ ! -d $AXISCPP_DEPLOY ]; then
+	echo "Operation failed"
+	echo "$AXISCPP_DEPLOY is not a directory"
+	exit 1
+    fi
+}
+
+# Sets the variables JITTERBIT_APACHE_BIN and JITTERBIT_APACHE_HOME
+# to the directory where the httpd binary is located and where the Jitterbit Apache
+# configuration directory is located, respectively.
+set_apache_env() {
+    set_axis_env
+
+    if [ -z "$JITTERBIT_APACHE_BIN" ]; then
+	JITTERBIT_APACHE_BIN=$JITTERBIT_HOME/apache2/bin
+    fi
+    if [ ! -x $JITTERBIT_APACHE_BIN/httpd ]; then
+	if [ -x /usr/sbin/httpd ]; then
+	    JITTERBIT_APACHE_BIN="/usr/sbin"
+	else
+	    echo "Apache operation failed"
+	    echo "$JITTERBIT_APACHE_BIN/httpd does not exist"
+	    echo "Install apache and set JITTERBIT_APACHE_BIN in /etc/sysconfig/jitterbit"
+	    echo "to the apache httpd install directory, usually /usr/local/apache2/bin"
+	    return 1
+	fi
+    fi
+
+    if [ -z "$JITTERBIT_APACHE_HOME" ]; then
+	JITTERBIT_APACHE_HOME=$JITTERBIT_HOME/apache2
+    fi
+    if [ ! -d $JITTERBIT_APACHE_HOME ]; then
+	echo "Apache operation failed"
+	echo "$JITTERBIT_APACHE_HOME is not a directory."
+	echo "Set the environment variable JITTERBIT_APACHE_HOME in /etc/sysconfig/jitterbit"
+	echo "to the Jitterbit specific httpd configuration directory."
+	echo "Usually installed in /usr/local/jitterbit/apache2."
+    fi
+    return 0
+}
+
+start_apache() {
+    set_apache_env
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+    echo -n "Starting Jitterbit Apache..."
+    $su_cmd $jitterbit_user -c "LD_LIBRARY_PATH=$LD_LIBRARY_PATH; export LD_LIBRARY_PATH;  $JITTERBIT_APACHE_BIN/httpd -d $JITTERBIT_APACHE_HOME -DSSL -k start"
+    echo " done"
+    return 0
+}
+
+stop_apache() {
+    set_apache_env
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+    echo -n "Stopping Jitterbit Apache..."
+    $su_cmd $jitterbit_user -c "LD_LIBRARY_PATH=$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; $JITTERBIT_APACHE_BIN/httpd -d $JITTERBIT_APACHE_HOME -DSSL -k stop"
+    echo " done"
+    return 0
+}
+
+set_java_home() {
+    if [ -z "$JRE_HOME" ]; then
+        # JRE_HOME is not defined, check JAVA_HOME.
+        if [ -z "$JAVA_HOME" ]; then
+            echo "Neither the JRE_HOME nor the JAVA_HOME environment variable is defined!"
+            if [ -d /usr/java/default ]; then
+                echo "Using JRE_HOME=/usr/java/default but this may not work!"
+                JRE_HOME=/usr/java/default
+                export JRE_HOME
+            else
+                echo "No default found, functionality relying on Java may not work!"
+            fi
+            echo "To get rid of this warning you need to install Sun JRE version 6"
+            echo "and set JRE_HOME in /etc/sysconfig/jitterbit."
+        else
+	    JRE_HOME=$JAVA_HOME
+            export JRE_HOME
+        fi
+    else
+        export JRE_HOME
+    fi
+}
+
+set_tomcat_env() {
+    set_jitterbit_env
+    if [ -z "$JITTERBIT_HOME" ]; then
+	echo "The environment variable JITTERBIT_HOME has not been set."
+	exit 1
+    fi
+    CATALINA_HOME="$JITTERBIT_HOME/tomcat"
+    export CATALINA_HOME
+
+    set_java_home
+}
+
+start_tomcat() {
+    set_tomcat_env
+    echo -n "Starting Jitterbit Tomcat..."
+    $su_cmd $jitterbit_user -c "CATALINA_HOME=$CATALINA_HOME; export CATALINA_HOME; cd $CATALINA_HOME/temp; $CATALINA_HOME/bin/startup.sh > $JITTERBIT_HOME/log/tomcat_control.log"
+    echo " done"
+}
+
+stop_tomcat() {
+    set_tomcat_env
+    echo -n "Stopping Jitterbit Tomcat..."
+    $su_cmd $jitterbit_user -c "CATALINA_HOME=$CATALINA_HOME; export CATALINA_HOME; $CATALINA_HOME/bin/shutdown.sh >> $JITTERBIT_HOME/log/tomcat_control.log"
+    echo " done"
+}
+
+start_jms_engine() {
+    set_jitterbit_env
+    if [ $ENABLE_JMS -ne 0 ]; then
+	set_jvm
+	if [ $? -eq 0 ]; then
+	    echo -n "Starting Jitterbit JMS Engine..."
+	    jar="$JITTERBIT_HOME/java/lib/jitterbit/integration/server/jitterbit-jms-engine.jar"
+	    std_out="$JITTERBIT_HOME/log/JmsEngine.stdout.txt"
+	    std_err="$JITTERBIT_HOME/log/JmsEngine.stderr.txt"
+	    $su_cmd $jitterbit_user -c "$JVM -jar $jar >> $std_out 2>> $std_err &"
+	    echo " done"
+	fi
+    else
+	echo "Jitterbit JMS Engine is disabled."
+    fi
+}
+
+stop_jms_engine() {
+    set_jitterbit_env
+    if [ $ENABLE_JMS -ne 0 ]; then
+	echo -n "Stopping Jitterbit JMS Engine..."
+	$JITTERBIT_HOME/bin/JitterbitUtils --quiet --send-command JmsEngine Shutdown
+	echo " done"
+    else
+	echo "Jitterbit JMS Engine disabled."
+    fi
+}
+
+# The arguments for pg should be read from conf file.
+start_pg() {
+    cd /tmp
+    $su_cmd postgres -c \
+        "pg_ctl -D /var/lib/pgsql/data -l /var/lib/pgsql/data/pgsql.log start"
+    cd - > /dev/null
+}
+
+stop_pg() {
+    cd /tmp
+    $su_cmd postgres -c "pg_ctl -D /var/lib/pgsql/data stop"
+    cd - > /dev/null
+}
+
+start() {
+    set_jitterbit_env
+
+#    start_jms_engine
+    start_apache
+    start_tomcat
+
+    CONTROLLER=$JITTERBIT_HOME/bin/ControlJitterbitProcess.sh
+    $CONTROLLER start JitterbitProcessEngine
+    $CONTROLLER start JitterbitScheduler
+    $CONTROLLER start JitterbitFileCleanup 19
+
+}
+
+stop() {
+    set_jitterbit_env
+
+    # Send interrupt signal to the Jitterbit processes.
+    CONTROLLER=$JITTERBIT_HOME/bin/ControlJitterbitProcess.sh
+    $CONTROLLER sig_int JitterbitScheduler
+    $CONTROLLER sig_int JitterbitProcessEngine
+    $CONTROLLER sig_int JitterbitFileCleanup
+
+    stop_tomcat
+    stop_apache
+#    stop_jms_engine
+
+    # Wait for the Jitterbit processes to stop.
+    $CONTROLLER wait_then_term JitterbitScheduler
+    $CONTROLLER wait_then_term JitterbitProcessEngine
+    $CONTROLLER wait_then_term JitterbitFileCleanup
+}
+
+# Returns 0 if all 3 services are running
+# else returns the number of services NOT running.
+status() {
+    set_jitterbit_env
+    CONTROLLER=$JITTERBIT_HOME/bin/ControlJitterbitProcess.sh
+    i=0
+    $CONTROLLER status JitterbitProcessEngine
+    if [ $? -eq 0 ]; then
+	let i=i+1
+    fi
+    $CONTROLLER status JitterbitScheduler
+    if [ $? -eq 0 ]; then
+	let i=i+1
+    fi
+    $CONTROLLER status JitterbitFileCleanup
+    if [ $? -eq 0 ]; then
+	let i=i+1
+    fi
+
+    if [ $i -eq 3 ]; then
+	echo "All services are running"
+	exit 0
+    else
+	echo "$i out of 3 services are running"
+	let diff=3-i
+	exit $diff
+    fi
+}
+
+
+run_top() {
+    top -U jitterbit
+}
+
+print_version() {
+    set_jitterbit_env
+    $JITTERBIT_HOME/bin/JitterbitProcessEngine --version
+}
+
+sysv_err() {
+    echo
+    echo "Your system does not seem to be configured to use SysV-style initialization."
+    echo "Add the command '$JITTERBIT_HOME/bin/jitterbit start' to your startup script."
+    echo "Also make sure that PostgreSQL starts up before the jitterbit services."
+    echo
+    exit 1
+}
+
+config_sysv_init() {
+    set_jitterbit_env
+    if [ ! -d /etc/init.d ] || [ ! -x /sbin/chkconfig  ]; then
+	echo
+	echo "Your system does not use SysV-style intialization"
+	echo "Add the command"
+	echo
+	echo "$JITTERBIT_HOME/bin/jitterbit start"
+	echo
+	echo "towards the end of your local startup script."
+	echo "Also make sure that PostgreSQL is started before Jitterbit Server."
+	echo
+	exit 1
+    fi
+
+    # Configure PostgreSQL and Jitterbit Server to start in runlevel 345
+    # and stop in 0126
+    /sbin/chkconfig --add postgresql
+    /sbin/chkconfig --add jitterbit
+
+    /sbin/chkconfig --level 35 postgresql on
+    /sbin/chkconfig --level 35 jitterbit on
+
+    echo "SysV-style initialization has been configured for PostgreSQL and Jitterbit Server."
+    exit 0
+}
+
+run_utils() {
+    set_jitterbit_env
+    $JITTERBIT_HOME/bin/JitterbitUtils $@
+}
+
+print_help() {
+    echo "Usage: $1 command [arguments]"
+    echo
+    echo "Available commands:
+
+start            Start all Jitterbit services.
+stop             Stop all Jitterbit services.
+restart          Restart all Jitterbit services (same as start and then stop).
+status           Show the status of the Jitterbit Process Engine, Scheduler and Cleanup service processes.
+
+start_apache     Start only the Jitterbit Apache service.
+stop_apache      Stop only the Jitterbit Apache service.
+start_tomcat     Start only the Jitterbit Tomcat service.
+stop_tomcat      Stop only the Jitterbit Tomcat service.
+
+config_sysv_init Configure System V initialization of Jitterbit and PostgreSQL services.
+top              Show processes running as the jitterbit user.
+utils            Wrapper to the JitterbitUtils command. arguments are forwarded to JitterbitUtils.
+                 Execute without arguments to see usage.
+version          Print the version and build date of the Jitterbit Process Engine
+help             Print this message.
+"
+}
+
+# See how we were called.
+case "$1" in
+  config)
+        jconfig
+        ;;
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        stop
+        sleep 2
+        start
+        ;;
+  status)
+        status
+        ;;
+  start_apache)
+        start_apache
+        ;;
+  stop_apache)
+        stop_apache
+        ;;
+  start_tomcat)
+        start_tomcat
+        ;;
+  stop_tomcat)
+        stop_tomcat
+        ;;
+  start_pg)
+        start_pg
+        ;;
+  stop_pg)
+        stop_pg
+        ;;
+  config_sysv_init)
+        config_sysv_init
+        ;;
+  top)
+	run_top
+	;;
+  utils)
+	run_utils $@
+	;;
+  help)
+	print_help $0
+	;;
+  version)
+	print_version
+	;;
+  *)
+        echo "Usage: $0 {start|stop|restart|status|start_apache|stop_apache|start_tomcat|stop_tomcat|config_sysv_init|top|version|config|utils|help}"
+        exit 1
+esac

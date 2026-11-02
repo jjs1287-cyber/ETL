@@ -1,0 +1,16 @@
+org/etlforge/integration/user/Group.class
+org/etlforge/integration/user/Group$*.class
+org/etlforge/integration/user/GroupId.class
+org/etlforge/integration/user/GroupId$*.class
+org/etlforge/integration/user/GroupMemberListener.class
+org/etlforge/integration/user/GroupMemberListener$*.class
+org/etlforge/integration/user/ProtectedMemberException.class
+org/etlforge/integration/user/ProtectedMemberException$*.class
+org/etlforge/integration/user/Role.class
+org/etlforge/integration/user/Role$*.class
+org/etlforge/integration/user/RoleId.class
+org/etlforge/integration/user/RoleId$*.class
+org/etlforge/integration/user/User.class
+org/etlforge/integration/user/User$*.class
+org/etlforge/integration/user/UserId.class
+org/etlforge/integration/user/UserId$*.class

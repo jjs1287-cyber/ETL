@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="admin.action.SystemConsole" class="org.etlforge.integration.client.ui.admin.core.action.ShowSystemConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.OperationQueue" class="org.etlforge.integration.client.ui.admin.core.action.ShowSystemQueueAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationQueueProvider" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.DeleteQueue" class="org.etlforge.integration.client.ui.admin.core.action.DeleteSystemQueueAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationQueueProvider" />
+	</bean>
+	<bean id="admin.action.OperationLog" class="org.etlforge.integration.client.ui.admin.core.action.ShowSystemOperationLogAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.OperationLogProvider" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.OperationHistory" class="org.etlforge.integration.client.ui.admin.core.action.ShowSystemOperationHistoryAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.admin.util.SystemOperationHistoryDisplayer">
+				<constructor-arg ref="server.OperationHistoryProvider" />
+				<constructor-arg ref="server.SourceHistoryProvider" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.RunOperation" class="org.etlforge.integration.client.ui.admin.core.action.OperationDoNowAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.JobControl" />
+		<property name="monitorApis">
+			<bean class="org.etlforge.integration.activity.ui.monitor.OperationMonitorApis">
+				<constructor-arg ref="server.OperationLogProvider" />
+				<constructor-arg ref="server.OperationQueueProvider" />
+			</bean>
+		</property>
+	</bean>	
+	<bean id="admin.action.SchedulerConsole" class="org.etlforge.integration.client.ui.admin.core.action.ShowSchedulerConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.UserConsole" class="org.etlforge.integration.client.ui.admin.core.action.ShowUserConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.ProjectConsole" class="org.etlforge.integration.client.ui.admin.core.action.ShowProjectConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.ServerLogs" class="com.etlforge.integration.client.ui.admin.action.ShowServerLogsConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>	
+	<bean id="admin.action.ServerProxyConsole" class="org.etlforge.integration.client.ui.admin.core.action.ShowServerProxyConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="Server.ProxySettings" />
+	</bean>	
+
+	<bean id="admin.ProjectInfoCache" class="org.etlforge.integration.client.ui.admin.component.project.SingleServerProjectInfoCache" lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.project.info.ProjectInfoFileCache">
+				<constructor-arg ref="platform.CacheDir" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="platform.LoginService" />
+	</bean>
+
+	<bean id="admin.action.AuditLog" class="org.etlforge.integration.client.ui.admin.audit.ShowAuditLogAction" lazy-init="true"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="platform.ServerManager"/><constructor-arg ref="ws.config.Cpp"/></bean>
+<bean id="admin.action.ProjectComparison" class="org.etlforge.integration.client.ui.admin.compare.ShowProjectComparisonAction" lazy-init="true"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="platform.ProjectManager"/></bean>
+<bean id="admin.action.SshKeys" class="org.etlforge.integration.client.ui.admin.ssh.ShowSshKeysAction" lazy-init="true"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="platform.ServerManager"/><constructor-arg ref="ws.config.Cpp"/></bean>
+<bean id="admin.action.Cluster" class="org.etlforge.integration.client.ui.admin.cluster.ShowClusterAction" lazy-init="true"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="platform.ServerManager"/><constructor-arg ref="ws.config.Cpp"/></bean>
+<bean id="admin.action.CloudLogging" class="org.etlforge.integration.client.ui.admin.cloud.ShowCloudLoggingAction" lazy-init="true"><constructor-arg ref="ui.AppWin"/><constructor-arg ref="platform.ServerManager"/><constructor-arg ref="ws.config.Cpp"/></bean>
+<bean id="admin.ConsoleActions" class="org.etlforge.integration.client.ui.admin.core.console.ConsoleActions" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="admin.action.SystemConsole" />
+				<ref bean="admin.action.OperationQueue" />
+				<ref bean="admin.action.OperationLog" />
+				<ref bean="admin.action.OperationHistory" />
+				<ref bean="admin.action.SchedulerConsole" />
+				<ref bean="admin.action.UserConsole" />
+				<ref bean="admin.action.ProjectConsole" />
+				<ref bean="admin.action.ServerProxyConsole" />
+				<ref bean="admin.action.ServerLogs" />
+                <ref bean="admin.action.AuditLog" />
+                <ref bean="admin.action.CloudLogging" />
+                <ref bean="admin.action.Cluster" />
+                <ref bean="admin.action.SshKeys" />
+                <ref bean="admin.action.ProjectComparison" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="administration.View" class="org.etlforge.integration.client.ui.admin.AdministrationView" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="admin.ConsoleActions" />
+		<constructor-arg>
+			<list>
+				<ref bean="admin.action.DeleteQueue" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="admin.Shell" class="org.etlforge.application.ui.view.shell.ViewShell" lazy-init="true">
+		<constructor-arg value="administration" />
+		<constructor-arg value="Administration" />
+		<property name="switchAction">
+			<bean class="org.etlforge.integration.client.ui.admin.AdminViewSwitchAction">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg ref="admin.Shell" />
+			</bean>
+		</property>
+		<property name="menuExtensions">
+			<list>
+				<bean class="org.etlforge.application.ui.view.menu.MenuExtensionData">
+					<constructor-arg value="menu.View" />
+					<constructor-arg type="int"><value>3</value></constructor-arg>
+					<property name="extensionItems">
+						<list>
+							<bean class="org.etlforge.integration.client.ui.admin.component.menu.proxy.AdminConsoleMenuItemFactory">
+								<constructor-arg ref="admin.ConsoleActions" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="administration.Launcher" class="org.etlforge.integration.client.ui.admin.component.launcher.AdminViewLauncher" 
+				lazy-init="true">
+		<constructor-arg ref="ui.ViewManager" />
+	</bean>
+
+	<bean id="admin.UserConsole.View" class="org.etlforge.integration.client.ui.admin.component.user2.UserConsoleTreeView"
+			scope="prototype" lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.admin.component.user2.UserConsoleModel">
+				<constructor-arg ref="platform.UserManager" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="admin.UserConsole" class="org.etlforge.integration.client.ui.admin.component.user2.UserConsolePage"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="admin.UserConsole.View" />
+		<constructor-arg ref="admin.UserConsole.Controller" />
+		<constructor-arg ref="platform.LoginService" />
+	</bean>
+
+	<bean id="admin.LogFileConsole" abstract="true">
+		<constructor-arg ref="server.ServerAdmin" />
+	</bean>
+	<bean id="admin.ServerLogConsole" class="com.etlforge.integration.client.ui.admin.log.ServerLogConsolePage"
+			scope="prototype" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="com.etlforge.integration.client.ui.admin.log.ServerLogFilesConsole" parent="admin.LogFileConsole" />
+				<bean class="com.etlforge.integration.client.ui.admin.log.OperationLogFilesConsole" parent="admin.LogFileConsole" />
+				<bean class="com.etlforge.integration.client.ui.admin.log.DebugLogFilesConsole" parent="admin.LogFileConsole" />
+				<bean class="com.etlforge.integration.client.ui.admin.log.PluginLogFilesConsole" parent="admin.LogFileConsole" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="admin.SystemConsole" class="org.etlforge.integration.client.ui.admin.component.system.SystemConsolePage"
+			scope="prototype" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.admin.component.system.ProcessEngineUi">
+					<constructor-arg ref="server.Admin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.system.ServerConfigurationFileViewer">
+					<constructor-arg ref="server.ServerAdmin" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="admin.ProjectConsole.Actions" class="org.etlforge.integration.client.ui.admin.component.project.ProjectConsoleActions" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="admin.ProjectConsole.Actions.Project" />
+		<constructor-arg>
+			<list>
+				<ref bean="admin.action.RunOperation" />
+				<ref bean="activity.action.Log" />
+				<ref bean="activity.action.History" />
+				<ref bean="activity.action.Queue" />
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.EnableSchedulesAction">
+					<constructor-arg ref="server.ProjectAdmin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.DisableSchedulesAction">
+					<constructor-arg ref="server.ProjectAdmin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.EnableOperationSchedulesAction">
+					<constructor-arg ref="server.ProjectAdmin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.DisableOperationSchedulesAction">
+					<constructor-arg ref="server.ProjectAdmin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.TestScheduleAction">
+					<constructor-arg ref="server.TestScheduleProvider" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="admin.SchedulerConsole" class="org.etlforge.integration.client.ui.admin.component.scheduler.SchedulerConsolePage"
+			scope="prototype" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.admin.component.scheduler.SchedulerEngineUi">
+					<constructor-arg ref="server.Admin" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.DeployedSchedulesPart">
+					<constructor-arg ref="ui.AppWin" />
+					<constructor-arg ref="admin.ProjectConsole.Actions" />
+					<constructor-arg ref="platform.ServerManager" />
+					<constructor-arg ref="server.ProjectInfoProvider" />
+					<constructor-arg ref="admin.ProjectInfoCache" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.admin.scheduler.ScheduledRunsPart">
+					<constructor-arg ref="server.ProjectAdmin" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="admin.ProjectConsole" class="org.etlforge.integration.client.ui.admin.component.project.ProjectConsolePage"
+			scope="prototype" lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.project.info.ProjectConsoleTreeView">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg>
+					<bean class="org.etlforge.integration.client.ui.project.info.ProjectConsoleModel" />
+				</constructor-arg>
+				<property name="filterControl">
+					<bean class="com.etlforge.integration.client.ui.admin.project.TreeFilterControlImpl" />
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="admin.ProjectConsole.Actions" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="server.ProjectInfoProvider" />
+		<property name="cache">
+			<ref bean="admin.ProjectInfoCache" />
+		</property>
+	</bean>
+	
+</beans>

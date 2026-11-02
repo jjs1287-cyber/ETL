@@ -1,0 +1,16 @@
+<html>
+Sort the array according to the some column specified in the 2nd argument.<br>
+Namely the 2nd argument specifies the index of sorting column, and the index is base 0.<br>
+The optional 3rd argument is for specifying ascending or descending order, and the default is true for ascending.<br>
+The return value is undefined and should be ignored.
+After the function returns, the array specified in the first argument will be sorted.
+Multiple columns sorting of the same array is possible by applying multiple SortArray function successively. 
+<h2>Example:</h2>
+<code><font size="4">
+arr={{&quot;a&quot;,20,1, &quot;abc&quot;},{&quot;bc&quot;,7,12},{&quot;x&quot;,20,13},{&quot;d&quot;,5,4}};<br>
+SortArray(arr, 2, false); // sort array arr order by third column descending<br>
+SortArray(arr, 1); // sort arr order by second column ascending<br>
+arr // display result<br>
+</font>
+</code>
+</html>

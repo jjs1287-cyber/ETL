@@ -1,0 +1,18 @@
+<html>
+<p>
+Performs necessary escaping of literal strings used in a SQL statement.
+Strings used as character constants in a SQL statement uses ' (single quote)
+as a delimiter so if the actual data contains single quotes they have to be escaped
+by specifying it twice. This method escapes single quotes
+according to the SQL standard by replacing ' with ''.
+</p>
+<p>
+If back-slash characters should also be escaped, set the second argument to true.
+</p>
+
+<br><h2>Example:</h2>
+<code><font size="4">
+DBLookup("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",
+"SELECT ORDER_TYPE FROM PO_HEADER WHERE PO_ID = " + Quote(SqlEscape(GUID)))
+</font></code>
+</html>

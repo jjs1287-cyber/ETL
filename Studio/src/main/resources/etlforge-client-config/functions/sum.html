@@ -1,0 +1,13 @@
+<html>
+Takes the value of all instances of a data element at a particular hierarchical
+level and returns their sum. The data type must be integer, long, float, double or string.
+It can also be called on an array to return the sum of the values in that array.
+In that case all the values in the array have to be of the same type or the function
+call will fail. If the array is empty NULL is returned.<br>
+
+<h2>Example:</h2>
+Assume your database contains a field called quantity in a table called Items that is a child
+of POHeader (there are many items within one POHeader).<br>
+<code><font size="4">Sum(POHeader.Items#.Quantity)</font></code> will return the sum of the quantity for
+all items for a particular POHeader (purchase order).
+</html>

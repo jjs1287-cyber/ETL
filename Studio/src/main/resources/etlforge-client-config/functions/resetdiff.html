@@ -1,0 +1,17 @@
+<html><p>
+        Reset an existing diff session. The <i>action</i> argument decides how the diff session is reset:
+        <ul>
+        <li>
+        0 -- Reset. Forget the latest snapshot and start over from scratch. This will force the system to treat all entries as "added".
+        </li>
+        <li>
+        1 -- Purge. Remove files left over from a previous diff session. This does not reset the latest snapshot, it just clears any stale files
+        left from old, failed or cancelled, diff sessions.
+        </li>
+        </ul>
+        </p>
+        <p>
+        This method is typically called when something has been changed in an existing diff process or
+        a diff process has failed and was left in an inconsistent state. Should normally not be called during normal diff processing.
+        If no diff session is present for this diff_id no action is performed.
+        </p></html>

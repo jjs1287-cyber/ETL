@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zip", "Zip.vcproj", "{F6AA9138-602F-4F82-A51F-53759F5F95C7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestZip", "..\..\Test\project\vc-9_0\TestZip.vcproj", "{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9} = {B0D1025B-BE98-4152-9E12-82FDB740ECB9}
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7} = {F6AA9138-602F-4F82-A51F-53759F5F95C7}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\Utils\project\vc-9_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Crypto", "..\..\..\Crypto\project\vc-9_0\Crypto.vcproj", "{B0D1025B-BE98-4152-9E12-82FDB740ECB9}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Installer_Release|Win32 = Installer_Release|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Debug|Win32.Build.0 = Debug|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Installer_Release|Win32.ActiveCfg = Release|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Installer_Release|Win32.Build.0 = Release|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Release|Win32.ActiveCfg = Release|Win32
+		{F6AA9138-602F-4F82-A51F-53759F5F95C7}.Release|Win32.Build.0 = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Debug|Win32.Build.0 = Debug|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Installer_Release|Win32.ActiveCfg = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Installer_Release|Win32.Build.0 = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Release|Win32.ActiveCfg = Release|Win32
+		{5E36BB44-D29A-452B-9F73-E6ED0A6056E4}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Debug|Win32.Build.0 = Debug|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Release|Win32.ActiveCfg = Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

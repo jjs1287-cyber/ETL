@@ -1,0 +1,8 @@
+<html>Matches a regular expression with an input string and stores the matches in data elements.
+				Returns the total number of matched elements (which could be more or less than the
+				number of data elements actually supplied).<br><h2>Example:</h2><code><font size="4">RegExMatch("[abc]", "(\\[)(.*)(\\])", "dummy", "value")</font></code> returns 3
+				and sets the global data element "dummy" to "[" and the global data element
+				"value" to "abc". The method will return three because the character "]" also matched the expression
+				but in this example we are not interested in it and it is not be saved to any data element.
+				Note: "\" has to be escaped in literal strings since it has special meaning.
+				If you really need "\" (like in this example) you need to use "\\".</html>

@@ -1,0 +1,84 @@
+<!--NOTE:  When mapping from an X12 EDI document to a date column in a database or vice versa, DO NOT use the CVTDate function.  This will automatically be taken care of by the CR engine.  However, DO use CVTDate() for EDIFACT since "date" fields in the EDIFACT standard are actually defined as numeric.
+-->
+
+<h3>Specification of the format strings:</h3>
+
+<p>
+The format of both the input date string and the output date string are specified in the same way by
+using either characters for place holders or one of the four pre-defined date formats
+(GeneralDate, LongDate, MediumDate, or ShortDate).
+</p>
+<p>
+For input, year, month, day, hour, minute, second and AM/PM are read from the date string at the position where
+y, m, d, H, M, S and AP appear in the input format string.
+</p>
+<p>
+For output, the format string is copied to the data string with the year, month, day, hour, minute, and second
+replacing the characters of y, m, d, H, M, S and AP.
+</p>
+<p>
+Alternatively, the substitutions used in the ANSI C method <b>strftime</b> can be used, e.g. the string "%Y-%m-%d"
+would result in the ISO 8601 date format (yyyy-mm-dd). See the unix manual page for strftime for a detailed
+description (http://www.penguin-soft.com/penguin/man?q=strftime&section=ALL&action=man).
+</p>
+</br>
+<p>
+The following can appear anywhere in the format string to specify how to read the input or write the output:
+</p>
+</br>
+</br>
+
+<table cellpadding="4">
+<tr>
+<th align="left">Format</th><th align="left"><sp>Input/Output</th>
+</tr><tr>
+<td>yyyy</td><td>4-digit year</td>
+</tr><tr>
+<td>yy</td><td>(last)2-digit year</td>
+</tr><tr>
+<td>??yy</td><td>2- or 4-digit year</td>
+</tr><tr>
+<td>mmm</td><td>Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec</td>
+</tr><tr>
+<td>mm</td><td>2-digit month (01-12)</td>
+</tr><tr>
+<td>?m</td><td>1- or 2-digit month (1-12)</td>
+</tr><tr>
+<td>ddd</td><td>Julian date (001-366)</td>
+</tr><tr>
+<td>dd</td><td>2-digit day (01-31)</td>
+</tr><tr>
+<td>?d</td><td>1- or 2-digit day (1-31)</td>
+</tr><tr>
+<td>HH</td><td>Hour (00-23) or (01-12) if AM/PM is specified</td>
+</tr><tr>
+<td>MM</td><td>Minutes (00-59)</td>
+</tr><tr>
+<td>SS</td><td>Second (00-59)</td>
+</tr><tr>
+<td>AP</td><td>AM or PM</td>
+</tr><tr>
+<td>GeneralDate</td><td>6/19/94 5:34:23 PM</td>
+</tr><tr>
+<td>LongDate</td><td>Sunday, June 19, 1994</td>
+</tr><tr>
+<td>MediumDate</td><td>19-Jun-1994</td>
+</tr><tr>
+<td>ShortDate</td><td>6/19/94</td>
+</tr>
+</table>
+<br>
+
+<table cellpadding="4">
+<tr>
+<th align="left">Example</th><th align="left">Input</th><th align="left">Output</th>
+</tr><tr>
+<td>CVTDate(myDate, "mmddyy", "yyyymmdd")</td><td>061994</td><td>19940619</td>
+</tr><tr>
+<td>CVTDate(myDate, "mmddyy", "ShortDate")</td><td>061994</td><td>6/19/94</td>
+</tr><tr>
+<td>CVTDate(myDate, "mmddyy", "LongDate")</td><td>061994</td><td>Sunday, June 19, 1994</td>
+</tr><tr>
+<td>CVTDate(Now(), "GeneralDate", "dd-mmm-yy, HH:MM AP")</td><td>061994</td><td>19-Jun-94, 10:37 AM</td>
+</tr>
+</table>

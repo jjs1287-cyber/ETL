@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/integration/konga/OperationObjects/FtpLocation.cpp');s=p.read_text(encoding='utf-8').replace('if(ftp.isSftp())ftp.configureSftp(m_extendedProperties.GetString("sftp_key_id", ""),m_extendedProperties.GetString("sftp_host_sha256", ""));','if(ftp.isSftp()){try{ftp.configureSftp(m_extendedProperties.GetString("sftp_key_id", ""),m_extendedProperties.GetString("sftp_host_sha256", ""));}catch(const CrException& ex){throw OperationEngineException(ex.GetErrorString());}}');p.write_text(s,encoding='utf-8')

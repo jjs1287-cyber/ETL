@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:CPP="http://xml.apache.org/axis/wsdd/providers/CPP">
+	<service name="UserAdminService" provider="CPP:DOCUMENT" description="Axis C++ web service">
+		<parameter name="className" value="/user/local/apache/axis/UserAdminService.dll"/>
+		<parameter name="allowedMethods" value="getUsersAndGroups getUsersAndGroups getUsersAndGroupsWithOptions getUsersAndGroupsWithOptions setUsersAndGroups setUsersAndGroups setUserInfo setUserInfo getUserInfo getUserInfo "/>
+	</service>
+</deployment>

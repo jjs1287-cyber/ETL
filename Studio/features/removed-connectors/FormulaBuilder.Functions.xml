@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+Description of the <Grammar> element:
+=====================================
+The <Grammar> element has the following form:
+
+  function-name;arg-list
+  or
+  function-name;arg-list;return-type
+  
+where arg-list is a description of the arguments required by the function.
+arg-list can take different forms:
+
+1.
+If the function takes a fixes number of arguments, the number of arguments can be
+given directly, like so:
+
+	Now;0
+	Left;2
+	
+Alternatively, you can use type codes to give a hint of the arguments data type. Note
+that the client cannot validate this, since the actual data type of a data element may not
+be known until runtime, so it serves just as a form of documentation (with an important 
+exception, see below). For example, the function Left takes a String and an Integer as input,
+which can be denoted as:
+
+	Left;si
+	
+Use "*" if the argument can be of any type.
+
+2.
+If the function takes a fixed number of optional arguments, they are denoted by '?'. For example,
+DebugBreak takes an optional boolean argument:
+
+	DebugBreak;?
+	
+Note that there is no way to indicate the data type of an optional argument.
+If the function has both required and optional arguments you must use the second form described 
+above for the required arguments. For example, If takes two required arguments and one optional one
+(the first argument should be a boolean, the second argument of any type):
+
+	If;b*?
+	
+SendEmail takes 4 required string arguments and up to 6 optional ones:
+
+	SendEmail;ssss??????
+	
+3.
+Some functions use so-called varargs, meaning that the number of arguments is not defined.
+This is denoted by '.'. For example, DbExecute takes two required arguments (DB source and SQL statement),
+and then an optional list of data element names (could be 0, could be 1, could be 42). This becomes:
+
+	DbExecute;ss.
+
+4.
+Some functions requires an array (or collection) as input. When used on a source data element the 
+formula builder must sometimes insert an array-marker in the path of the source element used as argument.
+This is indicated by using '#' as the argument marker:
+
+	Sum;#
+	FindValue;*##
+	SumString;#??
+	
+In other words, for these functions you cannot use the shorthand of just defining the number of arguments.
+
+5. 
+If the function return an array and the argument is not an array, the return type must be marked as array, i.e.
+
+	SelectNodes;ss.;array
+-->
+<Functions>
+  <ProjectItemArgs>
+	<Type>
+		<Prefix>s</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.SourceId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.Source</DataClass>
+	</Type>
+	<Type>
+		<Prefix>t</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.TargetId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.Target</DataClass>
+	</Type>
+	<Type>
+		<Prefix>op</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.OperationId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.Operation</DataClass>
+	</Type>
+	<Type>
+		<Prefix>sc</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.ScriptId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.Script</DataClass>
+	</Type>
+	<Type>
+		<Prefix>so</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.SalesforceConnectorId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.SalesforceConnector</DataClass>
+	</Type>
+	<Type>
+		<Prefix>m</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.EmailMessageId</IdClass>
+		<DataClass>org.etlforge.integration.data.entity.EmailMessage</DataClass>
+	</Type>
+	<Type>
+		<Prefix>plm</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.AutoDeskEndpointId</IdClass>
+		<DataClass>org.etlforge.integration.data.connector.AutoDeskEndpoint</DataClass>
+	</Type>
+	<Type>
+		<Prefix>netsuite</Prefix>
+		<IdClass>org.etlforge.integration.data.entity.id.NetSuiteEndpointId</IdClass>
+		<DataClass>org.etlforge.integration.data.connector.NetSuiteEndpoint</DataClass>
+	</Type>
+  </ProjectItemArgs>
+  <Category Name="Conversion">
+    <Function Name="Int">
+      <Display>int Int(type x)</Display>
+      <DEName>Int(&lt;arg&gt;)</DEName>
+      <Grammar>Int;1</Grammar>
+    </Function>
+    <Function Name="Long">
+      <Display>long Long(type x)</Display>
+      <DEName>Long(&lt;arg&gt;)</DEName>
+      <Grammar>Long;1</Grammar>
+    </Function>
+    <Function Name="Float">
+      <Display>float Float(type x)</Display>
+      <DEName>Float(&lt;arg&gt;)</DEName>
+      <Grammar>Float;1</Grammar>
+    </Function>
+    <Function Name="Double">
+      <Display>double Double(type x)</Display>
+      <DEName>Double(&lt;arg&gt;)</DEName>
+      <Grammar>Double;1</Grammar>
+    </Function>
+    <Function Name="String">
+      <Display>string String(type x)</Display>
+      <DEName>String(&lt;arg&gt;)</DEName>
+      <Grammar>String;1</Grammar>
+    </Function>
+    <Function Name="Bool">
+      <Display>bool Bool(type x)</Display>
+      <DEName>Bool(&lt;arg&gt;)</DEName>
+      <Grammar>Bool;1</Grammar>
+    </Function>
+    <Function Name="Date">
+      <Display>date Date(type d)</Display>
+      <DEName>Date(&lt;d&gt;)</DEName>
+      <Grammar>Date;1</Grammar>
+    </Function>
+    <Function Name="BinaryToHex" Since="3.0.1">
+      <Display>string BinaryToHex(binary x)</Display>
+      <DEName>BinaryToHex(&lt;arg&gt;)</DEName>
+      <Grammar>BinaryToHex;1</Grammar>
+    </Function>
+    <Function Name="StringToHex" Since="5.1.1">
+      <Display>string StringToHex(string s)</Display>
+      <DEName>StringToHex(&lt;arg&gt;)</DEName>
+      <Grammar>StringToHex;1</Grammar>
+    </Function>
+    <Function Name="HexToBinary" Since="3.0.1">
+      <Display>string HexToBinary(string)</Display>
+      <DEName>HexToBinary(&lt;arg&gt;)</DEName>
+      <Grammar>HexToBinary;1</Grammar>
+    </Function>
+    <Function Name="HexToString" Since="5.1.1">
+      <Display>string HexToString(string)</Display>
+      <DEName>HexToString(&lt;arg&gt;)</DEName>
+      <Grammar>HexToString;1</Grammar>
+    </Function>
+    <Function Name="UuidToBinary" Since="3.0.1">
+      <Display>binary UuidToBinary(string)</Display>
+      <DEName>UuidToBinary(&lt;uuid&gt;)</DEName>
+      <Grammar>UuidToBinary;1</Grammar>
+    </Function>
+    <Function Name="BinaryToUuid" Since="3.0.1">
+      <Display>string BinaryToUuid(binary x)</Display>
+      <DEName>BinaryToUuid(&lt;arg&gt;)</DEName>
+      <Grammar>BinaryToUuid;1</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Cryptography">
+    <Function Name="MD5">
+      <Display>string MD5(type d)</Display>
+      <DEName>MD5(&lt;arg&gt;)</DEName>
+      <Grammar>MD5;1</Grammar>
+    </Function>
+    <Function Name="MD5AsTwoNumbers" Since="3.0.1">
+      <Display>array MD5AsTwoNumbers(type d)</Display>
+      <DEName>MD5AsTwoNumbers(&lt;arg&gt;)</DEName>
+      <Grammar>MD5AsTwoNumbers;1</Grammar>
+    </Function>
+    <Function Name="Base64Encode" Since="1.2.0">
+      <Display>string Base64Encode(type data)</Display>
+      <DEName>Base64Encode(&lt;arg&gt;)</DEName>
+      <Grammar>Base64Encode;1</Grammar>
+    </Function>
+    <Function Name="Base64EncodeFile" Since="2.0.1">
+      <Display>string Base64EncodeFile(string source_id[, string file_name])</Display>
+      <DEName>Base64EncodeFile(&lt;source_id&gt;,...)</DEName>
+      <Grammar>Base64EncodeFile;s?</Grammar>
+      <ProjectItemIdPrefixes>s</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="Base64Decode" Since="1.2.0">
+      <Display>binary Base64Decode(string)</Display>
+      <DEName>Base64Decode(&lt;arg&gt;)</DEName>
+      <Grammar>Base64Decode;1</Grammar>
+    </Function>
+    <Function Name="SHA256" Since="5.1.1">
+      <Display>string SHA256(type d)</Display>
+	  <DEName>SHA256(&lt;arg&gt;)</DEName>
+	  <Grammar>SHA256;1</Grammar>
+	</Function>
+    <Function Name="AESEncryption" Since="5.1">
+    	<Display>string AESEncryption(string stPlainText, string stPassphrase, string stHexSalt, int keyLength, int iterations)</Display>
+    	<DEName>AESEncryption(&lt;stPlainText&gt;, &lt;stPassphrase&gt;, &lt;stHexSalt&gt;, &lt;keyLength&gt;, &lt;iterations&gt;)</DEName>
+    	<Grammar>AESEncryption;ss???</Grammar>
+    </Function>
+    <Function Name="AESDecryption" Since="5.1">
+    	<Display>string AESDecryption(string stEncryptedText, string stPassphrase, string stHexSalt, int keyLength, int iterations)</Display>
+    	<DEName>AESDecryption(&lt;stEncryptedText&gt;, &lt;stPassphrase&gt;, &lt;stHexSalt&gt;, &lt;keyLength&gt;, &lt;iterations&gt;)</DEName>
+    	<Grammar>AESDecryption;ss???</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Database">
+    <Function Name="DbExecute" Since="1.2.0">
+      <Display>type DbExecute(string database_id, string sql_str, ...)</Display>
+      <DEName>DbExecute(&lt;database_id&gt;,&lt;sql_str&gt;,...)</DEName>
+      <Grammar>DbExecute;ss.</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DBLookup">
+      <Display>string DBLookup(string database_id, string sql_str)</Display>
+      <DEName>DBLookup(&lt;database_id&gt;,&lt;sql_str&gt;)</DEName>
+      <Grammar>DBLookup;2</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DBLookupAll"  Since="5.0.2">
+      <Display>array DBLookupAll(string database_id, string sql_str)</Display>
+      <DEName>DBLookupAll(&lt;database_id&gt;,&lt;sql_str&gt;)</DEName>
+      <Grammar>DBLookupAll;2</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="CacheLookup">
+      <Display>string CacheLookup(string database_id, string sql_str)</Display>
+      <DEName>CacheLookup(&lt;database_id&gt;,&lt;sql_str&gt;)</DEName>
+      <Grammar>CacheLookup;2</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DbCloseConnection" Since="4.0.0">
+      <Display>void DbCloseConnection(string database_id)</Display>
+      <DEName>DbCloseConnection(&lt;database_id&gt;)</DEName>
+      <Grammar>DbCloseConnection;1</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DbRollbackTransaction" Since="4.0.0">
+      <Display>void DbRollbackTransaction(string database_id)</Display>
+      <DEName>DbRollbackTransaction(&lt;database_id&gt;)</DEName>
+      <Grammar>DbRollbackTransaction;1</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="CallStoredProcedure" Since="1.3.0">
+      <Display>type CallStoredProcedure(string database_id, string sp_name, string result_set, ...)</Display>
+      <DEName>CallStoredProcedure(&lt;database_id&gt;,&lt;sp_name&gt;,&lt;result_set&gt;,...)</DEName>
+      <Grammar>CallStoredProcedure;sss.</Grammar>
+      <ProjectItemIdPrefixes>s,t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="SetDbInsert" Since="3.0.0">
+      <Display>type SetDbInsert()</Display>
+      <DEName>SetDbInsert()</DEName>
+      <Grammar>SetDbInsert;0</Grammar>
+    </Function>
+    <Function Name="SetDbUpdate" Since="3.0.0">
+      <Display>type SetDbUpdate()</Display>
+      <DEName>SetDbUpdate()</DEName>
+      <Grammar>SetDbUpdate;0</Grammar>
+    </Function>
+    <Function Name="Unmap" Since="3.0.0">
+      <Display>type Unmap()</Display>
+      <DEName>Unmap()</DEName>
+      <Grammar>Unmap;0</Grammar>
+    </Function>
+    <Function Name="SqlEscape" Since="1.3.0">
+      <Display>string SqlEscape(string unescaped_sql, bool escapeBackslash)</Display>
+      <DEName>SqlEscape(&lt;unescaped_sql&gt;)</DEName>
+      <Grammar>SqlEscape;s?</Grammar>
+    </Function>
+    <Function Name="&lt;SQLIDENTITY&gt;">
+      <Display>&lt;SQLIDENTITY&gt;</Display>
+      <DEName>&lt;SQLIDENTITY&gt;</DEName>
+      <Grammar>N/A</Grammar>
+    </Function>
+    <Function Name="&lt;SEQUENCE&gt;">
+      <Display>&lt;SEQUENCE&gt;</Display>
+      <DEName>&lt;SEQUENCE&gt;</DEName>
+      <Grammar>N/A</Grammar>
+    </Function>
+    <Function Name="&lt;UDF&gt;">
+      <Display>&lt;UDF&gt;</Display>
+      <DEName>&lt;UDF&gt;</DEName>
+      <Grammar>N/A</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Date-Time">
+    <Function Name="Now">
+      <Display>date Now()</Display>
+      <DEName>Now()</DEName>
+      <Grammar>Now;0</Grammar>
+    </Function>
+    <Function Name="Now_">
+      <Display>date Now_()</Display>
+      <DEName>Now_()</DEName>
+      <Grammar>Now_;0</Grammar>
+    </Function>
+    <Function Name="GeneralDate">
+      <Display>string GeneralDate(date d)</Display>
+      <DEName>GeneralDate(&lt;date&gt;)</DEName>
+      <Grammar>GeneralDate;1</Grammar>
+    </Function>
+    <Function Name="LongDate">
+      <Display>string LongDate(date d)</Display>
+      <DEName>LongDate(&lt;date&gt;)</DEName>
+      <Grammar>LongDate;1</Grammar>
+    </Function>
+    <Function Name="MediumDate">
+      <Display>string MediumDate(date d)</Display>
+      <DEName>MediumDate(&lt;date&gt;)</DEName>
+      <Grammar>MediumDate;1</Grammar>
+    </Function>
+    <Function Name="ShortDate">
+      <Display>string ShortDate(date d)</Display>
+      <DEName>ShortDate(&lt;date&gt;)</DEName>
+      <Grammar>ShortDate;1</Grammar>
+    </Function>
+    <Function Name="LongTime">
+      <Display>string LongTime(date d)</Display>
+      <DEName>LongTime(&lt;date&gt;)</DEName>
+      <Grammar>LongTime;1</Grammar>
+    </Function>
+    <Function Name="MediumTime">
+      <Display>string MediumTime(date d)</Display>
+      <DEName>MediumTime(&lt;date&gt;)</DEName>
+      <Grammar>MediumTime;1</Grammar>
+    </Function>
+    <Function Name="ShortTime">
+      <Display>string ShortTime(date d)</Display>
+      <DEName>ShortTime(&lt;date&gt;)</DEName>
+      <Grammar>ShortTime;1</Grammar>
+    </Function>
+    <Function Name="CVTDate">
+      <Display>string CVTDate(string d, string oldFormat, string newFormat)</Display>
+      <DEName>CVTDate(&lt;date&gt;,&lt;oldFormat&gt;,&lt;newFormat&gt;)</DEName>
+      <Grammar>CVTDate;3</Grammar>
+    </Function>
+    <Function Name="FormatDate" Since="1.1.1">
+      <Display>string FormatDate(date d, string format)</Display>
+      <DEName>FormatDate(&lt;date&gt;,&lt;format&gt;)</DEName>
+      <Grammar>FormatDate;2</Grammar>
+    </Function>
+    <Function Name="DayOfWeek" Since="1.1.1">
+      <Display>int DayOfWeek(date d)</Display>
+      <DEName>DayOfWeek(&lt;date&gt;)</DEName>
+      <Grammar>DayOfWeek;1</Grammar>
+    </Function>
+    <Function Name="DayOfMonth" Since="1.1.1">
+      <Display>int DayOfMonth(date d)</Display>
+      <DEName>DayOfMonth(&lt;date&gt;)</DEName>
+      <Grammar>DayOfMonth;1</Grammar>
+    </Function>
+    <Function Name="MonthOfYear" Since="1.1.1">
+      <Display>int MonthOfYear(date d)</Display>
+      <DEName>MonthOfYear(&lt;date&gt;)</DEName>
+      <Grammar>MonthOfYear;1</Grammar>
+    </Function>
+    <Function Name="LastDayOfMonth" Since="1.1.1">
+      <Display>date LastDayOfMonth(date d)</Display>
+      <DEName>LastDayOfMonth(&lt;date&gt;)</DEName>
+      <Grammar>LastDayOfMonth;1</Grammar>
+    </Function>
+    <Function Name="GetUTCFormattedDateTime" Since="5.3.4">
+      <Display>string GetUTCFormattedDateTime(string input_date, string timezone_id, bool is_european_format)</Display>
+      <DEName>GetUTCFormattedDateTime(&lt;input_date&gt;, &lt;time_zone_id&gt;, &lt;is_european_format&gt;)</DEName>
+      <Grammar>GetUTCFormattedDateTime;sss</Grammar>
+    </Function>
+    <Function Name="GetUTCFormattedDate" Since="5.3.4">
+      <Display>string GetUTCFormattedDate(string input_date, string timezone_id, bool is_european_format)</Display>
+      <DEName>GetUTCFormattedDate(&lt;input_date&gt;, &lt;time_zone_id&gt;, &lt;is_european_format&gt;)</DEName>
+      <Grammar>GetUTCFormattedDate;sss</Grammar>
+    </Function>
+     <Function Name="ConvertTimeZone">
+      <Display>date ConvertTimeZone(date d, string fromTZ, string toTZ, bool is_european_format, bool ignoreDST)</Display>
+      <DEName>ConvertTimeZone(&lt;date&gt;,&lt;fromTZ&gt;,&lt;toTZ&gt;,&lt;is_european_format&gt;,&lt;ignoreDST&gt;)</DEName>
+      <Grammar>ConvertTimeZone;sss??</Grammar>
+    </Function>
+    <Function Name="DateAdd">
+      <Display>date DateAdd(string datepart, int number, Date d)</Display>
+      <DEName>DateAdd(&lt;datepart&gt;,&lt;number&gt;,&lt;date&gt;)</DEName>
+      <Grammar>DateAdd;sss</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Debugging" Since="3.0.0">
+    <Function Name="DebugBreak" Since="3.0.0">
+      <Display>bool DebugBreak(boolean b)</Display>
+      <DEName>DebugBreak(&lt;boolean expression&gt;)</DEName>
+      <Grammar>DebugBreak;?</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Dictionary and Array" Since="4.1.0">
+    <Function Name="Map" Since="4.1.0">
+      <Display>dictionary Map()</Display>
+      <DEName>Map()</DEName>
+      <Grammar>Map;0</Grammar>
+    </Function>
+    <Function Name="Dict" Since="4.1.0">
+      <Display>dictionary Dict()</Display>
+      <DEName>Dict()</DEName>
+      <Grammar>Dict;0</Grammar>
+    </Function>
+    <Function Name="Collection" Since="4.1.0">
+      <Display>array Collection()</Display>
+      <DEName>Collection()</DEName>
+      <Grammar>Collection;0</Grammar>
+    </Function>
+    <Function Name="Array" Since="4.1.0">
+      <Display>array Array()</Display>
+      <DEName>Array()</DEName>
+      <Grammar>Array;0</Grammar>
+    </Function>
+    <Function Name="HasKey" Since="4.1.0">
+      <Display>bool HasKey(dictionary dict, string key)</Display>
+      <DEName>HasKey(&lt;dict&gt;, &lt;key&gt;)</DEName>
+      <Grammar>HasKey;ds;b</Grammar>
+    </Function>
+    <Function Name="AddToDict" Since="4.1.0">
+      <Display>bool AddToDict(dictionary dict, string key, type value)</Display>
+      <DEName>AddToDict(&lt;dict&gt;, &lt;key&gt;, &lt;value&gt;)</DEName>
+      <Grammar>AddToDict;dss;b</Grammar>
+    </Function>
+    <Function Name="RemoveKey" Since="4.1.0">
+      <Display>bool RemoveKey(dictionary dict, string key)</Display>
+      <DEName>RemoveKey(&lt;dict&gt;, &lt;key&gt;)</DEName>
+      <Grammar>RemoveKey;ds;b</Grammar>
+    </Function>
+    <Function Name="GetSourceInstanceArray" Since="5.0.1">
+      <Display>array GetSourceInstanceArray(node _node)</Display>
+      <DEName>GetSourceInstanceArray(&lt;node&gt;)</DEName>
+      <Grammar>GetSourceInstanceArray;n</Grammar>
+    </Function>
+    <Function Name="GetSourceInstanceMap" Since="5.0.0">
+      <Display>dictionary GetSourceInstanceMap(node)</Display>
+      <DEName>GetSourceInstanceMap(&lt;node&gt;)</DEName>
+      <Grammar>GetSourceInstanceMap;n</Grammar>
+    </Function>
+    <Function Name="GetSourceInstanceElementArray" Since="5.0.1">
+      <Display>array GetSourceInstanceElementArray(node)</Display>
+      <DEName>GetSourceInstanceElementArray(&lt;node&gt;)</DEName>
+      <Grammar>GetSourceInstanceElementArray;n</Grammar>
+    </Function>
+    <Function Name="GetSourceInstanceElementMap" Since="5.0.0">
+      <Display>dictionary GetSourceInstanceElementMap(node)</Display>
+      <DEName>GetSourceInstanceElementMap(&lt;node&gt;)</DEName>
+      <Grammar>GetSourceInstanceElementMap;n</Grammar>
+    </Function>
+    <Function Name="GetSourceAttrNames" Since="5.0.0">
+      <Display>array GetSourceAttrNames(node)</Display>
+      <DEName>GetSourceAttrNames(&lt;node&gt;)</DEName>
+      <Grammar>GetSourceAttrNames;n</Grammar>
+    </Function>
+    <Function Name="GetSourceElementNames" Since="5.0.0">
+		<Display>array GetSourceElementNames(node)</Display>
+    	<DEName>GetSourceElementNames(&lt;node&gt;)</DEName>
+    	<Grammar>GetSourceElementNames;n</Grammar>
+	</Function>
+    <Function Name="CollectValues" Since="5.0.0">
+      <Display>array CollectValues(dictionary dict, array names)</Display>
+      <DEName>CollectValues(&lt;dict&gt;, &lt;names&gt;)</DEName>
+      <Grammar>CollectValues;2</Grammar>
+    </Function>
+    <Function Name="MapCache" Since="5.0.0">
+      <Display>string MapCache(dictionary dict, string key, string value)</Display>
+      <DEName>MapCache(&lt;dict&gt;, &lt;key&gt;, &lt;value&gt;)</DEName>
+      <Grammar>MapCache;mss</Grammar>
+    </Function>
+    <Function Name="ReduceDimension" Since="5.0.2">
+      <Display>array ReduceDimension(array array_2d)</Display>
+      <DEName>ReduceDimension(&lt;array_2d&gt;)</DEName>
+      <Grammar>ReduceDimension;#</Grammar>
+    </Function>
+    <Function Name="GetKeys" Since="5.3.0">
+      <Display>array GetKeys(dictionary dict)</Display>
+      <DEName>GetKeys(&lt;map&gt;)</DEName>
+      <Grammar>GetKeys;m</Grammar>
+    </Function>
+    <Function Name="SortArray" Since="5.3.0">
+      <Display>array SortArray(array array_2d, int index[, bool isAscending])</Display>
+      <DEName>SortArray(&lt;array_2d&gt;, &lt;index&gt;, &lt;isAscending&gt;)</DEName>
+      <Grammar>SortArray;ri?</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Diff" Since="2.1.0">
+    <Function Name="InitializeDiff" Since="2.1.0">
+      <Display>void InitializeDiff(string diff_id)</Display>
+      <DEName>InitializeDiff(&lt;diff_id&gt;)</DEName>
+      <Grammar>InitializeDiff;1</Grammar>
+    </Function>
+    <Function Name="ResetDiff" Since="2.1.0">
+      <Display>void ResetDiff(string diff_id, int action)</Display>
+      <DEName>ResetDiff(&lt;diff_id&gt;, &lt;action&gt;)</DEName>
+      <Grammar>ResetDiff;2</Grammar>
+    </Function>
+    <Function Name="SetDiffChunkSize" Since="2.1.0">
+      <Display>void SetDiffChunkSize(int chunk_size)</Display>
+      <DEName>SetDiffChunkSize(&lt;chunk_size&gt;)</DEName>
+      <Grammar>SetDiffChunkSize;1</Grammar>
+    </Function>
+    <Function Name="DiffKeyList" Since="2.1.0">
+      <Display>void DiffKeyList(string k1 [, string k2..., string kN])</Display>
+      <DEName>DiffKeyList(&lt;k1&gt;)</DEName>
+      <Grammar>DiffKeyList;s.</Grammar>
+    </Function>
+    <Function Name="DiffNode" Since="4.1.0">
+      <Display>void DiffNode(string node_name)</Display>
+      <DEName>DiffNode(&lt;node_name&gt;)</DEName>
+      <Grammar>DiffNode;s</Grammar>
+    </Function>
+    <Function Name="OrderedDiffKeyList" Since="2.1.0">
+      <Display>void OrderedDiffKeyList(string k1, bool isAscending1 [, string k2, bool isAscending2 ..., string kn, bool IsAscendingN])</Display>
+      <DEName>OrderedDiffKeyList(&lt;k1&gt;, &lt;isAscending1&gt;)</DEName>
+      <Grammar>OrderedDiffKeyList;ss.</Grammar>
+    </Function>
+    <Function Name="DiffAdd" Since="2.1.0">
+      <Display>void DiffAdd()</Display>
+      <DEName>DiffAdd()</DEName>
+      <Grammar>DiffAdd;0</Grammar>
+    </Function>
+    <Function Name="DiffDelete" Since="2.1.0">
+      <Display>void DiffDelete()</Display>
+      <DEName>DiffDelete()</DEName>
+      <Grammar>DiffDelete;0</Grammar>
+    </Function>
+    <Function Name="DiffUpdate" Since="2.1.0">
+      <Display>void DiffUpdate()</Display>
+      <DEName>DiffUpdate()</DEName>
+      <Grammar>DiffUpdate;0</Grammar>
+    </Function>
+    <Function Name="DiffComplete" Since="2.1.0">
+      <Display>void DiffComplete()</Display>
+      <DEName>DiffComplete()</DEName>
+      <Grammar>DiffComplete;0</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Email" Since="1.2.0">
+    <Function Name="SendSystemEmail" Since="1.2.0">
+      <Display>string SendSystemEmail(string to, string subject, string message)</Display>
+      <DEName>SendSystemEmail(&lt;to&gt;, &lt;subject&gt;, &lt;message&gt;)</DEName>
+      <Grammar>SendSystemEmail;3</Grammar>
+    </Function>
+    <Function Name="SendEmail" Since="1.2.0">
+      <Display>string SendEmail(string from, string to, string subject, string message[, string smtpServers, string account, string accountPassword, string cc, string bcc, string reply-to, bool useSSL])</Display>
+      <DEName>SendEmail(&lt;from&gt;, &lt;to&gt;, &lt;subject&gt;, &lt;message&gt;, ...)</DEName>
+      <Grammar>SendEmail;ssss???????</Grammar>
+    </Function>
+    <Function Name="SendEmailMessage" Since="2.1.0">
+      <Display>string SendEmailMessage(string email_message_id)</Display>
+      <DEName>SendEmailMessage(&lt;email_message_id&gt;)</DEName>
+      <Grammar>SendEmailMessage;1</Grammar>
+      <ProjectItemIdPrefixes>m</ProjectItemIdPrefixes>
+    </Function>
+  </Category>
+  <Category Name="File" Since="1.3.0">
+    <Function Name="FileList" Since="2.0.1">
+      <Display>array FileList(string source_id)</Display>
+      <DEName>FileList(&lt;source_id&gt;)</DEName>
+      <Grammar>FileList;f</Grammar>
+      <ProjectItemIdPrefixes>s</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="ReadFile" Since="1.3.0">
+      <Display>string ReadFile(string source_id[, string file_name])</Display>
+      <DEName>ReadFile(&lt;source_id&gt;,...)</DEName>
+      <Grammar>ReadFile;s?</Grammar>
+      <ProjectItemIdPrefixes>s</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DeleteFile" Since="5.3.2">
+      <Display>string DeleteFile(string source_id[, string file_name])</Display>
+      <DEName>DeleteFile(&lt;source_id&gt;,...)</DEName>
+      <Grammar>DeleteFile;s?</Grammar>
+      <ProjectItemIdPrefixes>s</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="DeleteFiles" Since="5.3.2">
+      <Display>string DeleteFiles(string source_id[, string file_name])</Display>
+      <DEName>DeleteFiles(&lt;source_id&gt;,...)</DEName>
+      <Grammar>DeleteFiles;s?</Grammar>
+      <ProjectItemIdPrefixes>s</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="WriteFile" Since="1.3.0">
+      <Display>void WriteFile(string target_id, type file_contents[, string file_name])</Display>
+      <DEName>WriteFile(&lt;target_id&gt;, &lt;file_contents&gt;, ...)</DEName>
+      <Grammar>WriteFile;ss?</Grammar>
+      <ProjectItemIdPrefixes>t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="FlushFile" Since="1.3.0">
+      <Display>void FlushFile(string target_id[, string file_name])</Display>
+      <DEName>FlushFile(&lt;target_id&gt;, ...)</DEName>
+      <Grammar>FlushFile;s?</Grammar>
+      <ProjectItemIdPrefixes>t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="FlushAllFiles" Since="1.3.0">
+      <Display>void FlushAllFiles([string target_id])</Display>
+      <DEName>FlushAllFiles(&lt;target_id&gt;)</DEName>
+      <Grammar>FlushAllFiles;?</Grammar>
+      <ProjectItemIdPrefixes>t</ProjectItemIdPrefixes>
+    </Function>
+  </Category>
+  <Category Name="General">
+    <Function Name="Length">
+      <Display>int Length(type arg)</Display>
+      <DEName>Length(&lt;arg&gt;)</DEName>
+      <Grammar>Length;1</Grammar>
+    </Function>
+    <Function Name="RecordCount">
+      <Display>int RecordCount()</Display>
+      <DEName>RecordCount()</DEName>
+      <Grammar>RecordCount;0</Grammar>
+    </Function>
+    <Function Name="AutoNumber">
+      <Display>int AutoNumber()</Display>
+      <DEName>AutoNumber()</DEName>
+      <Grammar>AutoNumber;0</Grammar>
+    </Function>
+    <Function Name="SourceInstanceCount" Since="3.0.0">
+      <Display>int SourceInstanceCount()</Display>
+      <DEName>SourceInstanceCount()</DEName>
+      <Grammar>SourceInstanceCount;0</Grammar>
+    </Function>
+    <Function Name="TargetInstanceCount" Since="3.0.0">
+      <Display>int TargetInstanceCount()</Display>
+      <DEName>TargetInstanceCount()</DEName>
+      <Grammar>TargetInstanceCount;0</Grammar>
+    </Function>
+    <Function Name="Null">
+      <Display>null Null()</Display>
+      <DEName>Null()</DEName>
+      <Grammar>Null;0</Grammar>
+    </Function>
+    <Function Name="IsNull">
+      <Display>bool IsNull(type arg)</Display>
+      <DEName>IsNull(&lt;arg&gt;)</DEName>
+      <Grammar>IsNull;1</Grammar>
+    </Function>
+    <Function Name="IfNull" Since="3.6.2">
+      <Display>type IfNull(type arg, type default)</Display>
+      <DEName>IfNull(&lt;arg&gt;, &lt;default&gt;)</DEName>
+      <Grammar>IfNull;2</Grammar>
+    </Function>
+    <Function Name="IfEmpty" Since="3.6.2">
+      <Display>type IfEmpty(type arg, type default)</Display>
+      <DEName>IfEmpty(&lt;arg&gt;, &lt;default&gt;)</DEName>
+      <Grammar>IfEmpty;2</Grammar>
+    </Function>
+    <Function Name="IsValid">
+      <Display>bool IsValid(type x)</Display>
+      <DEName>IsValid(&lt;arg&gt;)</DEName>
+      <Grammar>IsValid;1</Grammar>
+    </Function>
+    <Function Name="IsInteger" Since="2.2.1">
+      <Display>bool IsInteger(type x)</Display>
+      <DEName>IsInteger(&lt;arg&gt;)</DEName>
+      <Grammar>IsInteger;1</Grammar>
+    </Function>
+    <Function Name="Eval">
+      <Display>string Eval(type exp_to_evaluate, type default_result)</Display>
+      <DEName>Eval(&lt;exp_to_evaluate&gt;,&lt;default_result&gt;)</DEName>
+      <Grammar>Eval;2</Grammar>
+    </Function>
+    <Function Name="InList">
+      <Display>int InList(type x, type a1, type a2, type a3, type a4)</Display>
+      <DEName>InList(&lt;arg&gt;,&lt;arg&gt;,&lt;arg&gt;,&lt;arg&gt;,...)</DEName>
+      <Grammar>InList;.</Grammar>
+    </Function>
+    <Function Name="Guid" Since="1.1.1">
+      <Display>string Guid()</Display>
+      <DEName>Guid()</DEName>
+      <Grammar>Guid;0</Grammar>
+    </Function>
+    <Function Name="Set">
+      <Display>type Set(string name, type value [, int index1, int index2, ...])</Display>
+      <DEName>Set(&lt;name&gt;,&lt;value&gt;, ...)</DEName>
+      <Grammar>Set;ss.</Grammar>
+    </Function>
+    <Function Name="Get">
+      <Display>type Get(string name [, int index1, int index2, ...])</Display>
+      <DEName>Get(&lt;name&gt;, ...)</DEName>
+      <Grammar>Get;s.</Grammar>
+    </Function>
+    <Function Name="ReadArrayString" Since="2.1.0">
+      <Display>array ReadArrayString(string arrayString[, string type])</Display>
+      <DEName>ReadArrayString(&lt;arrayString&gt;, ...)</DEName>
+      <Grammar>ReadArrayString;s?</Grammar>
+    </Function>
+    <Function Name="RunOperation" Since="1.3.2">
+      <Display>bool RunOperation(string operation_tag [, bool run_synchronously])</Display>
+      <DEName>RunOperation(&lt;operation_tag&gt;, ...)</DEName>
+      <Grammar>RunOperation;s?</Grammar>
+      <ProjectItemIdPrefixes>op</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="ReRunOperation" Since="3.0.0">
+      <Display>bool ReRunOperation([bool run_synchronously])</Display>
+      <DEName>ReRunOperation()</DEName>
+      <Grammar>ReRunOperation;?</Grammar>
+    </Function>
+    <Function Name="RunScript" Since="2.0.0">
+      <Display>type RunScript(string script_tag,...)</Display>
+      <DEName>RunScript(&lt;script_tag&gt;,...)</DEName>
+      <Grammar>RunScript;s.</Grammar>
+      <ProjectItemIdPrefixes>sc</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="RunPlugin" Since="3.1.0">
+      <Display>bool RunPlugin(string plugin_tag)</Display>
+      <DEName>RunPlugin(&lt;plugin_tag&gt;)</DEName>
+      <Grammar>RunPlugin;1</Grammar>
+    </Function>
+    <Function Name="CancelOperationChain" Since="1.3.0">
+      <Display>void CancelOperationChain(string message)</Display>
+      <DEName>CancelOperationChain(&lt;message&gt;)</DEName>
+      <Grammar>CancelOperationChain;1</Grammar>
+    </Function>
+    <Function Name="GetOperationQueue" Since="3.1.3">
+      <Display>array GetOperationQueue([string operation_tag])</Display>
+      <DEName>GetOperationQueue(...)</DEName>
+      <Grammar>GetOperationQueue;?</Grammar>
+      <ProjectItemIdPrefixes>op</ProjectItemIdPrefixes>
+    </Function>
+      <Function Name="GetLastOperationRunStartTime" Since="5.3.2">
+      <Display>Date GetLastOperationRunStartTime(string operation_tag)</Display>
+      <DEName>GetLastOperationRunStartTime(...)</DEName>
+      <Grammar>GetLastOperationRunStartTime;s</Grammar>
+      <ProjectItemIdPrefixes>op</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="WaitForOperation" Since="3.1.3">
+      <Display>void WaitForOperation(string operation_tag[, int time_out_sec, int poll_interval_sec])</Display>
+      <DEName>WaitForOperation(&lt;operation_tag&gt;, ...)</DEName>
+      <Grammar>WaitForOperation;s??</Grammar>
+      <ProjectItemIdPrefixes>op</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="GetHostByIp" Since="2.0.0">
+      <Display>string GetHostByIp(string ipaddress)</Display>
+      <DEName>GetHostByIp(&lt;ipaddress&gt;)</DEName>
+      <Grammar>GetHostByIp;1</Grammar>
+    </Function>
+    <Function Name="GetServerName" Since="2.1.1">
+      <Display>string GetServerName()</Display>
+      <DEName>GetServerName()</DEName>
+      <Grammar>GetServerName;0</Grammar>
+    </Function>
+    <Function Name="Sleep" Since="2.0.1">
+      <Display>void Sleep(int nSeconds)</Display>
+      <DEName>Sleep(&lt;nSeconds&gt;)</DEName>
+      <Grammar>Sleep;1</Grammar>
+    </Function>
+    <Function Name="GetInputString" Since="3.1.0">
+      <Display>string GetInputString(type de)</Display>
+      <DEName>GetInputString(&lt;de&gt;)</DEName>
+      <Grammar>GetInputString;1</Grammar>
+    </Function>
+    <Function Name="InitCounter" Since="3.6.2">
+      <Display>long InitCounter(type counter, long initial_value)</Display>
+      <DEName>InitCounter(&lt;counter&gt;)</DEName>
+      <Grammar>InitCounter;*?</Grammar>
+    </Function>
+    <Function Name="ArgumentList" Since="5.0.2">
+      <Display>void ArgumentList(variable var1[, ...])</Display>
+      <DEName>ArgumentList(&lt;var1&gt;, ...)</DEName>
+      <Grammar>ArgumentList;v.</Grammar>
+    </Function>
+    <Function Name="GetName" Since="5.0.2">
+      <Display>string GetName(variable var1)</Display>
+      <DEName>GetName(&lt;var1&gt;)</DEName>
+      <Grammar>GetName;v</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Instance">
+    <Function Name="FindValue">
+      <Display>type2 FindValue(type1 c0, type1 de1, type2 de2)</Display>
+      <DEName>FindValue(&lt;arg&gt;,&lt;arg&gt;,&lt;arg&gt;)</DEName>
+      <Grammar>FindValue;*##</Grammar>
+    </Function>
+    <Function Name="Max">
+      <Display>type Max(type de)</Display>
+      <DEName>Max(&lt;arg&gt;)</DEName>
+      <Grammar>Max;#</Grammar>
+    </Function>
+    <Function Name="Min">
+      <Display>type Min(type de)</Display>
+      <DEName>Min(&lt;arg&gt;)</DEName>
+      <Grammar>Min;#</Grammar>
+    </Function>
+    <Function Name="Exist">
+      <Display>bool Exist(type c0, type de)</Display>
+      <DEName>Exist(&lt;c0&gt;,&lt;de&gt;)</DEName>
+      <Grammar>Exist;*#</Grammar>
+    </Function>
+    <Function Name="Sum">
+      <Display>type Sum(type de)</Display>
+      <DEName>Sum(&lt;arg&gt;)</DEName>
+      <Grammar>Sum;#</Grammar>
+    </Function>
+    <Function Name="Count">
+      <Display>int Count(type de)</Display>
+      <DEName>Count(&lt;arg&gt;)</DEName>
+      <Grammar>Count;#</Grammar>
+    </Function>
+    <Function Name="FindByPos">
+      <Display>type FindByPos(int pos, type de)</Display>
+      <DEName>FindByPos(&lt;pos&gt;,&lt;de&gt;)</DEName>
+      <Grammar>FindByPos;i#</Grammar>
+    </Function>
+    <Function Name="SumString" Since="1.3.1">
+      <Display>
+        string SumString(type de,string delimiter,bool omitlast)
+      </Display>
+      <DEName>
+        SumString(&lt;arg&gt;,&lt;delimiter&gt;,&lt;omitlast&gt;)
+      </DEName>
+      <Grammar>SumString;#??</Grammar>
+    </Function>
+    <Function Name="SumCsv" Since="1.3.1">
+      <Display>string SumCsv(type de)</Display>
+      <DEName>SumCsv(&lt;arg&gt;)</DEName>
+      <Grammar>SumCsv;#</Grammar>
+    </Function>
+	<Function Name="ResolveOneOf">
+      <Display>type ResolveOneOf(type de)</Display>
+      <DEName>ResolveOneOf(&lt;de&gt;)</DEName>
+      <Grammar>ResolveOneOf;#</Grammar>
+    </Function>
+	<Function Name="SetInstances" Since="5.0.2">
+      <Display>type SetInstances(string node_name, array de)</Display>
+      <DEName>SetInstances(&lt;node_name&gt;,&lt;array_de&gt;)</DEName>
+      <Grammar>SetInstances;sr</Grammar>
+    </Function>
+	<Function Name="GetInstance" Since="5.0.2">
+      <Display>type GetInstance()</Display>
+      <DEName>GetInstance()</DEName>
+      <Grammar>GetInstance;0</Grammar>
+    </Function>
+	<Function Name="SortInstances" Since="5.0.2">
+      <Display>void SortInstances(string node_name, array source_de_array, ...)</Display>
+      <DEName>SortInstances(&lt;node_name&gt;,&lt;source_de_array&gt;,...)</DEName>
+      <Grammar>SortInstances;s#.</Grammar>
+    </Function>
+	<Function Name="CountSourceRecords" Since="5.1.1.7">
+		<Display>int CountSourceRecords()</Display>
+		<DEName>CountSourceRecords()</DEName>
+		<Grammar>CountSourceRecords;0</Grammar>
+    </Function>
+  </Category>
+  <Category Name="LDAP" Since="1.1.0">
+    <Function Name="LdapConnect" Since="1.1.0">
+      <Display>bool LdapConnect(string ldap_target_id, ...)</Display>
+      <DEName>LdapConnect(&lt;ldap_target_id&gt;)</DEName>
+      <Grammar>LdapConnect;s.</Grammar>
+      <ProjectItemIdPrefixes>t</ProjectItemIdPrefixes>
+    </Function>
+    <Function Name="LdapAdd" Since="1.1.0">
+      <Display>bool LdapAdd(string type, string value)</Display>
+      <DEName>LdapAdd(&lt;type&gt;,&lt;value&gt;)</DEName>
+      <Grammar>LdapAdd;2</Grammar>
+    </Function>
+    <Function Name="LdapRemove" Since="1.1.0">
+      <Display>bool LdapRemove(string type, string value)</Display>
+      <DEName>LdapRemove(&lt;type&gt;,&lt;value&gt;)</DEName>
+      <Grammar>LdapRemove;2</Grammar>
+    </Function>
+    <Function Name="LdapDeleteEntry" Since="1.3.0">
+      <Display>bool LdapDeleteEntry(string DistinguishedName)</Display>
+      <DEName>LdapDeleteEntry(&lt;DistinguishedName&gt;)</DEName>
+      <Grammar>LdapDeleteEntry;1</Grammar>
+    </Function>
+    <Function Name="LdapReplace" Since="1.1.0">
+      <Display>bool LdapReplace(string type, string value)</Display>
+      <DEName>LdapReplace(&lt;type&gt;,&lt;value&gt;)</DEName>
+      <Grammar>LdapReplace;2</Grammar>
+    </Function>
+    <Function Name="LdapExecute" Since="1.1.0">
+      <Display>bool LdapExecute(string path)</Display>
+      <DEName>LdapExecute(&lt;path&gt;)</DEName>
+      <Grammar>LdapExecute;1</Grammar>
+    </Function>
+    <Function Name="LdapSearch" Since="1.1.0">
+      <Display>string LdapSearch(string path, string filter, int iDetail, string attribute1, string attribute2, ...)</Display>
+      <DEName>LdapSearch(&lt;path&gt;,&lt;filter&gt;,&lt;detail&gt;,...)</DEName>
+      <Grammar>LdapSearch;.</Grammar>
+    </Function>
+    <Function Name="LdapRename" Since="1.3.0">
+      <Display>bool LdapRename(string DN, string newRDN [, string newParent, bool deleteOldRDN])</Display>
+      <DEName>LdapRename(&lt;DN&gt;,&lt;newRDN&gt;)</DEName>
+      <Grammar>LdapRename;ss??</Grammar>
+    </Function>
+    <Function Name="ArrayToMultipleValues" Since="2.0.0">
+      <Display>string ArrayToMultipleValues(array a)</Display>
+      <DEName>ArrayToMultipleValues(&lt;arr&gt;)</DEName>
+      <Grammar>ArrayToMultipleValues;1</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Logging and Error">
+    <Function Name="GetLastError" Since="1.3.0">
+      <Display>string GetLastError()</Display>
+      <DEName>GetLastError()</DEName>
+      <Grammar>GetLastError;0</Grammar>
+    </Function>
+    <Function Name="SetLastError" Since="1.3.0">
+      <Display>void SetLastError(string errorMessage)</Display>
+      <DEName><![CDATA[SetLastError(<message>)]]></DEName>
+      <Grammar>SetLastError;1</Grammar>
+    </Function>
+    <Function Name="ResetLastError" Since="1.3.0">
+      <Display>void ResetLastError()</Display>
+      <DEName>ResetLastError()</DEName>
+      <Grammar>ResetLastError;0</Grammar>
+    </Function>
+    <Function Name="RaiseError">
+      <Display>void RaiseError(string errorMessage)</Display>
+      <DEName><![CDATA[RaiseError(<message>)]]></DEName>
+      <Grammar>RaiseError;1</Grammar>
+    </Function>
+    <Function Name="WriteToOperationLog" Since="1.3.0">
+      <Display>String WriteToOperationLog(String message)</Display>
+      <DEName>WriteToOperationLog(&lt;message&gt;)</DEName>
+      <Grammar>WriteToOperationLog;1</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Logical">
+    <Function Name="If">
+      <Display>type If(bool condition, type true_result, type false_result)</Display>
+      <DEName>If(&lt;condition&gt;,&lt;true_result&gt;,&lt;false_result&gt;)</DEName>
+      <Grammar>If;b*?</Grammar>
+    </Function>
+    <Function Name="Case">
+      <Display>typeN Case(bool b1, type1 de_1, bool b2, type2 de_2,...)</Display>
+      <DEName>case(&lt;b1&gt;,&lt;de1&gt;,&lt;b2&gt;,&lt;de2&gt;,...)</DEName>
+      <Grammar>case;.</Grammar>
+    </Function>
+    <Function Name="While" Since="1.3.0">
+      <Display>void While(bool condition, type expression)</Display>
+      <DEName>While(&lt;condition&gt;,&lt;expression&gt;)</DEName>
+      <Grammar>While;2</Grammar>
+    </Function>
+    <Function Name="Equal" Since="5.0.1">
+      <Display>bool Equal(type array1, type array2)</Display>
+      <DEName>Equal(&lt;array1&gt;,&lt;array2&gt;)</DEName>
+      <Grammar>Equal;rr</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Math">
+    <Function Name="Log">
+      <Display>double Log(double d)</Display>
+      <DEName>Log(&lt;d&gt;)</DEName>
+      <Grammar>Log;1</Grammar>
+    </Function>
+    <Function Name="Log10">
+      <Display>double Log10(double d)</Display>
+      <DEName>Log10(&lt;d&gt;)</DEName>
+      <Grammar>Log10;1</Grammar>
+    </Function>
+    <Function Name="Pow">
+      <Display>double Pow(double x, double y)</Display>
+      <DEName>Pow(&lt;x&gt;,&lt;y&gt;)</DEName>
+      <Grammar>Pow;2</Grammar>
+    </Function>
+    <Function Name="Exp">
+      <Display>double Exp(double d)</Display>
+      <DEName>Exp(&lt;d&gt;)</DEName>
+      <Grammar>Exp;1</Grammar>
+    </Function>
+    <Function Name="Mod" Since="3.1.2">
+      <Display>long Mod(long numerator, long denominator)</Display>
+      <DEName>Mod(&lt;numerator&gt;, &lt;denominator&gt;)</DEName>
+      <Grammar>Mod;2</Grammar>
+    </Function>
+    <Function Name="RoundToInt" Since="5.3.2">
+      <Display>int RoundToInt(double d)</Display>
+      <DEName>RoundToInt(&lt;d&gt;)</DEName>
+      <Grammar>RoundToInt;1</Grammar>
+    </Function>
+    <Function Name="Round" Since="5.3.2">
+      <Display>int Round(double d, int numPlaces)</Display>
+      <DEName>Round(&lt;d&gt;, &lt;numPlaces&gt;)</DEName>
+      <Grammar>Round;d?</Grammar>
+    </Function>
+    <Function Name="Floor" Since="5.3.2">
+      <Display>int Floor(double d)</Display>
+      <DEName>Floor(&lt;d&gt;)</DEName>
+      <Grammar>Floor;1</Grammar>
+    </Function>
+    <Function Name="Ceiling" Since="5.3.2">
+      <Display>int Ceiling(double d)</Display>
+      <DEName>Ceiling(&lt;d&gt;)</DEName>
+      <Grammar>Ceiling;1</Grammar>
+    </Function>
+    <Function Name="Sqrt" Since="5.3.2">
+      <Display>double Sqrt(double d)</Display>
+      <DEName>Sqrt(&lt;d&gt;)</DEName>
+      <Grammar>Sqrt;1</Grammar>
+    </Function>
+  </Category>
+  <Category Name="String">
+    <Function Name="IsValidString">
+      <Display>bool IsValidString(string x)</Display>
+      <DEName>IsValidString(&lt;string&gt;)</DEName>
+      <Grammar>IsValidString;1</Grammar>
+    </Function>
+    <Function Name="Trim">
+      <Display>string Trim(string s)</Display>
+      <DEName>Trim(&lt;str&gt;)</DEName>
+      <Grammar>Trim;1</Grammar>
+    </Function>
+    <Function Name="RTrim">
+      <Display>string RTrim(string s)</Display>
+      <DEName>Rtrim(&lt;str&gt;)</DEName>
+      <Grammar>Rtrim;1</Grammar>
+    </Function>
+    <Function Name="LTrim">
+      <Display>string LTrim(string s)</Display>
+      <DEName>Ltrim(&lt;str&gt;)</DEName>
+      <Grammar>Ltrim;1</Grammar>
+    </Function>
+    <Function Name="TrimChars" Since="2.1.1">
+      <Display>string TrimChars(string s, string chars)</Display>
+      <DEName>TrimChars(&lt;str&gt;, &lt;chars&gt;)</DEName>
+      <Grammar>TrimChars;2</Grammar>
+    </Function>
+    <Function Name="LTrimChars" Since="2.1.1">
+      <Display>string LTrimChars(string s, string chars)</Display>
+      <DEName>LTrimChars(&lt;str&gt;, &lt;chars&gt;)</DEName>
+      <Grammar>LTrimChars;2</Grammar>
+    </Function>
+    <Function Name="RTrimChars" Since="2.1.1">
+      <Display>string RTrimChars(string s, string chars)</Display>
+      <DEName>RTrimChars(&lt;str&gt;, &lt;chars&gt;)</DEName>
+      <Grammar>RTrimChars;2</Grammar>
+    </Function>
+    <Function Name="ToLower" Since="1.2.0">
+      <Display>string ToLower(string s)</Display>
+      <DEName>ToLower(&lt;str&gt;)</DEName>
+      <Grammar>ToLower;1</Grammar>
+    </Function>
+    <Function Name="ToUpper" Since="1.2.0">
+      <Display>string ToUpper(string s)</Display>
+      <DEName>ToUpper(&lt;str&gt;)</DEName>
+      <Grammar>ToUpper;1</Grammar>
+    </Function>
+    <Function Name="ToProper" Since="2.1.1">
+      <Display>string ToProper(string s)</Display>
+      <DEName>ToProper(&lt;str&gt;)</DEName>
+      <Grammar>ToProper;1</Grammar>
+    </Function>
+    <Function Name="Right">
+      <Display>string Right(string str, int n)</Display>
+      <DEName>Right(&lt;str&gt;,&lt;n&gt;)</DEName>
+      <Grammar>Right;2</Grammar>
+    </Function>
+    <Function Name="Left">
+      <Display>string Left(string str, int n)</Display>
+      <DEName>Left(&lt;str&gt;,&lt;n&gt;)</DEName>
+      <Grammar>Left;2</Grammar>
+    </Function>
+    <Function Name="Mid">
+      <Display>string Mid(string str, int m, int n)</Display>
+      <DEName>Mid(&lt;str&gt;,&lt;m&gt;,&lt;n&gt;)</DEName>
+      <Grammar>Mid;3</Grammar>
+    </Function>
+    <Function Name="RegExMatch" Since="1.2.0">
+      <Display>int RegExMatch(string input, string expression, ...)</Display>
+      <DEName>RegExMatch(&lt;input&gt;,&lt;expression&gt;,...)</DEName>
+      <Grammar>RegExMatch;ss.</Grammar>
+    </Function>
+    <Function Name="RegExReplace" Since="1.3.0">
+      <Display>string RegExReplace(string input, string expression, string format)</Display>
+      <DEName>RegExReplace(&lt;input&gt;,&lt;expression&gt;,&lt;format&gt;)</DEName>
+      <Grammar>RegExReplace;3</Grammar>
+    </Function>
+    <Function Name="Replace">
+      <Display>string Replace(string str, string old, string new)</Display>
+      <DEName>Replace(&lt;str&gt;,&lt;old&gt;,&lt;new&gt;)</DEName>
+      <Grammar>Replace;3</Grammar>
+    </Function>
+    <Function Name="LPad">
+      <Display>string LPad(string s, int n)</Display>
+      <DEName>LPad(&lt;s&gt;,&lt;n&gt;)</DEName>
+      <Grammar>LPad;2</Grammar>
+    </Function>
+    <Function Name="RPad">
+      <Display>string RPad(string s, int n)</Display>
+      <DEName>RPad(&lt;s&gt;,&lt;n&gt;)</DEName>
+      <Grammar>RPad;2</Grammar>
+    </Function>
+    <Function Name="LPadChar" Since="1.3.0">
+      <Display>string LPadChar(string in_string, string pad_char, int n)</Display>
+      <DEName>LPadChar(&lt;in_string&gt;,&lt;pad_char&gt;,&lt;n&gt;)</DEName>
+      <Grammar>LPadChar;3</Grammar>
+    </Function>
+    <Function Name="RPadChar" Since="1.3.0">
+      <Display>string RPadChar(string in_string, string pad_char, int n)</Display>
+      <DEName>RPadChar(&lt;in_string&gt;,&lt;pad_char&gt;,&lt;n&gt;)</DEName>
+      <Grammar>RPadChar;3</Grammar>
+    </Function>
+    <Function Name="Quote">
+      <Display>string Quote(string s)</Display>
+      <DEName>Quote(&lt;str&gt;)</DEName>
+      <Grammar>Quote;1</Grammar>
+    </Function>
+    <Function Name="Dquote">
+      <Display>string Dquote(string s)</Display>
+      <DEName>Dquote(&lt;str&gt;)</DEName>
+      <Grammar>Dquote;1</Grammar>
+    </Function>
+    <Function Name="Format">
+      <Display>string Format(string format_str, type de)</Display>
+      <DEName>Format(&lt;format_str&gt;,&lt;de&gt;)</DEName>
+      <Grammar>Format;2</Grammar>
+    </Function>
+    <Function Name="Index">
+      <Display>int Index(string haystack, string needle, int n)</Display>
+      <DEName>Index(&lt;haystack&gt;,&lt;needle&gt;,&lt;n&gt;)</DEName>
+      <Grammar>Index;ss?</Grammar>
+    </Function>
+    <Function Name="Truncate">
+      <Display>string Truncate(String s, int first_nchar, int last_nchar)</Display>
+      <DEName>Truncate(&lt;str&gt;,&lt;first_nchar&gt;,&lt;last_nchar&gt;)</DEName>
+      <Grammar>Truncate;3</Grammar>
+    </Function>
+    <Function Name="CountSubString">
+      <Display>int CountSubString(string str, string sub_str)</Display>
+      <DEName>CountSubString(&lt;str&gt;,&lt;sub_str&gt;)</DEName>
+      <Grammar>CountSubString;2</Grammar>
+    </Function>
+    <Function Name="Split" Since="2.0.0">
+      <Display>array Split(string str, string delimiter)</Display>
+      <DEName>Split(&lt;str&gt;,&lt;delimiter&gt;)</DEName>
+      <Grammar>Split;2</Grammar>
+    </Function>
+    <Function Name="SplitCsv" Since="5.0.0">
+      <Display>array SplitCsv(string str[,int delimter[,int qualifier]])</Display>
+      <DEName>SplitCsv(&lt;str&gt;[,&lt;delimiter&gt;, &lt;qualifier&gt;])</DEName>
+      <Grammar>SplitCsv;s??</Grammar>
+    </Function>
+    <Function Name="UrlEncode" Since="3.1.3">
+      <Display>string UrlEncode(string str[, int option])</Display>
+      <DEName>UrlEncode(&lt;str&gt;,&lt;option&gt;)</DEName>
+      <Grammar>UrlEncode;s?</Grammar>
+    </Function>
+    <Function Name="UrlDecode" Since="5.1.11">
+    	<Display>string UrlDecode(string URL, string param)</Display>
+    	<DEName>UrlDecode(&lt;url&gt;,&lt;param&gt;)</DEName>
+    	<Grammar>UrlDecode;ss</Grammar>
+    </Function>
+    <Function Name="ParseUrl" Since="5.1.11">
+    	<Display>array ParseUrl(string URL)</Display>
+    	<DEName>ParseUrl(&lt;url&gt;)</DEName>
+    	<Grammar>ParseUrl;s</Grammar>
+    </Function>
+    <Function Name="StringLength" Since="5.0.2">
+      <Display>int StringLength(string str)</Display>
+      <DEName>StringLength(&lt;str&gt;)</DEName>
+      <Grammar>StringLength;s</Grammar>
+    </Function>
+  </Category>
+  <Category Name="XML">
+    <Function Name="GetXmlString">
+      <Display>string GetXmlString(string path, bool qualified)</Display>
+      <DEName>GetXmlString(&lt;path&gt;[, &lt;qualified&gt;])</DEName>
+      <Grammar>GetXmlString;s?</Grammar>
+    </Function>
+    <Function Name="IsNil">
+      <Display>bool IsNil(string path)</Display>
+      <DEName>IsNil(&lt;path&gt;)</DEName>
+      <Grammar>IsNil;1</Grammar>
+    </Function>
+    <Function Name="SelectNodeFromXmlAny" Since="1.1.0">
+      <Display>type SelectNodeFromXmlAny(string nodeName, type AnyPath)</Display>
+      <DEName>SelectNodeFromXmlAny(&lt;nodeName&gt;,&lt;AnyPath&gt;)</DEName>
+      <Grammar>SelectNodeFromXmlAny;s#</Grammar>
+    </Function>
+    <Function Name="SelectNodesFromXmlAny" Since="1.3.0">
+      <Display>array SelectNodesFromXmlAny(string XPathQuery, type AnyPath,...)</Display>
+      <DEName>SelectNodesFromXmlAny(&lt;XPathQuery&gt;,&lt;AnyPath&gt;,...)</DEName>
+      <Grammar>SelectNodesFromXmlAny;s#.</Grammar>
+    </Function>
+    <Function Name="GetNodeName">
+      <Display>string GetNodeName(type path)</Display>
+      <DEName>GetNodeName(&lt;path&gt;)</DEName>
+      <Grammar>GetNodeName;1</Grammar>
+    </Function>
+    <Function Name="GetNodeValue">
+      <Display>string GetNodeValue(type path)</Display>
+      <DEName>GetNodeValue(&lt;path&gt;)</DEName>
+      <Grammar>GetNodeValue;1</Grammar>
+    </Function>
+    <Function Name="CreateNode" Since="1.1.0">
+      <Display>string CreateNode(string namespace,string node_name,type attribute_subelement,...)</Display>
+      <DEName>CreateNode(&lt;namespace&gt;,&lt;node_name&gt;,&lt;attribute_subelement&gt;,...)</DEName>
+      <Grammar>CreateNode;.</Grammar>
+    </Function>
+    <Function Name="Attribute" Since="1.1.0">
+      <Display>type Attribute(string attribute_name,string attribute_value)</Display>
+      <DEName>Attribute(&lt;attribute_name&gt;,&lt;attribute_value&gt;)</DEName>
+      <Grammar>Attribute;2</Grammar>
+    </Function>
+    <Function Name="SelectSingleNode" Since="1.1.0">
+      <Display>type SelectSingleNode(type node, string xpath,...)</Display>
+      <DEName>SelectSingleNode(&lt;node&gt;,&lt;xpath&gt;,...)</DEName>
+      <Grammar>SelectSingleNode;ss.</Grammar>
+    </Function>
+    <Function Name="SelectNodes" Since="2.0.0">
+      <Display>array SelectNodes(type node, string xpath,...)</Display>
+      <DEName>SelectNodes(&lt;node&gt;,&lt;xpath&gt;,...)</DEName>
+      <Grammar>SelectNodes;ss.;array</Grammar>
+    </Function>
+  </Category>
+  <Category Name="Salesforce">
+	<Function Name="SalesforceLogin" Since="5.0.0">
+		<Display>bool SalesforceLogin(string salesforce_org)</Display>
+		<DEName>SalesforceLogin(&lt;salesforce_org&gt;)</DEName>
+		<Grammar>SalesforceLogin;s</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+	<Function Name="GetSalesforceTimestamp" Since="5.0.0">
+		<Display>string GetSalesforceTimestamp(string url, string session_id)</Display>
+		<DEName>GetSalesforceTimestamp(&lt;url&gt;, &lt;session_id&gt;)</DEName>
+		<Grammar>GetSalesforceTimestamp;ss?</Grammar>
+	</Function>
+    <Function Name="FromDataLoaderDate" Since="5.0.0" Hidden="true">
+      <Display>FromDataLoaderDate is depreciated, use GetUTCFormattedDate()</Display>
+      <DEName>FromDataLoaderDate(&lt;input_date&gt;, &lt;time_zone_id&gt;, &lt;is_european_format&gt;)</DEName>
+      <Grammar>FromDataLoaderDate;ss?</Grammar>
+    </Function>
+    <Function Name="FromDataLoaderDateTime" Since="5.0.0" Hidden="true">
+      <Display>FromDataLoaderDateTime is depreciated, use GetUTCFormattedDateTime()</Display>
+      <DEName>FromDataLoaderDateTime(&lt;input_date&gt;, &lt;time_zone_id&gt;, &lt;is_european_format&gt;)</DEName>
+      <Grammar>FromDataLoaderDateTime;ss?</Grammar>
+    </Function>
+	<Function Name="LoginToSalesforceAndGetTimestamp" Since="5.0.0">
+		<Display>bool LoginToSalesforceAndGetTimestamp(string salesforce_org)</Display>
+		<DEName>LoginToSalesforceAndGetTimestamp(&lt;salesforce_org&gt;)</DEName>
+		<Grammar>LoginToSalesforceAndGetTimestamp;s?</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+	<Function Name="SfLookup" Since="5.0.1">
+		<Display>string SfLookup(string salesforce_org, string soql)</Display>
+		<DEName>SfLookup(&lt;salesforce_org&gt;,&lt;soql&gt;)</DEName>
+		<Grammar>SfLookup;ss</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+	<Function Name="SfCacheLookup" Since="5.3.2">
+		<Display>string SfCacheLookup(string salesforce_org, string soql)</Display>
+		<DEName>SfCacheLookup(&lt;salesforce_org&gt;,&lt;soql&gt;)</DEName>
+		<Grammar>SfCacheLookup;ss</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+	<Function Name="SfLookupAll" Since="5.0.1">
+		<Display>array_2D SfLookupAll(string salesforce_org, string soql)</Display>
+		<DEName>SfLookupAll(&lt;salesforce_org&gt;,&lt;soql&gt;)</DEName>
+		<Grammar>SfLookupAll;ss</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+	<Function Name="SfLookupAllToFile" Since="5.0.2">
+		<Display>int SfLookupAllToFile(string salesforce_org, string soql, string target_id)</Display>
+		<DEName>SfLookupAllToFile(&lt;salesforce_org&gt;,&lt;soql&gt;,&lt;target_id&gt;)</DEName>
+		<Grammar>SfLookupAllToFile;sss</Grammar>
+		<ProjectItemIdPrefixes>so</ProjectItemIdPrefixes>
+	</Function>
+  </Category>
+  <Category Name="Connector Functions">
+  	<Function Name="PLM360GetItemVersionId" Since="5.2.0">
+  		<Display>string PLM360GetItemVersionId(string plm360_org, int workspaceid, int dmsid)</Display>
+  		<DEName>PLM360GetItemVersionId(&lt;plm360_org&gt;,&lt;workspaceid&gt;,&lt;dmsid&gt;)</DEName>
+  		<Grammar>PLM360GetItemVersionId;sii</Grammar>
+ 		<ProjectItemIdPrefixes>plm</ProjectItemIdPrefixes>
+  	</Function>
+  	<Function Name="PLM360Login" Since="5.2.0">
+  		<Display>string PLM360Login(string plm360_org)</Display>
+  		<DEName>PLM360Login(&lt;plm360_org&gt;)</DEName>
+  		<Grammar>PLM360Login;s</Grammar>
+ 		<ProjectItemIdPrefixes>plm</ProjectItemIdPrefixes>
+  	</Function>
+  	<Function Name="PLM360Logout" Since="5.2.0">
+  		<Display>void PLM360Logout(string plm360_org)</Display>
+  		<DEName>PLM360Logout(&lt;plm360_org&gt;)</DEName>
+  		<Grammar>PLM360Logout;s</Grammar>
+ 		<ProjectItemIdPrefixes>plm</ProjectItemIdPrefixes>
+  	</Function>
+    <Function Name="NetSuiteGetServerTime" Since="5.3.0">
+      <Display>string NetSuiteGetServerTime(string netsuite_org)</Display>
+      <DEName>NetSuiteGetServerTime(&lt;netsuite_org&gt;)</DEName>
+      <Grammar>NetSuiteGetServerTime;s</Grammar>
+      <ProjectItemIdPrefixes>netsuite</ProjectItemIdPrefixes>
+    </Function>
+  </Category>
+  <Category Name="Text Validation">
+  	<Function Name="Validate" Since="5.0.0">
+  		<Display>bool Validate(string operator, string argument, boolean ignore_case)</Display>
+  		<DEName>Validate(&lt;operator&gt;,&lt;argument&gt;,&lt;ignore_case&gt;)</DEName>
+  		<Grammar>Validate;ss?</Grammar>
+  	</Function>
+  </Category>
+</Functions>

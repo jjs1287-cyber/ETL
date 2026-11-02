@@ -1,5 +1,5 @@
 enable_language(C)
-execute_process(COMMAND C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe C:/ETL/Tools/Generate-JavaScriptPolicy.py COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND C:/Tools/aider-env/Scripts/python.exe C:/ETL/Tools/Generate-JavaScriptPolicy.py COMMAND_ERROR_IS_FATAL ANY)
 option(ETLFORGE_ENABLE_JAVASCRIPT "Enable bounded native JavaScript script blocks" ON)
 set(ETLFORGE_QUICKJS "C:/ETL/Dependencies/quickjs-ng-0.17.0")
 add_library(etlforge_quickjs STATIC

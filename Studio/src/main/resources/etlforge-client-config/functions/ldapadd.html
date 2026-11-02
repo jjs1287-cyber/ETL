@@ -1,0 +1,15 @@
+<html>Adds entries and attributes to a directory. The value is added to the node specified in
+				<code><font size="4">LdapExecute()</font></code>, which should be called to make the changes take effect.<br><h2>Example:</h2><i>Adding a user entry to a directory:</i>
+				<br>
+				<code><font size="4">LdapAdd("objectClass","user");</font></code>
+				<br>
+				<code><font size="4">LdapAdd("cn","wright");</font></code>
+				<br>
+				<code><font size="4">LdapExecute("CN=wright,CN=Users,DC=finland,DC=company,DC=com");</font></code>
+				<br>
+				<br>
+				<i>Adding attributes to a user:</i>
+				<br>
+				<code><font size="4">LdapAdd("description","Thinks a lot.");</font></code>
+				<br>
+				<code><font size="4">LdapExecute("CN=wright,CN=Users,DC=finland,DC=company,DC=com");</font></code></html>

@@ -1,0 +1,5 @@
+<html>Returns the instance count of the generated target loop node. The number returned by this method will be one less
+        if it is called in a condition since in a condition it is not known yet if the current target instance will be generated or not.
+        When called in a condition it returns the number of target instances that have been generated so far for the current loop node.
+        When the first target instance is generated, 1 is returned, then 2 etc. If called in a condition the sequence will be 0, 1, ....
+        Also see SourceInstanceCount().</html>

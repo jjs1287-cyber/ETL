@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.webservice.WebServiceInfoProvider" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.webservice.WebServiceInfoProvider" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.webservice.WebServiceInfoProvider" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.webservice.WebServiceInfoProvider" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getWsdlFiles">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getWsdlFilesResponse">
+    <complexType>
+     <sequence>
+      <element name="getWsdlFilesReturn" type="impl:CWsdlFiles"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CWsdlFile">
+    <sequence>
+     <element name="WsdlLocator" nillable="true" type="xsd:string"/>
+     <element name="Status" type="xsd:int"/>
+     <element name="MD5" nillable="true" type="xsd:string"/>
+     <element name="ZippedBase64Contents" nillable="true" type="xsd:string"/>
+     <element name="Type" type="xsd:int"/>
+     <element name="ApplicationMessage" nillable="true" type="xsd:string"/>
+     <element name="UserComment" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCWsdlFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CWsdlFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CWsdlFiles">
+    <sequence>
+     <element name="WsdlFiles" nillable="true" type="impl:ArrayOfCWsdlFile"/>
+    </sequence>
+   </complexType>
+   <element name="downloadWsdl">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="wsdlFile" type="impl:CWsdlFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadWsdlResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadWsdlReturn" type="impl:CWsdlFileDownloadResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CWsdlFileDownloadResult">
+    <sequence>
+     <element name="WsdlFile" nillable="true" type="impl:CWsdlFile"/>
+     <element name="Dependencies" nillable="true" type="impl:ArrayOfCWsdlFile"/>
+    </sequence>
+   </complexType>
+   <element name="uploadWsdl">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="wsdlFile" type="impl:CWsdlFile"/>
+      <element name="parentWsdlFile" type="impl:CWsdlFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="uploadWsdlResponse">
+    <complexType>
+     <sequence>
+      <element name="uploadWsdlReturn" type="impl:CWsdlFileUploadResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CWsdlFileUploadResult">
+    <sequence>
+     <element name="WsdlFile" nillable="true" type="impl:CWsdlFile"/>
+     <element name="MissingWsdlFiles" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="ExistingDependencies" nillable="true" type="impl:ArrayOfCWsdlFile"/>
+    </sequence>
+   </complexType>
+   <element name="deleteWsdl">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="wsdlFile" type="impl:CWsdlFile"/>
+      <element name="force" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteWsdlResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="deleteWsdlReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getInputAndOutputJTR">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="wsOperation" type="impl:WebServiceOperationData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WebServiceOperationData">
+    <sequence>
+     <element name="WsdlLocator" nillable="true" type="xsd:string"/>
+     <element name="BindingName" nillable="true" type="xsd:string"/>
+     <element name="OperationName" nillable="true" type="xsd:string"/>
+     <element name="OperationInputName" nillable="true" type="xsd:string"/>
+     <element name="OperationOutputName" nillable="true" type="xsd:string"/>
+     <element name="SoapStyle" nillable="true" type="xsd:string"/>
+     <element name="BodyUse" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getInputAndOutputJTRResponse">
+    <complexType>
+     <sequence>
+      <element name="getInputAndOutputJTRReturn" type="impl:WebServiceJtr"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WebServiceJtr">
+    <sequence>
+     <element name="InputJtr" nillable="true" type="xsd:string"/>
+     <element name="OutputJtr" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="uploadWsdlResponse">
+
+      <wsdl:part element="impl:uploadWsdlResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadWsdlRequest">
+
+      <wsdl:part element="impl:uploadWsdl" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadWsdlResponse">
+
+      <wsdl:part element="impl:downloadWsdlResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getInputAndOutputJTRRequest">
+
+      <wsdl:part element="impl:getInputAndOutputJTR" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteWsdlRequest">
+
+      <wsdl:part element="impl:deleteWsdl" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadWsdlRequest">
+
+      <wsdl:part element="impl:downloadWsdl" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWsdlFilesRequest">
+
+      <wsdl:part element="impl:getWsdlFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getInputAndOutputJTRResponse">
+
+      <wsdl:part element="impl:getInputAndOutputJTRResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteWsdlResponse">
+
+      <wsdl:part element="impl:deleteWsdlResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getWsdlFilesResponse">
+
+      <wsdl:part element="impl:getWsdlFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WebServiceInfoProvider">
+
+      <wsdl:operation name="getWsdlFiles">
+
+         <wsdl:input message="impl:getWsdlFilesRequest" name="getWsdlFilesRequest"/>
+
+         <wsdl:output message="impl:getWsdlFilesResponse" name="getWsdlFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadWsdl">
+
+         <wsdl:input message="impl:downloadWsdlRequest" name="downloadWsdlRequest"/>
+
+         <wsdl:output message="impl:downloadWsdlResponse" name="downloadWsdlResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadWsdl">
+
+         <wsdl:input message="impl:uploadWsdlRequest" name="uploadWsdlRequest"/>
+
+         <wsdl:output message="impl:uploadWsdlResponse" name="uploadWsdlResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteWsdl">
+
+         <wsdl:input message="impl:deleteWsdlRequest" name="deleteWsdlRequest"/>
+
+         <wsdl:output message="impl:deleteWsdlResponse" name="deleteWsdlResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getInputAndOutputJTR">
+
+         <wsdl:input message="impl:getInputAndOutputJTRRequest" name="getInputAndOutputJTRRequest"/>
+
+         <wsdl:output message="impl:getInputAndOutputJTRResponse" name="getInputAndOutputJTRResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_webservice_infoproviderSoapBinding" type="impl:WebServiceInfoProvider">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getWsdlFiles">
+
+         <wsdlsoap:operation soapAction="konga_webservice_infoprovider#getWsdlFiles"/>
+
+         <wsdl:input name="getWsdlFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getWsdlFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadWsdl">
+
+         <wsdlsoap:operation soapAction="konga_webservice_infoprovider#downloadWsdl"/>
+
+         <wsdl:input name="downloadWsdlRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadWsdlResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadWsdl">
+
+         <wsdlsoap:operation soapAction="konga_webservice_infoprovider#uploadWsdl"/>
+
+         <wsdl:input name="uploadWsdlRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadWsdlResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteWsdl">
+
+         <wsdlsoap:operation soapAction="konga_webservice_infoprovider#deleteWsdl"/>
+
+         <wsdl:input name="deleteWsdlRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteWsdlResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getInputAndOutputJTR">
+
+         <wsdlsoap:operation soapAction="konga_webservice_infoprovider#getInputAndOutputJTR"/>
+
+         <wsdl:input name="getInputAndOutputJTRRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getInputAndOutputJTRResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WebServiceInfoProviderService">
+
+      <wsdl:port binding="impl:konga_webservice_infoproviderSoapBinding" name="konga_webservice_infoprovider">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_webservice_infoprovider"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

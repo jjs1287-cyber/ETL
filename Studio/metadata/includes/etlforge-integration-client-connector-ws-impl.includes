@@ -1,0 +1,14 @@
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorCallInfoProviderWsImpl.class
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorCallInfoProviderWsImpl$*.class
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorConnectionTesterWsImpl.class
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorConnectionTesterWsImpl$*.class
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorWsBase.class
+com/etlforge/integration/server/implementation/webservice/connector/ConnectorWsBase$*.class
+com/etlforge/integration/server/implementation/webservice/connector/MSCrmDesignInfoProviderWsImpl.class
+com/etlforge/integration/server/implementation/webservice/connector/MSCrmDesignInfoProviderWsImpl$*.class
+com/etlforge/integration/server/implementation/webservice/connector/NetSuiteDesignInfoProviderHelper.class
+com/etlforge/integration/server/implementation/webservice/connector/NetSuiteDesignInfoProviderHelper$*.class
+com/etlforge/integration/server/implementation/webservice/connector/NetSuiteDesignInfoProviderWsImpl.class
+com/etlforge/integration/server/implementation/webservice/connector/NetSuiteDesignInfoProviderWsImpl$*.class
+com/etlforge/integration/server/implementation/webservice/connector/TestNetSuiteQueryApiSoapImpl.class
+com/etlforge/integration/server/implementation/webservice/connector/TestNetSuiteQueryApiSoapImpl$*.class

@@ -1,0 +1,11 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/9.1/vpw.dtd">
+<Workspace Version="9.1" VendorName="SlickEdit">
+	<TagFiles>
+		<TagFile File="konga-2.vtg" AutoUpdateFrom="../../../../../../../.vslick/tagfiles/konga.vtg"/>
+		<TagFile File="usr-local.vtg" AutoUpdateFrom="../../../../../../../.vslick/tagfiles/usr-local.vtg"/>
+	</TagFiles>
+	<Projects>
+		<Project File="Mime.vpj"/>
+		<Project File="../../Test/project/SlickEdit/TestMime.vpj"/>
+	</Projects>
+</Workspace>

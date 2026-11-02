@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Numerator</Label>
+	</Argument>
+	<Argument>
+		<Label>&amp;Denominator</Label>
+	</Argument>
+</Wizard>

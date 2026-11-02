@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataLocations>
+	<DataLocation source="yes" target="yes">
+		<LocationType>Database</LocationType>
+	</DataLocation>		
+	<DataLocation source="yes" target="yes">
+		<LocationType>FileShare</LocationType>
+	</DataLocation>		
+	<DataLocation source="yes" target="yes">
+		<LocationType>FTP</LocationType>
+	</DataLocation>		
+	<DataLocation source="yes" target="yes">
+		<LocationType>HTTP</LocationType>
+	</DataLocation>
+	<DataLocation source="yes" target="yes">
+		<LocationType>LDAP</LocationType>
+	</DataLocation>
+	<DataLocation source="yes" target="yes">
+		<LocationType>TemporaryStorage</LocationType>
+	</DataLocation>
+	<DataLocation source="yes" target="yes">
+		<LocationType>LocalFile</LocationType>
+	</DataLocation>
+	<DataLocation source="yes" target="yes">
+		<LocationType>GlobalVariable</LocationType>
+	</DataLocation>
+	<DataLocation source="yes" target="yes">
+		<LocationType>AmazonS3</LocationType>
+	</DataLocation>
+</DataLocations>

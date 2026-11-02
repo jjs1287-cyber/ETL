@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="&#xD;&#xA;		http://www.springframework.org/schema/beans &#xD;&#xA;		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd&#xD;&#xA;		http://www.springframework.org/schema/util &#xD;&#xA;		http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="ic.EntityConfigRegistry" class="org.etlforge.integration.client.ui.interchange.EntityConfigRegistry" lazy-init="true" />
+
+	<bean id="ic.menu.File.Extension2.Builder" class="org.etlforge.application.ui.view.menu.MenuExtensionDataBuilder" lazy-init="true">
+		<constructor-arg value="menu.File" />
+		<constructor-arg type="int" value="2" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.application.ui.view.menu.ActionBasedViewMenuItemFactory">
+					<constructor-arg ref="action.ic.ImportJitterpak" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.ExportJitterpak" />
+				</bean>
+				<bean class="org.etlforge.application.ui.view.menu.ActionBasedViewMenuItemFactory">
+					<constructor-arg ref="action.ic.Migrate" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.menu.View.Extension4.Builder" class="org.etlforge.application.ui.view.menu.MenuExtensionDataBuilder" lazy-init="true">
+		<constructor-arg value="menu.View" />
+		<constructor-arg type="int" value="4" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.activity.ui.core.menu.proxy.OperationActivityMenuItemFactory">
+					<constructor-arg>
+						<list>
+							<ref bean="activity.action.Log" />
+							<ref bean="activity.action.History" />
+							<ref bean="activity.action.Queue" />
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.Validate" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.DataElements" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.ScriptPad" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.DeployHistory" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+		
+	<bean id="ic.AbstractDeployExecutor" abstract="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.DeployWorker" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="ic.CommandCollectionBuilder" class="org.etlforge.integration.client.ui.interchange.cli.CommandCollectionBuilder" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="ic.Command.CloseProject" />
+				<ref bean="ic.Command.NewEntity" />
+				<ref bean="ic.Command.ConnectWizard" />
+				<ref bean="ic.Command.Open" />
+				<bean class="org.etlforge.integration.client.ui.interchange.cli.ProjectPathCommand">
+					<constructor-arg value="openpath" />
+					<constructor-arg ref="core.CurrentProject" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.OpenPathExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.PageDisplayer" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.cli.ProjectPathCommand">
+					<constructor-arg value="delpath" />
+					<constructor-arg ref="core.CurrentProject" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.DeletePathExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.DeleteHandler" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.cli.ProjectPathCommand">
+					<constructor-arg value="deploy" />
+					<constructor-arg ref="core.CurrentProject" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.DeployPathExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.DeployFacade" />
+							<constructor-arg ref="ui.EditorService" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.CommandFactory" factory-method="newCommand">
+					<constructor-arg value="expand [{0}]" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.ExpandContentViewerExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.ContentViewer" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.CommandFactory" factory-method="newCommand">
+					<constructor-arg value="collapse [{0}]" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.CollapseContentViewerExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.ContentViewer" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.ui.ActionCommand">
+					<constructor-arg value="required_items_tree" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.entity.dependencies.tree.ViewRequiredItemsTreeAction">
+							<constructor-arg ref="ui.ActiveObjectService" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.SingleArgumentCommand">
+					<constructor-arg value="deploy_project" />
+					<constructor-arg value="true" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.DeployEverythingExecutor" parent="ic.AbstractDeployExecutor" />
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.SingleArgumentCommand">
+					<constructor-arg value="deploy_changes" />
+					<constructor-arg value="true" />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.DeployDirtyItemsExecutor" parent="ic.AbstractDeployExecutor" />
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.CommandFactory" factory-method="newCommand">
+					<constructor-arg value="search {type}..." />
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.cli.AdvancedSearchExecutor">
+							<constructor-arg ref="core.CurrentProject" />
+							<constructor-arg ref="ic.SearchAndReplaceMetaData" />
+							<constructor-arg ref="ic.ProjectPersistor" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.cli.NoArgumentCommand">
+					<constructor-arg value="sfdc_connection_pool_status" />
+					<constructor-arg>
+						<bean class="com.etlforge.integration.client.ui.sfdc.PrintPooledConnectionsReportCommandExecutor">
+							<constructor-arg ref="Sfdc.ConnectionFactory" />
+						</bean>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<map>
+				<entry key="find">
+					<ref bean="action.ic.Find" />
+				</entry>
+				<entry key="trashcan">
+					<ref bean="action.ic.TrashCan" />
+				</entry>
+				<entry key="validate">
+					<ref bean="action.ic.Validate" />
+				</entry>
+				<entry key="delete">
+					<ref bean="action.ic.Delete" />
+				</entry>
+				<entry key="test all connections">
+					<ref bean="action.ic.TestAllConnections" />
+				</entry>
+				<entry key="import jitterpak">
+					<ref bean="action.ic.ImportJitterpak" />
+				</entry>
+				<entry key="export jitterpak">
+					<ref bean="action.ic.ExportJitterpak" />
+				</entry>
+				<entry key="create copy">
+					<ref bean="action.ic.Copy" />
+				</entry>
+				<entry key="deep copy">
+					<ref bean="action.ic.DeepCopy" />
+				</entry>
+				<entry key="selective deep copy">
+					<ref bean="action.ic.SelectiveDeepCopy" />
+				</entry>
+				<entry key="script pad">
+					<ref bean="action.ic.ScriptPad" />
+				</entry>
+				<entry key="refresh all transformations">
+					<ref bean="action.ic.RefreshAllTransformations" />
+				</entry>
+				<entry key="deploy_history">
+					<ref bean="action.ic.DeployHistory" />
+				</entry>
+				<entry key="exclusive_view">
+					<ref bean="action.ic.InstallProcessFilter" />
+				</entry>
+				<entry key="close_exclusive_view">
+					<bean class="org.etlforge.integration.client.ui.interchange.core.action.RemoveProcessFilterAction">
+						<constructor-arg ref="ic.ProcessFilterInstaller" />
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="interchange.View" class="org.etlforge.integration.client.ui.interchange.InterchangeView" lazy-init="true" init-method="afterPropertiesSet">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+		<constructor-arg ref="ic.ContentViewer" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="ic.PageDisplayer" />
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<property name="topLevelMenus">
+			<map>
+				<entry key="1">
+					<ref bean="menu.ic.Transformation" />
+				</entry>
+			</map>
+		</property>
+		<property name="menuExtensions">
+			<list>
+				<ref bean="menu.ic.Help" />
+				<ref bean="menu.ic.Debug" />
+			</list>
+		</property>
+		<property name="toolBarManager">
+			<bean class="org.etlforge.integration.client.ui.interchange.component.toolbar.InterchangeToolBarManager">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg>
+					<list>
+						<bean class="org.etlforge.integration.client.ui.interchange.component.toolbar.FileToolBarExtension">
+							<constructor-arg ref="ic.EntityConfigRegistry" />
+							<constructor-arg ref="ic.EntityTypeCategories" />
+							<constructor-arg ref="platform.ProjectManager" />
+							<property name="additionalActions">
+								<list>
+									<ref bean="action.ic.Open" />
+								</list>
+							</property>
+						</bean>
+						<bean class="org.etlforge.integration.client.ui.interchange.component.toolbar.ActionToolBarExtension">
+							<constructor-arg>
+								<list>
+									<ref bean="action.ic.Deploy" />
+								</list>
+							</constructor-arg>
+						</bean>
+					</list>
+				</constructor-arg>
+			</bean>
+		</property>
+		<property name="popupMenuManager" ref="ic.ContextMenu" />
+		<property name="commandCollection" ref="ic.CommandCollection" />
+		<property name="newEntityMenuFactory" ref="ic.NewEntityMenuFactory" />
+		<property name="globalShortcuts">
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.LaunchConnectShortcut">
+					<constructor-arg ref="action.ic.ETLForgeConnectConsole" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.ProjectEventLogSwitch">
+					<constructor-arg ref="platform.ProjectManager" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.FocusContentViewerFilterFieldBinding">
+					<constructor-arg ref="ic.ContentViewer" />
+				</bean>
+			</list>
+		</property>
+		
+	</bean>
+
+	<bean id="ic.ProjectLoader" class="org.etlforge.integration.client.ui.project.loading.ProjectLoader" lazy-init="true">
+		<constructor-arg ref="platform.ProjectManager" />
+		<property name="waitService" ref="ui.AppWin" />
+	</bean>
+	<bean id="ic.TestResultPageDisplayer" class="org.etlforge.integration.client.ui.interchange.debug.TestResultPageDisplayer" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.PageDisplayer" />
+	</bean>
+	<bean id="ic.DebugService" class="org.etlforge.integration.client.ui.interchange.debug.InterchangeDebugService" lazy-init="true">
+		<constructor-arg ref="platform.DebugService" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.debug.TestResultDispatcher">
+				<constructor-arg>
+					<map>
+						<entry key="Transformation">
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.TransformationTestResultDisplayer">
+								<constructor-arg ref="platform.DebugService" />
+								<constructor-arg ref="ic.TestResultPageDisplayer" />
+							</bean>
+						</entry>
+						<entry key="Script">
+							<ref bean="ic.TestResultPageDisplayer" />
+						</entry>
+						<entry key="Operation">
+							<bean class="org.etlforge.integration.client.ui.interchange.debug.TestOperationResultDisplayer" />
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.ContextMenu" class="org.etlforge.integration.client.ui.interchange.core.action.popup.InterchangePopupMenuManager" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="TOP" />
+					<constructor-arg>
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.NewIntegrationEntityItemFactory">
+								<constructor-arg ref="ic.EntityConfigRegistry" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.NewFolderItemFactory">
+								<constructor-arg ref="ic.FolderConfig" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.DuplicateFolderStructureItemFactory">
+								<constructor-arg ref="ic.ContentViewer" />
+								<constructor-arg ref="ic.ProjectPersistor" />
+								<constructor-arg ref="EntityTypes" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.OpenPageItemFactory" />
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.SinglePagePopupMenuItemFactory">
+								<constructor-arg ref="action.Undo" />
+							</bean>						
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.SinglePagePopupMenuItemFactory">
+								<constructor-arg ref="action.Redo" />
+							</bean>						
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.SinglePagePopupMenuItemFactory">
+								<constructor-arg ref="action.Save" />
+							</bean>						
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.InstallProcessFilterItemFactory">
+								<constructor-arg ref="action.ic.InstallProcessFilter" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.Deploy" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.ExportJitterpak" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.DeployActiveObjectsItemFactory">
+								<constructor-arg ref="action.ic.DeploySelectedObjects" />
+							</bean>
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="EDIT" />
+					<constructor-arg>
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.RenameNodeItemFactory">
+								<constructor-arg ref="ic.ContentViewer" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.actions.SetOperationOptionsItemFactory">
+								<constructor-arg ref="ui.AppWin" />
+								<constructor-arg ref="ic.EntityExplorerService" />
+								<constructor-arg ref="ic.ProjectPersistor" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.SetPermissionsItemFactory">
+								<constructor-arg ref="action.ic.Permissions" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.CopyEntityItemFactory">
+								<constructor-arg>
+									<list>
+										<ref bean="action.ic.Copy" />
+										<ref bean="action.ic.DeepCopy" />
+										<ref bean="action.ic.SelectiveDeepCopy" />
+									</list>
+								</constructor-arg>
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.entity.search.SearchAndReplaceItemFactory">
+								<constructor-arg ref="ui.AppWin" />
+								<constructor-arg ref="ic.SearchAndReplaceMetaData" />
+								<constructor-arg ref="ic.ProjectPersistor" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.RefreshNodeItemFactory">
+								<constructor-arg ref="ic.ContentViewer" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.SinglePagePopupMenuItemFactory">
+								<constructor-arg ref="action.ic.Description" />
+							</bean>						
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.EditTransformationItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.Search" />
+							</bean>
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="ACTION" />
+					<constructor-arg>
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.TestAllConnections" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.RunOperationItemFactory">
+								<constructor-arg ref="action.ic.RunOperation" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.RunAllOperationsItemFactory">
+								<constructor-arg ref="action.ic.RunAllOperations" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.locatable.actions.TestConnectionItemFactory">
+								<constructor-arg ref="action.ic.TestConnection" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.TestSendEmailItemFactory">
+								<constructor-arg ref="action.ic.TestEmail" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.schedule.action.TestScheduleItemFactory">
+								<constructor-arg ref="action.ic.TestSchedule" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.AssignPipelinePluginItemFactory">
+								<constructor-arg ref="action.ic.AssignPlugin" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.CreateOperationMenuItemFactory">
+								<constructor-arg ref="ic.TxToOpFactory" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.locatable.actions.SingleSourceItemFactory">
+								<constructor-arg ref="action.ic.SourceToTarget" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.locatable.actions.SingleTargetItemFactory">
+								<constructor-arg ref="action.ic.TargetToSource" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.locatable.actions.SingleSourceItemFactory">
+								<constructor-arg ref="action.ic.ExportSourceSettings" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.locatable.actions.SingleTargetItemFactory">
+								<constructor-arg ref="action.ic.ExportTargetSettings" />
+							</bean>
+							<bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+								<constructor-arg>
+									<bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+										<constructor-arg ref="ui.ActiveObjectService" />
+										<constructor-arg ref="ic.EntityExplorerService" />
+										<constructor-arg>
+											<util:constant static-field="org.etlforge.integration.data.entity.operation.WebServiceOperationType.TYPE" />
+										</constructor-arg>
+										<constructor-arg value="org.etlforge.integration.data.entity.WebServiceCall" />
+									</bean>
+								</constructor-arg>
+								<constructor-arg value="org.etlforge.integration.data.entity.WebServiceCall" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.WebServiceCallItemFactory">
+								<constructor-arg ref="action.ic.CreateWsRequest" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.WebServiceCallItemFactory">
+								<constructor-arg ref="action.ic.CreateWsResponse" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.WebServiceCallItemFactory">
+								<constructor-arg ref="action.ic.GenerateSoapSchema" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.Refresh" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.LoadSource" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.TestTransformation" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.TestOperation" />
+							</bean>
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="PAGE" />
+					<constructor-arg>
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TransformationDataNodesItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.ViewSourceFile" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.ViewTargetFile" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.ViewLinkFile" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.RemoveData" />
+							</bean>
+							<ref bean="contextMenu.Separator" />
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.FollowStructureLinksItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.Migrate" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TransformationImportItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TransformationExportItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.MapAreaDisplaySettingsItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TreeMapperModeMenuItemFactory" />
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.PageActionPopupMenuItemFactory">
+								<constructor-arg ref="ui.EditorService" />
+								<constructor-arg value="action.ic.tx.Print" />
+							</bean>						
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="VIEW" />
+					<constructor-arg>
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ActivityActionPopupMenuItemFactory">
+								<constructor-arg ref="activity.action.Log" />
+								<constructor-arg ref="ic.ProjectPageDisplayer" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ActivityActionPopupMenuItemFactory">
+								<constructor-arg ref="activity.action.Queue" />
+								<constructor-arg ref="ic.ProjectPageDisplayer" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ActivityActionPopupMenuItemFactory">
+								<constructor-arg ref="activity.action.History" />
+								<constructor-arg ref="ic.ProjectPageDisplayer" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.DataElements" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ViewDependenciesItemFactory">
+								<constructor-arg ref="action.ic.ViewDependencies" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ViewEntityDeployHistoryAction">
+								<constructor-arg ref="action.ic.ItemDeployHistory" />
+							</bean>
+						</list>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.application.ui.action.popup.SectionFactories">
+					<constructor-arg value="OTHER" />
+					<constructor-arg>
+						<list>
+							<bean class="com.etlforge.integration.client.ui.sfdc.RunInDebugModeMenuItemFactory" />
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.DeleteEntityItemFactory">
+								<constructor-arg ref="action.ic.Delete" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.DeleteRootFolderContentItemFactory">
+								<constructor-arg ref="action.ic.DeleteRootFolder" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.OpenTrashCanItemFactory">
+								<constructor-arg ref="action.ic.TrashCan" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.ProjectProperties" />
+							</bean>
+							<ref bean="contextMenu.Separator" />
+							<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+								<constructor-arg ref="action.ic.CloseProject" />
+							</bean>
+						</list>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory" id="ic.SalesforceCategory">
+					<constructor-arg value="Salesforce" />
+					<constructor-arg>
+						<util:list value-type="org.etlforge.integration.data.entity.EntityType">
+							<value>SalesforceConnector</value>
+							<value>SalesforceQuery</value>
+							<value>SalesforceUpsert</value>
+							<value>SalesforceCreate</value>
+							<value>SalesforceUpdate</value>
+							<value>SalesforceDelete</value>
+							<value>SalesforceBulkLoad</value>
+						</util:list>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+							<constructor-arg value="SalesforceConnector" />
+						</bean>
+					</constructor-arg>
+				</bean>
+
+	<bean id="ic.ETLForgeConnect.Standard" class="com.google.common.collect.ImmutableList" factory-method="copyOf" lazy-init="true">
+		<constructor-arg>
+			<list><ref bean="ic.SalesforceCategory" /></list>
+		</constructor-arg>
+	</bean>
+	<!-- Defines any edition-specific ETLForge Connect categories. Can be overridden in an edition-specific application context file. -->
+	<bean id="ic.ETLForgeConnect.Edition" class="java.util.Collections" factory-method="emptyList" lazy-init="true" />
+	
+	<!-- Defines any edition-specific categories. Can be overridden in an edition-specific application context file. -->
+	<bean id="ic.EntityTypeCategories.Edition" class="java.util.Collections" factory-method="emptyList" lazy-init="true" />
+	<bean id="ic.EntityTypeCategories" class="org.etlforge.integration.client.ui.interchange.EntityTypeCategories" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Operation" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Transformation" /></bean><bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory"><constructor-arg value="XsltTransform" /></bean><bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory"><constructor-arg value="ProjectVariable" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Source" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Target" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="WebServiceCall" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="HttpEndpoint" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Document" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Schedule" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="EmailMessage" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.SingleTypeEntityCategory">
+					<constructor-arg value="Script" />
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg><ref bean="ic.SalesforceCategory" /></constructor-arg>
+		<constructor-arg ref="ic.EntityTypeCategories.Edition" />
+	</bean>
+	
+	<bean id="ic.EntityMover" class="org.etlforge.integration.client.ui.interchange.InterchangeEntityMover" lazy-init="true">
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="ic.ProjectRenamer" class="org.etlforge.integration.client.ui.interchange.entity.project.ProjectRenamerImpl" lazy-init="true">
+		<constructor-arg ref="ic.SaveAllGate" />
+		<property name="waitService" ref="ui.AppWin" />
+	</bean>
+	<bean id="ic.TreeConfig" class="org.etlforge.integration.client.ui.interchange.content.ProjectTreeConfiguration" lazy-init="true">
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+		<constructor-arg ref="ic.ProjectRenamer" />
+		<constructor-arg ref="ic.EntityMover" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.component.tree.ProjectTreeController">
+				<constructor-arg ref="ic.EntityConfigRegistry" />
+				<constructor-arg ref="ic.EntityTypeCategories" />
+				<constructor-arg ref="ic.PageDisplayer" />
+				<constructor-arg ref="action.ic.Delete" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="ic.ContentViewer" class="org.etlforge.integration.client.ui.interchange.content.DefaultProjectContentViewerManager" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.content.ProjectContentViewerFactory">
+				<constructor-arg ref="ic.EntityTypeCategories" />
+				<constructor-arg ref="ic.TreeConfig" />
+				<constructor-arg>
+					<bean class="org.etlforge.integration.client.ui.interchange.component.tree.MultiTreeSectionFactory">
+						<constructor-arg ref="ic.EntityTypeCategories" />
+						<constructor-arg ref="ic.TreeConfig" />
+						<constructor-arg ref="ic.EntityConfigRegistry" />
+						<constructor-arg ref="ic.PageDisplayer" />
+						<constructor-arg ref="ic.EntityMover" />
+						<constructor-arg ref="ic.ProjectRenamer" />
+					</bean>
+				</constructor-arg>
+				<constructor-arg ref="ic.ProcessFilterInstaller" />
+			</bean>
+		</constructor-arg>
+		<property name="processFilterProvider" ref="ic.ProcessFilterInstaller" />
+	</bean>
+
+	<bean id="ic.EntityExplorerService" class="org.etlforge.integration.client.ui.interchange.EntityExplorerService" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<constructor-arg ref="ic.PageDisplayer" />
+		<constructor-arg ref="ic.ParentFolderLocator" />
+	</bean>
+	<bean id="ic.ParentFolderLocator" class="org.etlforge.integration.client.ui.interchange.entity.ParentFolderLocator" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.ContentViewer" />
+	</bean>
+
+	<bean id="ic.Command.CloseProject" class="org.etlforge.cli.CommandFactory" factory-method="newCommand" lazy-init="true">
+		<constructor-arg value="close project" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.cli.CloseProjectExecutor">
+				<constructor-arg ref="core.CurrentProject" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.Command.NewEntity" class="org.etlforge.cli.CommandFactory" factory-method="newCommand" lazy-init="true">
+		<constructor-arg value="new {type}..." />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.cli.CreateNewEntityExecutor">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg ref="ic.EntityConfigRegistry" />
+				<constructor-arg ref="platform.ProjectManager" />
+				<constructor-arg ref="EntityTypes" />
+				<constructor-arg value="true" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.Command.ConnectWizard" class="org.etlforge.cli.ui.ActionCommand" lazy-init="true">
+		<constructor-arg value="connect wizard" />
+		<constructor-arg ref="action.ic.ETLForgeConnectConsole" />
+	</bean>
+
+	<bean id="ic.Command.Open" class="org.etlforge.integration.client.ui.interchange.cli.ProjectPathCommand" lazy-init="true">
+		<constructor-arg value="open" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.cli.OpenEntityExecutor">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg ref="core.CurrentProject" />
+				<constructor-arg ref="platform.ProjectManager" />
+				<constructor-arg ref="ic.PageDisplayer" />
+				<constructor-arg>
+					<bean class="org.etlforge.integration.client.ui.interchange.component.launcher.ProjectLauncherViewer">
+						<constructor-arg ref="interchange.Launcher" />
+					</bean>
+				</constructor-arg>
+				<constructor-arg value="true" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.ProcessFilterInstaller" class="org.etlforge.integration.client.ui.interchange.ProcessFilterInstaller" lazy-init="true">
+		<property name="currentProjectService" ref="core.CurrentProject" />
+	</bean>
+
+	<bean id="interchange.Shell" class="org.etlforge.application.ui.view.shell.ViewShell" lazy-init="true">
+		<constructor-arg value="interchange" />
+		<constructor-arg value="Design" />
+		<property name="switchAction">
+			<bean class="org.etlforge.integration.client.ui.interchange.InterchangeViewSwitchAction">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg ref="interchange.Shell" />
+				<constructor-arg ref="interchange.Launcher" />
+			</bean>
+		</property>
+		<property name="menuExtensions">
+			<list>
+				<bean class="org.etlforge.application.ui.view.menu.MenuExtensionData">
+					<constructor-arg value="menu.File" />
+					<constructor-arg type="int" value="1" />
+					<property name="extensionItems">
+						<list>
+							<bean class="org.etlforge.application.ui.view.menu.ActionBasedViewMenuItemFactory">
+								<constructor-arg ref="action.ic.Open" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.NewMenuItemFactory">
+								<constructor-arg ref="core.CurrentProject" />
+								<constructor-arg ref="ic.NewEntityMenuFactory" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<ref bean="ic.menu.File.Extension2" />
+				<bean class="org.etlforge.application.ui.view.menu.MenuExtensionData">
+					<constructor-arg value="menu.File" />
+					<constructor-arg type="int" value="3" />
+					<property name="extensionItems">
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.RecentProjectsMenuItemFactory">
+								<constructor-arg ref="core.RecentProjects" />
+								<constructor-arg ref="ic.ProjectLoader" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.etlforge.application.ui.view.menu.MenuExtensionData">
+					<constructor-arg value="menu.Edit" />
+					<constructor-arg type="int" value="1" />
+					<property name="extensionItems">
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.CopyEntityMenuItemFactory">
+								<constructor-arg>
+									<list>
+										<value>action.ic.Copy</value>
+										<value>action.ic.DeepCopy</value>
+										<value>action.ic.SelectiveDeepCopy</value>
+									</list>
+								</constructor-arg>
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.Find" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.TrashCan" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<ref bean="ic.menu.View.Extension4" />
+				<bean class="org.etlforge.application.ui.view.menu.MenuExtensionData">
+					<constructor-arg value="menu.Actions" />
+					<constructor-arg type="int" value="2" />
+					<property name="extensionItems">
+						<list>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.Deploy" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.TestAllConnections" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TransformationProxyMenuItemFactory">
+								<constructor-arg value="action.ic.RefreshAllTransformations" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.RunOperation" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.Permissions" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.InterchangeMenuItemBeanFactory">
+								<constructor-arg value="action.ic.AssignPlugin" />
+							</bean>
+							<bean class="org.etlforge.application.ui.view.menu.SeparatorFactory" />
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.DebugMenuItemFactory">
+								<constructor-arg value="action.debug.Stop" />
+							</bean>
+							<bean class="org.etlforge.integration.client.ui.interchange.component.menu.proxy.DebugMenuItemFactory">
+								<constructor-arg value="action.debug.Resume" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="interchange.OpenLocalProject" class="org.etlforge.integration.client.ui.interchange.component.launcher.OpenLocalProjectOption" lazy-init="true">
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.project.recent.RenameProjectAction">
+					<property name="waitService" ref="ui.AppWin" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.project.recent.CopyProjectLocationAction" />
+				<bean class="com.etlforge.integration.client.ui.interchange.launcher.RestoreFromBackupAction">
+					<constructor-arg>
+						<bean class="com.etlforge.integration.client.ui.interchange.project.backup.complete.BackupSelectorDialog">
+							<constructor-arg ref="ui.AppWin" />
+							<constructor-arg ref="platform.ProjectManager" />
+						</bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="com.etlforge.integration.client.ui.interchange.project.backup.complete.BackupLoader">
+							<constructor-arg ref="ui.AppWin" />
+							<constructor-arg ref="platform.ProjectManager" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<null />
+				<bean class="org.etlforge.integration.client.ui.project.recent.RemoveProjectFromHistoryAction" />
+				<null />
+				<bean class="org.etlforge.integration.client.ui.project.recent.DeleteProjectFromDiskAction" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ic.DeployWorker" class="org.etlforge.integration.client.ui.deploy.DeployWorker" lazy-init="true">
+		<constructor-arg ref="platform.DeployManager" />
+	</bean>
+	<bean id="ic.PageDisplayer" class="org.etlforge.integration.client.ui.interchange.ViewEntityPageDisplayer" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+	</bean>
+	<bean id="ic.ProjectPageDisplayer" class="org.etlforge.integration.client.ui.interchange.ProjectPageDisplayer" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ui.EditorService" />
+	</bean>
+	<bean id="ic.ProjectPersistor" class="org.etlforge.integration.client.ui.interchange.EditorAwarePersistor" lazy-init="true">
+		<constructor-arg ref="ic.PageDisplayer" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.SaveToDiskPersistor">
+				<constructor-arg ref="core.CurrentProject" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="ic.DeleteHandler" class="org.etlforge.integration.client.ui.interchange.DeleteRequestHandlerImpl" lazy-init="true">
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<constructor-arg ref="ic.PublicTypesFilter" />
+		<property name="deleteGate">
+			<bean class="org.etlforge.integration.client.ui.interchange.ActiveObjectDeleteGate" />
+		</property>
+		<property name="waitService" ref="ui.AppWin" />
+	</bean>
+	<bean id="ic.OperationRunnerFactory" class="org.etlforge.integration.client.ui.interchange.InterchangeOperationRunnerFactory" lazy-init="true">
+		<constructor-arg ref="server.JobControl" />
+		<constructor-arg ref="ic.DeployFacade" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.EditorAwarePersistor">
+				<constructor-arg ref="ic.PageDisplayer" />
+				<constructor-arg ref="ic.ProjectPersistor" />
+				<property name="saveToDiskEvenIfNotDirty" value="false" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="ic.DeployFacade" class="org.etlforge.integration.client.ui.interchange.deploy.InterchangeDeployFacade" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.DeployWorker" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.deploy.InterchangePreDeployProcessor">
+				<constructor-arg ref="ic.PageDisplayer" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="ic.EntityPageSaveGate" class="org.etlforge.integration.client.ui.interchange.core.action.EntityPageSaveGate" lazy-init="true">
+		<constructor-arg ref="ic.PageDisplayer" />
+		<constructor-arg ref="ui.EditorSaver" />
+	</bean>
+	<bean id="ic.SaveAllGate" class="org.etlforge.integration.client.ui.interchange.core.action.SaveAllGate" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ui.EditorSaver" />
+	</bean>
+	
+	<bean id="ic.ProjectFileDropHandler" class="org.etlforge.integration.client.ui.interchange.ProjectFileDropHandler" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="jitterpack.importer.factory" />
+	</bean>
+	
+	<bean id="ic.SourceConnectionTesterFactory" class="org.etlforge.integration.client.ui.interchange.entity.source.SourceConnectionTesterFactory" lazy-init="true">
+		<constructor-arg ref="server.TestSourceConnection" />
+	</bean>
+	
+	<bean id="ic.TargetConnectionTesterFactory" class="org.etlforge.integration.client.ui.interchange.entity.target.TargetConnectionTesterFactory" lazy-init="true">
+		<constructor-arg ref="server.TestTargetConnection" />
+	</bean>
+	
+	<bean id="ic.SearchAndReplaceMetaData" class="org.etlforge.integration.client.ui.interchange.entity.EntityConfigSearchAndReplaceMetaDataLookup" lazy-init="true">
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+	</bean>
+
+	<bean id="action.ic.Deploy" class="org.etlforge.integration.client.ui.interchange.core.action.DeployProjectAction" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.DeployWorker" />
+		<constructor-arg ref="ui.EditorService" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.Open" class="org.etlforge.integration.client.ui.interchange.core.action.OpenProjectAction" lazy-init="true">
+		<constructor-arg ref="interchange.Launcher" />
+	</bean>
+	<bean id="action.ic.Find" class="org.etlforge.integration.client.ui.interchange.core.action.FindIntegrationEntityAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="EntityTypes" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.entity.search.NameSearchType" />
+				<bean class="org.etlforge.integration.client.ui.entity.search.PropertySearchType">
+					<constructor-arg>
+						<bean class="org.etlforge.integration.client.ui.interchange.component.find.EntityConfigSearchValuesCollectorLookup">
+							<constructor-arg ref="ic.EntityConfigRegistry" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.find.MappingSearchType" />
+				<bean class="org.etlforge.integration.client.ui.interchange.component.find.ScriptSearchType" />
+				<bean class="org.etlforge.integration.client.ui.entity.search.GuidSearchType" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="action.ic.TrashCan" class="org.etlforge.integration.client.ui.interchange.core.action.OpenTrashCanAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.DeployHistory" class="org.etlforge.integration.client.ui.interchange.core.action.ViewProjectDeployHistoryAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.ItemDeployHistory" class="org.etlforge.integration.client.ui.interchange.core.action.ViewEntityDeployHistoryAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.Validate" class="org.etlforge.integration.client.ui.interchange.core.action.ValidateProjectAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.DataElements" class="org.etlforge.integration.client.ui.interchange.core.action.ViewReferencedDataElementsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.CloseProject" class="org.etlforge.integration.client.ui.interchange.core.action.CloseProjectAction" lazy-init="true">
+		<constructor-arg ref="interchange.Launcher" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.DeleteRootFolder" class="org.etlforge.integration.client.ui.interchange.core.action.DeleteRootFolderContentAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="ic.DeleteHandler" />
+	</bean>
+	<bean id="action.ic.OpenPage" class="org.etlforge.integration.client.ui.interchange.core.action.OpenPageAction" lazy-init="true">
+		<constructor-arg ref="ic.ContentViewer" />
+		<constructor-arg ref="ic.PageDisplayer" />
+	</bean>
+	<bean id="action.ic.Delete" class="org.etlforge.integration.client.ui.interchange.core.action.DeleteEntityAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="ic.DeleteHandler" />
+	</bean>
+	<bean id="action.ic.ProjectProperties" class="org.etlforge.integration.client.ui.interchange.core.action.ShowProjectPropertiesAction" lazy-init="true">
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.PageDisplayer" />
+	</bean>
+
+	<!-- Defines the ConnectionTesterFactory instances (for Test All Connections) that are not common to all editions.
+	     For example, in the enterprise edition Test All Connections must test connection to the various connector endpoints.
+		 The common definition of this bean is an empty list. It can be overridden in an edition specific config file. -->
+	<bean id="ic.AdditionalConnectionTesterFactories" class="java.util.Collections" factory-method="emptyList" lazy-init="true" />
+	<bean id="action.ic.TestAllConnections" class="org.etlforge.integration.client.ui.interchange.core.action.TestAllConnectionsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.source.SourceConnectionTesterFactory">
+					<constructor-arg ref="server.TestSourceConnection" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.target.TargetConnectionTesterFactory">
+					<constructor-arg ref="server.TestTargetConnection" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.sfdc.connector.SalesforceConnectionTesterFactory">
+					<constructor-arg ref="Sfdc.ConnectionTester" />
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="ic.AdditionalConnectionTesterFactories" />
+	</bean>
+	<bean id="action.ic.ImportJitterpak" class="org.etlforge.integration.client.ui.interchange.core.action.ImportJitterPackAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="jitterpack.importer.factory" />
+	</bean>
+	<bean id="action.ic.ExportJitterpak" class="org.etlforge.integration.client.ui.interchange.core.action.ExportJitterPackAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="jitterpack.exporter" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.Migrate" class="org.etlforge.integration.client.ui.project.migration.MigrateProjectAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.Copy" class="org.etlforge.integration.client.ui.interchange.core.action.CreateEntityCopyAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+	</bean>
+	<bean id="action.ic.DeepCopy" class="org.etlforge.integration.client.ui.interchange.core.action.CreateDeepEntityCopyAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.SaveAllGate" />
+		<constructor-arg ref="ic.DeleteHandler" />
+	</bean>
+	<bean id="action.ic.SelectiveDeepCopy" class="org.etlforge.integration.client.ui.interchange.core.action.SelectiveDeepEntityCopyAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.DeleteHandler" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.RunOperation" class="org.etlforge.integration.client.ui.interchange.core.action.RunOperationAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.OperationRunnerFactory" />
+		<property name="monitorApis">
+			<bean class="org.etlforge.integration.activity.ui.monitor.OperationMonitorApis">
+				<constructor-arg ref="server.OperationLogProvider" />
+				<constructor-arg ref="server.OperationQueueProvider" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="action.ic.RunAllOperations" class="org.etlforge.integration.client.ui.interchange.core.action.RunAllOperationsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.OperationRunnerFactory" />
+		<constructor-arg ref="ic.DeployFacade" />
+	</bean>
+	<bean id="action.ic.ViewDependencies" class="org.etlforge.integration.client.ui.interchange.core.action.ViewDependenciesAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.SourceToTarget" class="org.etlforge.integration.client.ui.interchange.locatable.actions.ExportSourceToTargetAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="ic.EntityExplorerService" />
+	</bean>
+	<bean id="action.ic.TargetToSource" class="org.etlforge.integration.client.ui.interchange.locatable.actions.ExportTargetToSourceAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="ic.EntityExplorerService" />
+	</bean>
+	<bean id="action.ic.ExportSourceSettings" class="org.etlforge.integration.client.ui.interchange.locatable.actions.ExportSourceSettingsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<constructor-arg ref="ic.EntityPageSaveGate" />
+	</bean>
+	<bean id="action.ic.ExportTargetSettings" class="org.etlforge.integration.client.ui.interchange.locatable.actions.ExportTargetSettingsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.ProjectPersistor" />
+		<constructor-arg ref="ic.EntityPageSaveGate" />
+	</bean>
+	<bean id="action.ic.Permissions" class="org.etlforge.integration.client.ui.interchange.core.action.SetPermissionsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="platform.UserManager" />
+	</bean>
+	<bean id="action.ic.DeploySelectedObjects" class="org.etlforge.integration.client.ui.interchange.core.action.DeployActiveObjectsAction" lazy-init="true">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="ic.DeployFacade" />
+	</bean>
+	<bean id="action.ic.TestConnection" class="org.etlforge.integration.client.ui.interchange.locatable.actions.TestConnectionAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.SourceConnectionTesterFactory" />
+		<constructor-arg ref="ic.TargetConnectionTesterFactory" />
+		<constructor-arg ref="ic.EntityPageSaveGate" />
+	</bean>
+	<bean id="action.ic.AssignPlugin" class="org.etlforge.integration.client.ui.interchange.core.action.AssignPipelinePluginAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="action.ic.ScriptPad" class="org.etlforge.integration.client.ui.interchange.core.action.OpenScriptPadAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.DebugService" />
+		<constructor-arg ref="script.ScriptBuilderUiFactory" />
+		<constructor-arg ref="core.CurrentProject" />
+	</bean>
+	<bean id="action.ic.TestEmail" class="org.etlforge.integration.client.ui.interchange.core.action.TestSendEmailAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.message.ScriptBasedTestEmailSender">
+				<constructor-arg ref="server.TestScriptProvider" />
+				<constructor-arg>
+					<bean class="org.etlforge.application.ui.widget.password.DialogPasswordSupplier">
+						<constructor-arg value="Please enter the password for the email account." />
+						<constructor-arg value="false" />
+					</bean>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="ic.EntityPageSaveGate" />
+	</bean>
+	<bean id="action.ic.TestSchedule" class="org.etlforge.integration.client.ui.interchange.entity.schedule.action.TestScheduleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.TestScheduleProvider" />
+	</bean>
+	<bean id="action.ic.Description" class="org.etlforge.integration.client.ui.interchange.core.action.EditEntityDescriptionAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.ic.AttachedListeners" class="org.etlforge.integration.client.ui.interchange.core.action.ViewAttachedListenersAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+	</bean>
+	<bean id="action.ic.RefreshAllTransformations" class="org.etlforge.integration.client.ui.interchange.entity.transformation.action.RefreshAllTransformationsAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="core.MappingStructureFactory" />
+	</bean>
+	<bean id="action.ic.OpenProjectFolder" class="org.etlforge.integration.client.ui.interchange.core.action.OpenProjectFolderAction" lazy-init="true">
+		<constructor-arg ref="platform.ProjectManager" />
+	</bean>
+	<bean id="action.ic.InstallProcessFilter" class="org.etlforge.integration.client.ui.interchange.core.action.InstallProcessFilterAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.ProcessFilterInstaller" />
+	</bean>
+	<bean id="action.ic.CreateWsRequest" class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.CreateRequestTransformationAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.EntityExplorerService" />
+	</bean>
+	<bean id="action.ic.CreateWsResponse" class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.CreateResponseTransformationAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.EntityExplorerService" />
+	</bean>
+	<bean id="action.ic.GenerateSoapSchema" class="org.etlforge.integration.client.ui.interchange.entity.webservice.action.GenerateSoapSchemasAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="server.WebServiceInfoProvider" />
+	</bean>
+	<bean id="action.ic.ETLForgeConnectConsole" class="org.etlforge.integration.client.ui.interchange.core.action.OpenETLForgeConnectConsoleAction" lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="ic.EntityConfigRegistry" />
+		<constructor-arg ref="ic.ETLForgeConnect.Standard" />
+		<constructor-arg ref="ic.ETLForgeConnect.Edition" />
+	</bean>
+	
+	
+	<bean id="menu.ic.Transformation" class="org.etlforge.integration.client.ui.interchange.entity.transformation.menu.TransformationMenu" lazy-init="true">
+		<constructor-arg ref="ui.EditorService" />
+	</bean>
+	<bean id="menu.ic.Debug" class="org.etlforge.integration.client.ui.interchange.component.menu.DebugMenuExtension" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<ref bean="action.ic.OpenProjectFolder" />
+				<ref bean="action.ic.AttachedListeners" />
+				<bean class="org.etlforge.integration.client.ui.interchange.core.action.OpenModificationViewAction">
+					<constructor-arg ref="ui.AppWin" />
+					<constructor-arg ref="core.CurrentProject" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="menu.ic.Help" class="org.etlforge.integration.client.ui.interchange.component.menu.HelpMenuExtension" lazy-init="true">
+		<constructor-arg>
+			<list>
+				
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>

@@ -1,0 +1,24 @@
+<H1>Using&nbsp;Java2WSDL</H1>
+<P>This example generates a WSDL file for the XmlUtils web service.</P>
+<OL>
+	<LI>
+		Set AXIS_LIB to where your Axis JAR files are.</LI>
+	<LI>
+		Add the environment variable 
+		AXISCLASSPATH=%AXIS_LIB%\axisjava\axis.jar;%AXIS_LIB%\axisjava\commons-discovery.jar;%AXIS_LIB%\axisjava\commons-logging.jar;%AXIS_LIB%\axisjava\jaxrpc.jar;%AXIS_LIB%\axisjava\saaj.jar;%AXIS_LIB%\axisjava\log4j-1.2.8.jar;%AXIS_LIB%\axisjava\xml-apis.jar;%AXIS_LIB%\axisjava\xercesImpl.jar;%AXIS_LIB%\axisjava\wsdl4j.jar
+	</LI>
+	<LI>
+		java -cp 
+		%AXISCLASSPATH%;C:\Project\Edgeways\EdgeApp\java\lib\edgeways_source.jar 
+		org.apache.axis.wsdl.Java2WSDL -o XmlUtils.wsdl 
+		-l"http://localhost/axis/XmlUtils" -n "urn:KongaWs" 
+		-pcom.edgeways.integration.server.xml "urn:KongaWs" 
+		com.edgeways.integration.server.xml.XmlInfoProvider</LI></OL>
+<H1>Using WSDL2Ws</H1>
+<P><FONT size="4">WSDL2Ws is used to create the stubs for the server (as in the example 
+		below) and client. See docs/winuser-guide.html in the Axis-C distro for the 
+		next steps to deploy your web service.</FONT></P>
+<OL>
+	<LI>
+		java -cp %AXIS_LIB%\axis\wsdl2ws.jar;%AXISCLASSPATH% 
+		org.apache.axis.wsdl.wsdl2ws.WSDL2Ws -o. -lc++ -sserver &lt;wsdl_file&gt;</LI></OL>

@@ -1,0 +1,4 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/compression/EndpointArchive.h');s=p.read_text().replace('const std::string& password);','const std::string& password, const std::string& sourceName = "");',1);p.write_text(s)
+p=Path('C:/ETL/Server/src/native/compression/EndpointArchive.cpp');s=p.read_text().replace('const std::string& directory,const std::string& password){','const std::string& directory,const std::string& password,const std::string& sourceName){').replace('relative=path(archivePath).filename().u8string();','relative=path(sourceName.empty()?archivePath:sourceName).filename().u8string();');p.write_text(s)
+p=Path('C:/ETL/Server/src/native/integration/konga/OperationObjects/EndpointCompression.cpp');s=p.read_text().replace('staging(file.getLocalSourceLocation()),data->compressionPassword())','staging(file.getLocalSourceLocation()),data->compressionPassword(),file.getRemoteSourceLeafName())');p.write_text(s)

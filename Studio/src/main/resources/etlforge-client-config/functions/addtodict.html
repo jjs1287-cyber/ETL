@@ -1,0 +1,16 @@
+<html>
+Adds a value do a dictionary for a specific key. The key must be a string or have a string representation, and NULL keys are not allowed.
+Any value is allowed, even NULL.
+Returns true if the value was added and false if the value was updated.
+If the first argument is not defined or is not a dictionary it will be initialized to an empty dictionary before the value is added.
+<br>
+<h2>Example:</h2>
+<code><font size="4">
+// Add the value to the dictionary if it doesn't already exists<br>
+If(!HasKey($d, "key"), AddToDict($d, "key", "value"));<br>
+<br>
+// If you just want to assign a key-value you can use the following syntax:<br>
+$d["key"]="value"
+</font>
+</code>
+</html>

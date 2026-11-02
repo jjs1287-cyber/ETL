@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('C:/ETL/Studio/src/main/java/org/etlforge/integration/client/project/sourcecontrol/GitProjectRepository.java');s=p.read_text(encoding='utf-8').replace('/cache/\\n/log/','/cache/\\n/persist/DeployHistory/\\n/persist/TestHistory/\\n/log/');s=s.replace('"cache","log","logs","temp","tmp"','"cache","persist/DeployHistory","persist/TestHistory","log","logs","temp","tmp"');p.write_text(s,encoding='utf-8')
+p=Path('C:/ETL/Server/docs/project-source-control.md');s=p.read_text(encoding='utf-8').replace('root cache/log/logs/temp/tmp directories','root cache/log/logs/temp/tmp directories and persist/DeployHistory and persist/TestHistory');p.write_text(s,encoding='utf-8')

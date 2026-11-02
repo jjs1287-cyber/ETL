@@ -1,0 +1,237 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="Common.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdCommon"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -g -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				DependsRef="Debug">
+				<Exec CmdLine='gmake -f "Common.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				DependsRef="Debug">
+				<Exec CmdLine='gmake -f "Common.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Dependencies Name="Debug">
+			<Dependency Project="../../Crypto/project/SlickEdit/Crypto.vpj"/>
+			<Dependency Project="../../FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+			<Dependency Project="../../Ldap/project/SlickEdit/Ldap.vpj"/>
+			<Dependency Project="../../Log/project/SlickEdit/Log.vpj"/>
+			<Dependency Project="../../MailClient/project/SlickEdit/MailClient.vpj"/>
+			<Dependency Project="../../Mime/project/SlickEdit/Mime.vpj"/>
+			<Dependency Project="../../Networking/project/SlickEdit/Networking.vpj"/>
+			<Dependency Project="../../Soap/project/SlickEdit/Soap.vpj"/>
+			<Dependency Project="../../Utils/project/SlickEdit/Utils.vpj"/>
+			<Dependency Project="../../WebService/project/SlickEdit/WebService.vpj"/>
+			<Dependency Project="../../Xml/project/SlickEdit/Xml.vpj"/>
+			<Dependency Project="../../Zip/project/SlickEdit/Zip.vpj"/>
+			<Dependency Project="../../CharacterEncodingConversion/project/SlickEdit/CharacterEncodingConversion.vpj"/>
+			<Dependency Project="../../SysInfo/project/SlickEdit/SysInfo.vpj"/>
+			<Dependency Project="../../Debugger/project/SlickEdit/Debugger.vpj"/>
+			<Dependency Project="../../JbParser/project/SlickEdit/JbParser.vpj"/>
+		</Dependencies>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdCommon"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				DependsRef="Release">
+				<Exec CmdLine='gmake -f "Common.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				DependsRef="Release">
+				<Exec CmdLine='gmake -f "Common.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Dependencies Name="Release">
+			<Dependency Project="../../Crypto/project/SlickEdit/Crypto.vpj"/>
+			<Dependency Project="../../FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+			<Dependency Project="../../Ldap/project/SlickEdit/Ldap.vpj"/>
+			<Dependency Project="../../Log/project/SlickEdit/Log.vpj"/>
+			<Dependency Project="../../MailClient/project/SlickEdit/MailClient.vpj"/>
+			<Dependency Project="../../Mime/project/SlickEdit/Mime.vpj"/>
+			<Dependency Project="../../Networking/project/SlickEdit/Networking.vpj"/>
+			<Dependency Project="../../Soap/project/SlickEdit/Soap.vpj"/>
+			<Dependency Project="../../Utils/project/SlickEdit/Utils.vpj"/>
+			<Dependency Project="../../WebService/project/SlickEdit/WebService.vpj"/>
+			<Dependency Project="../../Xml/project/SlickEdit/Xml.vpj"/>
+			<Dependency Project="../../Zip/project/SlickEdit/Zip.vpj"/>
+			<Dependency Project="../../CharacterEncodingConversion/project/SlickEdit/CharacterEncodingConversion.vpj"/>
+			<Dependency Project="../../SysInfo/project/SlickEdit/SysInfo.vpj"/>
+			<Dependency Project="../../Debugger/project/SlickEdit/Debugger.vpj"/>
+			<Dependency Project="../../JbParser/project/SlickEdit/JbParser.vpj"/>
+		</Dependencies>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="Common.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if"/>
+		<F
+			N="Common.mak"
+			Type="Makefile"/>
+	</Files>
+</Project>

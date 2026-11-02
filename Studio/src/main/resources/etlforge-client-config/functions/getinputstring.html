@@ -1,0 +1,6 @@
+<html>Returns the unformatted input as a string given a source data element. This is useful if the standard ETLForge
+        representation of a data type (such as date or double) is not suitable and you want the "raw" input.
+        If this method is called on something that is not a source data element then an empty string is returned.<br><h2>Example:</h2><code><font size="4">
+        // The input is too large for a ETLForge double so get the raw input<br>
+        $SessionId = GetInputString(root$transaction$body$GetMachineList$req$SessionID$);
+        </font></code></html>

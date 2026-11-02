@@ -1,0 +1,359 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="vsbuild">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-b2bidb-d.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -g -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -g -shared -fPIC -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../.."/>
+			<Include Dir="/usr/local/include"/>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="~/dev/Integration/lib/konga/libkonga-dtldbutils-d.so"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-b2bidb.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -shared -fPIC -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../.."/>
+			<Include Dir="/usr/local/include"/>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="~/dev/Integration/lib/konga/libkonga-dtldbutils.so"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../Address.cpp"/>
+			<F N="../../ArchiveCR_B2Bi_TPA.cpp"/>
+			<F N="../../ArchiveCR_B2BI_TPA2.cpp"/>
+			<F N="../../ArchiveCR_B2BI_TPA3.cpp"/>
+			<F N="../../ArchiveCR_B2BI_TPAFinal.cpp"/>
+			<F N="../../BackEndFieldControl.cpp"/>
+			<F N="../../BackEndNode.cpp"/>
+			<F N="../../BackEndType.cpp"/>
+			<F N="../../Binding.cpp"/>
+			<F N="../../Bindings.cpp"/>
+			<F N="../../CertificateInfo.cpp"/>
+			<F N="../../Contact.cpp"/>
+			<F N="../../CRIDB_ActivityTab.cpp"/>
+			<F N="../../CRIDB_DataElementTab.cpp"/>
+			<F N="../../CRIDB_InstanceInfoTab.cpp"/>
+			<F N="../../CRIDB_ProcessTab.cpp"/>
+			<F N="../../CRIDB_RouteDataElementTab.cpp"/>
+			<F N="../../CRIDB_RouteTab.cpp"/>
+			<F N="../../CRIDB_StatusTab.cpp"/>
+			<F N="../../CRIDB_TemporaryFileTab.cpp"/>
+			<F N="../../CRPDB_MultiServerSetupTab.cpp"/>
+			<F N="../../CRTRANDB_BackendOperation.cpp"/>
+			<F N="../../CRTRANDB_Operations.cpp"/>
+			<F N="../../CRTRANDB_OPERATIONSTAB.cpp"/>
+			<F N="../../CRTRANDB_TRANSFORMATIONSTAB.cpp"/>
+			<F N="../../ErrorCodes.cpp"/>
+			<F N="../../FieldValues.cpp"/>
+			<F N="../../Framework.cpp"/>
+			<F N="../../FwComponents.cpp"/>
+			<F N="../../GLFields.cpp"/>
+			<F N="../../Key_Values.cpp"/>
+			<F N="../../Log.cpp"/>
+			<F N="../../LOG_PIC.cpp"/>
+			<F N="../../Log_PIC_View.cpp"/>
+			<F N="../../Log_RN_View.cpp"/>
+			<F N="../../LogBaseView.cpp"/>
+			<F N="../../LogView.cpp"/>
+			<F N="../../Message.cpp"/>
+			<F N="../../MessageProtocol.cpp"/>
+			<F N="../../PIC.cpp"/>
+			<F N="../../PIPType.cpp"/>
+			<F N="../../Process.cpp"/>
+			<F N="../../Process_Task.cpp"/>
+			<F N="../../ProcessGroup.cpp"/>
+			<F N="../../ProcessGroup_Process.cpp"/>
+			<F N="../../RN_TreeView1.cpp"/>
+			<F N="../../Role.cpp"/>
+			<F N="../../Service.cpp"/>
+			<F N="../../Status.cpp"/>
+			<F N="../../StatusControl.cpp"/>
+			<F N="../../StatusFieldControl.cpp"/>
+			<F N="../../Task.cpp"/>
+			<F N="../../TPA.cpp"/>
+			<F N="../../TPA_ProcessGroup.cpp"/>
+			<F N="../../TPAAttachments.cpp"/>
+			<F N="../../TPABackEnd.cpp"/>
+			<F N="../../TPAErrorMonitor.cpp"/>
+			<F N="../../TPARoles.cpp"/>
+			<F N="../../TPAServices.cpp"/>
+			<F N="../../TPP.cpp"/>
+			<F N="../../TPP_ALL.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../Address.h"/>
+			<F N="../../ArchiveCR_B2Bi_TPA.h"/>
+			<F N="../../ArchiveCR_B2BI_TPA2.h"/>
+			<F N="../../ArchiveCR_B2BI_TPA3.h"/>
+			<F N="../../ArchiveCR_B2BI_TPAFinal.h"/>
+			<F N="../../BackEndFieldControl.h"/>
+			<F N="../../BackEndNode.h"/>
+			<F N="../../BackEndType.h"/>
+			<F N="../../Binding.h"/>
+			<F N="../../Bindings.h"/>
+			<F N="../../CertificateInfo.h"/>
+			<F N="../../Contact.h"/>
+			<F N="../../CRIDB_ActivityTab.h"/>
+			<F N="../../CRIDB_DataElementTab.h"/>
+			<F N="../../CRIDB_InstanceInfoTab.h"/>
+			<F N="../../CRIDB_ProcessTab.h"/>
+			<F N="../../CRIDB_RouteDataElementTab.h"/>
+			<F N="../../CRIDB_RouteTab.h"/>
+			<F N="../../CRIDB_StatusTab.h"/>
+			<F N="../../CRIDB_TemporaryFileTab.h"/>
+			<F N="../../CRPDB_MultiServerSetupTab.h"/>
+			<F N="../../CRTRANDB_BackendOperation.h"/>
+			<F N="../../CRTRANDB_Operations.h"/>
+			<F N="../../CRTRANDB_OPERATIONSTAB.h"/>
+			<F N="../../CRTRANDB_TRANSFORMATIONSTAB.h"/>
+			<F N="../../ErrorCodes.h"/>
+			<F N="../../FieldValues.h"/>
+			<F N="../../Framework.h"/>
+			<F N="../../FwComponents.h"/>
+			<F N="../../GLFields.h"/>
+			<F N="../../Key_Values.h"/>
+			<F N="../../Log.h"/>
+			<F N="../../LOG_PIC.h"/>
+			<F N="../../Log_PIC_View.h"/>
+			<F N="../../Log_RN_View.h"/>
+			<F N="../../LogBaseView.h"/>
+			<F N="../../LogView.h"/>
+			<F N="../../Message.h"/>
+			<F N="../../MessageProtocol.h"/>
+			<F N="../../PIC.h"/>
+			<F N="../../PIPType.h"/>
+			<F N="../../Process.h"/>
+			<F N="../../Process_Task.h"/>
+			<F N="../../ProcessGroup.h"/>
+			<F N="../../ProcessGroup_Process.h"/>
+			<F N="../../RN_TreeView1.h"/>
+			<F N="../../Role.h"/>
+			<F N="../../Service.h"/>
+			<F N="../../Status.h"/>
+			<F N="../../StatusControl.h"/>
+			<F N="../../StatusFieldControl.h"/>
+			<F N="../../Task.h"/>
+			<F N="../../TPA.h"/>
+			<F N="../../TPA_ProcessGroup.h"/>
+			<F N="../../TPAAttachments.h"/>
+			<F N="../../TPABackEnd.h"/>
+			<F N="../../TPAErrorMonitor.h"/>
+			<F N="../../TPARoles.h"/>
+			<F N="../../TPAServices.h"/>
+			<F N="../../TPP.h"/>
+			<F N="../../TPP_ALL.h"/>
+		</Folder>
+		<Folder
+			Name="Resource Files"
+			Filters="*.ico;*.cur;*.dlg"/>
+		<Folder
+			Name="Bitmaps"
+			Filters="*.bmp"/>
+		<Folder
+			Name="Other Files"
+			Filters=""/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

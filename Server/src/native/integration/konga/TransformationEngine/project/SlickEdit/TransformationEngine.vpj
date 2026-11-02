@@ -1,0 +1,517 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak"
+	VCSProject="CVS:">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-transformationengine-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-characterencodingconversion-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lkonga-dataelement-d"/>
+			<Lib File="-lkonga-dbrelations-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-debugger-d"/>
+			<Lib File="-lkonga-filetransfer-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-itemproperties-d"/>
+			<Lib File="-lkonga-jbparser-d"/>
+			<Lib File="-lkonga-jdbcutils-d"/>
+			<Lib File="-lkonga-jsonenginec-d"/>
+			<Lib File="-lkonga-ldap-d"/>
+			<Lib File="-lkonga-log-d"/>
+			<Lib File="-lkonga-messaging-d"/>
+			<Lib File="-lkonga-mime-d"/>
+			<Lib File="-lkonga-networking-d"/>
+			<Lib File="-lkonga-operationcontext-d"/>
+			<Lib File="-lkonga-operationobjects-d"/>
+			<Lib File="-lkonga-pipelinepluginexecutor-d"/>
+			<Lib File="-lkonga-pluginmanager-d"/>
+			<Lib File="-lkonga-server-d"/>
+			<Lib File="-lkonga-soap-d"/>
+			<Lib File="-lkonga-sysinfo-d"/>
+			<Lib File="-lkonga-systemvariables-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-trandbutils-d"/>
+			<Lib File="-lkonga-transformationdatastore-d"/>
+			<Lib File="-lkonga-transformationlogging-d"/>
+			<Lib File="-lkonga-transformationutils-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-webservice-d"/>
+			<Lib File="-lkonga-xml-d"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_regex-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)-d"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-transformationengine-d.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-transformationengine.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-characterencodingconversion"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-dataelement"/>
+			<Lib File="-lkonga-dbrelations"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-debugger"/>
+			<Lib File="-lkonga-filetransfer"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-itemproperties"/>
+			<Lib File="-lkonga-jbparser"/>
+			<Lib File="-lkonga-jdbcutils"/>
+			<Lib File="-lkonga-jsonenginec"/>
+			<Lib File="-lkonga-ldap"/>
+			<Lib File="-lkonga-log"/>
+			<Lib File="-lkonga-messaging"/>
+			<Lib File="-lkonga-mime"/>
+			<Lib File="-lkonga-networking"/>
+			<Lib File="-lkonga-operationcontext"/>
+			<Lib File="-lkonga-operationobjects"/>
+			<Lib File="-lkonga-pipelinepluginexecutor"/>
+			<Lib File="-lkonga-pluginmanager"/>
+			<Lib File="-lkonga-server"/>
+			<Lib File="-lkonga-soap"/>
+			<Lib File="-lkonga-sysinfo"/>
+			<Lib File="-lkonga-systemvariables"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-trandbutils"/>
+			<Lib File="-lkonga-transformationdatastore"/>
+			<Lib File="-lkonga-transformationlogging"/>
+			<Lib File="-lkonga-transformationutils"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-webservice"/>
+			<Lib File="-lkonga-xml"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_regex-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-transformationengine.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../AbstractCromToJtrWriter.cpp"/>
+			<F N="../../BatchParams.cpp"/>
+			<F N="../../CallStoredProcedure.cpp"/>
+			<F N="../../CDTDParser.cpp"/>
+			<F N="../../CombineFiles.cpp"/>
+			<F N="../../CRData.cpp"/>
+			<F N="../../crom.cpp"/>
+			<F N="../../crom1.cpp"/>
+			<F N="../../CROMData.cpp"/>
+			<F N="../../CromToJtrWriter.cpp"/>
+			<F N="../../CromUtils.cpp"/>
+			<F N="../../CRXmlData.cpp"/>
+			<F N="../../CRXmlList.cpp"/>
+			<F N="../../CRXmlParser.cpp"/>
+			<F N="../../DataElementUtils.cpp"/>
+			<F N="../../DbAccess.cpp"/>
+			<F N="../../DbWriter.cpp"/>
+			<F N="../../DETransform.cpp"/>
+			<F N="../../Diff.cpp"/>
+			<F N="../../DoHf.cpp"/>
+			<F N="../../DoOperation.cpp"/>
+			<F N="../../DoXml.cpp"/>
+			<F N="../../DTDParser.cpp"/>
+			<F N="../../DTDParser1.cpp"/>
+			<F N="../../DTDTokenize.cpp"/>
+			<F N="../../FillDataElements.cpp"/>
+			<F N="../../JtrReader.cpp"/>
+			<F N="../../KongaProtocolRpcInterface.cpp"/>
+			<F N="../../LdapDataConverter.cpp"/>
+			<F N="../../misc.cpp"/>
+			<F N="../../NodePatternMatch.cpp"/>
+			<F N="../../Normalization.cpp"/>
+			<F N="../../NoValueContentXmlCreator.cpp"/>
+			<F N="../../OdbcColumn.cpp"/>
+			<F N="../../OdbcSource.cpp"/>
+			<F N="../../OdbcTable.cpp"/>
+			<F N="../../RemoteSchemaResolver.cpp"/>
+			<F N="../../RunPlugin.cpp"/>
+			<F N="../../RunScript.cpp"/>
+			<F N="../../SchemaCollection.cpp"/>
+			<F N="../../SchemaIdentifier.cpp"/>
+			<F N="../../SchemaNodeCreator.cpp"/>
+			<F N="../../SoapBodyArrayHandler.cpp"/>
+			<F N="../../SpecialStructureHandling.cpp"/>
+			<F N="../../SqlForWrite_Builder.cpp"/>
+			<F N="../../SqlStatementParser.cpp"/>
+			<F N="../../StreamingTransform.cpp"/>
+			<F N="../../Table.cpp"/>
+			<F N="../../TextDocReader.cpp"/>
+			<F N="../../TextDocument.cpp"/>
+			<F N="../../TextParser.cpp"/>
+			<F N="../../TransacParser.cpp"/>
+			<F N="../../Transform.cpp"/>
+			<F N="../../Transform_fcn.cpp"/>
+			<F N="../../TransformationChain.cpp"/>
+			<F N="../../TransformationEngine.cpp"/>
+			<F N="../../TransformXMLFunctions.cpp"/>
+			<F N="../../TreeMapper.cpp"/>
+			<F N="../../TreeMapperFunctionHandler.cpp"/>
+			<F N="../../TreeMapperLdap.cpp"/>
+			<F N="../../TreeMapperPrepare.cpp"/>
+			<F N="../../TreeMapperRead.cpp"/>
+			<F N="../../TreeMapperStreaming.cpp"/>
+			<F N="../../TreeMapperTest.cpp"/>
+			<F N="../../TreeMapperWebService.cpp"/>
+			<F N="../../TreeMapperWriter.cpp"/>
+			<F N="../../TxtParser.cpp"/>
+			<F N="../../WebServiceHandler.cpp"/>
+			<F N="../../WebServiceResponseSynchronizer.cpp"/>
+			<F N="../../WebServiceUtils.cpp"/>
+			<F N="../../WsdlUtils.cpp"/>
+			<F N="../../WsResponseTransactionStructure.cpp"/>
+			<F N="../../XmlCromToJtrWriter.cpp"/>
+			<F N="../../XmlDocument.cpp"/>
+			<F N="../../XmlEditor.cpp"/>
+			<F N="../../XmlReader.cpp"/>
+			<F N="../../XPathSearch.cpp"/>
+			<F N="../../XsdAnyAttribute.cpp"/>
+			<F N="../../XsdAnyNode.cpp"/>
+			<F N="../../XsdAttribute.cpp"/>
+			<F N="../../XsdAttributeGroup.cpp"/>
+			<F N="../../XsdChoiceNode.cpp"/>
+			<F N="../../XsdComplexType.cpp"/>
+			<F N="../../XsdElement.cpp"/>
+			<F N="../../XsdExtensionNode.cpp"/>
+			<F N="../../XsdFromWsdlBridgeSchema.cpp"/>
+			<F N="../../XsdFromWsdlCreator.cpp"/>
+			<F N="../../XsdFromWsdlMainSchema.cpp"/>
+			<F N="../../XsdFromWsdlUtils.cpp"/>
+			<F N="../../XsdGroup.cpp"/>
+			<F N="../../XsdNamespaceSupport.cpp"/>
+			<F N="../../XsdNode.cpp"/>
+			<F N="../../XSDParser.cpp"/>
+			<F N="../../XsdParserArrayHandler.cpp"/>
+			<F N="../../XsdParserFileManager.cpp"/>
+			<F N="../../XsdParsingResult.cpp"/>
+			<F N="../../XsdRestriction.cpp"/>
+			<F N="../../XsdSequence.cpp"/>
+			<F N="../../XsdSimpleType.cpp"/>
+			<F N="../../XsdUtils.cpp"/>
+			<F N="../../XsdValueNode.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../AbstractCromToJtrWriter.h"/>
+			<F N="../../BatchParams.h"/>
+			<F N="../../CDTDParser.h"/>
+			<F N="../../CombineFiles.h"/>
+			<F N="../../componentinfo.h"/>
+			<F N="../../CRData.h"/>
+			<F N="../../crom.h"/>
+			<F N="../../CROM_Attr.h"/>
+			<F N="../../CROM_DB.h"/>
+			<F N="../../CROM_Ldap.h"/>
+			<F N="../../CROM_Text.h"/>
+			<F N="../../CROM_Xml.h"/>
+			<F N="../../CromConstants.h"/>
+			<F N="../../CROMData.h"/>
+			<F N="../../CromToJtrWriter.h"/>
+			<F N="../../CromUtils.h"/>
+			<F N="../../CRXmlData.h"/>
+			<F N="../../CRXmlList.h"/>
+			<F N="../../CRXmlParser.h"/>
+			<F N="../../DataElementUtils.h"/>
+			<F N="../../DbAccess.h"/>
+			<F N="../../DbWriter.h"/>
+			<F N="../../defines.h"/>
+			<F N="../../DETransform.h"/>
+			<F N="../../Diff.h"/>
+			<F N="../../DiffConstants.h"/>
+			<F N="../../DTDParser.h"/>
+			<F N="../../DTDTokenize.h"/>
+			<F N="../../ExeFcnException.h"/>
+			<F N="../../ExtraAttribute.h"/>
+			<F N="../../JtrReader.h"/>
+			<F N="../../KongaProtocolRpcInterface.h"/>
+			<F N="../../LdapDataConverter.h"/>
+			<F N="../../misc.h"/>
+			<F N="../../NodePatternMatch.h"/>
+			<F N="../../Normalization.h"/>
+			<F N="../../NoValueContentXmlCreator.h"/>
+			<F N="../../ObjectPool.h"/>
+			<F N="../../OdbcColumn.h"/>
+			<F N="../../OdbcSource.h"/>
+			<F N="../../OdbcTable.h"/>
+			<F N="../../ProfilingSections.h"/>
+			<F N="../../RaiseErrorException.h"/>
+			<F N="../../RemoteSchemaResolver.h"/>
+			<F N="../../resource.h"/>
+			<F N="../../RetVal.h"/>
+			<F N="../../RpcInterface.h"/>
+			<F N="../../RunPlugin.h"/>
+			<F N="../../RunScript.h"/>
+			<F N="../../SchemaCollection.h"/>
+			<F N="../../SoapBodyArrayHandler.h"/>
+			<F N="../../SqlForWrite_Builder.h"/>
+			<F N="../../SqlStatementParser.h"/>
+			<F N="../../StreamingTransform.h"/>
+			<F N="../../SystemVariableDefs.h"/>
+			<F N="../../Table.h"/>
+			<F N="../../TextDocReader.h"/>
+			<F N="../../TextDocument.h"/>
+			<F N="../../TextParser.h"/>
+			<F N="../../TransacParser.h"/>
+			<F N="../../TransFilterTab.h"/>
+			<F N="../../Transform.h"/>
+			<F N="../../TransformationChain.h"/>
+			<F N="../../TransformationEngine.h"/>
+			<F N="../../TransformationEngineApi.h"/>
+			<F N="../../TransformXMLFunctions.h"/>
+			<F N="../../TreeMapper.h"/>
+			<F N="../../TxtParser.h"/>
+			<F N="../../WebServiceHandler.h"/>
+			<F N="../../WebServiceResponseSynchronizer.h"/>
+			<F N="../../WebServiceUtils.h"/>
+			<F N="../../WsdlUtils.h"/>
+			<F N="../../WsResponseTransactionStructure.h"/>
+			<F N="../../XmlCromToJtrWriter.h"/>
+			<F N="../../XmlDocument.h"/>
+			<F N="../../XmlEditor.h"/>
+			<F N="../../XmlReader.h"/>
+			<F N="../../XPathSearch.h"/>
+			<F N="../../XsdAllNode.h"/>
+			<F N="../../XsdAnyAttribute.h"/>
+			<F N="../../XsdAnyNode.h"/>
+			<F N="../../XsdAttribute.h"/>
+			<F N="../../XsdAttributeGroup.h"/>
+			<F N="../../XsdChoiceNode.h"/>
+			<F N="../../XsdComplexType.h"/>
+			<F N="../../XsdElement.h"/>
+			<F N="../../XsdExtensionNode.h"/>
+			<F N="../../XsdFromWsdlBridgeSchema.h"/>
+			<F N="../../XsdFromWsdlCreator.h"/>
+			<F N="../../XsdFromWsdlMainSchema.h"/>
+			<F N="../../XsdFromWsdlUtils.h"/>
+			<F N="../../XsdGroup.h"/>
+			<F N="../../XsdImportNode.h"/>
+			<F N="../../XsdNamespaceSupport.h"/>
+			<F N="../../XsdNode.h"/>
+			<F N="../../XsdNodeFactory.h"/>
+			<F N="../../XsdNodeWithCardinalityConstraints.h"/>
+			<F N="../../XSDParser.h"/>
+			<F N="../../XsdParserArrayHandler.h"/>
+			<F N="../../XsdParserConstants.h"/>
+			<F N="../../XsdParserException.h"/>
+			<F N="../../XsdParsingResult.h"/>
+			<F N="../../XsdRestriction.h"/>
+			<F N="../../XsdSequence.h"/>
+			<F N="../../XsdSimpleType.h"/>
+			<F N="../../XsdUtils.h"/>
+			<F N="../../XsdValueNode.h"/>
+		</Folder>
+		<F
+			N="TransformationEngine.mak"
+			Type="Makefile"/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

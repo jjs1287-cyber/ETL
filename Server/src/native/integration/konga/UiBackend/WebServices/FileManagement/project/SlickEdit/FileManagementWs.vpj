@@ -1,0 +1,264 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-filemanagement-d.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-filemanagement-d.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-uploadedfilesmanager-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wsutils-d"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-filemanagement.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O2 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -O2 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-filemanagement.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-uploadedfilesmanager"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ArrayOfCDownloadedFile.cpp"/>
+			<F N="../../AxisServiceException.cpp"/>
+			<F N="../../CDownloadedFile.cpp"/>
+			<F N="../../CDownloadedFile_Array.cpp"/>
+			<F N="../../CFileDownloadResult.cpp"/>
+			<F N="../../FileManager.cpp"/>
+			<F N="../../FileManagerService.cpp"/>
+			<F N="../../FileManagerWrapper.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ArrayOfCDownloadedFile.hpp"/>
+			<F N="../../AxisServiceException.hpp"/>
+			<F N="../../CDownloadedFile.hpp"/>
+			<F N="../../CDownloadedFile_Array.hpp"/>
+			<F N="../../CFileDownloadResult.hpp"/>
+			<F N="../../FileManager.hpp"/>
+			<F N="../../FileManagerWrapper.hpp"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="">
+			<F N="../../deploy.wsdd"/>
+			<F N="../../generate_stubs.bat"/>
+			<F N="../../generate_wsdl.bat"/>
+			<F N="../../konga_file_management.wsdl"/>
+			<F N="../../undeploy.wsdd"/>
+			<F N="../../wsdl_generation_settings.bat"/>
+		</Folder>
+		<Folder
+			Name="Impl"
+			Filters="">
+			<F N="../../Impl/FileManagementImpl.cpp"/>
+			<F N="../../Impl/FileManagementImpl.h"/>
+		</Folder>
+		<F
+			N="FileManagementWs.mak"
+			Type="Makefile"/>
+	</Files>
+</Project>

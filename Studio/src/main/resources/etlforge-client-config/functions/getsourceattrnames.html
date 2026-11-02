@@ -1,0 +1,18 @@
+<html>
+Returns an array containting the names of the attributes for a node in the order that the attributes appear in the node.
+Compare GetSourceInstanceMap. This function returns the keys for the map returned by GetSourceInstanceMap on the same node.
+<h2>Example:</h2>
+<code><font size="4">
+// Appends all the attributes together without having to explicitly reference their source data elements.
+map = GetSourceInstanceMap([Values$Value.]);
+names = GetSourceAttrNames([Values$Value.]);
+n = Length(names);
+i = 0;
+str = "";
+while(i &lt; n,
+  str += map[names[i]];
+  i = i + 1
+);
+
+</font></code>
+</html>

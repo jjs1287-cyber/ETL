@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+ <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ETLForgeStudio"/>
+ <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.etlforge.integration.client.main.IntegrationMain"/>
+ <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/ETLForge Java 8"/>
+ <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:ETLForgeStudio}"/>
+ <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx2g -DRunUpgradeScripts=false -Djava.util.Arrays.useLegacyMergeSort=true -Duser.home=C:/ETL/Studio/run-user-home-etlforge"/>
+ <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-d C:/ETL/Studio/run-user-home-etlforge/application"/>
+</launchConfiguration>

@@ -1,0 +1,14 @@
+org/etlforge/integration/client/entity/valuecache/CacheStorage.class
+org/etlforge/integration/client/entity/valuecache/CacheStorage$*.class
+org/etlforge/integration/client/entity/valuecache/ClientValueCacheFactory.class
+org/etlforge/integration/client/entity/valuecache/ClientValueCacheFactory$*.class
+org/etlforge/integration/client/entity/valuecache/DefaultHistory.class
+org/etlforge/integration/client/entity/valuecache/DefaultHistory$*.class
+org/etlforge/integration/client/entity/valuecache/DefaultValueCache.class
+org/etlforge/integration/client/entity/valuecache/DefaultValueCache$*.class
+org/etlforge/integration/client/entity/valuecache/FileStorage.class
+org/etlforge/integration/client/entity/valuecache/FileStorage$*.class
+org/etlforge/integration/client/entity/valuecache/History.class
+org/etlforge/integration/client/entity/valuecache/History$*.class
+org/etlforge/integration/client/entity/valuecache/ValueCache.class
+org/etlforge/integration/client/entity/valuecache/ValueCache$*.class

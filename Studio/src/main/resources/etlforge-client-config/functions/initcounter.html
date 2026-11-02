@@ -1,0 +1,19 @@
+<html>
+<p>
+Initializes a thread-safe counter. Optionally pass the initial value. If no initial value is set it's initialized to 0.
+The first argument is either the name of a data element or a reference to a data element, see the examples.
+This method needs to be called in single-threaded contexts only. Calling this method in a multi-threaded context will result in an error
+</p>
+<br>
+<h2>Example:</h2>
+<p>
+<code><font size="4">
+// Initialize counter to 0 using the name of the data element.<br>
+InitCounter("counter");<br><br>
+
+// Initialize counter to 100 using a reference to the data element.<br>
+InitCounter($counter, 100);<br>
+</font>
+</code>
+</p>
+</html>

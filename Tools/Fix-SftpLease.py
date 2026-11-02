@@ -1,0 +1,4 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/ssh/SshKeys.cpp');s=p.read_text(encoding='utf-8');s=s.replace('    return p;\n}', '''    for(auto& entry:fs::directory_iterator(p))if(entry.path().extension()==".pem")DeleteFileW(entry.path().c_str());
+    return p;
+}''',1);s=s.replace('struct Handles {std::vector<HANDLE> handles;~Handles(){for(auto h:handles)CloseHandle(h);}};','struct Handles {std::vector<std::pair<HANDLE,fs::path>> handles;~Handles(){for(auto& h:handles){CloseHandle(h.first);DeleteFileW(h.second.c_str());}}};');s=s.replace('GENERIC_READ|GENERIC_WRITE|DELETE,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE','GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ').replace('FILE_ATTRIBUTE_TEMPORARY|FILE_FLAG_DELETE_ON_CLOSE','FILE_ATTRIBUTE_TEMPORARY');s=s.replace('handles.handles.push_back(h);','handles.handles.push_back({h,p});');p.write_text(s,encoding='utf-8')

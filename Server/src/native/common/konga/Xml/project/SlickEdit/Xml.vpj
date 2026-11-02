@@ -1,0 +1,295 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-xml-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-lxalan-c"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-xml-d.so ../../../../../../lib/konga"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-xml.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-lxalan-c"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-xml.so ../../../../../../lib/konga"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../CrXmlException.cpp"/>
+			<F N="../../DOMAttrPtr.cpp"/>
+			<F N="../../DOMCDATASectionPtr.cpp"/>
+			<F N="../../DOMCharacterDataPtr.cpp"/>
+			<F N="../../DOMDocument_ptr.cpp"/>
+			<F N="../../DOMDocumentPtr.cpp"/>
+			<F N="../../DOMDocumentTypePtr.cpp"/>
+			<F N="../../DOMElementListPtr.cpp"/>
+			<F N="../../DOMElementPtr.cpp"/>
+			<F N="../../DOMNamedNodeMapPtr.cpp"/>
+			<F N="../../DOMNodeListPtr.cpp"/>
+			<F N="../../DOMNodePtr.cpp"/>
+			<F N="../../DOMProcessingInstructionPtr.cpp"/>
+			<F N="../../DOMTextPtr.cpp"/>
+			<F N="../../RCDocPtr.cpp"/>
+			<F N="../../SimpleDOMErrorHandler.cpp"/>
+			<F N="../../SimpleSAXHandler.cpp"/>
+			<F N="../../XercesXmlUtils.cpp"/>
+			<F N="../../XmlNamespaceDeclarations.cpp"/>
+			<F N="../../XMLOstreamWriter.cpp"/>
+			<F N="../../XmlParsingErrors.cpp"/>
+			<F N="../../XmlSchemaUtils.cpp"/>
+			<F N="../../XmlSchemaValidator.cpp"/>
+			<F N="../../XmlStringBuilder.cpp"/>
+			<F N="../../XmlUtils.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ComparablePtr.h"/>
+			<F N="../../CrXmlException.h"/>
+			<F N="../../DOMAttrPtr.h"/>
+			<F N="../../DOMCDATASectionPtr.h"/>
+			<F N="../../DOMCharacterDataPtr.h"/>
+			<F N="../../DOMDocument_ptr.h"/>
+			<F N="../../DOMDocumentPtr.h"/>
+			<F N="../../DOMDocumentTypePtr.h"/>
+			<F N="../../DOMElementListPtr.h"/>
+			<F N="../../DOMElementPtr.h"/>
+			<F N="../../DOMNamedNodeMapPtr.h"/>
+			<F N="../../DOMNodeListBase.h"/>
+			<F N="../../DOMNodeListPtr.h"/>
+			<F N="../../DOMNodePtr.h"/>
+			<F N="../../DOMProcessingInstructionPtr.h"/>
+			<F N="../../DOMTextPtr.h"/>
+			<F N="../../ExpandedName.h"/>
+			<F N="../../RCDocPtr.h"/>
+			<F N="../../SimpleDOMErrorHandler.h"/>
+			<F N="../../SimpleNamespaceResolver.h"/>
+			<F N="../../SimpleSAXHandler.h"/>
+			<F N="../../XercesXmlUtils.h"/>
+			<F N="../../XmlCommon.h"/>
+			<F N="../../XmlConstants.h"/>
+			<F N="../../XmlIncludes.h"/>
+			<F N="../../XmlNamespaceDeclarations.h"/>
+			<F N="../../XMLOstreamWriter.h"/>
+			<F N="../../XmlParsingErrors.h"/>
+			<F N="../../XmlSchemaUtils.h"/>
+			<F N="../../XmlSchemaValidator.h"/>
+			<F N="../../XmlStringBuilder.h"/>
+			<F N="../../XmlStrings.h"/>
+			<F N="../../XmlUtils.h"/>
+			<F N="../../XsdConstants.h"/>
+		</Folder>
+		<F
+			N="Xml.mak"
+			Type="Makefile"/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

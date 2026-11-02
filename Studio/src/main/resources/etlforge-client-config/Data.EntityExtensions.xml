@@ -1,0 +1,105 @@
+<IntegrationEntityExtensions>
+
+  <Extension>
+   	<Type>org.etlforge.integration.client.project.jitterpack.ExportItemPreparer</Type>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.export.EmailMessagePreparer</Class>
+   		<Target>org.etlforge.integration.data.entity.EmailMessage</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.export.WebServiceCallPreparer</Class>
+   		<Target>org.etlforge.integration.data.entity.WebServiceCall</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.export.LocatablePreparer</Class>
+   		<Target>org.etlforge.integration.data.Locatable</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.export.SalesforceConnectorPreparer</Class>
+   		<Target>org.etlforge.integration.data.entity.SalesforceConnector</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.data.connector.ConnectorEndpointPreparer</Class>
+   		<Target>org.etlforge.integration.data.connector.ConnectorEndpoint</Target>
+   	</Factory>
+  </Extension>
+  
+  <Extension>
+   	<Type>org.etlforge.integration.client.project.deploy.PostDeployEntityProcessor</Type>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.DefaultPostDeployEntityProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.IntegrationEntity</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.EmailPostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.EmailMessage</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.SourcePostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.Source</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.TargetPostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.Target</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.TransformationPostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.Transformation</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.client.project.deploy.WebServiceCallPostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.entity.WebServiceCall</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>org.etlforge.integration.data.connector.ConnectorEndpointPostDeployProcessor</Class>
+   		<Target>org.etlforge.integration.data.connector.ConnectorEndpoint</Target>
+   	</Factory>
+  </Extension>
+
+  <Extension>
+	<!-- Defines type-specific behavior when importing a project item from one project into another.
+		 Note that any type-specific behavior here typically will require corresponding behavior
+		 in the AdditionalCopyInstructions extension below. -->
+   	<Type>com.etlforge.integration.client.project.share.EntityResourcesImporter</Type>
+   	<Factory>
+   		<Class>com.etlforge.integration.client.project.share.DefaultEntityResourcesImporter</Class>
+   		<Target>org.etlforge.integration.data.entity.IntegrationEntity</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>com.etlforge.integration.client.project.share.TransformationResourcesImporter</Class>
+   		<Target>org.etlforge.integration.data.entity.Transformation</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>com.etlforge.integration.client.project.share.WebServiceCallResourcesImporter</Class>
+   		<Target>org.etlforge.integration.data.entity.WebServiceCall</Target>
+   	</Factory>
+   	<Factory>
+   		<Class>com.etlforge.integration.client.project.share.ConnectorCallResourcesImporter</Class>
+   		<Target>org.etlforge.integration.data.connector.ConnectorCall</Target>
+   	</Factory>
+  </Extension>
+
+  <Extension>
+	<!-- Defines type-specific behavior when copying a project item within a project.
+		 Note that any type-specific behavior here typically will require corresponding behavior
+		 in the EntityResourcesImporter extension below. -->
+   	<Type>org.etlforge.integration.client.project.copy.AdditionalCopyInstructions</Type>
+	<Factory>
+		<Class>org.etlforge.integration.client.project.copy.OperationCopyInstructions</Class>
+   		<Target>org.etlforge.integration.data.entity.Operation</Target>
+	</Factory>
+	<Factory>
+		<Class>org.etlforge.integration.client.project.copy.TransformationCopyInstructions</Class>
+   		<Target>org.etlforge.integration.data.entity.Transformation</Target>
+	</Factory>
+	<Factory>
+		<Class>org.etlforge.integration.client.project.copy.WebServiceCallCopyInstructions</Class>
+   		<Target>org.etlforge.integration.data.entity.WebServiceCall</Target>
+	</Factory>
+	<Factory>
+		<Class>org.etlforge.integration.data.connector.ConnectorCallCopyInstructions</Class>
+   		<Target>org.etlforge.integration.data.connector.ConnectorCall</Target>
+	</Factory>
+  </Extension>
+  
+</IntegrationEntityExtensions>

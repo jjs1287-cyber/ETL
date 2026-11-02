@@ -1,0 +1,344 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="vsbuild">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdOperationEngineExe"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -g -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1"
+				DependsRef="Debug">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1"
+				DependsRef="Debug">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../"/>
+    </Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-filetransfer-d"/>
+			<Lib File="-lkonga-mime-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-dtldbutils-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-transformationengine-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lboost_regex-gcc-mt-d"/>
+			<Lib File="-lboost_date_time-gcc-mt-d"/>
+		</Libs>
+		<Dependencies Name="Debug">
+			<Dependency Project="../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+			<Dependency Project="../../../Db/DbUtils/project/SlickEdit/DbUtils.vpj"/>
+			<Dependency Project="../../../../../../common/cpp/konga/FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+			<Dependency Project="../../../Db/TranDb/project/SlickEdit/TranDb.vpj"/>
+			<Dependency Project="../../../TransformationEngine/project/SlickEdit/TransformationEngine.vpj"/>
+			<Dependency Project="../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+		</Dependencies>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdOperationEngineExe"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1"
+				DependsRef="Release">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1"
+				DependsRef="Release">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../"/>
+    </Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-filetransfer-d"/>
+			<Lib File="-lkonga-mime-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-dtldbutils-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-transformationengine-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lboost_regex-gcc-mt-d"/>
+			<Lib File="-lboost_date_time-gcc-mt-d"/>
+		</Libs>
+		<Dependencies Name="Release">
+			<Dependency Project="../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+			<Dependency Project="../../../Db/DbUtils/project/SlickEdit/DbUtils.vpj"/>
+			<Dependency Project="../../../../../../common/cpp/konga/FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+			<Dependency Project="../../../Db/TranDb/project/SlickEdit/TranDb.vpj"/>
+			<Dependency Project="../../../TransformationEngine/project/SlickEdit/TransformationEngine.vpj"/>
+			<Dependency Project="../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+		</Dependencies>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ArchiveOperation.cpp"/>
+			<F N="../../DataLocation.cpp"/>
+			<F N="../../FileShareSource.cpp"/>
+			<F N="../../FileShareTarget.cpp"/>
+			<F N="../../FileTypeSourceLocation.cpp"/>
+			<F N="../../FtpLocation.cpp"/>
+			<F N="../../FtpSource.cpp"/>
+			<F N="../../FtpTarget.cpp"/>
+			<F N="../../HttpLocation.cpp"/>
+			<F N="../../HttpSource.cpp"/>
+			<F N="../../HttpTarget.cpp"/>
+			<F N="../../NoSource.cpp"/>
+			<F N="../../Operation.cpp"/>
+			<F N="OperationEngineExe.cpp"/>
+			<F N="../../OperationObjectCreator.cpp"/>
+			<F N="../../OperationResolver.cpp"/>
+			<F N="../../ProcessedFiles.cpp"/>
+			<F N="../../RenameFile.cpp"/>
+			<F N="../../SourceXmlDataStructure.cpp"/>
+			<F N="../../TargetXmlDataStructure.cpp"/>
+			<F N="../../TransferHistory.cpp"/>
+			<F N="../../Transformation.cpp"/>
+			<F N="../../TransformationOperation.cpp"/>
+			<F N="../../XmlDataStructure.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../Account.h"/>
+			<F N="../../ArchiveOperation.h"/>
+			<F N="../../ComplexTextDataStructure.h"/>
+			<F N="../../DatabaseDataStructure.h"/>
+			<F N="../../DatabaseLocation.h"/>
+			<F N="../../DatabaseSourceLocation.h"/>
+			<F N="../../DatabaseTargetLocation.h"/>
+			<F N="../../DataLocation.h"/>
+			<F N="../../DataStructure.h"/>
+			<F N="../../FileShareLocation.h"/>
+			<F N="../../FileShareSource.h"/>
+			<F N="../../FileShareTarget.h"/>
+			<F N="../../FileTypeSourceLocation.h"/>
+			<F N="../../FtpLocation.h"/>
+			<F N="../../FtpSource.h"/>
+			<F N="../../FtpTarget.h"/>
+			<F N="../../FunctionTransformation.h"/>
+			<F N="../../HttpLocation.h"/>
+			<F N="../../HttpSource.h"/>
+			<F N="../../HttpTarget.h"/>
+			<F N="../../NoDataStructure.h"/>
+			<F N="../../NoLocation.h"/>
+			<F N="../../NoSource.h"/>
+			<F N="../../NoTarget.h"/>
+			<F N="../../Operation.h"/>
+			<F N="../../OperationEngineException.h"/>
+			<F N="../../OperationObjectCreator.h"/>
+			<F N="../../OperationOverrideParameters.h"/>
+			<F N="../../OperationResolver.h"/>
+			<F N="../../ProcessedFiles.h"/>
+			<F N="../../Project.h"/>
+			<F N="../../RenameFile.h"/>
+			<F N="../../SourceDatabaseDataStructure.h"/>
+			<F N="../../SourceDataLocation.h"/>
+			<F N="../../SourceDataStructure.h"/>
+			<F N="../../SourceTextDataStructure.h"/>
+			<F N="../../SourceWebServiceInputDataStructure.h"/>
+			<F N="../../SourceWebServiceOutputDataStructure.h"/>
+			<F N="../../SourceXmlDataStructure.h"/>
+			<F N="../../TargetDatabaseDataStructure.h"/>
+			<F N="../../TargetDataLocation.h"/>
+			<F N="../../TargetDataStructure.h"/>
+			<F N="../../TargetTextDataStructure.h"/>
+			<F N="../../TargetWebServiceInputDataStructure.h"/>
+			<F N="../../TargetWebServiceOutputDataStructure.h"/>
+			<F N="../../TargetXmlDataStructure.h"/>
+			<F N="../../TextDataStructure.h"/>
+			<F N="../../TransferHistory.h"/>
+			<F N="../../Transformation.h"/>
+			<F N="../../TransformationOperation.h"/>
+			<F N="../../WebServiceTransformation.h"/>
+			<F N="../../XmlDataStructure.h"/>
+		</Folder>
+	</Files>
+	<Dependencies Name="Build">
+		<Dependency Project="../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+		<Dependency Project="../../../Db/DbUtils/project/SlickEdit/DbUtils.vpj"/>
+		<Dependency Project="../../../../../../common/cpp/konga/FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+		<Dependency Project="../../../Db/TranDb/project/SlickEdit/TranDb.vpj"/>
+		<Dependency Project="../../../TransformationEngine/project/SlickEdit/TransformationEngine.vpj"/>
+		<Dependency Project="../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+	</Dependencies>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

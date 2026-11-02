@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="testable" value="false" />
+	<Argument optional="true">
+		<Label>Condition (optional)</Label>
+		<Description>Value or expression that evaluates to true or false. The breakpoint will be ignored if the value is false.</Description>
+	</Argument>
+</Wizard>

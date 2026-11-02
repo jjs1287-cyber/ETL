@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<!DOCTYPE Process SYSTEM "WebWorkflow.dtd">
+<Process Name="Complete Process" ProcessPriority="6">
+	<Description>A process with all supported actions.</Description>
+	<Font Name="Arial" Size="15" Style="Regular"/>
+			<Data Name="$i" Type="integer" Origin="Process" Required="0" InitValue="123"/>
+			<Data Name="$li" Type="long_integer" Origin="Process" Required="0" InitValue="1234"/>
+			<Data Name="$text" Type="long_string" Origin="Process" Required="0" InitValue="&quot;long_string&quot;"/>
+			<Data Name="$si" Type="short_integer" Origin="Process" Required="0" InitValue="12"/>
+			<Data Name="$s" Type="string" Origin="Process" Required="0" InitValue="&quot;initial value&quot;"/>
+			<Data Name="$f" Type="float" Origin="Process" Required="0" InitValue="1.2"/>
+			<Data Name="$dbl" Type="double" Origin="Process" Required="0" InitValue="1.23"/>
+			<Data Name="$b" Type="boolean" Origin="Process" Required="0" InitValue="true"/>
+	<Task Name="Task0" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="98" y="250"/> 
+			<rect left="43" top="233" right="153" bottom="267"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="0" Type="boolean" IO="I" Origin="Constant" Required="0" Path="0"/>
+			<Data Name="&quot;Aj aj aj!&quot;" Type="string" IO="I" Origin="Constant" Required="0" Path="&quot;Aj aj aj!&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="emailRecipient=&quot;theZato@hotmail.com&quot;" Instance="0" IsCommentedOut="No">			<Data Name="emailRecipient" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;theZato@hotmail.com&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i=0" Instance="0" IsCommentedOut="No">			<Data Name="i" Type="integer" IO="O" Origin="Task" Required="0" Path="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="bb=true" Instance="0" IsCommentedOut="No">			<Data Name="bb" Type="boolean" IO="O" Origin="Task" Required="0" Path="true"/>
+		</ActivityItem>
+		<ActivityItem Type="TrueAction" Text="$b == bb" IsCommentedOut="No">			<Data Name="$b" Type="boolean" IO="I" Origin="Task" Required="0"/>
+			<Data Name="bb" Type="boolean" IO="I" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i=$i" Instance="0" IsCommentedOut="No">			<Data Name="$i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="i" Type="integer" IO="O" Origin="Task" Required="0" Path="$i"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i2=2" Instance="0" IsCommentedOut="No">			<Data Name="i2" Type="integer" IO="O" Origin="Task" Required="0" Path="2"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i3=i + 3" Instance="0" IsCommentedOut="No">			<Data Name="i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="i3" Type="integer" IO="O" Origin="Task" Required="0" Path="i + 3"/>
+		</ActivityItem>
+		<ActivityItem Type="FalseAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TrueAction" Text="$i &gt;= 1" IsCommentedOut="No">			<Data Name="$i" Type="integer" IO="I" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="s=&quot;och &amp; och&quot;" Instance="0" IsCommentedOut="No">			<Data Name="s" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;och &amp; och&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Task1" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="FalseAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="$s=&quot;bananbat. Bug.. does not handle swedish characters when exporting to XML??&quot;" Instance="0" IsCommentedOut="No">			<Data Name="$s" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;bananbat. Bug.. does not handle swedish characters when exporting to XML??&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="DB Statement with Document" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="EndifAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="EndifAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TrueAction" Text="i == 0" IsCommentedOut="No">			<Data Name="i" Type="integer" IO="I" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ReportDataElements" Instance="0" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="TerminateProcess" Instance="0" IsCommentedOut="Yes">		</ActivityItem>
+		<ActivityItem Type="FalseAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ReportDataElements" Instance="0" IsCommentedOut="No">			<Data Name="$text" Type="long_string" Origin="Process" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="TerminateTask" Instance="0" IsCommentedOut="Yes">		</ActivityItem>
+		<ActivityItem Type="EndifAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="FileXfer" Instance="0" IsCommentedOut="No">		<FileXferObject URL="http://host.com" FileOrString="$text" Transfer="2" Operation="2" ResponseType="data" ResponseDE="$s" Timeout="0"/>
+			<Data Name="$text" Type="string" IO="I" Origin="Task" Required="0"/>
+			<Data Name="$s" Type="string" IO="O" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="FileXfer" Instance="0" IsCommentedOut="No">		<FileXferObject URL="http://host.com" FileOrString="$text" Transfer="1" Operation="1" Timeout="0"/>
+			<Data Name="$text" Type="long_string" IO="O" Origin="Task" Required="0" Path="$text"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="FileXfer" Instance="0" IsCommentedOut="No">		<FileXferObject URL="http://host.com" FileOrString="$text" Transfer="1" Operation="2" ResponseType="filename" ResponseDE="$s" Timeout="0"/>
+			<Data Name="$text" Type="string" IO="I" Origin="Task" Required="0"/>
+			<Data Name="$s" Type="string" IO="O" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="FileXfer" Instance="0" IsCommentedOut="No">		<FileXferObject URL="http://host.com" FileOrString="$text" Transfer="2" Operation="1" Timeout="0"/>
+			<Data Name="$text" Type="long_string" IO="O" Origin="Task" Required="0" Path="$text"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="0" Type="boolean" IO="I" Origin="Constant" Required="0" Path="0"/>
+			<Data Name="&quot;Ouch!&quot;" Type="string" IO="I" Origin="Constant" Required="0" Path="&quot;Ouch!&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="1" Type="boolean" IO="I" Origin="Constant" Required="0" Path="1"/>
+			<Data Name="GetLastError()" Type="string" IO="I" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="0" Type="boolean" IO="I" Origin="Constant" Required="0" Path="0"/>
+			<Data Name="$b" Type="string" IO="I" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="0" Type="boolean" IO="I" Origin="Constant" Required="0" Path="0"/>
+			<Data Name="emailRecipient" Type="string" IO="I" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ResetLastError" Instance="0" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Task1" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="DB Statement with Document" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="CreateScheduledEvent" Instance="1" IsCommentedOut="No">		<LinkDisplay c1="R" x1="153" y1="250" x2="283" y2="250" x3="283" y3="133" x4="425" y4="129" c4="L"/>
+			<Data Name="Scheduled task" Type="string" Origin="TaskName" Required="0"/>
+			<Data Name="DT" Type="string" Origin="Constant" Required="0" Path="2 H"/>
+			<Data Name="tiid" Type="integer" IO="O" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="CreateScheduledEvent" Instance="0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="153" y1="250" x2="271" y2="250" x3="271" y3="74" x4="425" y4="65" c4="L"/>
+			<Data Name="Scheduled Task 2" Type="string" Origin="TaskName" Required="0"/>
+			<Data Name="$i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="tiid2" Type="integer" IO="O" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+	</Task>
+	<Task Name="Task1" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="424" y="240"/> 
+			<rect left="369" top="223" right="479" bottom="257"/> </DisplayProperty>
+		<PreDocActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="emailRecipient=&quot;theZato@hotmail.com&quot;" Instance="0" IsCommentedOut="No">			<Data Name="emailRecipient" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;theZato@hotmail.com&quot;"/>
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="iFromTask0=[TASK:Task0.i]" Instance="0" IsCommentedOut="No">			<Data Name="[TASK:Task0.i]" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="iFromTask0" Type="integer" IO="O" Origin="Task" Required="0" Path="[TASK:Task0.i]"/>
+		</PreDocActivityItem>
+		<Document Type="EmailNotificationOnly" URL="http://linuxdev/foo.html">
+			<Subject Text="Mail from [T0.GetRouteId()]"/>
+			<Priority Level="Normal"/>
+			<To Text="[T0.emailRecipient]"/>
+			<Message Type="Text">Hi. This is task [T0.GetTaskName()] of process [T0.GetProcessName()].</Message>
+			<Attachment List=""/>
+			<Data Name="SecondDe" Type="string" IO="I" Origin="Doc" Required="0" Path="$text"/>
+			<Data Name="FirstDE" Type="boolean" IO="I" Origin="Doc" Required="0" Path="$b"/>
+			<QSColWidths x1="154" x2="65" x3="184" x4="-1"/>			<RespColWidths x1="214" x2="70" x3="93" x4="-1"/>		</Document>
+		<ActivityItem Type="TargetTask" Text="Run Operation" IsCommentedOut="No">		</ActivityItem>
+		<Escalation TaskName="I am the escalation task for Task1" RemindMinutes="iFromTask0">
+			<LinkDisplay c1="R" x1="479" y1="240" x2="502" y2="240" x3="502" y3="208" x4="522" y4="185" c4="L"/>
+</Escalation>
+	</Task>
+	<Task Name="DB Statement with Document" TaskPriority="0">		<Description>Executes some Db statements and has a document.</Description>
+		<DisplayProperty>
+			<pos x="430" y="341"/> 
+			<rect left="382" top="308" right="478" bottom="374"/> </DisplayProperty>
+		<PreDocActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="emailRecipient=[TASK:Task0.emailRecipient]" Instance="0" IsCommentedOut="No">			<Data Name="[TASK:Task0.emailRecipient]" Type="string" IO="I" Origin="Task" Required="0"/>
+			<Data Name="emailRecipient" Type="string" IO="O" Origin="Task" Required="0" Path="[TASK:Task0.emailRecipient]"/>
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="companyFilter=&quot;CompanyName = &apos;CommerceRoute&apos;&quot;" Instance="0" IsCommentedOut="No">			<Data Name="companyFilter" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;CompanyName = &apos;CommerceRoute&apos;&quot;"/>
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="1" IsCommentedOut="No">			<Data Name="$i" Type="integer" IO="O" Origin="ODBC" Required="0"/>
+			<Data Name="companyName" Type="string" IO="O" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="Table" EntityName="Shippers" StatementType="Select" IsAdvancedWhere="Yes" AdvancedWhereClause="Phone LIKE '510' ORDER BY CompanyName
+
+"/>
+			<DBAttribute Name="ShipperID" DataType="integer" IO="O" Value="$i" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="723" DataTypeInfo="" />
+			<DBAttribute Name="CompanyName" DataType="string" IO="O" Value="companyName" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="Phone" DataType="string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="0" IsCommentedOut="No">			<Data Name="$i" Type="integer" IO="O" Origin="ODBC" Required="0"/>
+			<Data Name="$s" Type="string" IO="O" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="Yes" ConnectString="CRTRANDB_P" EntityType="Table" EntityName="operationstab" StatementType="Select" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="operation_id" DataType="integer" IO="O" Value="$i" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-644" DataTypeInfo="" />
+			<DBAttribute Name="operation_name" DataType="string" IO="O" Value="$s" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-644" DataTypeInfo="" />
+			<DBAttribute Name="operation_type_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-644" DataTypeInfo="" />
+			<DBAttribute Name="project_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="$si" FilterType="DataElement" DataSize="-644" DataTypeInfo="" />
+			<DBAttribute Name="source_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="123" FilterType="Constant" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="target_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="schedule_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="transformation_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="success_operation_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="success_message_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="success_workflow" DataType="long_string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="failure_operation_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="failure_message_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="failure_workflow" DataType="long_string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="user_id" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="description" DataType="long_string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="trace" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="diff" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ignore_history" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="edi_997_ack" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ignore_edi_rules" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="tpaguid" DataType="string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="inserttime" DataType="date" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="3" />
+			<DBAttribute Name="modtime" DataType="date" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="3" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="procuctName=&quot;Boxer Shorts&quot;" Instance="0" IsCommentedOut="No">			<Data Name="procuctName" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;Boxer Shorts&quot;"/>
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="0" IsCommentedOut="No">			<Data Name="procuctName" Type="string" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="[TASK:Task0.i]" Type="double" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="$i" Type="integer" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="false" Type="boolean" IO="I" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="Table" EntityName="Products" StatementType="Insert" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="ProductID" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-275" DataTypeInfo="" />
+			<DBAttribute Name="ProductName" DataType="string" IO="i" Value="procuctName" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-275" DataTypeInfo="" />
+			<DBAttribute Name="SupplierID" DataType="integer" IO="i" Value="1" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="-275" DataTypeInfo="" />
+			<DBAttribute Name="CategoryID" DataType="integer" IO="i" Value="12" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="QuantityPerUnit" DataType="string" IO="i" Value="2" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitPrice" DataType="double" IO="i" Value="[TASK:Task0.i]" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="9373775" DataTypeInfo="" />
+			<DBAttribute Name="UnitsInStock" DataType="integer" IO="i" Value="$i" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsOnOrder" DataType="integer" IO="i" Value="1" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ReorderLevel" DataType="integer" IO="i" Value="1" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="Discontinued" DataType="boolean" IO="i" Value="false" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="0" IsCommentedOut="No">			<Data Name="[TASK:Task0.i]" Type="integer" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="companyName" Type="string" IO="I" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="Table" EntityName="Products" StatementType="Update" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="ProductID" DataType="integer" IO="i" Value="[TASK:Task0.i]" ValueType="DataElement" Filter="$i" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ProductName" DataType="string" IO="i" Value="companyName" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="SupplierID" DataType="integer" IO="i" Value="[TASK:Task0.i]" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="CategoryID" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="QuantityPerUnit" DataType="string" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="9371762" DataTypeInfo="" />
+			<DBAttribute Name="UnitPrice" DataType="double" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsInStock" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsOnOrder" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-325" DataTypeInfo="" />
+			<DBAttribute Name="ReorderLevel" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-325" DataTypeInfo="" />
+			<DBAttribute Name="Discontinued" DataType="boolean" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="-325" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="0" IsCommentedOut="No">			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="Table" EntityName="Products" StatementType="Delete" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="ProductID" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="$i" FilterType="DataElement" DataSize="-307" DataTypeInfo="" />
+			<DBAttribute Name="ProductName" DataType="string" IO="i" Value="" ValueType="DataElement" Filter="companyName" FilterType="DataElement" DataSize="-307" DataTypeInfo="" />
+			<DBAttribute Name="SupplierID" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="[TASK:Task0.i]" FilterType="DataElement" DataSize="-307" DataTypeInfo="" />
+			<DBAttribute Name="CategoryID" DataType="integer" IO="i" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="QuantityPerUnit" DataType="string" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitPrice" DataType="double" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="9372734" DataTypeInfo="" />
+			<DBAttribute Name="UnitsInStock" DataType="integer" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsOnOrder" DataType="integer" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ReorderLevel" DataType="integer" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="Discontinued" DataType="boolean" IO="i" Value="" ValueType="Constant" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="0" IsCommentedOut="No">			<Data Name="$s" Type="string" IO="O" Origin="ODBC" Required="0"/>
+			<Data Name="categoryName" Type="string" IO="O" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="View" EntityName="Alphabetical list of products" StatementType="Select" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="ProductID" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="$i" FilterType="DataElement" DataSize="-331" DataTypeInfo="" />
+			<DBAttribute Name="ProductName" DataType="string" IO="O" Value="$s" ValueType="DataElement" Filter="companyFilter" FilterType="DataElement" DataSize="-331" DataTypeInfo="" />
+			<DBAttribute Name="SupplierID" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="[TASK:Task0.i]" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="CategoryID" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="QuantityPerUnit" DataType="string" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="9372392" DataTypeInfo="" />
+			<DBAttribute Name="UnitPrice" DataType="double" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsInStock" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="UnitsOnOrder" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ReorderLevel" DataType="integer" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="Discontinued" DataType="boolean" IO="O" Value="" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="CategoryName" DataType="string" IO="O" Value="categoryName" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<PreDocActivityItem Type="ODBCItem" Text="" Instance="1" IsCommentedOut="Yes">			<Data Name="$s" Type="string" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="[TASK:Task0.emailRecipient]" Type="string" IO="I" Origin="ODBC" Required="0"/>
+			<Data Name="$i" Type="integer" IO="O" Origin="ODBC" Required="0"/>
+			<Data Name="$text" Type="string" IO="O" Origin="ODBC" Required="0"/>
+			<Data Name="$dbl" Type="double" IO="O" Origin="ODBC" Required="0"/>
+			<SQLColWidths x1="-1" x2="-1" x3="-1" x4="-1"/>
+			<DBData IsDSN="No" ConnectString="DRIVER=SQL Server;SERVER=windev;DATABASE=Northwind;UID=sa;PWD=****;" EntityType="StoredProcedure" EntityName="SalesByCategory;1" StatementType="None" IsAdvancedWhere="No" AdvancedWhereClause=""/>
+			<DBAttribute Name="@RETURN_VALUE" DataType="integer" IO="R" Value="$i" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="10" DataTypeInfo="" />
+			<DBAttribute Name="@CategoryName" DataType="string" IO="i" Value="$s" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="@OrdYear" DataType="string" IO="i" Value="[TASK:Task0.emailRecipient]" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="ProductName" DataType="string" IO="F" Value="$text" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+			<DBAttribute Name="TotalPurchase" DataType="double" IO="F" Value="$dbl" ValueType="DataElement" Filter="" FilterType="DataElement" DataSize="0" DataTypeInfo="" />
+		</PreDocActivityItem>
+		<Document Type="Email" URL="http://linuxdev/foo.html">
+			<Subject Text="This mail requires a response. Route: [T0.GetRouteId()]"/>
+			<Priority Level="Normal"/>
+			<To Text="[T0.emailRecipient]"/>
+			<Message Type="MHTML">&lt;H3&gt;Please Respond&lt;/H3&gt;
+
+&lt;b&gt;
+
+[T0.GetProcessName()] -- [T0.GetTaskName()] -- [T0.GetRouteId()]
+
+&lt;/b&gt;
+
+&lt;br&gt;
+
+</Message>
+			<Attachment List=""/>
+			<Data Name="iResp" Type="integer" IO="B" Origin="Doc" Required="1"/>
+			<Data Name="i0" Type="integer" IO="I" Origin="Doc" Required="0" Path="$i"/>
+			<Data Name="i1" Type="integer" IO="I" Origin="Doc" Required="0" Path="$dbl"/>
+			<QSColWidths x1="154" x2="65" x3="184" x4="-1"/>			<RespColWidths x1="214" x2="70" x3="93" x4="-1"/>		</Document>
+		<ActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ReportDataElements" Instance="0" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Run Operation" IsCommentedOut="No">		</ActivityItem>
+		<Escalation TaskName="I am an escalation task" RemindMinutes="1 D">
+			<LinkDisplay c1="R" x1="478" y1="341" x2="521" y2="341" x3="521" y3="402" x4="566" y4="402" c4="L"/>
+</Escalation>
+	</Task>
+	<Task Name="Run Operation" TaskPriority="0" Terminate="True">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="887" y="240"/> 
+			<rect left="823" top="218" right="952" bottom="262"/> </DisplayProperty>
+		<PreDocActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="target=&quot;My Target&quot;" Instance="0" IsCommentedOut="No">			<Data Name="target" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;My Target&quot;"/>
+		</PreDocActivityItem>
+		<Document Type="Operation">
+			<Operation Type = "DataElement" Id="$i" Server="windev" Login = "emanuel"/>
+				<OperationProperty Name = "Operation:Success Operation(ID)" Value="&quot;1&quot;"/>
+				<OperationProperty Name = "Operation:Failure Operation(ID)" Value="$i"/>
+				<OperationProperty Name = "Operation:Error if Source Not Found" Value="&quot;TRUE&quot;"/>
+				<OperationProperty Name = "Operation:Source" Value="&quot;Hardcoded source&quot;"/>
+				<OperationProperty Name = "Operation:Target" Value="target"/>
+			<Data Name="WDIOperationResult" Type="integer" IO="B" Origin="Task" Required="0"/>
+			<Data Name="WDIFilesRetrieved" Type="string" IO="B" Origin="Task" Required="0"/>
+			<Data Name="WDIFilesNotRetrieved" Type="string" IO="B" Origin="Task" Required="0"/>
+			<Data Name="WDIFilesProcessed" Type="string" IO="B" Origin="Task" Required="0"/>
+			<Data Name="WDIResponseMsgFull" Type="string" IO="B" Origin="Task" Required="0"/>
+			<Data Name="WDIResponseMsg" Type="string" IO="B" Origin="Task" Required="0"/>
+		</Document>
+		<ActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ReportDataElements" Instance="0" IsCommentedOut="No">			<Data Name="WDIOperationResult" Type="integer" Origin="Task" Required="0"/>
+		</ActivityItem>
+	</Task>
+	<Task Name="I am an escalation task" TaskPriority="0" Special="IsEscalationTask">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="629" y="402"/> 
+			<rect left="566" top="374" right="692" bottom="430"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="SimpleInFcnObject" Text="BlockEscalatedTask" Instance="0" IsCommentedOut="No">		</ActivityItem>
+	</Task>
+	<Task Name="Scheduled task" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="480" y="129"/> 
+			<rect left="425" top="112" right="535" bottom="146"/> </DisplayProperty>
+	</Task>
+	<Task Name="Scheduled Task 2" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="480" y="65"/> 
+			<rect left="425" top="40" right="535" bottom="90"/> </DisplayProperty>
+		<PreDocActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</PreDocActivityItem>
+		<PreDocActivityItem Type="SimpleAction" Text="target=&quot;My Target&quot;" Instance="0" IsCommentedOut="No">			<Data Name="target" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;My Target&quot;"/>
+		</PreDocActivityItem>
+		<ActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Run Operation" IsCommentedOut="No">		</ActivityItem>
+	</Task>
+	<Task Name="I am the escalation task for Task1" TaskPriority="0" Special="IsEscalationTask">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="593" y="184"/> 
+			<rect left="522" top="158" right="665" bottom="211"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="SimpleInFcnObject" Text="BlockEscalatedTask" Instance="0" IsCommentedOut="No">		</ActivityItem>
+	</Task>
+	<Route Target="Task1">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Task0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="153" y1="250" x2="264" y2="250" x3="264" y3="250" x4="369" y4="240" c4="L"/>
+		</RouteItem>
+	</Route>
+	<Route Target="DB Statement with Document">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Task0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="153" y1="250" x2="272" y2="250" x3="272" y3="341" x4="382" y4="341" c4="L"/>
+		</RouteItem>
+	</Route>
+	<Route Target="Run Operation">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="OrItem" Text="" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="AndItem" Text="" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Task1" IsCommentedOut="No">		<LinkDisplay c1="R" x1="479" y1="240" x2="651" y2="240" x3="651" y3="240" x4="823" y4="240" c4="L"/>
+		</RouteItem>
+		<RouteItem Type="SourceTask" Text="DB Statement with Document" IsCommentedOut="No">		<LinkDisplay c1="R" x1="478" y1="341" x2="650" y2="341" x3="650" y3="283" x4="823" y4="240" c4="L"/>
+		</RouteItem>
+		<RouteItem Type="EndItem" Text="" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Scheduled Task 2" IsCommentedOut="No">		<LinkDisplay c1="R" x1="535" y1="65" x2="681" y2="65" x3="681" y3="240" x4="823" y4="240" c4="L"/>
+		</RouteItem>
+		<RouteItem Type="EndItem" Text="" IsCommentedOut="No">		</RouteItem>
+	</Route>
+	<Route Target="Task0">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+	</Route>
+	<Route Target="Scheduled Task 2">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+	</Route>
+	<Route Target="Scheduled task">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+	</Route>
+</Process>

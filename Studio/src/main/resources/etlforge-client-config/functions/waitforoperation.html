@@ -1,0 +1,32 @@
+<html><p>
+        Stops execution of script/mapping until all instances of the specified operation currently in the operation queue have finished processing.
+        Operation instances that are added after this call are not waited for and the current user needs to have read access for the operation.
+        This method is useful if you want to add many instances of an operation to the queue for parallel processing and then wait for all of them to finish.
+        </p>
+        
+        <p>
+        The first argument is the operation tag argument for the operation to wait for. If you want to wait for several operations you have to call this method several times.
+        The available operations are shown in the "Project Items" tab in the lower section of the Formula Builder,
+        under the node called "Operations".
+        By double clicking on an operation node, the corresponding operation ID will be
+        inserted into the formula expression. The ID is constructed by wrapping the project path
+        of the selected operation within &lt;TAG&gt;...&lt;/TAG&gt; tags.
+        <br><br>
+        
+        The second (optional) argument is the time-out in seconds. The default time-out is 1 hour (3600 seconds) and if the operations have not finished within this time
+        an error will be thrown. If you expect your operations to run for a longer time during normal conditions you have to increase the time-out.
+        You can handle this error by using the Eval function.
+        <br><br>
+        
+        The third (optional) argument is the poll-interval in seconds. The default poll-interval is 10 seconds and this is the time between operation queue checks.
+        The default will not be a significant performance hit but if you expect your operations to run for a very long time you may want to increase the poll-interval.
+        </p><br><h2>Example:</h2><code><font size="4">
+        // Add ten operation instances to the queue and wait for all of them to finish<br>
+        $i = 0;<br>
+        while($i &lt; 10,<br>
+	      &nbsp;&nbsp;RunOperation("&lt;TAG&gt;MyProject/Operations/Process One Message&lt;/TAG&gt;", false)<br>
+	      &nbsp;&nbsp;$i = $i + 1;<br>
+        );<br>
+        <br>
+        WaitForOperation("&lt;TAG&gt;MyProject/Operations/Process One Message&lt;/TAG&gt;");
+        </font></code></html>

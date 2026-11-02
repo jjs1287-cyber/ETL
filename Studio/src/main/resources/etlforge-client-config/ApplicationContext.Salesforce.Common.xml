@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd"
+		default-lazy-init="true">
+
+	<bean id="Sfdc.ConnectionFactory" class="com.etlforge.integration.client.sfdc.server.StudioConnectionFactory" factory-method="create">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.salesforce.DefaultPoolingConnectionFactory">
+				<constructor-arg>
+					<!-- [Use this bean to let the studio connect directly to salesforce, rather than going through the server.] 
+					bean class="org.etlforge.integration.salesforce.wsdl.partner.wsc.WscPartnerConnectionFactory" /-->
+					<bean class="com.etlforge.integration.client.sfdc.server.RemoteConnectionFactory">
+						<constructor-arg ref="server.SalesforceInfoProvider" />
+					</bean>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="Sfdc.ConnectionFactory.Fake" class="org.etlforge.integration.salesforce.FakeConnectionFactory" />
+	<bean id="Sfdc.ConnectionTester" class="org.etlforge.integration.salesforce.SalesforceConnectionTester">
+		<constructor-arg ref="Sfdc.ConnectionFactory" />
+	</bean>
+	<bean id="Sfdc.SchemaProviderFactory" class="com.etlforge.integration.client.ui.sfdc.ClientSObjectSchemaProviderFactory">
+		<constructor-arg ref="platform.CacheDir" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.salesforce.wsdl.DefaultSObjectSchemaProviderFactory" />
+		</constructor-arg>
+	</bean>
+	<bean id="Sfdc.SchemaProviderFactory.Fake" class="org.etlforge.integration.salesforce.FakeSObjectSchemaProviderFactory" />
+	<bean id="Sfdc.FacadeFactory" class="com.etlforge.integration.client.sfdc.facade.FacadeFactory">
+		<constructor-arg ref="Sfdc.ConnectionFactory" />
+		<constructor-arg ref="Sfdc.SchemaProviderFactory" />
+	</bean>
+	
+	<bean id="Sfdc.OpMonitorApis" class="org.etlforge.integration.activity.ui.monitor.OperationMonitorApis">
+		<constructor-arg ref="server.OperationLogProvider" />
+		<constructor-arg ref="server.OperationQueueProvider" />
+		<constructor-arg ref="server.OperationProgressProvider" />
+	</bean>
+	
+	<bean id="Sfdc.StatusFileDownloaderFactory" class="org.etlforge.integration.activity.client.files.StatusFileDownloaderFactory">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.activity.client.files.RemoteFileSupport">
+				<constructor-arg ref="server.OperationFileProvider" />
+				<constructor-arg>
+					<bean class="org.etlforge.integration.activity.client.files.DownloadToTempFileProvider" />
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<property name="cache">
+			<bean class="org.etlforge.integration.activity.client.files.RemoteFileCache" />
+		</property>
+	</bean>
+	<bean id="Sfdc.OpMonitorListener" class="com.etlforge.integration.client.ui.sfdc.SingleRunResultDisplayer">
+		<constructor-arg ref="Sfdc.StatusHistoryApi" />
+		<property name="statusFileDownloaderFactory" ref="Sfdc.StatusFileDownloaderFactory" />
+	</bean>
+	
+	<bean id="action.ic.TestSalesforceConnection" class="com.etlforge.integration.client.ui.sfdc.connector.TestSalesforceConnectionAction">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="Sfdc.ConnectionTester" />
+		<property name="saveGate" ref="ic.EntityPageSaveGate" />
+	</bean>
+	<bean id="Sfdc.Connector.ValueCache" factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+		<constructor-arg value="SalesforceConnector" />
+		<constructor-arg>
+			<list>
+				<value>server_host</value>
+				<value>user_name</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="Sfdc.Connector.Config" parent="ic.EntityConfig.Base" class="com.etlforge.integration.client.ui.sfdc.connector.SalesforceConnectorConfig">
+		<property name="testConnectionAction" ref="action.ic.TestSalesforceConnection" />
+		<property name="valueCache" ref="Sfdc.Connector.ValueCache" />
+	</bean>
+
+	<bean id="Sfdc.RetryPolicyEditorFactory" class="com.etlforge.integration.client.ui.sfdc.DefaultRetryPolicyEditorFactory" />
+		
+	<bean id="Sfdc.StatusHistoryApi" class="org.etlforge.integration.activity.client.files.StatusHistoryApi">
+		<constructor-arg ref="server.OperationLogProvider" />
+		<constructor-arg ref="server.OperationFileProvider" />
+	</bean>
+	<bean id="Sfdc.ShowHistoryAction" class="com.etlforge.integration.client.ui.sfdc.status.ShowStatusHistoryAction">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="Sfdc.StatusHistoryApi" />
+		<property name="statusFileDownloaderFactory" ref="Sfdc.StatusFileDownloaderFactory" />
+	</bean>
+
+	<bean id="Sfdc.Item.Config" parent="ic.EntityConfig.Base" abstract="true">
+		<constructor-arg index="0" ref="Sfdc.FacadeFactory" />
+		<property name="operationRunnerFactory" ref="ic.OperationRunnerFactory" />
+		<property name="operationTesterFactory" ref="ic.OperationTesterFactory" />
+		<property name="operationMonitorApis" ref="Sfdc.OpMonitorApis" />
+		<property name="operationMonitorListener" ref="Sfdc.OpMonitorListener" />
+		<property name="deleteAction" ref="action.ic.Delete" />
+		<property name="retryPolicyEditorFactory" ref="Sfdc.RetryPolicyEditorFactory" />
+		<property name="renamer">
+			<bean class="com.etlforge.integration.client.ui.sfdc.SalesforceWizardRenamer">
+				<constructor-arg ref="ic.ProjectPersistor" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="Sfdc.WizardFactory" abstract="true">
+		<property name="includeObjectSummary" value="true" />
+		<property name="operationPreferences" ref="operation.Preferences" />
+	</bean>
+
+	<bean id="Sfdc.Query.QueryPolicy" class="org.etlforge.integration.salesforce.parser.NoAggregateFunctionsPolicy" />
+	<bean id="Sfdc.Query.WizardFactory" parent="Sfdc.WizardFactory"
+			class="com.etlforge.integration.client.ui.sfdc.query.wizard.QueryWizardFactory">
+		<constructor-arg ref="Sfdc.FacadeFactory" />
+		<constructor-arg>
+			<bean class="com.etlforge.integration.client.ui.sfdc.query.wizard.StandardQueryTargetConfig" />
+		</constructor-arg>
+		<constructor-arg ref="Sfdc.Query.QueryPolicy" />
+	</bean>
+	<bean id="Sfdc.Query.Config" class="com.etlforge.integration.client.ui.sfdc.query.SalesforceQueryConfig" parent="Sfdc.Item.Config">
+		<constructor-arg index="1" ref="Sfdc.Query.WizardFactory" />
+		<constructor-arg index="2" ref="Sfdc.Query.QueryPolicy" />
+		<constructor-arg index="3">
+			<list>
+				<value>RESPONSE</value>
+				<value>TARGET</value>
+				<value>OPERATION</value>
+			</list>
+		</constructor-arg>
+		<property name="operationMonitorListener"><null/></property>
+	</bean>
+
+	<bean id="Sfdc.UCUItem.Config" parent="Sfdc.Item.Config" abstract="true">
+		<constructor-arg index="2">
+			<list>
+				<value>SOURCE</value>
+				<value>REQUEST</value>
+				<value>OPERATION</value>
+			</list>
+		</constructor-arg>
+		<property name="showHistoryAction" ref="Sfdc.ShowHistoryAction" />
+		<property name="searchValuesCollector">
+			<bean class="com.etlforge.integration.client.ui.sfdc.ucu.UcuSearchValuesCollector" />
+		</property>
+	</bean>
+	<bean id="Sfdc.UCU.WizardFactory" parent="Sfdc.WizardFactory" abstract="true">
+		<constructor-arg index="0" ref="Sfdc.FacadeFactory" />
+		<constructor-arg index="1">
+			<bean class="com.etlforge.integration.client.ui.sfdc.wizard.StandardRequestSourceConfig" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="Sfdc.Upsert.Config" class="com.etlforge.integration.client.ui.sfdc.ucu.SalesforceUpsertConfig" parent="Sfdc.UCUItem.Config">
+		<constructor-arg index="1">
+			<bean parent="Sfdc.UCU.WizardFactory" class="com.etlforge.integration.client.ui.sfdc.ucu.wizard.UcuWizardFactory">
+				<constructor-arg value="org.etlforge.integration.data.entity.SalesforceUpsert" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="Sfdc.Create.Config" class="com.etlforge.integration.client.ui.sfdc.ucu.SalesforceCreateConfig" parent="Sfdc.UCUItem.Config">
+		<constructor-arg index="1">
+			<bean parent="Sfdc.UCU.WizardFactory" class="com.etlforge.integration.client.ui.sfdc.ucu.wizard.UcuWizardFactory">
+				<constructor-arg value="org.etlforge.integration.data.entity.SalesforceCreate" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="Sfdc.Update.Config" class="com.etlforge.integration.client.ui.sfdc.ucu.SalesforceUpdateConfig" parent="Sfdc.UCUItem.Config">
+		<constructor-arg index="1">
+			<bean parent="Sfdc.UCU.WizardFactory" class="com.etlforge.integration.client.ui.sfdc.ucu.wizard.UcuWizardFactory">
+				<constructor-arg value="org.etlforge.integration.data.entity.SalesforceUpdate" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="Sfdc.Delete.Config" class="com.etlforge.integration.client.ui.sfdc.delete.SalesforceDeleteConfig" parent="Sfdc.UCUItem.Config">
+		<constructor-arg index="1">
+			<bean parent="Sfdc.UCU.WizardFactory" class="com.etlforge.integration.client.ui.sfdc.delete.wizard.DeleteWizardFactory" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="Sfdc.BulkLoad.QueryPolicy" class="org.etlforge.integration.salesforce.parser.CompoundSupportedQueryPolicy">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.salesforce.parser.NoNestedQueriesPolicy" />
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.etlforge.integration.salesforce.parser.NoForeignKeysInBulkQueryPolicy" />
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.etlforge.integration.salesforce.parser.NoAggregateFunctionsPolicy" />
+		</constructor-arg>
+	</bean>
+	<bean id="Sfdc.BulkLoad.WizardFactory"
+			class="com.etlforge.integration.client.ui.sfdc.bulkload.wizard.BulkLoadWizardFactory"
+			parent="Sfdc.WizardFactory">
+		<constructor-arg ref="Sfdc.FacadeFactory" />
+		<constructor-arg>
+			<list>
+				<value>LocalFile</value>
+				<value>FTP</value>
+				<value>FileShare</value>
+				<value>TemporaryStorage</value>
+				<value>HTTP</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="Sfdc.BulkLoad.QueryPolicy" />
+	</bean>
+	<bean id="Sfdc.BulkLoad.Config" class="com.etlforge.integration.client.ui.sfdc.bulkload.SalesforceBulkLoadConfig" parent="Sfdc.Item.Config">
+		<constructor-arg index="1" ref="Sfdc.BulkLoad.WizardFactory" />
+		<constructor-arg index="2">
+			<list>
+				<value>BULKLOAD_FILE</value>
+				<value>OPERATION</value>
+			</list>
+		</constructor-arg>
+		<property name="supportedQueryPolicy" ref="Sfdc.BulkLoad.QueryPolicy" />
+		<property name="includeTestActionInPage" value="false" />
+		<property name="showHistoryAction" ref="action.ic.BulkLoadHistory" />
+	</bean>
+	
+	<bean id="com.etlforge.integration.client.bulkload.serverapi.BulkLoadInfoProvider" 
+		class="com.etlforge.integration.server.implementation.webservice.bulkload.impl.BulkLoadInfoProviderWsImpl">
+		<constructor-arg ref="ws.config.Java" />
+		<constructor-arg ref="server.OperationFileProvider" />
+	</bean>
+
+	<bean id="action.ic.BulkLoadHistory" class="com.etlforge.integration.client.ui.sfdc.bulkload.actions.ShowBulkLoadHistoryAction">
+		<constructor-arg ref="ui.ActiveObjectService" />
+		<constructor-arg ref="com.etlforge.integration.client.bulkload.serverapi.BulkLoadInfoProvider" />
+		<property name="statusFileDownloaderFactory" ref="Sfdc.StatusFileDownloaderFactory" />
+	</bean>
+
+	<bean id="Sfdc.ContextMenu.RunOp" abstract="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="ic.OperationRunnerFactory" />
+		<property name="monitorApis" ref="Sfdc.OpMonitorApis" />
+	</bean>
+
+	<bean id="sfdc.ContextMenu.Action" class="org.etlforge.application.ui.action.popup.SectionFactories">
+		<constructor-arg value="ACTION" />
+		<constructor-arg>
+			<list>
+				<bean class="com.etlforge.integration.client.ui.sfdc.query.RunQueryItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.ucu.RunUpsertItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.ucu.RunUpdateItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.ucu.RunCreateItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.delete.RunDeleteItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.bulkload.actions.RunBulkLoadItemFactory" parent="Sfdc.ContextMenu.RunOp" />
+				<bean class="com.etlforge.integration.client.ui.sfdc.connector.TestConnectionItemFactory">
+					<constructor-arg ref="action.ic.TestSalesforceConnection" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+		
+</beans>

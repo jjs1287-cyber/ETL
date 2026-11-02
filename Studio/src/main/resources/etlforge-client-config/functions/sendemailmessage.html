@@ -1,0 +1,11 @@
+<html>Sends an email using a pre-defined Email Message.
+        The email message used in this function call must be defined as an Email Message
+        in the current integration project. The available email messages are shown in the "Project Items"
+        tab in the lower section of the Formula Builder, under the node called "Email Messages".
+        By double clicking on an email message node, the corresponding email message ID will be
+        inserted into the formula expression. (The ID is constructed by wrapping the project path
+        of the selected email message within &lt;TAG&gt;...&lt;/TAG&gt;
+        tags.)<br><h2>Example:</h2><code><font size="4">
+        // Send a pre-defined email message.<br>
+        SendEmailMessage("&lt;TAG&gt;MyProject/Email Messages/My Email Message&lt;TAG&gt;");
+        </font></code></html>

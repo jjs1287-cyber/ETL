@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:CPP="http://xml.apache.org/axis/wsdd/providers/CPP">
+  <service name="AdminService" provider="CPP:DOCUMENT" description="Axis C++ web service">
+    <parameter name="className" value="/user/local/apache/axis/AdminService.dll" />
+    <parameter name="allowedMethods" value="startEngine stopEngine isEngineRunning getEngineStatus startScheduler stopScheduler isSchedulerRunning getSchedulerStatus startJmsEngine stopJmsEngine isJmsEngineRunning getJmsEngineStatus auditRequest getProxySettings setProxySettings" />
+  </service>
+</deployment>

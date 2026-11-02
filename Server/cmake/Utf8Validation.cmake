@@ -1,0 +1,7 @@
+add_executable(etlforge_utf8_engine_tests EXCLUDE_FROM_ALL tests/native/utf8_engine_tests.cpp)
+get_target_property(utf8_engine_includes etlforge_operation_worker INCLUDE_DIRECTORIES)
+get_target_property(utf8_engine_libraries etlforge_operation_worker LINK_LIBRARIES)
+target_include_directories(etlforge_utf8_engine_tests PRIVATE ${utf8_engine_includes})
+target_compile_definitions(etlforge_utf8_engine_tests PRIVATE WIN32 NOMINMAX _WIN32_WINNT=0x0602 _CRT_SECURE_NO_WARNINGS BOOST_ALL_NO_LIB)
+target_link_libraries(etlforge_utf8_engine_tests PRIVATE ${utf8_engine_libraries})
+set_target_properties(etlforge_utf8_engine_tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/build-probe/utf8")

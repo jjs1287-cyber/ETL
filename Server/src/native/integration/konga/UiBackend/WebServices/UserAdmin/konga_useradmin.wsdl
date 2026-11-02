@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.useradmin.UserAdmin" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.useradmin.UserAdmin" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.useradmin.UserAdmin" xmlns:tns2="http://webservice.implementation.server.integration.etlforge.invalid" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.useradmin.UserAdmin" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservice.implementation.server.integration.etlforge.invalid"/>
+   <element name="getUsersAndGroups">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUsersAndGroupsResponse">
+    <complexType>
+     <sequence>
+      <element name="getUsersAndGroupsReturn" type="impl:UsersAndGroups"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="User">
+    <sequence>
+     <element name="UserId" nillable="true" type="xsd:string"/>
+     <element name="FirstName" nillable="true" type="xsd:string"/>
+     <element name="LastName" nillable="true" type="xsd:string"/>
+     <element name="Login" nillable="true" type="xsd:string"/>
+     <element name="Password" nillable="true" type="xsd:string"/>
+     <element name="Email" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfUser">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:User"/>
+    </sequence>
+   </complexType>
+   <complexType name="Group">
+    <sequence>
+     <element name="GroupId" nillable="true" type="xsd:string"/>
+     <element name="GroupName" nillable="true" type="xsd:string"/>
+     <element name="Description" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfGroup">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:Group"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="UserGroup">
+    <sequence>
+     <element name="GroupId" nillable="true" type="xsd:string"/>
+     <element name="UserIds" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfUserGroup">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:UserGroup"/>
+    </sequence>
+   </complexType>
+   <complexType name="UsersAndGroups">
+    <sequence>
+     <element name="Users" nillable="true" type="impl:ArrayOfUser"/>
+     <element name="Groups" nillable="true" type="impl:ArrayOfGroup"/>
+     <element name="UserGroups" nillable="true" type="impl:ArrayOfUserGroup"/>
+    </sequence>
+   </complexType>
+   <element name="getUsersAndGroupsWithOptions">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="options" type="tns2:WsKeyValuePairs"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_WsKeyValue">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:WsKeyValue"/>
+    </sequence>
+   </complexType>
+   <element name="getUsersAndGroupsWithOptionsResponse">
+    <complexType>
+     <sequence>
+      <element name="getUsersAndGroupsWithOptionsReturn" type="impl:UsersAndGroups"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUsersAndGroups">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="usersAndGroups" type="impl:UsersAndGroups"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUsersAndGroupsResponse">
+    <complexType/>
+   </element>
+   <element name="setUserInfo">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="userInfo" type="impl:User"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUserInfoResponse">
+    <complexType/>
+   </element>
+   <element name="getUserInfo">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="getUserInfoReturn" type="impl:User"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.implementation.server.integration.etlforge.invalid" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:org.etlforge.integration.server.implementation.webservice.useradmin.UserAdmin"/>
+   <complexType name="WsKeyValue">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsKeyValuePairs">
+    <sequence>
+     <element name="keyValues" nillable="true" type="impl:ArrayOf_tns2_WsKeyValue"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="setUserInfoResponse">
+
+      <wsdl:part element="impl:setUserInfoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUserInfoRequest">
+
+      <wsdl:part element="impl:setUserInfo" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUsersAndGroupsResponse">
+
+      <wsdl:part element="impl:setUsersAndGroupsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUsersAndGroupsRequest">
+
+      <wsdl:part element="impl:setUsersAndGroups" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersAndGroupsWithOptionsResponse">
+
+      <wsdl:part element="impl:getUsersAndGroupsWithOptionsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserInfoRequest">
+
+      <wsdl:part element="impl:getUserInfo" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersAndGroupsWithOptionsRequest">
+
+      <wsdl:part element="impl:getUsersAndGroupsWithOptions" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersAndGroupsResponse">
+
+      <wsdl:part element="impl:getUsersAndGroupsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersAndGroupsRequest">
+
+      <wsdl:part element="impl:getUsersAndGroups" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserInfoResponse">
+
+      <wsdl:part element="impl:getUserInfoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UserAdmin">
+
+      <wsdl:operation name="getUsersAndGroups">
+
+         <wsdl:input message="impl:getUsersAndGroupsRequest" name="getUsersAndGroupsRequest"/>
+
+         <wsdl:output message="impl:getUsersAndGroupsResponse" name="getUsersAndGroupsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUsersAndGroupsWithOptions">
+
+         <wsdl:input message="impl:getUsersAndGroupsWithOptionsRequest" name="getUsersAndGroupsWithOptionsRequest"/>
+
+         <wsdl:output message="impl:getUsersAndGroupsWithOptionsResponse" name="getUsersAndGroupsWithOptionsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUsersAndGroups">
+
+         <wsdl:input message="impl:setUsersAndGroupsRequest" name="setUsersAndGroupsRequest"/>
+
+         <wsdl:output message="impl:setUsersAndGroupsResponse" name="setUsersAndGroupsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUserInfo">
+
+         <wsdl:input message="impl:setUserInfoRequest" name="setUserInfoRequest"/>
+
+         <wsdl:output message="impl:setUserInfoResponse" name="setUserInfoResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUserInfo">
+
+         <wsdl:input message="impl:getUserInfoRequest" name="getUserInfoRequest"/>
+
+         <wsdl:output message="impl:getUserInfoResponse" name="getUserInfoResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_useradminSoapBinding" type="impl:UserAdmin">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getUsersAndGroups">
+
+         <wsdlsoap:operation soapAction="konga_useradmin#getUsersAndGroups"/>
+
+         <wsdl:input name="getUsersAndGroupsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUsersAndGroupsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUsersAndGroupsWithOptions">
+
+         <wsdlsoap:operation soapAction="konga_useradmin#getUsersAndGroupsWithOptions"/>
+
+         <wsdl:input name="getUsersAndGroupsWithOptionsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUsersAndGroupsWithOptionsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUsersAndGroups">
+
+         <wsdlsoap:operation soapAction="konga_useradmin#setUsersAndGroups"/>
+
+         <wsdl:input name="setUsersAndGroupsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setUsersAndGroupsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUserInfo">
+
+         <wsdlsoap:operation soapAction="konga_useradmin#setUserInfo"/>
+
+         <wsdl:input name="setUserInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setUserInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUserInfo">
+
+         <wsdlsoap:operation soapAction="getUserInfo"/>
+
+         <wsdl:input name="getUserInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUserInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UserAdminService">
+
+      <wsdl:port binding="impl:konga_useradminSoapBinding" name="konga_useradmin">
+
+         <wsdlsoap:address location="http://localhost:46908/axis/konga_useradmin"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

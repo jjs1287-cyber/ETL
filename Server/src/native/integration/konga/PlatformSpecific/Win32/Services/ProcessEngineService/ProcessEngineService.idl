@@ -1,0 +1,18 @@
+// ProcessEngineService.idl : IDL source for ProcessEngineService
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ProcessEngineService.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(194ADDAF-BA0B-48C1-9501-42ADAF032D56),
+	version(1.0),
+	helpstring("ProcessEngineService 1.0 Type Library")
+]
+library ProcessEngineServiceLib
+{
+	importlib("stdole2.tlb");
+};

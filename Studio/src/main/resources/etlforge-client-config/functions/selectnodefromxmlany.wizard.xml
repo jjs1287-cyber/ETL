@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Element name</Label>
+		<Description>The name of the element, e.g. "Account".</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Path to XML &lt;any&gt;</Label>
+		<Description>The data element path of a value node of an xml Any element.</Description>
+	</Argument>
+</Wizard>

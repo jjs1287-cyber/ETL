@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;To</Label>
+		<Description>The recipient's email address.</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Subject</Label>
+	</Argument>
+	<Argument>
+		<Label>&amp;Message</Label>
+	</Argument>
+</Wizard>

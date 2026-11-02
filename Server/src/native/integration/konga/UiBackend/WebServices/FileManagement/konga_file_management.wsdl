@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.filemanagement.FileManager" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.filemanagement.FileManager" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.filemanagement.FileManager" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.filemanagement.FileManager" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="downloadFile">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="fileToDownload" type="impl:CDownloadedFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CDownloadedFile">
+    <sequence>
+     <element name="Guid" nillable="true" type="xsd:string"/>
+     <element name="Path" nillable="true" type="xsd:string"/>
+     <element name="MD5" nillable="true" type="xsd:string"/>
+     <element name="ZippedBase64EncodedContents" nillable="true" type="xsd:string"/>
+     <element name="ModifiedTime" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="downloadFileResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadFileReturn" type="impl:CFileDownloadResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOfCDownloadedFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CDownloadedFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CFileDownloadResult">
+    <sequence>
+     <element name="DownloadedFile" nillable="true" type="impl:CDownloadedFile"/>
+     <element name="Dependencies" nillable="true" type="impl:ArrayOfCDownloadedFile"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="downloadFileRequest">
+
+      <wsdl:part element="impl:downloadFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadFileResponse">
+
+      <wsdl:part element="impl:downloadFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FileManager">
+
+      <wsdl:operation name="downloadFile">
+
+         <wsdl:input message="impl:downloadFileRequest" name="downloadFileRequest"/>
+
+         <wsdl:output message="impl:downloadFileResponse" name="downloadFileResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_file_managementSoapBinding" type="impl:FileManager">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="downloadFile">
+
+         <wsdlsoap:operation soapAction="konga_file_management#downloadFile"/>
+
+         <wsdl:input name="downloadFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FileManagerService">
+
+      <wsdl:port binding="impl:konga_file_managementSoapBinding" name="konga_file_management">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_file_management"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

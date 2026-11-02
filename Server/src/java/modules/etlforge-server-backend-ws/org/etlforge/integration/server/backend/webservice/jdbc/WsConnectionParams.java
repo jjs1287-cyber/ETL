@@ -1,0 +1,281 @@
+package org.etlforge.integration.server.backend.webservice.jdbc;
+
+import java.io.Serializable;
+import javax.xml.namespace.QName;
+import org.apache.axis.description.ElementDesc;
+import org.apache.axis.description.TypeDesc;
+import org.apache.axis.encoding.Deserializer;
+import org.apache.axis.encoding.Serializer;
+import org.apache.axis.encoding.ser.BeanDeserializer;
+import org.apache.axis.encoding.ser.BeanSerializer;
+
+public class WsConnectionParams implements Serializable {
+   private String server;
+   private int port;
+   private String database;
+   private String user;
+   private String password;
+   private String manualConnectionString;
+   private String additionalParams;
+   private String driverName;
+   private int timeout;
+   private int transactionIsolationLevel;
+   private Object __equalsCalc = null;
+   private boolean __hashCodeCalc = false;
+   private static TypeDesc typeDesc = new TypeDesc(WsConnectionParams.class, true);
+
+   public WsConnectionParams() {
+   }
+
+   public WsConnectionParams(String var1, int var2, String var3, String var4, String var5, String var6, String var7, String var8, int var9, int var10) {
+      this.server = var1;
+      this.port = var2;
+      this.database = var3;
+      this.user = var4;
+      this.password = var5;
+      this.manualConnectionString = var6;
+      this.additionalParams = var7;
+      this.driverName = var8;
+      this.timeout = var9;
+      this.transactionIsolationLevel = var10;
+   }
+
+   public String getServer() {
+      return this.server;
+   }
+
+   public void setServer(String var1) {
+      this.server = var1;
+   }
+
+   public int getPort() {
+      return this.port;
+   }
+
+   public void setPort(int var1) {
+      this.port = var1;
+   }
+
+   public String getDatabase() {
+      return this.database;
+   }
+
+   public void setDatabase(String var1) {
+      this.database = var1;
+   }
+
+   public String getUser() {
+      return this.user;
+   }
+
+   public void setUser(String var1) {
+      this.user = var1;
+   }
+
+   public String getPassword() {
+      return this.password;
+   }
+
+   public void setPassword(String var1) {
+      this.password = var1;
+   }
+
+   public String getManualConnectionString() {
+      return this.manualConnectionString;
+   }
+
+   public void setManualConnectionString(String var1) {
+      this.manualConnectionString = var1;
+   }
+
+   public String getAdditionalParams() {
+      return this.additionalParams;
+   }
+
+   public void setAdditionalParams(String var1) {
+      this.additionalParams = var1;
+   }
+
+   public String getDriverName() {
+      return this.driverName;
+   }
+
+   public void setDriverName(String var1) {
+      this.driverName = var1;
+   }
+
+   public int getTimeout() {
+      return this.timeout;
+   }
+
+   public void setTimeout(int var1) {
+      this.timeout = var1;
+   }
+
+   public int getTransactionIsolationLevel() {
+      return this.transactionIsolationLevel;
+   }
+
+   public void setTransactionIsolationLevel(int var1) {
+      this.transactionIsolationLevel = var1;
+   }
+
+   @Override
+   public synchronized boolean equals(Object var1) {
+      if (!(var1 instanceof WsConnectionParams)) {
+         return false;
+      }
+
+      WsConnectionParams var2 = (WsConnectionParams)var1;
+      if (var1 == null) {
+         return false;
+      }
+
+      if (this == var1) {
+         return true;
+      }
+
+      if (this.__equalsCalc != null) {
+         return this.__equalsCalc == var1;
+      }
+
+      this.__equalsCalc = var1;
+      boolean var3 = (this.server == null && var2.getServer() == null || this.server != null && this.server.equals(var2.getServer()))
+         && this.port == var2.getPort()
+         && (this.database == null && var2.getDatabase() == null || this.database != null && this.database.equals(var2.getDatabase()))
+         && (this.user == null && var2.getUser() == null || this.user != null && this.user.equals(var2.getUser()))
+         && (this.password == null && var2.getPassword() == null || this.password != null && this.password.equals(var2.getPassword()))
+         && (
+            this.manualConnectionString == null && var2.getManualConnectionString() == null
+               || this.manualConnectionString != null && this.manualConnectionString.equals(var2.getManualConnectionString())
+         )
+         && (
+            this.additionalParams == null && var2.getAdditionalParams() == null
+               || this.additionalParams != null && this.additionalParams.equals(var2.getAdditionalParams())
+         )
+         && (this.driverName == null && var2.getDriverName() == null || this.driverName != null && this.driverName.equals(var2.getDriverName()))
+         && this.timeout == var2.getTimeout()
+         && this.transactionIsolationLevel == var2.getTransactionIsolationLevel();
+      this.__equalsCalc = null;
+      return var3;
+   }
+
+   @Override
+   public synchronized int hashCode() {
+      if (this.__hashCodeCalc) {
+         return 0;
+      }
+
+      this.__hashCodeCalc = true;
+      int var1 = 1;
+      if (this.getServer() != null) {
+         var1 += this.getServer().hashCode();
+      }
+
+      var1 += this.getPort();
+      if (this.getDatabase() != null) {
+         var1 += this.getDatabase().hashCode();
+      }
+
+      if (this.getUser() != null) {
+         var1 += this.getUser().hashCode();
+      }
+
+      if (this.getPassword() != null) {
+         var1 += this.getPassword().hashCode();
+      }
+
+      if (this.getManualConnectionString() != null) {
+         var1 += this.getManualConnectionString().hashCode();
+      }
+
+      if (this.getAdditionalParams() != null) {
+         var1 += this.getAdditionalParams().hashCode();
+      }
+
+      if (this.getDriverName() != null) {
+         var1 += this.getDriverName().hashCode();
+      }
+
+      var1 += this.getTimeout();
+      var1 += this.getTransactionIsolationLevel();
+      this.__hashCodeCalc = false;
+      return var1;
+   }
+
+   public static TypeDesc getTypeDesc() {
+      return typeDesc;
+   }
+
+   public static Serializer getSerializer(String var0, Class var1, QName var2) {
+      return new BeanSerializer(var1, var2, typeDesc);
+   }
+
+   public static Deserializer getDeserializer(String var0, Class var1, QName var2) {
+      return new BeanDeserializer(var1, var2, typeDesc);
+   }
+
+   static {
+      typeDesc.setXmlType(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "WsConnectionParams"));
+      ElementDesc var0 = new ElementDesc();
+      var0.setFieldName("server");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "server"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("port");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "port"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "int"));
+      var0.setNillable(false);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("database");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "database"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("user");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "user"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("password");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "password"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("manualConnectionString");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "manualConnectionString"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("additionalParams");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "additionalParams"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("driverName");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "driverName"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "string"));
+      var0.setNillable(true);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("timeout");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "timeout"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "int"));
+      var0.setNillable(false);
+      typeDesc.addFieldDesc(var0);
+      var0 = new ElementDesc();
+      var0.setFieldName("transactionIsolationLevel");
+      var0.setXmlName(new QName("http://jdbc.webservice.backend.server.integration.etlforge.invalid", "transactionIsolationLevel"));
+      var0.setXmlType(new QName("http://www.w3.org/2001/XMLSchema", "int"));
+      var0.setNillable(false);
+      typeDesc.addFieldDesc(var0);
+   }
+}

@@ -1,0 +1,54 @@
+<html>
+This function initializes a set of local variables from its argument list.<br>
+The construction of the local variable depends on two cases.<p>
+case 1. when the function call is made in the mapping of a target field.<br>
+(A call of <code><font size="4">SetInstances()</font></code> function must be made privously.)<br>
+the local variable is constructed from the corresponding 
+data element in the instance given by 
+<code><font size="4">SetInstances()</font></code> function.<p>
+case 2. when the function call is made in the script.<br>
+the local variable is constructed from the corresponding 
+argument in the list provided by the calling runscript statement.<br>
+These veriables can be addressed also by _1, _2... 
+<p>
+A null data element is return from this function, and should be ignored.
+<p>
+Example:
+<p>
+case 1.<br>
+Assuming in one of the parent mappings contains the following statements<br>
+<code><font size="4">
+...<br>
+r=DBLookupAll("&lt;TAG&gt;Sources/DB...&lt;/TAG&gt;","SELECT key_name, key_value, key_type FROM key_values");<br>
+SetInstances("DETAILS",r);<br>
+...</font></code>
+<p>
+in the "DETAILS" target node a field may have the mapping<p>
+<code><font size="4">
+&lt;trans&gt;<br>
+ArgumentList(key,value);<br>
+key+" = "+value;<br>
+&lt;/trans&gt;
+</font></code>
+<p>
+case 2.<br>
+run a script<br>
+<code><font size="4">
+...<br>
+RunScript("&lt;TAG&gt;myProject/Scripts/CalculateSomething&lt;/TAG&gt;","John",35)<br>
+// the result value would be "John is 35 years old."<br>
+...<br>
+</font></code>
+<p>
+with the script "CalculateSomething" read as follows
+<p>
+<code><font size="4">
+&lt;trans&gt;<br>
+ArgumentList(name,age);<br>
+name+" is "+age+" years old."<br>
+&lt;/trans&gt;
+</font></code>
+<p>
+
+As an alternative to this function, see <code><font size="4">GetInstance()</font></code>.
+</html>

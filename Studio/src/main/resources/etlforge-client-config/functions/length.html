@@ -1,0 +1,31 @@
+<html>Returns the length of the input argument. 
+							The following list summarizes the behavior of this method for different input types:
+							<ul>
+							<li><code><font size="4">string</font></code>: The length of the string is returned;</li>
+							<li><code><font size="4">array</font></code>: The number of elements in the array is returned;</li>
+							<li><code><font size="4">binary data</font></code>: The number of bytes is returned;</li>
+							<li>For all other types an attempt is made to convert the argument to a string,
+							and the length of the resulting string is returned. If the argument can not be converted to a 
+							string, or the argument is null or unknown, 0 is returned.</li>
+							</ul><br><h2>Example:</h2><code><font size="4">
+				// String length:<br>
+        Length("Mississippi") // returns 11.<br><br>
+					
+        // Array length:<br>
+				// Count the number of email address nodes.<br>
+				$nodes = SelectNodesFromXmlAny("cust:EmailAddress",Customer$Any#.,<br>
+				"cust=urn:xmlns:25hoursaday-com:customer");<br>
+				Length($nodes)<br><br>
+        
+        // Binary arguments:<br>
+        Length(HexToBinary("b2082fee")) // returns 4, because the input is a 4-byte binary data element<br><br>
+
+        // Numeric arguments:<br>
+        Length(1234567) // returns 7 <br>
+        Length(123.45678) // returns 9<br><br>
+        
+        // Misc:<br>
+        Length(true) // returns 1<br>
+        Length(Now()) // returns 19 since the default date format is yyyy-MM-DD hh:mm:ss<br>
+        Length(Null()) // returns 0 
+				</font></code></html>

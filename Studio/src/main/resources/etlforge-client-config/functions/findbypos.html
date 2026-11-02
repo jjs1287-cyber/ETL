@@ -1,0 +1,14 @@
+<html>Returns the value of a data element in a row that occurs multiple times.
+				The number specified in the pos argument indicates from which occurrence to get the value.
+				If a negative number is specified, counting will begin with the last row.
+				Note that the index is 1-based.<br><h2>Example:</h2>Assume your database has a child-parent relationship, where for each parent
+				the child occurs 5 times. To get the second child you would use
+				<br>
+				<br>
+				<code><font size="4">FindByPos(2, ParentTab.ChildTab#.Value$)</font></code>
+				<br>
+				<br>
+				To get the last child you would use
+				<br>
+				<br>
+				<code><font size="4">FindByPos(-1, ParentTab.ChildTab#.Value$)</font></code></html>

@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+  <globalConfiguration>
+    <parameter name="sendMultiRefs" value="true" />
+    <parameter name="disablePrettyXML" value="true" />
+    <parameter name="dotNetSoapEncFix" value="true" />
+    <parameter name="enableNamespacePrefixOptimization" value="true" />
+    <parameter name="sendXMLDeclaration" value="true" />
+    <parameter name="sendXsiTypes" value="true" />
+    <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" />
+    <requestFlow>
+      <handler type="java:org.apache.axis.handlers.JWSHandler">
+        <parameter name="scope" value="session" />
+      </handler>
+      <handler type="java:org.apache.axis.handlers.JWSHandler">
+        <parameter name="scope" value="request" />
+        <parameter name="extension" value=".jwr" />
+      </handler>
+    </requestFlow>
+  </globalConfiguration>
+  <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+  <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder" />
+  <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+  <service name="konga_salesforce_infoprovider" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns1:openConnectionReturn" returnType="ns1:WsLoginResult" name="openConnection" qname="ns1:openConnection" soapAction="openConnection" xmlns:ns1="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns1:etlforgeCredentials" type="ns2:WsCredentials" xmlns:ns2="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns1:orgId" type="ns1:WsOrgIdentifier" />
+    </operation>
+    <operation returnQName="ns3:queryReturn" returnType="ns3:WsQueryResult" name="query" qname="ns3:query" soapAction="query" xmlns:ns3="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns3:etlforgeCredentials" type="ns4:WsCredentials" xmlns:ns4="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns3:sessionData" type="ns3:WsSessionData" />
+      <parameter qname="ns3:soql" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns5:queryAllReturn" returnType="ns5:WsQueryResult" name="queryAll" qname="ns5:queryAll" soapAction="queryAll" xmlns:ns5="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns5:etlforgeCredentials" type="ns6:WsCredentials" xmlns:ns6="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns5:sessionData" type="ns5:WsSessionData" />
+      <parameter qname="ns5:soql" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns7:describeObjectsReturn" returnType="ns7:WsDescribeObjectsResult" name="describeObjects" qname="ns7:describeObjects" soapAction="describeObjects" xmlns:ns7="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns7:etlforgeCredentials" type="ns8:WsCredentials" xmlns:ns8="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns7:sessionData" type="ns7:WsSessionData" />
+      <parameter qname="ns7:objectNames" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns9:queryAllToFileReturn" returnType="ns9:WsSalesforceError" name="queryAllToFile" qname="ns9:queryAllToFile" soapAction="queryAllToFile" xmlns:ns9="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns9:in0" type="ns10:WsCredentials" xmlns:ns10="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns9:in1" type="ns9:WsSessionData" />
+      <parameter qname="ns9:in2" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns9:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns11:listAllObjectsReturn" returnType="ns11:WsDescribeObjectsResult" name="listAllObjects" qname="ns11:listAllObjects" soapAction="listAllObjects" xmlns:ns11="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns11:etlforgeCredentials" type="ns12:WsCredentials" xmlns:ns12="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns11:sessionData" type="ns11:WsSessionData" />
+    </operation>
+    <operation returnQName="ns13:describeObjectReturn" returnType="ns13:WsDescribeObjectsResult" name="describeObject" qname="ns13:describeObject" soapAction="describeObject" xmlns:ns13="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns13:etlforgeCredentials" type="ns14:WsCredentials" xmlns:ns14="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns13:sessionData" type="ns13:WsSessionData" />
+      <parameter qname="ns13:objectName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns15:listAllObjects2Return" returnType="ns15:WsSerializedObjectList" name="listAllObjects2" qname="ns15:listAllObjects2" soapAction="listAllObjects2" xmlns:ns15="http://sfdc.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns15:etlforgeCredentials" type="ns16:WsCredentials" xmlns:ns16="http://webservice.implementation.server.integration.etlforge.invalid" />
+      <parameter qname="ns15:sessionData" type="ns15:WsSessionData" />
+    </operation>
+    <parameter name="allowedMethods" value="openConnection listAllObjects describeObjects query describeObject listAllObjects2 queryAllToFile queryAll" />
+    <parameter name="wsdlPortType" value="SalesforceInfoProvider" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_salesforce_infoprovider" />
+    <parameter name="className" value="org.etlforge.integration.server.implementation.webservice.sfdc.Konga_salesforce_infoproviderSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="SalesforceInfoProviderService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectField" qname="ns17:WsSObjectField" xmlns:ns17="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsQueryResult" qname="ns18:WsQueryResult" xmlns:ns18="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsDescribeObjectsResult" qname="ns19:WsDescribeObjectsResult" xmlns:ns19="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectParent" qname="ns20:WsSObjectParent" xmlns:ns20="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsQueryRecord" qname="ns21:WsQueryRecord" xmlns:ns21="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSalesforceError" qname="ns22:WsSalesforceError" xmlns:ns22="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectParent[]" qname="ns23:ArrayOfWsSObjectParent" xmlns:ns23="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectChild[]" qname="ns24:ArrayOfWsSObjectChild" xmlns:ns24="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectField[]" qname="ns25:ArrayOfWsSObjectField" xmlns:ns25="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsOrgIdentifier" qname="ns26:WsOrgIdentifier" xmlns:ns26="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:java.lang.String[]" qname="ns27:ArrayOf_xsd_string" xmlns:ns27="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsPicklistEntry" qname="ns28:WsPicklistEntry" xmlns:ns28="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsQueryField[]" qname="ns29:ArrayOfWsQueryField" xmlns:ns29="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsQueryField" qname="ns30:WsQueryField" xmlns:ns30="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsPicklistEntry[]" qname="ns31:ArrayOfWsPicklistEntry" xmlns:ns31="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.WsCredentials" qname="ns32:WsCredentials" xmlns:ns32="http://webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectChild" qname="ns33:WsSObjectChild" xmlns:ns33="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSerializedObjectList" qname="ns34:WsSerializedObjectList" xmlns:ns34="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSessionData" qname="ns35:WsSessionData" xmlns:ns35="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectSchema[]" qname="ns36:ArrayOfWsSObjectSchema" xmlns:ns36="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsSObjectSchema" qname="ns37:WsSObjectSchema" xmlns:ns37="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsQueryRecord[]" qname="ns38:ArrayOfWsQueryRecord" xmlns:ns38="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.sfdc.WsLoginResult" qname="ns39:WsLoginResult" xmlns:ns39="http://sfdc.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_ldap_infoprovider" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns40:getObjectClassesReturn" returnType="ns40:WsObjectClassInfoReturn" name="getObjectClasses" qname="ns40:getObjectClasses" soapAction="getObjectClasses" xmlns:ns40="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns40:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in2" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in4" type="ns40:WsLdapConnectionParams" />
+      <parameter qname="ns40:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in6" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in7" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns40:in8" type="ns41:WsKeyValuePairs" xmlns:ns41="http://webservice.implementation.server.integration.etlforge.invalid" />
+    </operation>
+    <operation returnQName="ns42:getObjectStructuresReturn" returnType="ns42:WsClassStructureReturn" name="getObjectStructures" qname="ns42:getObjectStructures" soapAction="getObjectStructures" xmlns:ns42="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns42:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in2" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in4" type="ns42:WsLdapConnectionParams" />
+      <parameter qname="ns42:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in6" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns42:in7" type="ns43:WsKeyValuePairs" xmlns:ns43="http://webservice.implementation.server.integration.etlforge.invalid" />
+    </operation>
+    <parameter name="allowedMethods" value="getObjectClasses getObjectStructures" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlPortType" value="LdapInfoProvider" />
+    <parameter name="className" value="org.etlforge.integration.server.implementation.webservice.interchange.ldap.Konga_ldap_infoproviderSoapBindingImpl" />
+    <parameter name="wsdlServicePort" value="konga_ldap_infoprovider" />
+    <parameter name="wsdlTargetNamespace" value="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="LdapInfoProviderService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:java.lang.String[]" qname="ns44:ArrayOf_xsd_string" xmlns:ns44="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.WsKeyValue[]" qname="ns45:ArrayOf_tns2_WsKeyValue" xmlns:ns45="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.ldap.WsClassStructureReturn" qname="ns46:WsClassStructureReturn" xmlns:ns46="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.ldap.WsObjectClassInfo" qname="ns47:WsObjectClassInfo" xmlns:ns47="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.ldap.WsObjectClassInfoReturn" qname="ns48:WsObjectClassInfoReturn" xmlns:ns48="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.WsKeyValue" qname="ns49:WsKeyValue" xmlns:ns49="http://webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.ldap.WsObjectClassInfo[]" qname="ns50:ArrayOfWsObjectClassInfo" xmlns:ns50="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.WsKeyValuePairs" qname="ns51:WsKeyValuePairs" xmlns:ns51="http://webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.ldap.WsLdapConnectionParams" qname="ns52:WsLdapConnectionParams" xmlns:ns52="http://ldap.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_projectbackupadmin" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns57:getListOfBackupsReturn" returnType="ns57:WsGetBackupListResult" name="getListOfBackups" qname="ns57:getListOfBackups" soapAction="getListOfBackups" xmlns:ns57="http://backup.projectadmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns57:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns57:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns57:projectId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <parameter name="allowedMethods" value="getListOfBackups" />
+    <parameter name="wsdlPortType" value="ProjectBackupAdministration" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_projectbackupadmin" />
+    <parameter name="className" value="com.etlforge.integration.server.implementation.webservice.projectadmin.backup.Konga_projectbackupadminSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://backup.projectadmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="ProjectBackupAdministrationService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.projectadmin.backup.WsProjectBackupDescriptor" qname="ns58:WsProjectBackupDescriptor" xmlns:ns58="http://backup.projectadmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.projectadmin.backup.WsProjectBackupDescriptor[]" qname="ns59:ArrayOfWsProjectBackupDescriptor" xmlns:ns59="http://backup.projectadmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.projectadmin.backup.WsGetBackupListResult" qname="ns60:WsGetBackupListResult" xmlns:ns60="http://backup.projectadmin.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_jdbc_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns61:closeSessionReturn" returnType="ns61:WsJdbcError" name="closeSession" qname="ns61:closeSession" soapAction="closeSession" xmlns:ns61="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns61:in0" type="ns61:WsJdbcSessionId" />
+    </operation>
+    <operation returnQName="ns62:rollbackTransactionsReturn" returnType="ns62:WsJdbcError" name="rollbackTransactions" qname="ns62:rollbackTransactions" soapAction="rollbackTransactions" xmlns:ns62="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns62:in0" type="ns62:WsJdbcSessionId" />
+    </operation>
+    <operation returnQName="ns63:callStoredProcedureReturn" returnType="ns63:WsSPResult" name="callStoredProcedure" qname="ns63:callStoredProcedure" soapAction="callStoredProcedure" xmlns:ns63="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns63:in0" type="ns63:WsJdbcSessionId" />
+      <parameter qname="ns63:in1" type="ns63:WsSPParams" />
+    </operation>
+    <operation returnQName="ns64:startNewSessionReturn" returnType="ns64:WsJdbcStartNewSessionResult" name="startNewSession" qname="ns64:startNewSession" soapAction="startNewSession" xmlns:ns64="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns64:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns64:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns65:commitTransactionsReturn" returnType="ns65:WsJdbcError" name="commitTransactions" qname="ns65:commitTransactions" soapAction="commitTransactions" xmlns:ns65="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns65:in0" type="ns65:WsJdbcSessionId" />
+    </operation>
+    <operation returnQName="ns66:cachedDbLookupReturn" returnType="ns66:WsDbLookupResult" name="cachedDbLookup" qname="ns66:cachedDbLookup" soapAction="cachedDbLookup" xmlns:ns66="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns66:in0" type="ns66:WsJdbcSessionId" />
+      <parameter qname="ns66:in1" type="ns66:WsDbLookupParams" />
+    </operation>
+    <operation returnQName="ns67:readSourceReturn" returnType="ns67:WsJdbcError" name="readSource" qname="ns67:readSource" soapAction="readSource" xmlns:ns67="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns67:in0" type="ns67:WsJdbcSessionId" />
+      <parameter qname="ns67:in1" type="ns67:WsReadSourceParams" />
+    </operation>
+    <operation returnQName="ns68:dbLookupReturn" returnType="ns68:WsDbLookupResult" name="dbLookup" qname="ns68:dbLookup" soapAction="dbLookup" xmlns:ns68="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns68:in0" type="ns68:WsJdbcSessionId" />
+      <parameter qname="ns68:in1" type="ns68:WsDbLookupParams" />
+    </operation>
+    <operation returnQName="ns69:writeTargetReturn" returnType="ns69:WsJdbcError" name="writeTarget" qname="ns69:writeTarget" soapAction="writeTarget" xmlns:ns69="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns69:in0" type="ns69:WsJdbcSessionId" />
+      <parameter qname="ns69:in1" type="ns69:WsWriteTargetParams" />
+    </operation>
+    <operation returnQName="ns70:dbExecuteReturn" returnType="ns70:WsDbExecuteResult" name="dbExecute" qname="ns70:dbExecute" soapAction="dbExecute" xmlns:ns70="http://jdbc.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns70:in0" type="ns70:WsJdbcSessionId" />
+      <parameter qname="ns70:in1" type="ns70:WsDbLookupParams" />
+      <parameter qname="ns70:in2" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <parameter name="allowedMethods" value="readSource closeSession rollbackTransactions dbExecute dbLookup cachedDbLookup commitTransactions callStoredProcedure startNewSession writeTarget" />
+    <parameter name="wsdlPortType" value="JdbcEngine" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_jdbc_engine" />
+    <parameter name="className" value="org.etlforge.integration.server.backend.webservice.jdbc.Konga_jdbc_engineSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="JdbcEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsDbLookupResult" qname="ns71:WsDbLookupResult" xmlns:ns71="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsSPParameter[]" qname="ns72:ArrayOfWsSPParameter" xmlns:ns72="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsResultSetRow" qname="ns73:WsResultSetRow" xmlns:ns73="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsKeyValue[]" qname="ns74:ArrayOfWsKeyValue" xmlns:ns74="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsKeyValue" qname="ns75:WsKeyValue" xmlns:ns75="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsSPParameter" qname="ns76:WsSPParameter" xmlns:ns76="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsJdbcStartNewSessionResult" qname="ns77:WsJdbcStartNewSessionResult" xmlns:ns77="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsReadSourceParams" qname="ns78:WsReadSourceParams" xmlns:ns78="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsDbExecuteResult" qname="ns79:WsDbExecuteResult" xmlns:ns79="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsDbLookupParams" qname="ns80:WsDbLookupParams" xmlns:ns80="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsWriteTargetParams" qname="ns81:WsWriteTargetParams" xmlns:ns81="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsConnectionParams" qname="ns82:WsConnectionParams" xmlns:ns82="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsSPResult" qname="ns83:WsSPResult" xmlns:ns83="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsResultSetRow[]" qname="ns84:ArrayOfWsResultSetRow" xmlns:ns84="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsSPParams" qname="ns85:WsSPParams" xmlns:ns85="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsJdbcSessionId" qname="ns86:WsJdbcSessionId" xmlns:ns86="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:java.lang.String[]" qname="ns87:ArrayOf_xsd_string" xmlns:ns87="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsJdbcError" qname="ns88:WsJdbcError" xmlns:ns88="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.jdbc.WsResultSet" qname="ns89:WsResultSet" xmlns:ns89="http://jdbc.webservice.backend.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_json_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns90:startNewJsonSessionReturn" returnType="ns90:WsStartNewJsonSessionResult" name="startNewJsonSession" qname="ns90:startNewJsonSession" soapAction="startNewJsonSession" xmlns:ns90="http://json.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns90:ETLForgeUser" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns90:Md5Pwd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns91:jsonToXmlReturn" returnType="ns91:WsJsonError" name="jsonToXml" qname="ns91:jsonToXml" soapAction="jsonToXml" xmlns:ns91="http://json.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns91:SessionId" type="ns91:WsJsonSessionId" />
+      <parameter qname="ns91:ConversionParams" type="ns91:WsConversionParams" />
+    </operation>
+    <operation returnQName="ns92:xmlToJsonReturn" returnType="ns92:WsJsonError" name="xmlToJson" qname="ns92:xmlToJson" soapAction="xmlToJson" xmlns:ns92="http://json.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns92:SessionId" type="ns92:WsJsonSessionId" />
+      <parameter qname="ns92:ConversionParams" type="ns92:WsConversionParams" />
+    </operation>
+    <operation returnQName="ns93:closeJsonSessionReturn" returnType="ns93:WsJsonError" name="closeJsonSession" qname="ns93:closeJsonSession" soapAction="closeJsonSession" xmlns:ns93="http://json.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns93:SessionId" type="ns93:WsJsonSessionId" />
+    </operation>
+    <parameter name="allowedMethods" value="jsonToXml xmlToJson closeJsonSession startNewJsonSession" />
+    <parameter name="wsdlPortType" value="JsonEngine" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_json_engine" />
+    <parameter name="className" value="org.etlforge.integration.server.backend.webservice.json.Konga_json_engineSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://json.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="JsonEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.json.WsStartNewJsonSessionResult" qname="ns94:WsStartNewJsonSessionResult" xmlns:ns94="http://json.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.json.WsJsonSessionId" qname="ns95:WsJsonSessionId" xmlns:ns95="http://json.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.json.WsConversionParams" qname="ns96:WsConversionParams" xmlns:ns96="http://json.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.json.WsJsonError" qname="ns97:WsJsonError" xmlns:ns97="http://json.webservice.backend.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_jdbc_infoprovider" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns98:getAllDatabaseObjectsReturn" returnType="ns98:WsJdbcDatabaseInfo" name="getAllDatabaseObjects" qname="ns98:getAllDatabaseObjects" soapAction="getAllDatabaseObjects" xmlns:ns98="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns98:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns98:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns98:in2" type="ns98:WsConnectionParams" />
+      <parameter qname="ns98:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns98:in4" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns98:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns99:getDatabaseObjectsReturn" returnType="ns99:WsJdbcDatabaseInfo" name="getDatabaseObjects" qname="ns99:getDatabaseObjects" soapAction="getDatabaseObjects" xmlns:ns99="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns99:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in2" type="ns99:WsConnectionParams" />
+      <parameter qname="ns99:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in4" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in6" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns99:in7" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns100:getTableInfoReturn" returnType="ns100:WsJdbcDatabaseInfo" name="getTableInfo" qname="ns100:getTableInfo" soapAction="getTableInfo" xmlns:ns100="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns100:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns100:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns100:in2" type="ns100:WsConnectionParams" />
+      <parameter qname="ns100:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns100:in4" type="ns100:WsJdbcBeginEndQuote" />
+      <parameter qname="ns100:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns100:in6" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns100:in7" type="ns100:WsJdbcDatabaseObject" />
+    </operation>
+    <operation returnQName="ns101:getDriversReturn" returnType="ns101:WsJdbcDriverInfo" name="getDrivers" qname="ns101:getDrivers" soapAction="getDrivers" xmlns:ns101="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns101:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns101:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns102:testConnectionReturn" returnType="ns102:WsJdbcBeginEndQuote" name="testConnection" qname="ns102:testConnection" soapAction="testConnection" xmlns:ns102="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns102:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns102:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns102:in2" type="ns102:WsConnectionParams" />
+      <parameter qname="ns102:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns102:in4" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns102:in5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <parameter name="sendMultiRefs" value="false" />
+    <parameter name="wsdlServicePort" value="konga_jdbc_infoprovider" />
+    <parameter name="className" value="org.etlforge.integration.server.implementation.webservice.interchange.db.Konga_jdbc_infoproviderSoapBindingImpl" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="allowedMethods" value="getTableInfo getAllDatabaseObjects getDrivers testConnection getDatabaseObjects" />
+    <parameter name="wsdlServiceElement" value="JdbcInfoProviderService" />
+    <parameter name="wsdlTargetNamespace" value="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlPortType" value="JdbcInfoProvider" />
+    <parameter name="sendXsiTypes" value="false" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDatabaseColumn[]" qname="ns103:ArrayOfWsJdbcDatabaseColumn" xmlns:ns103="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDriverDescriptor" qname="ns104:WsJdbcDriverDescriptor" xmlns:ns104="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDriverInfo" qname="ns105:WsJdbcDriverInfo" xmlns:ns105="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDatabaseInfo" qname="ns106:WsJdbcDatabaseInfo" xmlns:ns106="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDatabaseObject" qname="ns107:WsJdbcDatabaseObject" xmlns:ns107="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDatabaseColumn" qname="ns108:WsJdbcDatabaseColumn" xmlns:ns108="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDatabaseObject[]" qname="ns109:ArrayOfWsJdbcDatabaseObject" xmlns:ns109="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcDriverDescriptor[]" qname="ns110:ArrayOfWsJdbcDriverDescriptor" xmlns:ns110="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsConnectionParams" qname="ns111:WsConnectionParams" xmlns:ns111="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.implementation.webservice.interchange.db.WsJdbcBeginEndQuote" qname="ns112:WsJdbcBeginEndQuote" xmlns:ns112="http://db.interchange.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_serveradmin" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns113:downloadFileReturn" returnType="xsd:string" name="downloadFile" qname="ns113:downloadFile" soapAction="downloadFile" xmlns:ns113="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <parameter qname="ns113:user" type="xsd:string" />
+      <parameter qname="ns113:password" type="xsd:string" />
+      <parameter qname="ns113:path" type="xsd:string" />
+    </operation>
+    <operation returnQName="ns114:downloadServerConfigurationFileReturn" returnType="xsd:string" name="downloadServerConfigurationFile" qname="ns114:downloadServerConfigurationFile" soapAction="downloadServerConfigurationFile" xmlns:ns114="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <parameter qname="ns114:user" type="xsd:string" />
+      <parameter qname="ns114:password" type="xsd:string" />
+    </operation>
+    <operation name="uploadServerConfigurationFile" qname="ns115:uploadServerConfigurationFile" soapAction="uploadServerConfigurationFile" xmlns:ns115="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns115:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns115:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns115:zippedAndBase64EncodedContents" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns116:listServerLogFilesReturn" returnType="ns116:WsServerFileLocators" name="listServerLogFiles" qname="ns116:listServerLogFiles" soapAction="listServerLogFiles" xmlns:ns116="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns116:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns116:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns117:listPluginLogFilesReturn" returnType="ns117:WsServerFileLocators" name="listPluginLogFiles" qname="ns117:listPluginLogFiles" soapAction="listPluginLogFiles" xmlns:ns117="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns117:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns117:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns118:listDebugLogFilesReturn" returnType="ns118:WsServerFileLocators" name="listDebugLogFiles" qname="ns118:listDebugLogFiles" soapAction="listDebugLogFiles" xmlns:ns118="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns118:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns118:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns118:startDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns118:endDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns119:listOperationLogFilesReturn" returnType="ns119:WsServerFileLocators" name="listOperationLogFiles" qname="ns119:listOperationLogFiles" soapAction="listOperationLogFiles" xmlns:ns119="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns119:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns119:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns119:startDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns119:endDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <parameter name="allowedMethods" value="listServerLogFiles listDebugLogFiles uploadServerConfigurationFile listOperationLogFiles downloadFile listPluginLogFiles downloadServerConfigurationFile" />
+    <parameter name="wsdlPortType" value="ServerAdministration" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_serveradmin" />
+    <parameter name="className" value="com.etlforge.integration.server.implementation.webservice.serveradmin.Konga_serveradminSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="ServerAdministrationService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.serveradmin.WsServerFileLocator[]" qname="ns120:ArrayOfWsServerFileLocator" xmlns:ns120="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.serveradmin.WsServerFileLocators" qname="ns121:WsServerFileLocators" xmlns:ns121="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.serveradmin.WsServerFileLocator" qname="ns122:WsServerFileLocator" xmlns:ns122="http://serveradmin.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <!-- Services from NetSuiteDesignEngineService WSDL service -->
+  <service name="konga_function_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns139:sendEmailReturn" returnType="ns139:WsSendEmailOutput" name="sendEmail" qname="ns139:sendEmail" soapAction="sendEmail" xmlns:ns139="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns139:SessionId" type="ns139:WsFunctionSessionId" />
+      <parameter qname="ns139:SendEmailInput" type="ns139:WsSendEmailInput" />
+    </operation>
+    <operation returnQName="ns140:startNewFunctionSessionReturn" returnType="ns140:WsStartNewFunctionSessionResult" name="startNewFunctionSession" qname="ns140:startNewFunctionSession" soapAction="startNewFunctionSession" xmlns:ns140="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns140:ETLForgeUser" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns140:ETLForgePasswordMD5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns141:getSalesforceServerTimestampReturn" returnType="ns141:WsGetSalesforceServerTimeStampResult" name="getSalesforceServerTimestamp" qname="ns141:getSalesforceServerTimestamp" soapAction="getSalesforceServerTimestamp" xmlns:ns141="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns141:SessionId" type="ns141:WsFunctionSessionId" />
+      <parameter qname="ns141:GetSalesforceServerTimeStampInput" type="ns141:WsGetSalesforceServerTimeStampInput" />
+    </operation>
+    <operation returnQName="ns142:fromDataLoaderDateTimeReturn" returnType="ns142:WsFromDataLoaderDateOutput" name="fromDataLoaderDateTime" qname="ns142:fromDataLoaderDateTime" soapAction="fromDataLoaderDateTime" xmlns:ns142="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns142:SessionId" type="ns142:WsFunctionSessionId" />
+      <parameter qname="ns142:FromDataLoaderDateInput" type="ns142:FromDataLoaderDateInput" />
+    </operation>
+    <operation returnQName="ns143:fromDataLoaderDateReturn" returnType="ns143:WsFromDataLoaderDateOutput" name="fromDataLoaderDate" qname="ns143:fromDataLoaderDate" soapAction="fromDataLoaderDate" xmlns:ns143="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns143:SessionId" type="ns143:WsFunctionSessionId" />
+      <parameter qname="ns143:FromDataLoaderDateInput" type="ns143:FromDataLoaderDateInput" />
+    </operation>
+    <operation returnQName="ns144:closeFunctionSessionReturn" returnType="ns144:WsFunctionError" name="closeFunctionSession" qname="ns144:closeFunctionSession" soapAction="closeFunctionSession" xmlns:ns144="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns144:SessionId" type="ns144:WsFunctionSessionId" />
+    </operation>
+    <operation returnQName="ns145:fromDataLoaderTimeReturn" returnType="ns145:WsFromDataLoaderDateOutput" name="fromDataLoaderTime" qname="ns145:fromDataLoaderTime" soapAction="fromDataLoaderTime" xmlns:ns145="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns145:SessionId" type="ns145:WsFunctionSessionId" />
+      <parameter qname="ns145:FromDataLoaderDateInput" type="ns145:FromDataLoaderDateInput" />
+    </operation>
+    <operation returnQName="ns146:convertTimeZoneReturn" returnType="ns146:WsConvertTimeZoneOutput" name="convertTimeZone" qname="ns146:convertTimeZone" soapAction="convertTimeZone" xmlns:ns146="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns146:in0" type="ns146:WsFunctionSessionId" />
+      <parameter qname="ns146:in1" type="ns146:WsConvertTimeZoneInput" />
+    </operation>
+    <operation returnQName="ns147:testFunctionReturn" returnType="ns147:WsTestFunctionOutput" name="testFunction" qname="ns147:testFunction" soapAction="testFunction" xmlns:ns147="http://function.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns147:in0" type="ns147:WsFunctionSessionId" />
+      <parameter qname="ns147:in1" type="ns147:WsTestFunctionInput" />
+    </operation>
+    <parameter name="allowedMethods" value="startNewFunctionSession getSalesforceServerTimestamp fromDataLoaderTime fromDataLoaderDate sendEmail fromDataLoaderDateTime closeFunctionSession testFunction convertTimeZone" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlPortType" value="FunctionEngine" />
+    <parameter name="className" value="org.etlforge.integration.server.backend.webservice.function.Konga_function_engineSoapBindingImpl" />
+    <parameter name="wsdlServicePort" value="konga_function_engine" />
+    <parameter name="wsdlTargetNamespace" value="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="FunctionEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.FromDataLoaderDateInput" qname="ns148:FromDataLoaderDateInput" xmlns:ns148="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsFunctionSessionId" qname="ns149:WsFunctionSessionId" xmlns:ns149="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsSendEmailOutput" qname="ns150:WsSendEmailOutput" xmlns:ns150="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsStartNewFunctionSessionResult" qname="ns151:WsStartNewFunctionSessionResult" xmlns:ns151="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsFunctionError" qname="ns152:WsFunctionError" xmlns:ns152="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:java.lang.String[]" qname="ns153:ArrayOf_xsd_string" xmlns:ns153="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsSendEmailInput" qname="ns154:WsSendEmailInput" xmlns:ns154="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsFromDataLoaderDateOutput" qname="ns155:WsFromDataLoaderDateOutput" xmlns:ns155="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsGetSalesforceServerTimeStampResult" qname="ns156:WsGetSalesforceServerTimeStampResult" xmlns:ns156="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsGetSalesforceServerTimeStampInput" qname="ns157:WsGetSalesforceServerTimeStampInput" xmlns:ns157="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsConvertTimeZoneOutput" qname="ns158:WsConvertTimeZoneOutput" xmlns:ns158="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsConvertTimeZoneInput" qname="ns159:WsConvertTimeZoneInput" xmlns:ns159="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsTestFunctionInput" qname="ns160:WsTestFunctionInput" xmlns:ns160="http://function.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.function.WsTestFunctionOutput" qname="ns161:WsTestFunctionOutput" xmlns:ns161="http://function.webservice.backend.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_salesforce_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns180:loginToSalesforceReturn" returnType="ns180:WsSalesforceEngineLoginResult" name="loginToSalesforce" qname="ns180:loginToSalesforce" soapAction="loginToSalesforce" xmlns:ns180="http://salesforce.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns180:etlforgeUser" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns180:etlforgePasswordMD5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns180:sfdcLoginParameters" type="ns180:WsSalesforceEngineLoginParams" />
+    </operation>
+    <operation returnQName="ns181:logoutFromSalesforceReturn" returnType="ns181:WsSalesforceEngineError" name="logoutFromSalesforce" qname="ns181:logoutFromSalesforce" soapAction="logoutFromSalesforce" xmlns:ns181="http://salesforce.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns181:etlforgeUser" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns181:etlforgePasswordMD5" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns181:sessionParams" type="ns181:WsSalesforceEngineSessionParams" />
+    </operation>
+    <parameter name="allowedMethods" value="logoutFromSalesforce loginToSalesforce" />
+    <parameter name="wsdlPortType" value="SalesforceEngine" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_salesforce_engine" />
+    <parameter name="className" value="org.etlforge.integration.server.backend.webservice.salesforce.Konga_salesforce_engineSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://salesforce.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="SalesforceEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.salesforce.WsSalesforceEngineLoginParams" qname="ns182:WsSalesforceEngineLoginParams" xmlns:ns182="http://salesforce.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.salesforce.WsSalesforceEngineLoginResult" qname="ns183:WsSalesforceEngineLoginResult" xmlns:ns183="http://salesforce.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.salesforce.WsSalesforceEngineError" qname="ns184:WsSalesforceEngineError" xmlns:ns184="http://salesforce.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.salesforce.WsSalesforceEngineSessionParams" qname="ns185:WsSalesforceEngineSessionParams" xmlns:ns185="http://salesforce.webservice.backend.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_bulkload_infoprovider" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns186:listInstancesReturn" returnType="ns186:WsBulkLoadInstance" name="listInstances" qname="ns186:listInstances" soapAction="listInstances" xmlns:ns186="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns186:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns186:md5Pwd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns186:filter" type="ns186:WsInstanceFilter" />
+    </operation>
+    <operation returnQName="ns187:listBatchesReturn" returnType="ns187:WsRecordOfSentBatch" name="listBatches" qname="ns187:listBatches" soapAction="listBatches" xmlns:ns187="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns187:user" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns187:md5Pwd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns187:instanceId" type="ns187:WsBulkLoadInstanceId" />
+    </operation>
+    <parameter name="allowedMethods" value="listInstances listBatches" />
+    <parameter name="wsdlPortType" value="BulkLoadInfoProvider" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_bulkload_infoprovider" />
+    <parameter name="className" value="com.etlforge.integration.server.implementation.webservice.bulkloadinfo.Konga_bulkload_infoproviderSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="BulkLoadInfoProviderService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkloadinfo.WsRecordOfSentBatch" qname="ns188:WsRecordOfSentBatch" xmlns:ns188="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkloadinfo.WsBulkLoadInstanceId" qname="ns189:WsBulkLoadInstanceId" xmlns:ns189="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkloadinfo.WsBulkLoadInstance" qname="ns190:WsBulkLoadInstance" xmlns:ns190="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkloadinfo.WsBatch" qname="ns191:WsBatch" xmlns:ns191="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkloadinfo.WsInstanceFilter" qname="ns192:WsInstanceFilter" xmlns:ns192="http://bulkloadinfo.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <service name="Version" provider="java:RPC">
+    <parameter name="allowedMethods" value="getVersion" />
+    <parameter name="className" value="org.apache.axis.Version" />
+  </service>
+  <service name="konga_wsexample_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns193:TestExampleReturn" returnType="ns193:WsStatus" name="testExample" qname="ns193:TestExample" soapAction="TestExample" xmlns:ns193="http://wsexample.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns193:Parameters" type="ns193:WsParameters" />
+    </operation>
+    <operation name="testNoOutput" qname="ns194:TestNoOutput" soapAction="TestNoOutput" xmlns:ns194="http://wsexample.webservice.backend.server.integration.etlforge.invalid">
+      <parameter qname="ns194:Parameters" type="ns194:WsParameters" />
+    </operation>
+    <operation returnQName="ns195:TestNoInputReturn" returnType="ns195:WsStatus" name="testNoInput" qname="ns195:TestNoInput" soapAction="TestNoInput" xmlns:ns195="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+    <operation name="testNoInputOutput" qname="ns196:TestNoInputOutput" soapAction="TestNoInputOutput" xmlns:ns196="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="allowedMethods" value="testNoInput testNoOutput testExample testNoInputOutput" />
+    <parameter name="wsdlPortType" value="WsExampleEngine" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_wsexample_engine" />
+    <parameter name="className" value="org.etlforge.integration.server.backend.webservice.wsexample.Konga_wsexample_engineSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="WsExampleEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.wsexample.WsStatus" qname="ns197:WsStatus" xmlns:ns197="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" type="java:java.lang.String[]" qname="ns198:ArrayOf_xsd_string" xmlns:ns198="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:org.etlforge.integration.server.backend.webservice.wsexample.WsParameters" qname="ns199:WsParameters" xmlns:ns199="http://wsexample.webservice.backend.server.integration.etlforge.invalid" />
+  </service>
+  <service name="konga_bulkload_engine" provider="java:RPC" style="wrapped" use="literal">
+    <operation returnQName="ns200:startNewBulkLoadSessionReturn" returnType="ns200:WsStartNewBulkLoadSessionResult" name="startNewBulkLoadSession" qname="ns200:startNewBulkLoadSession" soapAction="startNewBulkLoadSession" xmlns:ns200="http://bulkload.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns200:etlforgeUser" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+      <parameter qname="ns200:md5Pwd" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+    </operation>
+    <operation returnQName="ns201:runBulkLoadReturn" returnType="ns201:WsBulkLoadResult" name="runBulkLoad" qname="ns201:runBulkLoad" soapAction="runBulkLoad" xmlns:ns201="http://bulkload.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns201:sessionId" type="ns201:WsBulkLoadSessionId" />
+      <parameter qname="ns201:bulkloadParams" type="ns201:WsBulkLoadParams" />
+      <parameter qname="ns201:salesforceEndpoint" type="ns201:WsSalesforceEndpoint" />
+      <parameter qname="ns201:in3" type="ns201:WsKeyValue" />
+    </operation>
+    <operation returnQName="ns202:closeBulkLoadSessionReturn" returnType="ns202:WsBulkLoadError" name="closeBulkLoadSession" qname="ns202:closeBulkLoadSession" soapAction="closeBulkLoadSession" xmlns:ns202="http://bulkload.webservice.implementation.server.integration.etlforge.invalid">
+      <parameter qname="ns202:sessionId" type="ns202:WsBulkLoadSessionId" />
+    </operation>
+    <parameter name="allowedMethods" value="runBulkLoad closeBulkLoadSession startNewBulkLoadSession" />
+    <parameter name="wsdlPortType" value="BulkLoadEngine" />
+    <parameter name="typeMappingVersion" value="1.2" />
+    <parameter name="wsdlServicePort" value="konga_bulkload_engine" />
+    <parameter name="className" value="com.etlforge.integration.server.implementation.webservice.bulkload.Konga_bulkload_engineSoapBindingImpl" />
+    <parameter name="wsdlTargetNamespace" value="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <parameter name="wsdlServiceElement" value="BulkLoadEngineService" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsBulkLoadResult" qname="ns203:WsBulkLoadResult" xmlns:ns203="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsKeyValue" qname="ns204:WsKeyValue" xmlns:ns204="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsBulkLoadSessionId" qname="ns205:WsBulkLoadSessionId" xmlns:ns205="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsBulkLoadError" qname="ns206:WsBulkLoadError" xmlns:ns206="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsStartNewBulkLoadSessionResult" qname="ns207:WsStartNewBulkLoadSessionResult" xmlns:ns207="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsSalesforceEndpoint" qname="ns208:WsSalesforceEndpoint" xmlns:ns208="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+    <typeMapping encodingStyle="" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" type="java:com.etlforge.integration.server.implementation.webservice.bulkload.WsBulkLoadParams" qname="ns209:WsBulkLoadParams" xmlns:ns209="http://bulkload.webservice.implementation.server.integration.etlforge.invalid" />
+  </service>
+  <transport name="http">
+    <requestFlow>
+      <handler type="URLMapper" />
+      <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+    </requestFlow>
+    <parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler" />
+    <parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" />
+    <parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler" />
+    <parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler" />
+    <parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler" />
+    <parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" />
+  </transport>
+  <transport name="local">
+    <responseFlow>
+      <handler type="LocalResponder" />
+    </responseFlow>
+  </transport>
+</deployment>

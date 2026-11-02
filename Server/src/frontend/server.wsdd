@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:CPP="http://xml.apache.org/axis/wsdd/providers/CPP">
+  <globalConfiguration />
+  <service name="konga_activity_infoprovider" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeActivity.dll" />
+    <parameter name="allowedMethods" value="getOperationLog getOperationProgress getSourceFileHistoryLog deleteSourceFileHistory deleteOperationLogEntry cancelOperations" />
+  </service>
+  <service name="konga_admin" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeAdmin.dll" />
+    <parameter name="allowedMethods" value="startEngine stopEngine isEngineRunning getEngineStatus startScheduler stopScheduler isSchedulerRunning getSchedulerStatus startJmsEngine stopJmsEngine isJmsEngineRunning getJmsEngineStatus auditRequest getProxySettings setProxySettings" />
+  </service>
+  <service name="konga_authenticate" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeAuthenticate.dll" />
+    <parameter name="allowedMethods" value="login loginWithVersion loginWithVersionAndKeyValues" />
+  </service>
+  <service name="konga_checkout_interchange_data" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeCheckoutInterchangeData.dll" />
+    <parameter name="allowedMethods" value="checkoutInterchangeProject downloadIntegrationProject downloadRequiredFiles getOperationTree getInterchangeProjects" />
+  </service>
+  <service name="konga_odbc_infoprovider" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeOdbcInfoProvider.dll" />
+    <parameter name="allowedMethods" value="getDatabaseObjects getTableInfo getDrivers" />
+  </service>
+  <service name="konga_deploy_interchange_data" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeDeployInterchangeData.dll" />
+    <parameter name="allowedMethods" value="checkProjectForDeploy deployInterchangeData checkRequiredFiles uploadJtrFiles uploadJitterpak deleteInterchangeProjects" />
+  </service>
+  <service name="konga_file_management" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeFileManagement.dll" />
+    <parameter name="allowedMethods" value="downloadFile" />
+  </service>
+  <service name="konga_jobcontrol" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeJobControl.dll" />
+    <parameter name="allowedMethods" value="RunOperation RunOperationMD5Password RunOperationWithSourceData RunOperationInstanceMD5Password" />
+  </service>
+  <service name="konga_plugin_management" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgePluginManagement.dll" />
+    <parameter name="allowedMethods" value="GetFilters" />
+  </service>
+  <service name="konga_project_administration" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeProjectAdministration.dll" />
+    <parameter name="allowedMethods" value="DisableSchedules EnableSchedules DisableScheduleForOperation EnableScheduleForOperation FindScheduledOperations TestScheduleWithKeyValues TestScheduleWithGuid" />
+  </service>
+  <service name="konga_test_connection" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeTestConnection.dll" />
+    <parameter name="allowedMethods" value="testFileTypeConnection testDatabaseConnection testLdapConnection" />
+  </service>
+  <service name="konga_treemapper_infoprovider" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeTreeMapperInfoProvider.dll" />
+    <parameter name="allowedMethods" value="getJtrForStructureFile getJtrForWS loadSourceData testTransformation testOperation downloadDataFile testExpression stop" />
+  </service>
+  <service name="konga_useradmin" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeUserAdmin.dll" />
+    <parameter name="allowedMethods" value="getUsersAndGroups getUsersAndGroupsWithOptions setUsersAndGroups setUserInfo getUserInfo" />
+  </service>
+  <service name="konga_webservice_infoprovider" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeWebServiceInfoProvider.dll" />
+    <parameter name="allowedMethods" value="getWsdlFiles downloadWsdl uploadWsdl deleteWsdl getInputAndOutputJTR" />
+  </service>
+  <service name="konga_xml_infoprovider" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeXmlInfoProvider.dll" />
+    <parameter name="allowedMethods" value="getXmlStructureFiles getXmlStructureFile getPossibleRootNames uploadStructureFile" />
+  </service>
+  <service name="konga_serveradmin" provider="CPP:DOCUMENT">
+    <parameter name="className" value="C:/ETL/Server/dist/bin/ETLForgeAdmin.dll" />
+    <parameter name="allowedMethods" value="downloadFile downloadServerConfigurationFile uploadServerConfigurationFile listServerLogFiles listPluginLogFiles listOperationLogFiles listDebugLogFiles" />
+  </service>
+</deployment>

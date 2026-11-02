@@ -1,0 +1,351 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-utils-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-lboost_system-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_date_time-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_regex-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-lxalan-c"/>
+			<Lib File="-luuid"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-utils-d.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-utils.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-lboost_system-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_date_time-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_regex-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-lxalan-c"/>
+			<Lib File="-luuid"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-utils.so ../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<Folder
+				Name="UnixSrc"
+				Filters="">
+				<F N="../../PlatformSpecific/Unix/PortDefs.cpp"/>
+			</Folder>
+			<F N="../../AutoFileCleanup.cpp"/>
+			<F N="../../BinaryData.cpp"/>
+			<F N="../../BinaryDataFileIo.cpp"/>
+			<F N="../../CancelHandlers.cpp"/>
+			<F N="../../CsvUtils.cpp"/>
+			<F N="../../date.cpp"/>
+			<F N="../../DateUtils.cpp"/>
+			<F N="../../DBConnectionInfo.cpp"/>
+			<F N="../../DbTypeUtils.cpp"/>
+			<F N="../../EbcdicToAscii.cpp"/>
+			<F N="../../ErrorResolver.cpp"/>
+			<F N="../../ExecuteCommand.cpp"/>
+			<F N="../../FileContents.cpp"/>
+			<F N="../../FileLineReadWriter.cpp"/>
+			<F N="../../FilesTraverser.cpp"/>
+			<F N="../../FileTokenizer.cpp"/>
+			<F N="../../FileUtils.cpp"/>
+			<F N="../../HashTable.cpp"/>
+			<F N="../../KeyValues.cpp"/>
+			<F N="../../KString.cpp"/>
+			<F N="../../LoadDBConnectionInfo.cpp"/>
+			<F N="../../MemUtils.cpp"/>
+			<F N="../../ObjectAccessControl.cpp"/>
+			<F N="../../OdbcConnectionStringUtils.cpp"/>
+			<F N="../../ProcessUtils.cpp"/>
+			<F N="../../Random.cpp"/>
+			<F N="../../RCStringTable.cpp"/>
+			<F N="../../RegExUtils.cpp"/>
+			<F N="../../Settings.cpp"/>
+			<F N="../../SimpleFileFilterFileMatcher.cpp"/>
+			<F N="../../StringBuilder.cpp"/>
+			<F N="../../StringTokenizer.cpp"/>
+			<F N="../../StringUtils.cpp"/>
+			<F N="../../ThreadUtils.cpp"/>
+			<F N="../../Timer.cpp"/>
+			<F N="../../Timing.cpp"/>
+			<F N="../../Url.cpp"/>
+			<F N="../../util.cpp"/>
+			<F N="../../VectorUtils.cpp"/>
+			<F N="../../Version.cpp"/>
+			<F N="../../XmlInit.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<Folder
+				Name="Unix"
+				Filters="">
+				<F N="../../PlatformSpecific/Unix/PortDefs.h"/>
+			</Folder>
+			<F N="../../AutoCleanup.h"/>
+			<F N="../../AutoCleanupGeneric.h"/>
+			<F N="../../AutoDbCleanup.h"/>
+			<F N="../../AutoFileCleanup.h"/>
+			<F N="../../AutoPtrCleanup.h"/>
+			<F N="../../BinaryData.h"/>
+			<F N="../../BinaryDataFileIo.h"/>
+			<F N="../../CancelHandler.h"/>
+			<F N="../../CancelHandlers.h"/>
+			<F N="../../CommandListener.h"/>
+			<F N="../../CrException.h"/>
+			<F N="../../CsvUtils.h"/>
+			<F N="../../CurrentTime.h"/>
+			<F N="../../date.h"/>
+			<F N="../../DateUtils.h"/>
+			<F N="../../DBConnectionInfo.h"/>
+			<F N="../../DbTypeUtils.h"/>
+			<F N="../../EbcdicToAscii.h"/>
+			<F N="../../ErrorResolver.h"/>
+			<F N="../../ExecuteCommand.h"/>
+			<F N="../../FileAction.h"/>
+			<F N="../../FileContents.h"/>
+			<F N="../../FileLineReadWriter.h"/>
+			<F N="../../FilesTraverser.h"/>
+			<F N="../../FileTokenizer.h"/>
+			<F N="../../FileUtils.h"/>
+			<F N="../../HashTable.h"/>
+			<F N="../../KeyValues.h"/>
+			<F N="../../KString.h"/>
+			<F N="../../LoadDBConnectionInfo.h"/>
+			<F N="../../MapUtils.h"/>
+			<F N="../../Matcher.h"/>
+			<F N="../../MemUtils.h"/>
+			<F N="../../Nullable.h"/>
+			<F N="../../NullableString.h"/>
+			<F N="../../ObjectAccessControl.h"/>
+			<F N="../../OdbcConnectionStringUtils.h"/>
+			<F N="../../PointerCache.h"/>
+			<F N="../../PortDefs.h"/>
+			<F N="../../ProcessUtils.h"/>
+			<F N="../../Random.h"/>
+			<F N="../../RCStringTable.h"/>
+			<F N="../../RegExUtils.h"/>
+			<F N="../../Settings.h"/>
+			<F N="../../SimpleFileFilterFileMatcher.h"/>
+			<F N="../../StatusReceiver.h"/>
+			<F N="../../StringBuilder.h"/>
+			<F N="../../StringTokenizer.h"/>
+			<F N="../../StringUtils.h"/>
+			<F N="../../ThreadUtils.h"/>
+			<F N="../../Timer.h"/>
+			<F N="../../Timing.h"/>
+			<F N="../../Tokenizer.h"/>
+			<F N="../../TraceLog.h"/>
+			<F N="../../TreeNode.h"/>
+			<F N="../../Url.h"/>
+			<F N="../../util.h"/>
+			<F N="../../VectorUtils.h"/>
+			<F N="../../Version.h"/>
+			<F N="../../XmlInit.h"/>
+		</Folder>
+		<F
+			N="Utils.mak"
+			Type="Makefile"/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

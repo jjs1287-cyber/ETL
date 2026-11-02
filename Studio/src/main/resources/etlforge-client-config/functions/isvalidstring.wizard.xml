@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">	<Argument>		<Label>String to check</Label>	</Argument></Wizard>

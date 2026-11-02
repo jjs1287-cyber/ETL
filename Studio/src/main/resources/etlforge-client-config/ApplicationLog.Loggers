@@ -1,0 +1,14 @@
+# This file is processed, line by line, on client startup.
+# Each (non-empty, non-coment) line is interpreted as a class name,
+# and the corresponding class is loaded by calling Class.forName.
+# The purpose is that each loaded class will create a Logger by calling
+# ApplicationLog.getLogger, so that the log-level configuration UI knows
+# which loggers exists.
+org.etlforge.application.ui.job.UiJobLogger
+org.etlforge.integration.client.mapping.MappingStructureLog
+org.etlforge.integration.client.project.ProjectDataLoaderLog
+org.etlforge.integration.client.project.deploy.DeployLog
+org.etlforge.integration.jitterpack.impl.JitterPackLog
+org.etlforge.integration.client.ui.interchange.component.page.entity.IntegrationEntityPageLog
+com.etlforge.integration.client.admin.project.DownloadLog
+com.etlforge.integration.client.ui.sfdc.page.SalesforceWizardPageLog

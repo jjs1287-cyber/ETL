@@ -1,0 +1,281 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-activity-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-activity-d.so ../../../../../../../../lib/konga"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-authentication-d"/>
+			<Lib File="-lkonga-dbrelations-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-msgdb-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wsutils-d"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-activity.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O2 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -O2 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-activity.so ../../../../../../../../lib/konga"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-authentication"/>
+			<Lib File="-lkonga-dbrelations"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-msgdb"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ActivityInfoProvider.cpp"/>
+			<F N="../../ActivityInfoProviderService.cpp"/>
+			<F N="../../ActivityInfoProviderWrapper.cpp"/>
+			<F N="../../ArrayOf_xsd_int.cpp"/>
+			<F N="../../ArrayOf_xsd_long.cpp"/>
+			<F N="../../ArrayOf_xsd_string.cpp"/>
+			<F N="../../ArrayOfWsOperationMessage.cpp"/>
+			<F N="../../AxisServiceException.cpp"/>
+			<F N="../../Impl/CancelOperationImpl.cpp"/>
+			<F N="../../WsOperationInstanceFilter.cpp"/>
+			<F N="../../WsOperationLogInstance.cpp"/>
+			<F N="../../WsOperationLogInstance_Array.cpp"/>
+			<F N="../../WsOperationMessage.cpp"/>
+			<F N="../../WsOperationMessage_Array.cpp"/>
+			<F N="../../WsOperationProgress.cpp"/>
+			<F N="../../WsOperationProgress_Array.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ActivityInfoProvider.hpp"/>
+			<F N="../../ActivityInfoProviderWrapper.hpp"/>
+			<F N="../../ArrayOf_xsd_int.hpp"/>
+			<F N="../../ArrayOf_xsd_long.hpp"/>
+			<F N="../../ArrayOf_xsd_string.hpp"/>
+			<F N="../../ArrayOfWsOperationMessage.hpp"/>
+			<F N="../../AxisServiceException.hpp"/>
+			<F N="../../WsOperationInstanceFilter.hpp"/>
+			<F N="../../WsOperationLogInstance.hpp"/>
+			<F N="../../WsOperationLogInstance_Array.hpp"/>
+			<F N="../../WsOperationMessage.hpp"/>
+			<F N="../../WsOperationMessage_Array.hpp"/>
+			<F N="../../WsOperationProgress.hpp"/>
+			<F N="../../WsOperationProgress_Array.hpp"/>
+		</Folder>
+		<Folder
+			Name="Impl"
+			Filters="">
+			<F N="../../Impl/ActivityInfoProviderImpl.cpp"/>
+			<F N="../../Impl/ActivityInfoProviderImpl.h"/>
+			<F
+				N="ActivityWs.mak"
+				Type="Makefile"/>
+			<F N="../../Impl/utils.cpp"/>
+			<F N="../../Impl/utils.h"/>
+		</Folder>
+	</Files>
+</Project>

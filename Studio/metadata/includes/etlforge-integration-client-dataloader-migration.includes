@@ -1,0 +1,6 @@
+org/etlforge/integration/client/dl/migration/DataLoaderProjectLocator.class
+org/etlforge/integration/client/dl/migration/DataLoaderProjectLocator$*.class
+org/etlforge/integration/client/dl/migration/ProjectFolderFilter.class
+org/etlforge/integration/client/dl/migration/ProjectFolderFilter$*.class
+org/etlforge/integration/client/dl/migration/ProjectMigrator.class
+org/etlforge/integration/client/dl/migration/ProjectMigrator$*.class

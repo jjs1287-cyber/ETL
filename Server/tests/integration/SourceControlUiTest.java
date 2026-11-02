@@ -1,0 +1,46 @@
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
+import javax.swing.*;
+import org.etlforge.application.Application;
+import org.etlforge.integration.client.main.IntegrationMain;
+import org.etlforge.integration.client.runtime.ClientPlatform;
+import org.etlforge.integration.client.project.*;
+import org.etlforge.integration.client.project.deploy.*;
+import org.etlforge.integration.client.project.sourcecontrol.*;
+import org.etlforge.integration.client.ui.project.sourcecontrol.*;
+import org.etlforge.integration.client.ui.deploy.*;
+import org.etlforge.integration.client.deploy.serverapi.*;
+import org.etlforge.integration.data.project.*;
+
+public final class SourceControlUiTest {
+ static int checks;static Path report=Paths.get("C:/ETL/Reports/source-control");
+ static void check(boolean value,String label){if(!value)throw new AssertionError(label);System.out.println("PASS "+label);System.out.flush();checks++;}
+ static void components(java.awt.Container parent,java.util.List<java.awt.Component> result){for(java.awt.Component c:parent.getComponents()){result.add(c);if(c instanceof java.awt.Container)components((java.awt.Container)c,result);}}
+ static javax.swing.Timer answer(boolean cancel){javax.swing.Timer timer=new javax.swing.Timer(150,null);timer.addActionListener(e->{for(java.awt.Window window:java.awt.Window.getWindows()){if(!window.isShowing()||!(window instanceof JDialog)||!((JDialog)window).getTitle().contains("Commit"))continue;java.util.List<java.awt.Component> all=new ArrayList<>();components((java.awt.Container)window,all);for(java.awt.Component c:all)if(c instanceof JTextArea&&((JTextArea)c).isEditable())((JTextArea)c).setText("Fixture deployment checkpoint");for(java.awt.Component c:all)if(c instanceof JButton&&((JButton)c).getText().equals(cancel?"Cancel":"OK")){timer.stop();((JButton)c).doClick();return;}}});timer.start();return timer;}
+ static boolean reached,failed,cancelled;
+ static void deploy(ManagedProject project)throws Exception{reached=failed=cancelled=false;DeployManager manager=new DeployManager();manager.setPreDeployJobFactories(Collections.singletonList(data->payload->{reached=true;return PreDeployStatus.ABORT;}));DeployCallback callback=new DeployCallback.Adapter(){public void cancelled(){cancelled=true;}public void caught(Throwable error){failed=true;}};DeployJob job=new DeployJob(manager,new DeployDataImpl(project,project.getProject(),false),callback);java.lang.reflect.Method run=DeployJob.class.getDeclaredMethod("runImpl");run.setAccessible(true);run.invoke(job);}
+ public static void main(String[]args)throws Exception{try{run(args);}catch(Throwable error){error.printStackTrace(System.out);for(java.awt.Window window:java.awt.Window.getWindows())window.dispose();System.exit(1);}}
+ static void run(String[] args)throws Exception{
+  Path fixture=Files.createTempDirectory(report,"ui-fixture-");IntegrationMain.main(new String[]{"-d",fixture.resolve("workspace").toString()});ClientPlatform.waitForInitialization(60,java.util.concurrent.TimeUnit.SECONDS);Thread.sleep(2000);SwingUtilities.invokeAndWait(()->{});System.setOut(new PrintStream(report.resolve("ui-results.txt").toFile(),"UTF-8"));
+  long deadline=System.currentTimeMillis()+30000;boolean ready=false;while(System.currentTimeMillis()<deadline){final boolean[] shown={false};SwingUtilities.invokeAndWait(()->{javax.swing.JFrame frame=Application.getBean("ui.AppWin",org.etlforge.application.ui.window.ApplicationWindow.class).getFrame();shown[0]=frame!=null;});if(shown[0]){ready=true;break;}Thread.sleep(150);}check(ready,"main window initializes");
+  ProjectManager manager=Application.getBeansOfType(ProjectManager.class).get(0);
+  IntegrationProjectLock.acquire();ManagedProject project;try{IntegrationProject data=manager.createNewProject("Git Fixture",fixture.resolve("project").toFile());project=data.getExtensionObject(ManagedProject.class);manager.setCurrentProject(data);}finally{IntegrationProjectLock.release();}
+  Thread.sleep(1200);SwingUtilities.invokeAndWait(()->{});
+  check(Application.getBean("action.sourcecontrol.commit",org.etlforge.application.ui.action.ApplicationAction.class).isEnabled(),"Commit action wired and enabled");
+  SwingUtilities.invokeAndWait(()->{JMenuBar menus=Application.getBean("ui.AppWin",org.etlforge.application.ui.window.ApplicationWindow.class).getFrame().getJMenuBar();boolean menu=false,action=false;for(int i=0;i<menus.getMenuCount();i++){JMenu item=menus.getMenu(i);if(item==null)continue;if("Source Control".equals(item.getText())){menu=true;check(i>0&&menus.getMenu(i-1)!=null&&"Actions".equals(menus.getMenu(i-1).getText()),"Source Control beside Actions");check(item.getItemCount()==6,"Source Control contains six actions");}if("Actions".equals(item.getText()))for(java.awt.Component c:item.getMenuComponents())if(c instanceof JMenuItem&&"Commit and Push...".equals(((JMenuItem)c).getText()))action=true;}check(menu,"Source Control menu visible");check(action,"Commit under Actions");});
+  Object launcher=Application.getBean("interchange.Launcher",org.etlforge.integration.client.ui.interchange.component.launcher.InterchangeLauncher.class);java.lang.reflect.Field options=launcher.getClass().getDeclaredField("launchOptions");options.setAccessible(true);boolean cloneFound=false;for(Object option:(Iterable<?>)options.get(launcher))if(option instanceof GitCloneLaunchOption)cloneFound=true;check(cloneFound,"Open from Source Control is a launcher option");
+  SwingUtilities.invokeAndWait(()->{GitCloneLaunchOption option=new GitCloneLaunchOption(manager);JPanel holder=new JPanel(new java.awt.BorderLayout());option.decorate(c->holder.add(c));JFrame frame=new JFrame("Git clone UI fixture");frame.setContentPane(holder);frame.setSize(1000,450);frame.setVisible(true);frame.validate();java.awt.image.BufferedImage image=new java.awt.image.BufferedImage(1000,450,java.awt.image.BufferedImage.TYPE_INT_RGB);holder.printAll(image.createGraphics());try{javax.imageio.ImageIO.write(image,"png",report.resolve("clone-screen.png").toFile());}catch(IOException ex){throw new RuntimeException(ex);}frame.dispose();});check(true,"clone screen loads and renders");
+  deploy(project);check(reached&&!failed,"ordinary project deploy bypasses Git prompt");
+  GitProjectRepository repo=GitProjectRepository.connect(project.getLocation().toPath(),"https://github.com/etlforge-tests/ui-project.git");
+  javax.swing.Timer[] timer={null};SwingUtilities.invokeAndWait(()->timer[0]=answer(true));deploy(project);SwingUtilities.invokeAndWait(()->timer[0].stop());check(!reached&&!failed&&cancelled,"cancelled commit blocks deployment");
+  SwingUtilities.invokeAndWait(()->timer[0]=answer(false));deploy(project);SwingUtilities.invokeAndWait(()->timer[0].stop());check(!reached&&failed,"failed push blocks deployment");check(repo.history().contains("Fixture deployment checkpoint"),"failed push retains committed revision and comment");
+  repo.run("remote","set-url","origin","https://github.com/etlforge-tests/project.git");repo.run("fetch","origin");String testBranch="ui-fixture-"+System.nanoTime();repo.run("push","--set-upstream","origin","HEAD:refs/heads/"+testBranch);repo.run("branch","-m",testBranch);
+  SwingUtilities.invokeAndWait(()->timer[0]=answer(false));deploy(project);SwingUtilities.invokeAndWait(()->timer[0].stop());check(reached&&!failed,"successful commit and push permits deployment processing");check(repo.history().contains("Fixture deployment checkpoint"),"deployment checkpoint comment recorded");
+  check(Files.exists(project.getLocation().toPath().resolve("Git Fixture.jip")),"project remains intact after source control operations");
+  Path checkout=fixture.resolve("cloned-real-project");java.util.concurrent.CountDownLatch cloned=new java.util.concurrent.CountDownLatch(1);final IntegrationProject[] reopened={null};
+  SwingUtilities.invokeAndWait(()->{try{GitCloneLaunchOption option=new GitCloneLaunchOption(manager);option.setContainer(selected->{try{reopened[0]=selected.getProject();cloned.countDown();}catch(Exception ex){throw new RuntimeException(ex);}});for(String[] entry:new String[][]{{"url","https://github.com/etlforge-tests/project.git"},{"branch",testBranch},{"folder",checkout.toString()}}){java.lang.reflect.Field field=option.getClass().getDeclaredField(entry[0]);field.setAccessible(true);((JTextField)field.get(option)).setText(entry[1]);}java.lang.reflect.Field button=option.getClass().getDeclaredField("clone");button.setAccessible(true);((JButton)button.get(option)).doClick();}catch(Exception ex){throw new RuntimeException(ex);}});
+  check(cloned.await(30,java.util.concurrent.TimeUnit.SECONDS),"Clone and Open button finishes asynchronously");check(reopened[0].getName().equals("Git Fixture"),"cloned real Studio project reopens successfully");IntegrationProjectLock.acquire();try{manager.closeProject(reopened[0].getExtensionObject(ManagedProject.class));}finally{IntegrationProjectLock.release();}check(!Files.exists(checkout.resolve(".project.lock")),"project locks are absent from clone");
+  System.out.println("PASSED "+checks);System.out.flush();SwingUtilities.invokeAndWait(()->{for(java.awt.Window window:java.awt.Window.getWindows())window.dispose();});System.exit(0);
+ }
+}

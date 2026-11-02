@@ -1,0 +1,10 @@
+org/etlforge/integration/http/HttpConnector.class
+org/etlforge/integration/http/HttpConnector$*.class
+org/etlforge/integration/http/HttpProperties.class
+org/etlforge/integration/http/HttpProperties$*.class
+org/etlforge/integration/http/HttpPropertiesSupport.class
+org/etlforge/integration/http/HttpPropertiesSupport$*.class
+org/etlforge/integration/http/HttpVerb.class
+org/etlforge/integration/http/HttpVerb$*.class
+org/etlforge/integration/http/SslVersion.class
+org/etlforge/integration/http/SslVersion$*.class

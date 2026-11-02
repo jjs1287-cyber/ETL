@@ -1,0 +1,7 @@
+<html>Creates a string representing an XML node. If the target node is the value node
+				of an XML "any" node, then an XML element corresponding to the node_name and node_value will be
+				created. The first argument is the namespace of the node and the 2nd argument is the name of
+				the node, and starting from the 3rd argument a series of value, attributes, and subnodes can
+				be specified. The attribute and the subnode can be created with the function Attribute() and
+				CreateNode().<br><h2>Example:</h2><code><font size="4">CreateNode("http://abc.123.com/xml","Contact",Attribute("Type","VIP"),
+				CreateNode("http://abc.123.com/xml","Name","Bill G."))</font></code></html>

@@ -1,0 +1,37 @@
+<html>
+This function returns the instance data element which is defined by calling <code><font size="4">SetInstances()</font></code> function during the generation of the parent.
+<p>
+Example:
+<p>
+Assuming in one of the parent mappings contains the following statements<br>
+<code><font size="4">
+...<br>
+r1=DBLookupAll("&lt;TAG&gt;Sources/DB...&lt;/TAG&gt;","SELECT key_name, key_value, key_type FROM key_values");<br>
+SetInstances("DETAILS",r1);<br>
+r2={"MS","HP"};<br>
+SetInstances("COMPANIES",r2);<br>
+...</font></code>
+<p>
+in the "DETAILS" target node we may create a condition to have the mapping<p>
+<code><font size="4">
+&lt;trans&gt;<br>
+GetInstance()["key_value"]!="" // same as GetInstance()[0]!=""<br>
+&lt;/trans&gt;</font></code>
+<p>
+or, in one of the attributes, the mapping may look like<p>
+<code><font size="4">
+&lt;trans&gt;<br>
+x=GetInstance();<br>
+x["key_name"]+"="+x["key_value"] // same as x[0]+"="+x[1]<br>
+&lt;/trans&gt;</font></code>
+<p>
+
+and, in one of the attributes of "COMPANIES" target node, mapping may look like<p>
+<code><font size="4">
+&lt;trans&gt;<br>
+GetInstance() // this will return "MS" for the first instance, "HP" for 2nd  <br>
+&lt;/trans&gt;</font></code>
+<p>
+
+As an alternative to this function, see <code><font size="4">ArgumentList()</font></code>.
+</html>

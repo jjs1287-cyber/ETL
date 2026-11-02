@@ -1,0 +1,28 @@
+<html><p>
+        Returns the contents of the operation queue as an array. Only operations that the current user has read access for will be returned.
+        The result is returned as an array of arrays with the following sub-array indexes:<br>
+        <ol start="0">
+        <li>Operation GUID (string)</li>
+        <li>IsExecuting flag (bool)</li>
+        <li>Time stamp for when the operation was added to the queue (date)</li>
+        </ol>
+        </p>
+        
+        <p>
+        The operation tag argument is optional and, if present, only queue entries for that particular operation will be returned.
+        The available operations are shown in the "Project Items" tab in the lower section of the Formula Builder,
+        under the node called "Operations".
+        By double clicking on an operation node, the corresponding operation ID will be
+        inserted into the formula expression. The ID is constructed by wrapping the project path
+        of the selected operation within &lt;TAG&gt;...&lt;/TAG&gt; tags.
+        </p><br><h2>Example:</h2><code><font size="4">
+        // Write queue for a particular operation to the operation log:<br>
+        $queue = RunOperation("&lt;TAG&gt;MyProject/Operations/MyOperation&lt;/TAG&gt;");<br>
+        $N = Length($queue);<br>
+        $i = 0;<br>
+        // Loop over the queue entries<br>
+        While($i &lt; $N,<br>
+        &nbsp;&nbsp;WriteToOperationLog("Queue Entry: GUID=" + $queue[$i][0] + "; IsExecuting=" + $queue[$i][1] + "; Added at " + $queue[$i][2]);<br>
+      	&nbsp;&nbsp;$i = $i +1<br>
+        );<br>
+        </font></code></html>

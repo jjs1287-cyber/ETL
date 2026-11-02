@@ -1,0 +1,9 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/9.1/vpw.dtd">
+<Workspace Version="9.1" VendorName="SlickEdit">
+	<Projects>
+		<Project File="Soap.vpj"/>
+		<Project File="../../Test/project/SlickEdit/SoapTest.vpj"/>
+		<Project File="../../../Utils/project/SlickEdit/Utils.vpj"/>
+		<Project File="../../../Xml/project/SlickEdit/Xml.vpj"/>
+	</Projects>
+</Workspace>

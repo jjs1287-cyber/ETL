@@ -1,0 +1,14 @@
+org/etlforge/integration/client/connect/mapper/AbstractAutoMappingJob.class
+org/etlforge/integration/client/connect/mapper/AbstractAutoMappingJob$*.class
+org/etlforge/integration/client/connect/mapper/AutoMappingJob.class
+org/etlforge/integration/client/connect/mapper/AutoMappingJob$*.class
+org/etlforge/integration/client/connect/text/NewFileStructureCallback.class
+org/etlforge/integration/client/connect/text/NewFileStructureCallback$*.class
+org/etlforge/integration/client/connect/text/TextStructureFactory.class
+org/etlforge/integration/client/connect/text/TextStructureFactory$*.class
+org/etlforge/integration/client/connect/text/TextTargetPageUi.class
+org/etlforge/integration/client/connect/text/TextTargetPageUi$*.class
+org/etlforge/integration/client/connect/wizard/AbstractConnectWizardCompleter.class
+org/etlforge/integration/client/connect/wizard/AbstractConnectWizardCompleter$*.class
+org/etlforge/integration/client/connect/wizard/NameChangeUi.class
+org/etlforge/integration/client/connect/wizard/NameChangeUi$*.class

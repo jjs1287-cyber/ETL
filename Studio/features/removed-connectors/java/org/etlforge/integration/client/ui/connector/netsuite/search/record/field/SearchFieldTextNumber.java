@@ -1,0 +1,16 @@
+package org.etlforge.integration.client.ui.connector.netsuite.search.record.field;
+
+import org.etlforge.integration.client.ui.connector.netsuite.search.definition.SearchField;
+import org.etlforge.integration.client.ui.connector.netsuite.search.record.value.SearchFieldSaxHandler;
+
+public class SearchFieldTextNumber extends SearchField {
+   @Override
+   public int definedValueNumber() {
+      return 2;
+   }
+
+   @Override
+   public SearchFieldSaxHandler newSearchFieldValueSaxHandler() {
+      return new SearchFieldTextNumberSaxHandler();
+   }
+}

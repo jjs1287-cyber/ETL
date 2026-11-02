@@ -1,0 +1,264 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/9.1/vpj.dtd">
+<Project
+	Version="9.1"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="vsbuild">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdTestDeployment"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -g -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../../.."/>
+    </Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-authentication-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lkonga-wfdbwriter-d"/>
+			<Lib File="-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wfxmlreader-d"/>
+			<Lib File="-lkonga-workflow-d"/>
+			<Lib File="-lkonga-pdb-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-dtltrandb-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-dtldbutils-d"/>
+			<Lib File="-lkonga-xml-d"/>
+			<Lib File="-lboost_filesystem-gcc-d"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-luuid"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdTestDeployment"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../../../../../.."/>
+    </Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-authentication"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-wfdbwriter"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wfxmlreader"/>
+			<Lib File="-lkonga-workflow"/>
+			<Lib File="-lkonga-pdb"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-dtltrandb"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-dtldbutils"/>
+			<Lib File="-lkonga-xml"/>
+			<Lib File="-lboost_filesystem-gcc"/>
+			<Lib File="-lxerces-c"/>
+			<Lib File="-luuid"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../TestDeployment.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if"/>
+	</Files>
+	<Dependencies Name="Build">
+		<Dependency Project="../../../../../Authentication/project/SlickEdit/Authentication.vpj"/>
+		<Dependency Project="../../../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+		<Dependency Project="../../../../../Db/DbUtils/project/SlickEdit/DbUtils.vpj"/>
+		<Dependency Project="../../../../../Db/DtlDbUtils/project/SlickEdit/DtlDbUtils.vpj"/>
+		<Dependency Project="../../../../../Db/DtlTranDb/project/SlickEdit/DtlTranDb.vpj"/>
+		<Dependency Project="../../../../../Db/PDb/project/SlickEdit/PDb.vpj"/>
+		<Dependency Project="../../../../../Db/TranDb/project/SlickEdit/TranDb.vpj"/>
+		<Dependency Project="../../../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+		<Dependency Project="../../../../DbWriter/project/SlickEdit/WfDbWriter.vpj"/>
+		<Dependency Project="../../../../XmlReader/project/SlickEdit/WfXmlReader.vpj"/>
+		<Dependency Project="../../../../project/SlickEdit/Workflow.vpj"/>
+		<Dependency Project="../../../../../../../../common/cpp/konga/Xml/project/SlickEdit/Xml.vpj"/>
+	</Dependencies>
+</Project>

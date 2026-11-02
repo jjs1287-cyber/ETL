@@ -1,0 +1,56 @@
+  
+                                                                               
+                                                                                                               
+   
+
+#include "AxisServiceException.hpp"
+
+#include <axis/AxisWrapperAPI.hpp>
+
+using namespace checkout_interchange_data;
+
+AxisServiceException::AxisServiceException(ISoapFault* pFault)
+{
+	m_iExceptionCode = AXISC_SERVICE_THROWN_EXCEPTION;
+	m_pISoapFault = pFault;
+}
+
+AxisServiceException::AxisServiceException(const int iExceptionCode, const char* pcMessage):AxisException(iExceptionCode)
+{
+
+	string sMessage = "";
+	if (pcMessage)
+	{
+		sMessage = string(pcMessage);
+		getMessageForExceptionCode(iExceptionCode);
+		m_sMessageForExceptionCode = getMessageForExceptionCode(iExceptionCode) + " " + sMessage;
+		setMessage(m_sMessageForExceptionCode.c_str());
+	}
+
+	else
+		setMessage(getMessageForExceptionCode(iExceptionCode).c_str());
+}
+
+AxisServiceException::AxisServiceException(const AxisServiceException& e):AxisException(e)
+{}
+
+AxisServiceException::~AxisServiceException() throw () 
+{}
+
+string AxisServiceException::getMessageForExceptionCode (int iExceptionCode)
+{
+	switch(iExceptionCode)
+	{
+		case AXISC_SERVICE_THROWN_EXCEPTION:
+			m_sMessageForExceptionCode = "The CheckoutInterchangeDataService service has thrown an exception. see details";
+			break;
+		default:
+			m_sMessageForExceptionCode = "Unknown Exception has occurred in the CheckoutInterchangeDataService service";
+	}
+return m_sMessageForExceptionCode;
+}
+
+const ISoapFault* AxisServiceException::getFault(){
+	return m_pISoapFault;
+}
+

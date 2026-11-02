@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/common/konga/Utils/StringUtils.cpp');b=Path('C:/ETL/Archives/sftp-keys-20261029/Server/src/native/common/konga/Utils/StringUtils.cpp');b.parent.mkdir(parents=True,exist_ok=True);b.write_bytes(p.read_bytes());s=p.read_text(encoding='utf-8').replace('sprintf(buf,"%%%X",*it);','sprintf(buf,"%%%02X",static_cast<unsigned char>(*it));');p.write_text(s,encoding='utf-8')

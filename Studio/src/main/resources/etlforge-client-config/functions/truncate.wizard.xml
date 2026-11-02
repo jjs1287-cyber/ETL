@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;String to truncate</Label>
+	</Argument>
+	<Argument>
+		<Label>&amp;Number of characters to remove from start</Label>
+	</Argument>
+	<Argument>
+		<Label>Number of characters to remove from &amp;end</Label>
+	</Argument>
+</Wizard>

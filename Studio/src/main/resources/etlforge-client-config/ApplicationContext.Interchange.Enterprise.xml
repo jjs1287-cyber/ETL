@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+		default-lazy-init="true">
+
+	<bean id="ic.DownloadProjectConsoleFactory"
+		  class="com.etlforge.integration.client.ui.project.download.console.DownloadProjectConsoleFactory">
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="server.ProjectInfoProvider" />
+		<constructor-arg ref="server.ProjectDownloader" />
+	</bean>
+		
+	<bean id="interchange.Launcher" 
+			class="org.etlforge.integration.client.ui.interchange.component.launcher.InterchangeLauncher">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<property name="launchOptions">
+			<list>
+				<ref bean="interchange.OpenLocalProject" />
+                <bean class="org.etlforge.integration.client.ui.project.sourcecontrol.GitCloneLaunchOption"><constructor-arg ref="platform.ProjectManager" /></bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.launcher.CreateNewProjectOption">
+					<constructor-arg ref="platform.ProjectManager" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.interchange.download.DownloadProjectLaunchOption">
+					<constructor-arg ref="ui.AppWin" />
+					<constructor-arg ref="platform.ProjectManager" />
+					<constructor-arg ref="ic.DownloadProjectConsoleFactory" />
+				</bean>
+				<bean class="org.etlforge.integration.client.ui.interchange.component.launcher.ImportJitterPackOption">
+					<constructor-arg ref="ui.AppWin" />
+					<constructor-arg ref="platform.ProjectManager" />
+					<constructor-arg ref="jitterpack.importer.factory" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ic.menu.File.Extension2" factory-bean="ic.menu.File.Extension2.Builder.Enterprise" factory-method="buildExtension" />
+	<bean id="ic.menu.File.Extension2.Builder.Enterprise" parent="ic.menu.File.Extension2.Builder">
+		<property name="additionalItems">
+			<list>
+				<bean class="com.etlforge.integration.client.ui.interchange.core.menu.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.ImportProjectData" />
+				</bean>
+				<bean class="com.etlforge.integration.client.ui.interchange.core.menu.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.RestoreBackup" />
+				</bean>
+				<bean class="org.etlforge.application.ui.view.menu.ActionBasedViewMenuItemFactory">
+					<constructor-arg ref="action.ic.DownloadProject" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ic.menu.View.Extension4" factory-bean="ic.menu.View.Extension4.Builder.Enterprise" factory-method="buildExtension" />
+	<bean id="ic.menu.View.Extension4.Builder.Enterprise" parent="ic.menu.View.Extension4.Builder">
+		<property name="additionalItems">
+			<list>
+				<bean class="com.etlforge.integration.client.ui.interchange.core.menu.InterchangeMenuItemBeanFactory">
+					<constructor-arg value="action.ic.ProjectPlugins" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ic.CommandCollection" factory-bean="ic.CommandCollectionBuilder.Enterprise" factory-method="buildCollection" />
+	<bean id="ic.CommandCollectionBuilder.Enterprise" parent="ic.CommandCollectionBuilder">
+		<property name="additionalActions">
+			<map>
+				<entry key="import project data">
+					<ref bean="action.ic.ImportProjectData" />
+				</entry>
+				<entry key="restore backup">
+					<ref bean="action.ic.RestoreBackup" />
+				</entry>
+				<entry key="download project">
+					<ref bean="action.ic.DownloadProject" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="action.ic.ProjectPlugins" class="com.etlforge.integration.client.ui.interchange.core.action.ViewRequiredPipelinePluginsAction">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="server.PluginInfoProvider" />
+	</bean>
+	<bean id="action.ic.ImportProjectData" class="com.etlforge.integration.client.ui.interchange.core.action.ImportProjectDataAction">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg>
+			<bean class="com.etlforge.integration.client.ui.interchange.project.share.ProjectItemImporterFactory">
+				<constructor-arg ref="ui.AppWin" />
+				<constructor-arg ref="platform.ProjectManager" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.RestoreBackup" class="com.etlforge.integration.client.ui.interchange.core.action.RestoreBackupAction">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="core.CurrentProject" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="ic.SaveAllGate" />
+	</bean>
+	<bean id="action.ic.DownloadProject" class="com.etlforge.integration.client.ui.project.download.console.OpenDownloadProjectConsoleAction">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+		<constructor-arg ref="ic.DownloadProjectConsoleFactory" />
+	</bean>
+	
+
+	<bean id="ic.enterprise.ContextMenu.View" class="org.etlforge.application.ui.action.popup.SectionFactories">
+		<constructor-arg value="VIEW" />
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.core.action.popup.ProjectActionItemFactory">
+					<constructor-arg ref="action.ic.ProjectPlugins" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

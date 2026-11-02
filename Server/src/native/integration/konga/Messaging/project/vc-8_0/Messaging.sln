@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Messaging", "Messaging.vcproj", "{074A0526-EF9A-43DF-A203-457A138988BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MessagingTest", "..\..\Test\project\vc-8_0\MessagingTest.vcproj", "{17521700-0E53-4E96-8E3D-1ECA7BD69195}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+		{074A0526-EF9A-43DF-A203-457A138988BE} = {074A0526-EF9A-43DF-A203-457A138988BE}
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D} = {F7DF273D-80D8-4CF6-AE03-27891A02715D}
+		{F93493A9-CA55-4DAA-8379-F31319566362} = {F93493A9-CA55-4DAA-8379-F31319566362}
+		{CABBAE95-D329-4B05-9765-A4491F1BB865} = {CABBAE95-D329-4B05-9765-A4491F1BB865}
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5} = {261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\..\..\..\common\cpp\konga\Utils\project\vc-8_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbUtils", "..\..\..\Db\DbUtils\project\vc-8_0\DbUtils.vcproj", "{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DtlDbUtils", "..\..\..\Db\DtlDbUtils\project\vc-8_0\DtlDbUtils.vcproj", "{F7DF273D-80D8-4CF6-AE03-27891A02715D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DtlMsgDb", "..\..\..\Db\DtlMsgDb\project\vc-8_0\DtlMsgDb.vcproj", "{CABBAE95-D329-4B05-9765-A4491F1BB865}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MsgDb", "..\..\..\Db\MsgDb\project\vc-8_0\MsgDb.vcproj", "{F93493A9-CA55-4DAA-8379-F31319566362}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{074A0526-EF9A-43DF-A203-457A138988BE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{074A0526-EF9A-43DF-A203-457A138988BE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{074A0526-EF9A-43DF-A203-457A138988BE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{074A0526-EF9A-43DF-A203-457A138988BE}.Debug|Win32.Build.0 = Debug|Win32
+		{074A0526-EF9A-43DF-A203-457A138988BE}.Release|Win32.ActiveCfg = Release|Win32
+		{074A0526-EF9A-43DF-A203-457A138988BE}.Release|Win32.Build.0 = Release|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.Debug|Win32.Build.0 = Debug|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.Release|Win32.ActiveCfg = Release|Win32
+		{17521700-0E53-4E96-8E3D-1ECA7BD69195}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Debug|Win32.Build.0 = Debug|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Release|Win32.ActiveCfg = Release|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Release|Win32.Build.0 = Release|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Debug|Win32.Build.0 = Debug|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Release|Win32.ActiveCfg = Release|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Release|Win32.Build.0 = Release|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.Debug|Win32.Build.0 = Debug|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.Release|Win32.ActiveCfg = Release|Win32
+		{CABBAE95-D329-4B05-9765-A4491F1BB865}.Release|Win32.Build.0 = Release|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.Debug|Win32.Build.0 = Debug|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.Release|Win32.ActiveCfg = Release|Win32
+		{F93493A9-CA55-4DAA-8379-F31319566362}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

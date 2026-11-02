@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 1998-2005 Jitterbit, Inc.
+ *
+ */
+#if !defined(CR_POP3_H)
+#define CR_POP3_H
+
+#include <string>
+#include <konga/Utils/PortDefs.h>	// strncasecmp
+
+#include <konga/Networking/SockProtocol.h>
+
+namespace konga {
+
+	struct pop3_exception : public protocol_exception
+	{
+		pop3_exception(std::string reason = "", std::string response = "", std::string cmd = "") :
+			protocol_exception(reason, 0, response, cmd)
+		{}
+	};
+	
+	class pop3 : public SockProtocol
+	{
+	public:
+		pop3();
+		virtual ~pop3();
+	
+		void User(const std::string& user) { m_user = user; }
+		void Password(const std::string& passwd) { m_passwd = passwd; }
+	
+		bool Connect();
+		bool Disconnect();
+		bool IsConnected() const { return m_connected; }
+	
+		bool GetMessage(const std::string& filename, int msg_num);
+		int GetMessageCount();
+		bool DeleteMessage(int msg_num=-1);
+	
+	protected:
+		void DoGetMessage();
+		void DoGetMessageCount();
+		void DoDeleteMessage();
+		void DoConnect();
+		void DoDisconnect();
+	
+		bool GetMultiLineResponse(std::string& response);
+		virtual bool GetResponse(std::string& response);
+		virtual bool IsErrorResponse(const std::string& res) { return strncasecmp( res.c_str(), "+OK", 3) != 0; }
+		virtual bool IsEndOfResponse(const std::string& res)
+		{
+			// TODO: I have changed the baseclass to the portable CrStreamSocket and this function needs rewriting. - Henrik Feb 11, 2005
+			/*
+			char s[10];
+			int err = GetSocket().CAsyncSocket::Receive((void*)s,10,MSG_PEEK);
+			if( err == SOCKET_ERROR )
+			{
+				if( WSAGetLastError() == WSAEWOULDBLOCK ) return true;
+				TRACE("GetSocket().CAsyncSocket::Receive((void*)s,10,MSG_PEEK) err=%d\n\n", WSAGetLastError());
+				return true;
+			}
+			else return false;
+			*/
+			return true; // todo see above
+		}
+		virtual void Close() { m_connected=false; SockProtocol::Close(); }
+	
+	private:
+		std::string m_user, m_passwd;
+		std::string m_msg_filename;
+	
+		int m_msg_count, m_msg_current;
+		bool m_connected;
+	};
+}
+
+#endif // CR_POP3_H

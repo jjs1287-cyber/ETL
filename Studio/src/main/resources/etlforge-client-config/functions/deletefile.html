@@ -1,0 +1,22 @@
+<html><p>
+				Deletes a file from the specified source. The file-type source used
+				in this function call must be defined as a source in
+				the current integration project. The available file-type sources are shown
+				in the "Project Items" tab in the lower  section of the Formula Builder,
+				under the node called "File Locations".
+				</p>
+				<p>				
+				If the source filter selects more than one file, an error will be thrown.
+				To delete multiple files, use the DeleteFiles() function.
+				The method returns an integer of either 0 or 1, specifying how many files were deleted.  0 means the file could not be found.
+				If the folder cannot be found, an error will be thrown (and can be wrapped in an eval statement if needed)
+				</p>
+				<p>
+				The second argument, <tt>file_name</tt> is optional and can be used
+				to override the file name used in the source definition.
+				Alternatively, a global data element can be used to override the file name in the source definition.
+				Global data elements are referenced as "[de_name]" in the source definition.
+				</p>
+        <br><h2>Example:</h2><code><font size="4">
+				DeleteFile("&lt;TAG&gt;Project Name/Sources/File Share Source&lt;/TAG&gt;","SomeFile.txt")<br>
+				</font></code></html>

@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WsUtils", "WsUtils.vcproj", "{1CEFA311-F7A9-499F-A80D-36DA009DFA95}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Authentication", "..\..\..\..\..\Authentication\project\vc-9_0\Authentication.vcproj", "{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\..\..\..\..\..\common\cpp\konga\Utils\project\vc-9_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WsUtilsTest", "..\..\Test\project\vc-9_0\WsUtilsTest.vcproj", "{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95} = {1CEFA311-F7A9-499F-A80D-36DA009DFA95}
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9} = {B0D1025B-BE98-4152-9E12-82FDB740ECB9}
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5} = {261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC} = {00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245} = {D3E1196E-129B-4149-A0B3-0714CDDE8245}
+		{DF7C7205-0299-433C-9406-3F3AC570C612} = {DF7C7205-0299-433C-9406-3F3AC570C612}
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D} = {CBCC9896-BF8A-48C3-93D3-BF320D460C2D}
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D} = {F7DF273D-80D8-4CF6-AE03-27891A02715D}
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DtlDbUtils", "..\..\..\..\..\Db\DtlDbUtils\project\vc-9_0\DtlDbUtils.vcproj", "{F7DF273D-80D8-4CF6-AE03-27891A02715D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbUtils", "..\..\..\..\..\Db\DbUtils\project\vc-9_0\DbUtils.vcproj", "{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DtlTranDb", "..\..\..\..\..\Db\DtlTranDb\project\vc-9_0\DtlTranDb.vcproj", "{D3E1196E-129B-4149-A0B3-0714CDDE8245}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TranDb", "..\..\..\..\..\Db\TranDb\project\vc-9_0\TranDb.vcproj", "{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ItemAccess", "..\..\..\..\..\ItemAccess\project\vc-9_0\ItemAccess.vcproj", "{DF7C7205-0299-433C-9406-3F3AC570C612}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Crypto", "..\..\..\..\..\..\..\..\common\cpp\konga\Crypto\project\vc-9_0\Crypto.vcproj", "{B0D1025B-BE98-4152-9E12-82FDB740ECB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.Debug|Win32.Build.0 = Debug|Win32
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.Release|Win32.ActiveCfg = Release|Win32
+		{1CEFA311-F7A9-499F-A80D-36DA009DFA95}.Release|Win32.Build.0 = Release|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.Debug|Win32.Build.0 = Debug|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.Release|Win32.ActiveCfg = Release|Win32
+		{00519BDC-EDD5-49C7-8E80-3CD3B7E586EC}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.Debug|Win32.Build.0 = Debug|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.Release|Win32.ActiveCfg = Release|Win32
+		{BEA3CEB7-B40A-4D1C-A464-42BD6A0AB645}.Release|Win32.Build.0 = Release|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Debug|Win32.Build.0 = Debug|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Release|Win32.ActiveCfg = Release|Win32
+		{F7DF273D-80D8-4CF6-AE03-27891A02715D}.Release|Win32.Build.0 = Release|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Debug|Win32.Build.0 = Debug|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Release|Win32.ActiveCfg = Release|Win32
+		{261BD4EC-F1BB-4AFD-A080-FD782C3EBCB5}.Release|Win32.Build.0 = Release|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.Debug|Win32.Build.0 = Debug|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.Release|Win32.ActiveCfg = Release|Win32
+		{D3E1196E-129B-4149-A0B3-0714CDDE8245}.Release|Win32.Build.0 = Release|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.Debug|Win32.Build.0 = Debug|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.Release|Win32.ActiveCfg = Release|Win32
+		{CBCC9896-BF8A-48C3-93D3-BF320D460C2D}.Release|Win32.Build.0 = Release|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.Debug|Win32.Build.0 = Debug|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.Release|Win32.ActiveCfg = Release|Win32
+		{DF7C7205-0299-433C-9406-3F3AC570C612}.Release|Win32.Build.0 = Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Debug|Win32.Build.0 = Debug|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Release|Win32.ActiveCfg = Release|Win32
+		{B0D1025B-BE98-4152-9E12-82FDB740ECB9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

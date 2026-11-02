@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyKeyMappings>
+  <IntegrationEntity Name="Project">
+    <Key Client="project_id" Server="interchangeproject_id" />
+    <Key Client="project_name" Server="interchangeproject_name" />
+    <Key Client="description" Server="description" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Operation">
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="operation_name" Server="operation_name" />
+    <Key Client="operation_type_id" Server="operation_type_id" />
+    <Key Client="source_id" Server="source_id" />
+    <Key Client="target_id" Server="target_id" />
+    <Key Client="schedule_id" Server="schedule_id" />
+    <Key Client="transformation_id" Server="transformation_id" />
+    <Key Client="success_operation_id" Server="success_operation_id" />
+    <Key Client="success_message_id" Server="success_message_id" />
+    <Key Client="success_workflow" Server="success_workflow" />
+    <Key Client="failure_operation_id" Server="failure_operation_id" />
+    <Key Client="failure_message_id" Server="failure_message_id" />
+    <Key Client="failure_workflow" Server="failure_workflow" />
+    <Key Client="user_id" Server="user_id" />
+    <Key Client="description" Server="description" />
+    <Key Client="trace" Server="trace" />
+    <Key Client="ignore_history" Server="ignore_history" />
+    <Key Client="schedule_policy" Server="schedule_policy" Type="1" />
+    <Key Client="chunk_size" Server="chunk_size" Type="1" />
+    <Key Client="target_chunk_size" Server="target_chunk_size" Type="1" />
+    <Key Client="max_number_of_threads" Server="max_number_of_threads" Type="1" />
+    <Key Client="source_chunk_node" Server="source_chunk_node" Type="1" />
+    <Key Client="target_chunk_node" Server="target_chunk_node" Type="1" />
+    <Key Client="label" Server="label" Type="1" />
+    <Key Client="scheduleEnabled" Server="schedule_enabled" Type="1" />
+    <Key Client="debug_mode" Server="write_log" Type="1" />
+    <Key Client="enable_history_log" Server="enable_history_log" Type="1" />
+    <Key Client="operation_log_level" Server="operation_log_level" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+    <Key Client="salesforce_wizard_operation_name" Server="wizard.salesforce.operation" Type="1" />
+    <Key Client="connect_type" Server="connect_type" Type="1" />
+	<Key Client="salesforce_wizard_guid" Server="wizard.salesforce.guid" Type="1" />
+	<Key Client="target_records_target.success" Server="target_records_target.success" Type="1" />
+	<Key Client="target_records_email.success" Server="target_records_email.success" Type="1" />
+	<Key Client="target_records_target.failure" Server="target_records_target.failure" Type="1" />
+	<Key Client="target_records_email.failure" Server="target_records_email.failure" Type="1" />
+	<Key Client="validate_source_text_file" Server="validate_source_text_file" Type="1" />
+	<Key Client="valid_source_records.target" Server="valid_source_records.target" Type="1" />
+	<Key Client="valid_source_records.email" Server="valid_source_records.email" Type="1" />
+	<Key Client="invalid_source_records.target" Server="invalid_source_records.target" Type="1" />
+	<Key Client="invalid_source_records.email" Server="invalid_source_records.email" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Transformation">
+    <Key Client="transformation_id" Server="transformation_id" />
+    <Key Client="transformation_name" Server="transformation_name" />
+    <Key Client="source_type_id" Server="source_type_id" />
+    <Key Client="target_type_id" Server="target_type_id" />
+    <Key Client="source_text_doc" Server="source_text_doc" />
+    <Key Client="source_edi" Server="source_edi" />
+    <Key Client="source_sourceid" Server="source_sourceid" />
+    <Key Client="target_text_doc" Server="target_text_doc" />
+    <Key Client="target_edi" Server="target_edi" />
+    <Key Client="target_targetid" Server="target_targetid" />
+    <Key Client="source_xml" Server="source_xml" />
+    <Key Client="target_xml" Server="target_xml" />
+    <Key Client="natureofsource" Server="natureofsource" />
+    <Key Client="natureoftarget" Server="natureoftarget" />
+    <Key Client="insert_mode" Server="insert_mode" />
+    <Key Client="target_dtd_url" Server="target_dtd_url" />
+    <Key Client="source_edi_default" Server="source_edi_default" />
+    <Key Client="target_edi_default" Server="target_edi_default" />
+    <Key Client="isvalid" Server="isvalid" />
+    <Key Client="sourcedtd_root" Server="sourcedtd_root" />
+    <Key Client="targetdtd_root" Server="targetdtd_root" />
+    <Key Client="SourceJmsMessageId" Server="sourcejmsmessageid" />
+    <Key Client="TargetJmsMessageId" Server="targetjmsmessageid" />
+    <Key Client="DoSourceXmlValidation" Server="DoSourceXmlValidation" Type="1" />
+    <Key Client="DoTargetXmlValidation" Server="DoTargetXmlValidation" Type="1" />
+    <Key Client="TargetXmlSchemaLocation" Server="SchemaLocation" Type="1" />
+    <Key Client="TruncateCharsInDbTarget" Server="TruncateDbCharTargets" Type="1" />
+    <Key Client="SourceBatchSize" Server="SourceBatchSize" Type="1" />
+    <Key Client="SourceBatchNodePath" Server="SourceBatchNodePath" Type="1" />
+    <Key Client="include_informix_row_id_input" Server="include_informix_row_id_input" Type="1" />
+    <Key Client="include_informix_row_id_output" Server="include_informix_row_id_output" Type="1" />
+    <Key Client="NoSourceDataUsedInMapping" Server="NoSourceDataUsedInMapping" Type="1" />
+    <Key Client="XmlSourceIsEdi" Server="XmlSourceIsEdi" Type="1" />
+    <Key Client="XmlTargetIsEdi" Server="XmlTargetIsEdi" Type="1" />
+    <Key Client="auto_generated_target_struct" Server="auto_generated_target_struct" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+	<Key Client="salesforce_object" Server="salesforce_object" Type="1" />
+	<Key Client="saleforce_wizard_role" Server="saleforce_wizard_role" Type="1" />
+	<Key Client="salesforce_partner_wizard" Server="salesforce_partner_wizard" Type="1" />
+	<Key Client="use_jbxmlparser" Server="use_jbxmlparser" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Source">
+    <Key Client="source_id" Server="source_id" />
+    <Key Client="source_name" Server="source_name" />
+    <Key Client="source_type_id" Server="source_type_id" />
+    <Key Client="document_id" Server="document_id" />
+    <Key Client="locator" Server="locator" />
+    <Key Client="path" Server="path" />
+    <Key Client="file_name" Server="file_name" />
+    <Key Client="timeout" Server="timeout" />
+    <Key Client="login" Server="login" />
+    <Key Client="password" Server="password" />
+    <Key Client="filter" Server="filter" />
+    <Key Client="ignore_first" Server="ignore_first" />
+    <Key Client="ignore_last" Server="ignore_last" />
+    <Key Client="dsn" Server="dsn" />
+    <Key Client="transfer_type" Server="transfer_type" />
+    <Key Client="encrypt_text" Server="encrypt_text" />
+    <Key Client="encrypt_choice" Server="encrypt_choice" />
+    <Key Client="driver" Server="driver" />
+    <Key Client="drivertype" Server="drivertype" />
+    <Key Client="dbtype_id" Server="dbtype_id" />
+    <Key Client="port" Server="port" />
+    <Key Client="passive_mode" Server="passive_mode" />
+    <Key Client="dbname" Server="dbname" />
+    <Key Client="connectstring" Server="connectstring" />
+    <Key Client="renamefileto" Server="renamefileto" />
+    <Key Client="secured" Server="secured" />
+    <Key Client="httpurl" Server="httpurl" />
+    <Key Client="certificatename" Server="certificatename" />
+    <Key Client="optional_connectstring" Server="optional_connectstring" />
+    <Key Client="http_verb" Server="http_verb" />
+    <Key Client="jms_message_selector" Server="jms_message_selector" />
+    <Key Client="enable_content_encoding" Server="enable_content_encoding" Type="1" />
+    <Key Client="enable_chunked_transfer_encoding" Server="enable_chunked_transfer_encoding" Type="1" />
+    <Key Client="send_expect_100_continue" Server="send_expect_100_continue" Type="1" />
+    <Key Client="filterOption.ignoreCase" Server="case_insensitive_file_filter" Type="1" />
+    <Key Client="filterOption.regularExpression" Server="regular_expression_file_filter" Type="1" />
+    <Key Client="ftp.nlst" Server="ftp_nlst" Type="1" />
+    <Key Client="ftps_explicit" Server="ftps_explicit" Type="1" />
+    <Key Client="ftps_auth" Server="ftps_auth" Type="1" />
+    <Key Client="transactionIsolationLevel" Server="db_transaction_isolation_level" Type="1" />
+    <Key Client="driver_begin_quote" Server="driver_begin_quote" Type="1" />
+    <Key Client="driver_end_quote" Server="driver_end_quote" Type="1" />
+    <Key Client="db_begin_quote" Server="db_begin_quote" Type="1" />
+    <Key Client="db_end_quote" Server="db_end_quote" Type="1" />
+    <Key Client="driver_class" Server="driver_class" Type="1" />
+    <Key Client="jdbc_subprotocol" Server="jdbc_subprotocol" Type="1" />
+    <Key Client="http_request_headers" Server="http_request_headers" Type="1" />
+    <Key Client="fetch_size" Server="fetch_size" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+    <Key Client="use_basic_http_authentication" Server="use_basic_http_authentication" Type="1" />
+    <Key Client="manual_mode" Server="manual_mode" Type="1" />
+    <Key Client="http_ssl_version" Server="http_ssl_version" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Target">
+    <Key Client="target_id" Server="target_id" />
+    <Key Client="target_name" Server="target_name" />
+    <Key Client="source_type_id" Server="source_type_id" />
+    <Key Client="document_id" Server="document_id" />
+    <Key Client="locator" Server="locator" />
+    <Key Client="path" Server="path" />
+    <Key Client="file_name" Server="file_name" />
+    <Key Client="timeout" Server="timeout" />
+    <Key Client="login" Server="login" />
+    <Key Client="password" Server="password" />
+    <Key Client="smtp_message" Server="smtp_message" />
+    <Key Client="dsn" Server="dsn" />
+    <Key Client="transfer_type" Server="transfer_type" />
+    <Key Client="encrypt_text" Server="encrypt_text" />
+    <Key Client="encrypt_choice" Server="encrypt_choice" />
+    <Key Client="driver" Server="driver" />
+    <Key Client="drivertype" Server="drivertype" />
+    <Key Client="user_Client" Server="user_Client" />
+    <Key Client="user_password" Server="user_password" />
+    <Key Client="user_id" Server="user_id" />
+    <Key Client="developer_password" Server="developer_password" />
+    <Key Client="developer_client" Server="developer_client" />
+    <Key Client="developer_id" Server="developer_id" />
+    <Key Client="system_number" Server="system_number" />
+    <Key Client="app_server" Server="app_server" />
+    <Key Client="lang" Server="lang" />
+    <Key Client="port" Server="port" />
+    <Key Client="passive_mode" Server="passive_mode" />
+    <Key Client="secured" Server="secured" />
+    <Key Client="dbname" Server="dbname" />
+    <Key Client="connectstring" Server="connectstring" />
+    <Key Client="httpurl" Server="httpurl" />
+    <Key Client="certificatename" Server="certificatename" />
+    <Key Client="optional_connectstring" Server="optional_connectstring" />
+    <Key Client="http_verb" Server="http_verb" />
+    <Key Client="target_target_id" Server="target_target_id" />
+    <Key Client="begin_quote" Server="begin_quote" />
+    <Key Client="end_quote" Server="end_quote" />
+    <Key Client="enable_content_encoding" Server="enable_content_encoding" Type="1" />
+    <Key Client="enable_chunked_transfer_encoding" Server="enable_chunked_transfer_encoding" Type="1" />
+    <Key Client="send_expect_100_continue" Server="send_expect_100_continue" Type="1" />
+    <Key Client="ftps_explicit" Server="ftps_explicit" Type="1" />
+    <Key Client="ftps_auth" Server="ftps_auth" Type="1" />
+    <Key Client="transactionIsolationLevel" Server="db_transaction_isolation_level" Type="1" />
+    <Key Client="httpContentType" Server="http_content_type_header" Type="1" />
+    <Key Client="driver_begin_quote" Server="driver_begin_quote" Type="1" />
+    <Key Client="driver_end_quote" Server="driver_end_quote" Type="1" />
+    <Key Client="db_begin_quote" Server="db_begin_quote" Type="1" />
+    <Key Client="db_end_quote" Server="db_end_quote" Type="1" />
+    <Key Client="driver_class" Server="driver_class" Type="1" />
+    <Key Client="jdbc_subprotocol" Server="jdbc_subprotocol" Type="1" />
+    <Key Client="http_request_headers" Server="http_request_headers" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+    <Key Client="use_basic_http_authentication" Server="use_basic_http_authentication" Type="1" />
+    <Key Client="manual_mode" Server="manual_mode" Type="1" />
+    <Key Client="http_ssl_version" Server="http_ssl_version" Type="1" />
+    <Key Client="skip_empty_files" Server="skip_empty_files" Type="1" />
+    <Key Client="file_share_create_directories" Server="file_share_create_directories" Type="1" />
+    <Key Client="transfer_timeout" Server="transfer_timeout" Type="1" />
+    <Key Client="character_encoding" Server="character_encoding" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="WebServiceCall">
+    <Key Client="webservice_id" Server="webservice_id" />
+    <Key Client="wsdl_id" Server="wsdl_id" />
+    <Key Client="webservice_name" Server="webservice_name" />
+    <Key Client="webservice_url" Server="webservice_url" />
+    <Key Client="service" Server="service" />
+    <Key Client="port" Server="port" />
+    <Key Client="binding" Server="binding" />
+    <Key Client="operation" Server="operation" />
+    <Key Client="soapversion" Server="soapversion" />
+    <Key Client="soapaction" Server="soapaction" />
+    <Key Client="soapstyle" Server="soapstyle" />
+    <Key Client="soapbodyuse" Server="soapbodyuse" />
+    <Key Client="inputxsdfilename" Server="inputxsdfilename" />
+    <Key Client="outputxsdfilename" Server="outputxsdfilename" />
+    <Key Client="httpusername" Server="httpusername" />
+    <Key Client="httppassword" Server="httppassword" />
+    <Key Client="certificate" Server="certificate" />
+    <Key Client="targetnamespace" Server="targetnamespace" />
+    <Key Client="othernamespaces" Server="othernamespaces" />
+    <Key Client="enable_content_encoding" Server="enable_content_encoding" Type="1" />
+    <Key Client="enable_chunked_transfer_encoding" Server="enable_chunked_transfer_encoding" Type="1" />
+    <Key Client="send_expect_100_continue" Server="send_expect_100_continue" Type="1" />
+    <Key Client="operation_input" Server="operation_input" Type="1" />
+    <Key Client="operation_output" Server="operation_output" Type="1" />
+    <Key Client="http_request_headers" Server="http_request_headers" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+    <Key Client="sfdc_partner_wsdl" Server="sfdc_partner_wsdl" Type="1" />
+    <Key Client="http_ssl_version" Server="http_ssl_version" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Schedule">
+    <Key Client="schedule_id" Server="schedule_id" />
+    <Key Client="schedule_name" Server="schedule_name" />
+    <Key Client="occurs" Server="occurs" />
+    <Key Client="daily" Server="daily" />
+    <Key Client="weekly" Server="weekly" />
+    <Key Client="mon" Server="mon" />
+    <Key Client="tue" Server="tue" />
+    <Key Client="wed" Server="wed" />
+    <Key Client="thu" Server="thu" />
+    <Key Client="fri" Server="fri" />
+    <Key Client="sat" Server="sat" />
+    <Key Client="sun" Server="sun" />
+    <Key Client="monthly" Server="monthly" />
+    <Key Client="monthly_a_day" Server="monthly_a_day" />
+    <Key Client="monthly_a_of_every_x_month" Server="monthly_a_of_every_x_month" />
+    <Key Client="monthly_b_num" Server="monthly_b_num" />
+    <Key Client="monthly_b_day" Server="monthly_b_day" />
+    <Key Client="monthly_b_of_every_x_month" Server="monthly_b_of_every_x_month" />
+    <Key Client="frequency" Server="frequency" />
+    <Key Client="frequency_once_time" Server="frequency_once_time" />
+    <Key Client="frequency_every_num" Server="frequency_every_num" />
+    <Key Client="frequency_every_hm" Server="frequency_every_hm" />
+    <Key Client="frequency_start_time" Server="frequency_start_time" />
+    <Key Client="frequency_end_time" Server="frequency_end_time" />
+    <Key Client="duration_start_date" Server="duration_start_date" />
+    <Key Client="duration_end_date" Server="duration_end_date" />
+    <Key Client="duration_yesno_end" Server="duration_yesno_end" />
+    <Key Client="priority" Server="priority" />
+    <Key Client="enabled" Server="enabled" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="HttpEndpoint">
+    <Key Client="httpendpoint_id" Server="httpendpoint_id" />
+    <Key Client="httpendpoint_name" Server="httpendpoint_name" />
+    <Key Client="Description" Server="httpendpoint_description" />
+    <Key Client="endpoint_url" Server="endpoint_url" />
+    <Key Client="response_type" Server="response_type" />
+    <Key Client="request_variable" Server="request_variable" />
+    <Key Client="response_variable" Server="response_variable" />
+    <!-->Key Client="response_content_type" Server="response_content_type" /-->
+    <Key Client="trigger_on_empty_request" Server="trigger_on_empty_request" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Document">
+    <Key Client="document_id" Server="document_id" />
+    <Key Client="document_name" Server="document_name" />
+    <Key Client="format_type_id" Server="format_type_id" />
+    <Key Client="delimiter" Server="delimiter" />
+    <Key Client="text_qualifier" Server="text_qualifier" />
+    <Key Client="qualifier_mode" Server="qualifier_mode" Type="1" />
+    <Key Client="edifact" Server="edifact" Type="1" />
+    <Key Client="number_of_columns_validation" Server="number_of_columns_validation" Type="1" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceConnector">
+    <Key Client="salesforceconnector_id" Server="salesforceconnector_id" />
+	<Key Client="salesforceconnector_name" Server="salesforceconnector_name" />
+    <Key Client="api_version" Server="api_version" />
+    <Key Client="server_host" Server="server_host" />
+    <Key Client="user_name" Server="user_name" />
+    <Key Client="password" Server="salesforce_password" />
+	<Key Client="security_token" Server="security_token" />
+    <Key Client="sandbox" Server="sandbox" />
+    <Key Client="status" Server="status" Type="1" />
+  
+    <Key Client="auth_type" Server="auth_type" />
+    <Key Client="instance_url" Server="instance_url" />
+    <Key Client="client_id" Server="client_id" />
+    <Key Client="client_secret" Server="client_secret" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceQuery">
+    <Key Client="salesforcequery_id" Server="salesforcequery_id" />
+    <Key Client="salesforcequery_name" Server="salesforcequery_name" />
+    <Key Client="query_string" Server="query_string" />
+    <Key Client="salesforce_object" Server="salesforce_object" />
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="query_all" Server="query_all" Type="1" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+    <Key Client="auto_response" Server="auto_response" Type="1" />
+	<Key Client="target_encoding" Server="target_encoding" Type="1" />
+	<Key Client="target_header_mode" Server="target_header_mode" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceUpsert">
+    <Key Client="salesforceupsert_id" Server="salesforceupsert_id" />
+    <Key Client="salesforceupsert_name" Server="salesforceupsert_name" />
+    <Key Client="salesforce_object" Server="salesforce_object" />
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="truncate_fields" Server="truncate_fields" />
+    <Key Client="trigger_email" Server="trigger_email" />
+    <Key Client="debug_mode" Server="debug_mode" />
+    <Key Client="external_id_field" Server="external_id_field" />
+	<Key Client="insert_null_values" Server="insert_null_values" Type="1" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+    <Key Client="compress" Server="compress" Type="1" />
+    <Key Client="source_file_has_header" Server="source_file_has_header" Type="1" />
+    <Key Client="start_at_row" Server="start_at_row" Type="1" />
+	<Key Client="timezone" Server="timezone" Type="1" />
+	<Key Client="date_fmt" Server="date_fmt" Type="1" />
+	<Key Client="datetime_fmt" Server="datetime_fmt" Type="1" />
+	<Key Client="source_encoding" Server="source_encoding" Type="1" />
+	<Key Client="related_objects" Server="related_objects" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceCreate">
+    <Key Client="salesforcecreate_id" Server="salesforcecreate_id" />
+    <Key Client="salesforcecreate_name" Server="salesforcecreate_name" />
+    <Key Client="salesforce_object" Server="salesforce_object" />
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="truncate_fields" Server="truncate_fields" />
+    <Key Client="trigger_email" Server="trigger_email" />
+    <Key Client="debug_mode" Server="debug_mode" />
+	<Key Client="insert_null_values" Server="insert_null_values" Type="1" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+    <Key Client="compress" Server="compress" Type="1" />
+    <Key Client="source_file_has_header" Server="source_file_has_header" Type="1" />
+    <Key Client="start_at_row" Server="start_at_row" Type="1" />
+	<Key Client="timezone" Server="timezone" Type="1" />
+	<Key Client="date_fmt" Server="date_fmt" Type="1" />
+	<Key Client="datetime_fmt" Server="datetime_fmt" Type="1" />
+	<Key Client="source_encoding" Server="source_encoding" Type="1" />
+	<Key Client="related_objects" Server="related_objects" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceUpdate">
+    <Key Client="salesforceupdate_id" Server="salesforceupdate_id" />
+    <Key Client="salesforceupdate_name" Server="salesforceupdate_name" />
+    <Key Client="salesforce_object" Server="salesforce_object" />
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="truncate_fields" Server="truncate_fields" />
+    <Key Client="trigger_email" Server="trigger_email" />
+    <Key Client="debug_mode" Server="debug_mode" />
+	<Key Client="insert_null_values" Server="insert_null_values" Type="1" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+    <Key Client="compress" Server="compress" Type="1" />
+    <Key Client="source_file_has_header" Server="source_file_has_header" Type="1" />
+    <Key Client="start_at_row" Server="start_at_row" Type="1" />
+	<Key Client="timezone" Server="timezone" Type="1" />
+	<Key Client="date_fmt" Server="date_fmt" Type="1" />
+	<Key Client="datetime_fmt" Server="datetime_fmt" Type="1" />
+	<Key Client="source_encoding" Server="source_encoding" Type="1" />
+	<Key Client="related_objects" Server="related_objects" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceDelete">
+    <Key Client="salesforcedelete_id" Server="salesforcedelete_id" />
+    <Key Client="salesforcedelete_name" Server="salesforcedelete_name" />
+    <Key Client="operation_id" Server="operation_id" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+    <Key Client="source_file_has_header" Server="source_file_has_header" Type="1" />
+    <Key Client="start_at_row" Server="start_at_row" Type="1" />
+	<Key Client="source_encoding" Server="source_encoding" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SalesforceBulkLoad">
+    <Key Client="salesforcebulkload_id" Server="salesforcebulkload_id" />
+    <Key Client="salesforcebulkload_name" Server="salesforcebulkload_name" />
+	<Key Client="operation_id" Server="operation_id" />
+    <Key Client="salesforce_object" Server="salesforce_object" />
+    <Key Client="action" Server="action" />
+    <Key Client="external_id" Server="external_id" />
+    <Key Client="source_header" Server="source_header" />
+	<Key Client="source_column_indices" Server="source_column_indices" />
+    <Key Client="target_fields" Server="target_fields" />
+    <Key Client="recs_per_batch" Server="recs_per_batch" />
+	<Key Client="chars_per_batch" Server="chars_per_batch" />
+	<Key Client="timezone" Server="timezone" />
+	<Key Client="date_fmt" Server="date_fmt" />
+	<Key Client="datetime_fmt" Server="datetime_fmt" />
+	<Key Client="insert_null_values" Server="insert_null_values" Type="1" />
+    <Key Client="serial_mode" Server="serial_mode" Type="1" />
+    <Key Client="compress" Server="compress" Type="1" />
+	<Key Client="file_encoding" Server="file_encoding" Type="1" />
+    <Key Client="connector_id" Server="connector_guid" Type="1" />
+	<Key Client="all_target_fields" Server="all_target_fields" Type="1" />
+    <Key Client="start_at_row" Server="start_at_row" Type="1" />
+    <Key Client="assignment_rule" Server="assignment_rule" Type="1" />
+    <Key Client="query_string" Server="query_string" Type="1" />
+    <Key Client="related_objects" Server="related_objects" Type="1" />
+	<Key Client="sfdc.soapheader.*" Type="2" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Script">
+    <Key Client="script_id" Server="script_id" />
+    <Key Client="script_name" Server="script_name" />
+    <Key Client="script" Server="script_text" />
+    <Key Client="salesforce_wizard_object" Server="salesforce_wizard_object" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="Folder">
+    <Key Client="folder_id" Server="folder_id" />
+    <Key Client="folder_name" Server="folder_name" />
+    <Key Client="contentsentitytype_id" Server="contentsentitytype_id" />
+    <Key Client="protected" Server="protected" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="EmailMessage">
+    <Key Client="message_id" Server="message_id" />
+    <Key Client="message_name" Server="message_name" />
+    <Key Client="smtp_servers" Server="smtp_servers" />
+    <Key Client="account" Server="account" />
+    <Key Client="account_password" Server="account_password" />
+    <Key Client="send_to" Server="send_to" />
+    <Key Client="sent_from" Server="sent_from" />
+    <Key Client="cc" Server="cc" />
+    <Key Client="bcc" Server="bcc" />
+    <Key Client="reply_to" Server="reply_to" />
+    <Key Client="subject" Server="subject" />
+    <Key Client="use_ssl" Server="use_ssl" />
+    <Key Client="message_text" Server="message_text" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SapEndpoint">
+    <Key Client="sapendpoint_id" Server="sapendpoint_id" />
+    <Key Client="sapendpoint_name" Server="sapendpoint_name" />
+    <Key Client="host" Server="saphost" />
+    <Key Client="user" Server="sapuser" />
+    <Key Client="password" Server="sappassword" />
+    <Key Client="port" Server="port" Type="1" />
+    <Key Client="systemnumber" Server="systemnumber" Type="1"  />
+    <Key Client="client" Server="client" Type="1" />
+    <Key Client="lang" Server="lang" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="SapFunction">
+    <Key Client="sapfunction_id" Server="sapfunction_id" />
+    <Key Client="sapfunction_name" Server="sapfunction_name" />
+    <Key Client="sapendpoint_id" Server="sapendpoint_id" />
+    <Key Client="type" Server="saptype" />
+    <Key Client="category_name" Server="messagetypename" />
+    <Key Client="category_description" Server="messagetypedescription" />
+    <Key Client="api_function_name" Server="functionmodulename" />
+    <Key Client="api_function_description" Server="functionmoduledescription" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmEndpoint">
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrmendpoint_name" Server="mscrmendpoint_name" />
+    <Key Client="host" Server="mscrmhost" />
+    <Key Client="user" Server="mscrmuser" />
+    <Key Client="password" Server="mscrmpassword" />
+    <Key Client="port" Server="port" Type="1" />
+    <Key Client="authType" Server="authType" Type="1"  />
+    <Key Client="organizationUniqueName" Server="organizationUniqueName" Type="1" />
+    <Key Client="domain" Server="domain" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmCreate">
+    <Key Client="mscrmcreate_id" Server="mscrmfunction_id" />
+    <Key Client="mscrmcreate_name" Server="mscrmfunction_name" />
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrm_type" Server="mscrmoperation" />
+    <Key Client="object_name" Server="mscrmobject" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+    <Key Client="query_xml" Server="mscrmqueryxml" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmDelete">
+    <Key Client="mscrmdelete_id" Server="mscrmfunction_id" />
+    <Key Client="mscrmdelete_name" Server="mscrmfunction_name" />
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrm_type" Server="mscrmoperation" />
+    <Key Client="object_name" Server="mscrmobject" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+    <Key Client="query_xml" Server="mscrmqueryxml" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmUpdate">
+    <Key Client="mscrmupdate_id" Server="mscrmfunction_id" />
+    <Key Client="mscrmupdate_name" Server="mscrmfunction_name" />
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrm_type" Server="mscrmoperation" />
+    <Key Client="object_name" Server="mscrmobject" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+    <Key Client="query_xml" Server="mscrmqueryxml" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmUpsert">
+    <Key Client="mscrmupsert_id" Server="mscrmfunction_id" />
+    <Key Client="mscrmupsert_name" Server="mscrmfunction_name" />
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrm_type" Server="mscrmoperation" />
+    <Key Client="object_name" Server="mscrmobject" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+    <Key Client="query_xml" Server="mscrmqueryxml" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSCrmQuery">
+    <Key Client="mscrmquery_id" Server="mscrmfunction_id" />
+    <Key Client="mscrmquery_name" Server="mscrmfunction_name" />
+    <Key Client="mscrmendpoint_id" Server="mscrmendpoint_id" />
+    <Key Client="mscrm_type" Server="mscrmoperation" />
+    <Key Client="object_name" Server="mscrmobject" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+    <Key Client="query_xml" Server="mscrmqueryxml" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSAXEndpoint">
+    <Key Client="msaxendpoint_id" Server="msaxendpoint_id" />
+    <Key Client="msaxendpoint_name" Server="msaxendpoint_name" />
+    <Key Client="user" Server="msaxuser" />
+    <Key Client="password" Server="msaxpassword" />
+    <Key Client="domain" Server="domain" Type="1" />
+    <Key Client="wsdl_urls" Server="wsdl_urls" Type="1" />
+    <Key Client="service_url" Server="service_url" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSAXFunction">
+    <Key Client="msaxfunction_id" Server="msaxfunction_id" />
+    <Key Client="msaxfunction_name" Server="msaxfunction_name" />
+    <Key Client="msaxendpoint_id" Server="msaxendpoint_id" />
+    <Key Client="msaxwsdlurl" Server="msaxwsdlurl" />
+    <Key Client="msaxserviceandoperation" Server="msaxserviceandoperation" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSGPEndpoint">
+    <Key Client="msgpendpoint_id" Server="msgpendpoint_id" />
+    <Key Client="msgpendpoint_name" Server="msgpendpoint_name" />
+    <Key Client="host" Server="msgphost" />
+    <Key Client="user" Server="msgpuser" />
+    <Key Client="password" Server="msgppassword" />
+    <Key Client="databasename" Server="databasename" Type="1" />
+    <Key Client="service_url" Server="service_url" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSGPCreate">
+    <Key Client="msgpcreate_id" Server="msgpfunction_id" />
+    <Key Client="msgpcreate_name" Server="msgpfunction_name" />
+    <Key Client="msgpendpoint_id" Server="msgpendpoint_id" />
+    <Key Client="msgp_type" Server="msgpoperation" />
+    <Key Client="object_name" Server="msgpmodule" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSGPDelete">
+    <Key Client="msgpdelete_id" Server="msgpfunction_id" />
+    <Key Client="msgpdelete_name" Server="msgpfunction_name" />
+    <Key Client="msgpendpoint_id" Server="msgpendpoint_id" />
+    <Key Client="msgp_type" Server="msgpoperation" />
+    <Key Client="object_name" Server="msgpmodule" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="MSGPUpdate">
+    <Key Client="msgpupdate_id" Server="msgpfunction_id" />
+    <Key Client="msgpupdate_name" Server="msgpfunction_name" />
+    <Key Client="msgpendpoint_id" Server="msgpendpoint_id" />
+    <Key Client="msgp_type" Server="msgpoperation" />
+    <Key Client="object_name" Server="msgpmodule" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskEndpoint">
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodeskendpoint_name" Server="autodeskendpoint_name" />
+    <Key Client="host" Server="autodeskhost" />
+    <Key Client="user" Server="autodeskuser" />
+    <Key Client="password" Server="autodeskpassword" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskGet">
+    <Key Client="autodeskget_id" Server="autodeskfunction_id" />
+    <Key Client="autodeskget_name" Server="autodeskfunction_name" />
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodesk_type" Server="autodeskoperation" />
+    <Key Client="object_name" Server="autodeskworkspace" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskCreate">
+    <Key Client="autodeskcreate_id" Server="autodeskfunction_id" />
+    <Key Client="autodeskcreate_name" Server="autodeskfunction_name" />
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodesk_type" Server="autodeskoperation" />
+    <Key Client="object_name" Server="autodeskworkspace" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskUpdate">
+    <Key Client="autodeskupdate_id" Server="autodeskfunction_id" />
+    <Key Client="autodeskupdate_name" Server="autodeskfunction_name" />
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodesk_type" Server="autodeskoperation" />
+    <Key Client="object_name" Server="autodeskworkspace" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskUpsert">
+    <Key Client="autodeskupsert_id" Server="autodeskfunction_id" />
+    <Key Client="autodeskupsert_name" Server="autodeskfunction_name" />
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodesk_type" Server="autodeskoperation" />
+    <Key Client="object_name" Server="autodeskworkspace" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="AutoDeskDelete">
+    <Key Client="autodeskdelete_id" Server="autodeskfunction_id" />
+    <Key Client="autodeskdelete_name" Server="autodeskfunction_name" />
+    <Key Client="autodeskendpoint_id" Server="autodeskendpoint_id" />
+    <Key Client="autodesk_type" Server="autodeskoperation" />
+    <Key Client="object_name" Server="autodeskworkspace" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteEndpoint">
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuiteendpoint_name" Server="netsuiteendpoint_name" />
+    <Key Client="user" Server="netsuiteuser" />
+    <Key Client="password" Server="netsuitepassword" />
+    <Key Client="sandbox" Server="sandbox" Type="1" />
+    <Key Client="email" Server="email" Type="1" />
+    <Key Client="wsdldownloadurl" Server="wsdldownloadurl" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteCreate">
+    <Key Client="netsuitecreate_id" Server="netsuitefunction_id" />
+    <Key Client="netsuitecreate_name" Server="netsuitefunction_name" />
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuite_operation" Server="netsuiteoperation" />
+    <Key Client="object_name" Server="netsuiteobject" />
+    <Key Client="queryxml" Server="netsuitequeryxml" />
+    <Key Client="pagesize" Server="netsuitepagesize" />
+    <Key Client="advancedsearch" Server="netsuiteadvancedsearch" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteUpdate">
+    <Key Client="netsuiteupdate_id" Server="netsuitefunction_id" />
+    <Key Client="netsuiteupdate_name" Server="netsuitefunction_name" />
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuite_operation" Server="netsuiteoperation" />
+    <Key Client="object_name" Server="netsuiteobject" />
+    <Key Client="pagesize" Server="netsuitepagesize" />
+    <Key Client="queryxml" Server="netsuitequeryxml" />
+    <Key Client="advancedsearch" Server="netsuiteadvancedsearch" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteUpsert">
+    <Key Client="netsuiteupsert_id" Server="netsuitefunction_id" />
+    <Key Client="netsuiteupsert_name" Server="netsuitefunction_name" />
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuite_operation" Server="netsuiteoperation" />
+    <Key Client="object_name" Server="netsuiteobject" />
+    <Key Client="queryxml" Server="netsuitequeryxml" />
+    <Key Client="pagesize" Server="netsuitepagesize" />
+    <Key Client="advancedsearch" Server="netsuiteadvancedsearch" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteDelete">
+    <Key Client="netsuitedelete_id" Server="netsuitefunction_id" />
+    <Key Client="netsuitedelete_name" Server="netsuitefunction_name" />
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuite_operation" Server="netsuiteoperation" />
+    <Key Client="object_name" Server="netsuiteobject" />
+    <Key Client="queryxml" Server="netsuitequeryxml" />
+    <Key Client="pagesize" Server="netsuitepagesize" />
+    <Key Client="advancedsearch" Server="netsuiteadvancedsearch" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="NetSuiteQuery">
+    <Key Client="netsuitequery_id" Server="netsuitefunction_id" />
+    <Key Client="netsuitequery_name" Server="netsuitefunction_name" />
+    <Key Client="netsuiteendpoint_id" Server="netsuiteendpoint_id" />
+    <Key Client="netsuite_operation" Server="netsuiteoperation" />
+    <Key Client="object_name" Server="netsuiteobject" />
+    <Key Client="queryxml" Server="netsuitequeryxml" />
+    <Key Client="pagesize" Server="netsuitepagesize" />
+    <Key Client="advancedsearch" Server="netsuiteadvancedsearch" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="EBSEndpoint">
+    <Key Client="ebsendpoint_id" Server="ebsendpoint_id" />
+    <Key Client="ebsendpoint_name" Server="ebsendpoint_name" />
+    <Key Client="user" Server="ebsuser" />
+    <Key Client="password" Server="ebspassword" />
+    <Key Client="connecturl" Server="connecturl" Type="1" />
+  </IntegrationEntity>
+  <IntegrationEntity Name="EBSFunction">
+    <Key Client="ebsfunction_id" Server="ebsfunction_id" />
+    <Key Client="ebsfunction_name" Server="ebsfunction_name" />
+    <Key Client="ebsendpoint_id" Server="ebsendpoint_id" />
+    <Key Client="ebscatalog" Server="ebscatalog" />
+    <Key Client="ebsprogram" Server="ebsprogram" />
+    <Key Client="ebscatalog_description" Server="ebscatalogdescription" />
+    <Key Client="ebsprogram_description" Server="ebsprogramdescription" />
+    <Key Client="input_xsd_filename" Server="inputxsdfilename" />
+    <Key Client="input_xsd_root" Server="inputxsdroot" />
+    <Key Client="output_xsd_filename" Server="outputxsdfilename" />
+    <Key Client="output_xsd_root" Server="outputxsdroot" />
+  </IntegrationEntity>
+
+</PropertyKeyMappings>

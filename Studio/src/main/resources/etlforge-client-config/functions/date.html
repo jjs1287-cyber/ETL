@@ -1,0 +1,14 @@
+<html>Converts the argument to a date. If the input is a string
+				it has to be formatted using one of the standard date formats:
+				such as "12/25/2008 12:30", "2008-12-25", "2008-12-25T12:30:00",
+        "December 25, 2008", "DEC 25, 2008". If the input string cannot be read by 
+        Date() function, it can be convert first to standard format by CVTDate(). 
+        Hour, minute and second are optional.
+				If the input is an integer or a double the input is interpreted as
+				the number of seconds from 12:00:00 AM of 1/1/1970 GMT. Note that
+				Date(Long(Now()))==Now().<br><h2>Example:</h2><code><font size="4">
+							// Returns the date that represents 2007-09-13 00:00:00 GMT.<br>
+							Date("9/13/2000")<br><br>
+							// Returns 2007-09-27 10:18:08 local time.<br>
+							Date(1190888288)<br>
+							</font></code></html>

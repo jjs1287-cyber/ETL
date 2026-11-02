@@ -1,0 +1,11 @@
+<html>Sends an email using the supplied information.
+				Only the four first arguments are required, the rest are optional.
+				If some information is not specified it will be read from the server configuration
+				file. If it is not available in the configuration file the email will not be sent.
+				The method returns a string with an error message if the email could not be sent,
+				on success an empty string is returned.<br><h2>Example:</h2><code><font size="4">
+				SendEmail("john.doe@localhost", "jane.doe@localhost", "Weird data in PO input",
+				"There was some weird data in this incoming PO, could you have a look at it?",
+				"mail.myhost.org", "john.doe@localhost", "mymailpwd", "jennifer@localhost",
+				"svennis@localhost, urban@localhost", "jd@localhost")
+				</font></code></html>

@@ -1,0 +1,364 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""MapTransform.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,2,0,211
+ PRODUCTVERSION 2,2,0,211
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "Comments", "E1 - Requires ErrorCodes v2.2.0.35"
+            VALUE "CompanyName", "ETLForge"
+            VALUE "FileDescription", "MapTransform"
+            VALUE "FileVersion", "2, 2, 0, 211"
+            VALUE "InternalName", "MapTransform"
+            VALUE "LegalCopyright", "Copyright 2001 - 2011"
+            VALUE "OriginalFilename", "MapTransform.dll"
+            VALUE "ProductName", "ETLForge Transformation Engine"
+            VALUE "ProductVersion", "2, 2, 0, 211"
+        END
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "ETLForge"
+            VALUE "FileDescription", "MapTransform Module"
+            VALUE "FileVersion", "2, 2, 0, 211"
+            VALUE "InternalName", "MapTransform"
+            VALUE "LegalCopyright", "Copyright 1999 - 2011"
+            VALUE "OriginalFilename", "MapTransform.DLL"
+            VALUE "ProductName", "MapTransform Module"
+            VALUE "ProductVersion", "2, 2, 0, 211"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200, 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "MapTransform"
+    PARSE_ELEMENT_SYNTAX_ERR "PARSE_ELEMENT_SYNTAX_ERR"
+    PARSE_ELEMENT_EXTRA_RP  "PARSE_ELEMENT_EXTRA_RP"
+    PARSE_ELEMENT_EXTRA_LP  "PARSE_ELEMENT_EXTRA_LP"
+    PARSE_ELEMENT_MORE_TEXT "PARSE_ELEMENT_MORE_TEXT"
+    PARSE_ELEMENT_WITH_ENTITY "PARSE_ELEMENT_WITH_ENTITY"
+    PARSE_ATTLIST_STACK_ERR "PARSE_ATTLIST_STACK_ERR"
+    PARSE_ATTLIST_MORE_TEXT "PARSE_ATTLIST_MORE_TEXT"
+    PARSE_ATTLIST_WITH_ENTITY "PARSE_ATTLIST_WITH_ENTITY"
+    PARSE_ENTITY_UNBALANCE_QUOTE "PARSE_ENTITY_UNBALANCE_QUOTE"
+    PARSE_ENTITY_MORE_TEXT  "PARSE_ENTITY_MORE_TEXT"
+END
+
+STRINGTABLE 
+BEGIN
+    ENTITY_REPLACE_ERR      "ENTITY_REPLACE_ERR"
+    DTD_PARSER_ERROR        "DTD_PARSER_ERROR"
+    PARSE_ENTITY_SYNTAX_ERROR "PARSE_ENTITY_SYNTAX_ERROR"
+    PARSE_ELEMENT_ERR_OR    "PARSE_ELEMENT_ERR_OR"
+    ENTITY_ENCOUNTER_EMPTY_KEY "ENTITY_ENCOUNTER_EMPTY_KEY"
+    PROCESS_ENTITY_SYNTAX_ERROR "PROCESS_ENTITY_SYNTAX_ERROR"
+    DTDPARSER_INFILE_ERR    "DTDPARSER_INFILE_ERR"
+    DTDPARSER_CLOSE_TAG_MISSING "DTDPARSER_CLOSE_TAG_MISSING"
+    EXPLODING_EXCEED_MAX_ORDER 
+                            "The depth of the tree is too large. Please contact support. "
+    READ_FILE_ERR           "READ_FILE_ERR"
+    READ_ERR_CLOSING_TAG_MISSING "READ_ERR_CLOSING_TAG_MISSING"
+    ENTITY_REPLACE_SYSTEM_ERR "ENTITY_REPLACE_SYSTEM_ERR"
+    READ_FILE_NOT_FOUND     "READ_FILE_NOT_FOUND"
+    READ_SYSTEM_LOCAL_ERR   "READ_SYSTEM_LOCAL_ERR"
+    READ_SYNTAX_ERROR       "READ_SYNTAX_ERROR"
+    PARSE_ATTLIST_MISSING_RP "PARSE_ATTLIST_MISSING_RP"
+END
+
+STRINGTABLE 
+BEGIN
+    PARSEFILEDEF_MISSING_CLOSING_QUOTE "PARSEFILEDEF_MISSING_CLOSING_QUOTE"
+    PARSE_FILE_DEF_EXTRA_LINKS "PARSE_FILE_DEF_EXTRA_LINKS"
+    PARSE_FILE_DEF_MISSING_RP "PARSE_FILE_DEF_MISSING_RP"
+    PARSE_FILE_DEF_PARENT_NOT_EXIST "PARSE_FILE_DEF_PARENT_NOT_EXIST"
+    PARSE_FILE_DEF_CHILD_NOT_EXIST "PARSE_FILE_DEF_CHILD_NOT_EXIST"
+    DTDPARSER_ADDLINK_MISMATCH_ID "DTDPARSER_ADDLINK_MISMATCH_ID"
+    DTDPARSERADDLINK_CHILD_INDEX_MISSING 
+                            "DTDPARSERADDLINK_CHILD_INDEX_MISSING"
+    READ_ERR_CLOSING_SQAURE_BRACKET_MISSING 
+                            "READ_ERR_CLOSING_SQAURE_BRACKET_MISSING"
+    SQUARE_BRACKET_ERR      "SQUARE_BRACKET_ERR"
+    PARSER_ELEMENT_MORE_TEXT "PARSER_ELEMENT_MORE_TEXT"
+    PARSE_FILE_DEF_MISSING_LP "PARSE_FILE_DEF_MISSING_LP"
+    DTDPARSERADDLINK_PARENT_INDEX_MISSING 
+                            "DTDPARSERADDLINK_PARENT_INDEX_MISSING"
+    DTDPARSERADDLINK_MISMATCH_INDEX "DTDPARSERADDLINK_MISMATCH_INDEX"
+    DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION 
+                            "DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION"
+    PARSE_LOADDATA_ERR      "PARSE_LOADDATA_ERR"
+    XMLPARSE_READ_ERR       "XMLPARSE_READ_ERR"
+END
+
+STRINGTABLE 
+BEGIN
+    CALL_DOXMLXMLMAP_WITH_ATTR_VALUE "CALL_DOXMLXMLMAP_WITH_ATTR_VALUE"
+    INTERNAL_ERR_EXPECT_ELEMENT_OR_COLLECTION 
+                            "INTERNAL_ERR_EXPECT_ELEMENT_OR_COLLECTION"
+    WRITEDATAFILE_ERR       "WRITEDATAFILE_ERR"
+    PARSEMAPPINGSTRING_FAIL_OPEN_FILE "PARSEMAPPINGSTRING_FAIL_OPEN_FILE"
+    APPENDATTRIBUTE_FAILED  "APPENDATTRIBUTE_FAILED"
+    XMLSAVE_FAILED          "XMLSAVE_FAILED"
+    NO_TREE_WITH_SPECIFIEDTABLES "NO_TREE_WITH_SPECIFIEDTABLES"
+    TOKENIZE_CREATE_DE_ERR  "TOKENIZE_CREATE_DE_ERR"
+    XML_PARSER_CREATE_DOM_NODE_ERROR "XML_PARSER_CREATE_DOM_NODE_ERROR"
+    SOURCE_OR_TARGET_TYPE_NOT_SUPPORTED "SOURCE_OR_TARGET_TYPE_NOT_SUPPORTED"
+    OPEN_TO_WRITE_TREEFILE_FAILED "OPEN_TO_WRITE_TREEFILE_FAILED"
+    OPEN_TO_WRITE_JAVAFILE_FAILED "OPEN_TO_WRITE_JAVAFILE_FAILED"
+    TXTPARSE_READ_ERR       "TXTPARSE_READ_ERR"
+    DELETE_XMLNODE_FAILED   "DELETE_XMLNODE_FAILED"
+    DEFINE_PRIMARY_KEY_FAIL "DEFINE_PRIMARY_KEY_FAIL"
+    PARSE_FILE_DEF_MISSING_RIGHT_ANGLE_BRACKET 
+                            "PARSE_FILE_DEF_MISSING_RIGHT_ANGLE_BRACKET"
+END
+
+STRINGTABLE 
+BEGIN
+    FIELD_POS_LENGTH_ERR    "FIELD_POS_LENGTH_ERR"
+    DEFINE_FOREIGN_KEY_FAIL "DEFINE_FOREIGN_KEY_FAIL"
+    FOREIGNKEY_FAIL_TO_FIND_PRIMARYKEY "Foreign key is NULL or empty."
+    XML_PARSER_DELETE_DOM_NODE_ERROR "XML_PARSER_DELETE_DOM_NODE_ERROR"
+    XML_PARSER_READ_XML_FILE_ERROR "XML_PARSER_READ_XML_FILE_ERROR"
+    XML_PARSER_SET_DTD_ERROR "XML_PARSER_SET_DTD_ERROR"
+    XML_PARSER_SET_VALUE_DOM_NODE_ERROR "XML_PARSER_SET_VALUE_DOM_NODE_ERROR"
+    XML_PARSER_SAVE_FAILED  "XML_PARSER_SAVE_FAILED"
+    XML_PARSER_CREATE_DOM_LOOP_FAILED "XML_PARSER_CREATE_DOM_LOOP_FAILED"
+    XML_PARSER_NEXT_NODE_DOM_LOOP_FAILED 
+                            "XML_PARSER_NEXT_NODE_DOM_LOOP_FAILED"
+    TRANSFORM_DE_READ_ERR   "Read data element error. Possible reason: the value is not consistent with either the datatype or the specified format."
+    TRANSFORM_CANNOT_OPEN_INPUT_FILE "Transform Error: Cannot open input file"
+    TRANSFORM_CANNOT_OPEN_OUTPUT_FILE 
+                            "Transform Error: Cannot open output file"
+    OPEN_DB_FAILED          "Error: OPEN_DB_FAILED"
+    TRANSFORM_TOKEN_UNKNOWN_INPUT "Transform Error: TOKEN_UNKNOWN_INPUT"
+    TRANSFORM_TOKEN_UNBALANCE_PAREN "Transform Error: TOKEN_UNBALANCE_PARENTHESIS"
+END
+
+STRINGTABLE 
+BEGIN
+    TRANSFORM_ARGNUM_MISSMATCH "Transform Error: ARGUMENT NUMBER MISSMATCH"
+    TRANSORM_ILLEGAL_OP_IN_STACK "Transform Error: ILLEGAL_OP_IN_STACK"
+    EXPRESSION_YIELD_NO_DATA "Transform Error: EXPRESSION_YIELD_NO_DATA"
+    EXPRESSION_YIELD_TOO_MANY_DATA "Transform Error: EXPRESSION_YIELD_TOO_MANY_DATA"
+	SYNTAX_ERROR_FUNCTION_ARGUMENT_COUNT "Transform Error: SYNTAX_ERROR_FUNCTION_ARGUMENT_COUNT"
+	SYNTAX_ERROR_MISPLACED_COMMA "Transform Error: SYNTAX_ERROR_MISPLACED_COMMA"
+	SYNTAX_ERROR_MISPLACED_RIGHT_PARENTHESIS "Transform Error: SYNTAX_ERROR_MISPLACED_RIGHT_PARENTHESIS"
+	EXPRESSION_COMMA_YIELD_MULTI_DATA "Transform Error: SYNTAX_ERROR_MULTIPLE_DATA_AT_END_OF_COMMA"
+	EXPRESSION_RF_YIELD_MULTI_DATA "Transform Error: SYNTAX_ERROR_MULTIPLE_DATA_AT_END_OF_RIGHT_PARENTHESeS"
+	TRANSFORM_TOKEN_UNBALANCE_BRACE "Transform Error: TRANSFORM_TOKEN_UNBALANCE_BRACE"
+	SYNTAX_ERROR_MISPLACED_RBRACE "Transform Error: SYNTAX_ERROR_MISPLACED_RBRACE"
+    TRANSFORM_TOKEN_UNBALANCE_QUOTE "Transform Error: TOKEN_UNBALANCE_QUOTE"
+    TRANSFORM_SYNTAX_ERR    "Transform Error: SYNTAX ERROR"
+    TRANSFORM_DATA_TYPE_CONVERT_ERROR 
+                            "Transform Error: DATA_TYPE_CONVERT_ERROR"
+    TRANSFORM_CANNOT_CVT_DE_TYPE "Transform Error: DE_TYPE_CONVERT_FAILED"
+	TRANSFORM_WRONG_TYPE_FOR_BINARY "Transformation Error: Wong data type to retrieve binary data"
+    TRANSFORM_ILLEGAL_OPERAND "Transform Error: ILLEGAL_OPERAND"
+    TRANSFORM_UNKNOWN_DE_TYPE "Transform Error: UNKNOWN_DE_TYPE"
+    TRANSFORM_INPUT_STR_PARSING_ERR "Transform Error: INPUT_STR_PARSING_ERR"
+    TRANSFORM_INPUT_DE_BOTH_FIXFIELD_DELIMIT 
+                            "Transform Error: INPUT_DE_BOTH_FIXFIELD_DELIMIT"
+    TRANSFORM_INPUT_FIXFIELD_LEN_ERROR 
+                            "Transform Error: INPUT_FIXFIELD_LEN_ERROR"
+    TRANSFORM_STR_DELIMITER_MISSING "Transform: STR_DELIMITER_MISSING"
+    TRANSFORM_INPUT_SYNTAX_ERR "Transform Error: INPUT_SYNTAX_ERR"
+    TRANSFORM_NUM_DELIMITER_MISSING "Transform Error: NUM_DELIMITER_MISSING"
+    TRANSFORM_ILLEGAL_DATE_INPUT "Transform Error: ILLEGAL_DATE_INPUT"
+END
+
+STRINGTABLE 
+BEGIN
+    TRANSFORM_CANNOT_READ_DATE "Transform Error: CANNOT_READ_DATE"
+    TRANSFORM_FORMAT_STR_EQ_0 "Transform Error: FORMAT_STR_EQ_0"
+    TRANSFORM_FORMAT_STR_GT_1 "Transform Error: FORMAT_STR_GT_1"
+    TRANSFORM_FORMAT_STR_SYNTAX_ERROR 
+                            "Transform Error: FORMAT_STR_SYNTAX_ERROR"
+    TRANSFORM_STACK_OVERFLOW_OR_UNDERFLOW 
+                            "Transform Error: STACK_OVERFLOW_OR_UNDERFLOW"
+    TRANSFORM_MEMORY_EXCEPTION "Transform Error: MEMORY_EXCEPTION"
+    TRANSFORM_NOT_SUPORT_EXCEPTION "Transform Error: NOT_SUPORT_EXCEPTION"
+    TRANSFORM_ARCHIVE_EXCEPTION "Transform Error: ARCHIVE_EXCEPTION"
+    TRANSFORM_FILE_EXCEPTION "Transform Error: FILE_EXCEPTION"
+    TRANSFORM_RESOURCE_EXCEPTION "Transform Error: RESOURCE_EXCEPTION"
+    TRANSFORM_OLE_EXCEPTION "Transform Error: OLE_EXCEPTION"
+    TRANSFORM_DB_EXCEPTION  "Transform Error: DB_EXCEPTION"
+    TRANSFORM_OLE_DISPATCH_EXCEPTION "Transform Error: OLE_DISPATCH_EXCEPTION"
+    TRANSFORM_USER_EXCEPTION "Transform Error: USER_EXCEPTION"
+    TRANSFORM_FLOATING_POINT_ERR "Transform Error: FLOATING_POINT_ERR"
+    TRANSFORM_EXEC_COM_INVOKER_FAIL "Transform Error: EXEC_COM_INVOKER_FAIL"
+END
+
+STRINGTABLE 
+BEGIN
+    TRANSFORM_FUNCTION_DOES_NOT_EXIST 
+                            "Transform Error: FUNCTION_DOES_NOT_EXIST"
+    TRANSFORM_TAKE_LOG_WITH_NEGATIVE_ARGUMENT 
+                            "Transform Error: TAKE_LOG_WITH_NEGATIVE_ARGUMENT"
+    TRANSFORM_UNBALANCED_TRANS_TAG "Transform Error: UNBALANCED_TRANS_TAG"
+    TRANSFORM_LOAD_COM_INVOKER_FAIL "Transform Error: LOAD_COM_INVOKER_FAIL"
+    PARENT_CHILD_LINK_UNEXPECTED_END "PARENT_CHILD_LINK_UNEXPECTED_END"
+    DIVIDE_BY_ZERO          "DIVIDE_BY_ZERO"
+    XML_PARSER_DOM_LOOP_CREATE_ERROR "XML_PARSER_DOM_LOOP_CREATE_ERROR"
+    XML_PARSER_DOM_LOOP_NEXT_NODE_ERROR "XML_PARSER_DOM_LOOP_NEXT_NODE_ERROR"
+    EDI_TYPE_AS_TARGET_NOT_IMPLIMENT_YET "Edi as Target is not impliment yet."
+    TRANSFORM_INPUT_EMPTY   "EMPTY_INPUT"
+    TRANSFORM_EMPTY_LINE    "EMPTY_LINE"
+    DBLOOKUPINT_FAIL_TO_FIND_RECORD "DBLOOKUPINT_FAIL_TO_FIND_RECORD"
+    YEAR_OUT_OF_RANGE       "YEAR_OUT_OF_RANGE"
+    MONTH_OUT_OF_RANGE      "MONTH_OUT_OF_RANGE"
+    DAY_OUT_OF_RANGE        "DAY_OUT_OF_RANGE"
+    HOUR_OUT_OF_RANGE       "HOUR_OUT_OF_RANGE"
+END
+
+STRINGTABLE 
+BEGIN
+    MINUTE_OUT_OF_RANGE     "MINUTE_OUT_OF_RANGE"
+    SECOND_OUT_OF_RANGE     "SECOND_OUT_OF_RANGE"
+    TRANSFORM_SYNTAX_ERR_1  "SYNTAX_ERR => or =< is undefined operator"
+    CALL_MID_WITH_NEG_LENGTH "Mid function was called with negative length"
+    INDEX_CALL_WITH_3P_NEG_NUMBER 
+                            "Index function was called with negative 3rd parameter"
+    TRANSFORM_VALUE_NULL    "VALUE_NULL"
+    UNEXPECTED_NODETYPE     "UNEXPECTED_NODETYPE"
+    STACK_OVER_FLOW         "STACK_OVER_FLOW"
+    DBLOOPUP_RESULT_NULL    "Null result"
+    SCM_FILE_EMPTY          "The SCM file does not have table header"
+    SCM_UNEXPECTED_PARLEVEL "Scm file has too many layer of parenthesis."
+    CANT_FIND_SCM_FILE      "Cannot open scm file"
+    SOURCE_PATH_ERR         "Cannot find the source CROM from the source data element path"
+    MISSING_ROOT            "MISSING_ROOT"
+    WRONG_DE_IN_CRESOLVE    "WRONG DE IN CALL OF CResolve, the 2nd and 3rd DE must be instance collection type"
+END
+
+STRINGTABLE 
+BEGIN
+    INCONSISTANCE_INSTANCE_IN_CRESOLVE "INCONSISTANCE_INSTANCE_IN_CRESOLVE"
+    WRONG_TYPE_ADD_TO_COLLECTION 
+                            "Wrong data element type when calling addToCollection, type must be t_collection"
+    FIND_SOURCE_LOOP_NODE_ERR1 
+                            "Cannot find the source node from the data element."
+    SOURCE_CROM_ROOT_NOT_FOUND "SOURCE_CROM_ROOT_NOT_FOUND"
+    TRANSFORM_MAX_ERR       "Transformation error, try to find maximum and no instance is found."
+    TRANSFORM_MIN_ERR       "Transformation error, try to find minimum and no instance is found."
+    TRANSFORM_SUM_ERR       "Transform call sum with data type incompatible with + operator."
+    TRANSFORM_NOT_INSTANCE  "Transform error: Argument should be collection of instances"
+    UNABLE_TO_FIND_FIELD    "Unable to find field."
+    PARSE_FILE_DEF_SYNTAX_ERROR "PARSE_FILE_DEF_SYNTAX_ERROR"
+    UPDATE_GENERATOR_ERR1   "Two unrelated loop nodes are mapped to the same level in the target. This is an ambiguous situation.\nThe incompatible source loops are: ""%s"" and ""%s""\n"
+    ROOT_NAME_NOT_FOUND     "The specified root name can not be found in the dtd"
+    FILL_CHILDREN_ERR       "FILL_CHILDREN_ERR"
+    PRECOND_SRCUPDATE_NOTALLOWED 
+                            "Cannot perform a transformation that has /PRECONDITION/ and Source Database Update. Please remove one of them and try again."
+    NULL_DATA_ELEMENT       "NULL_DATA_ELEMENT"
+    INTEGER_OVER_FLOW       "INTEGER_OVER_FLOW"
+END
+
+STRINGTABLE 
+BEGIN
+    TRANSFORM_SOURCE_EMPTY  "The source file is empty."
+    DOMAIN_VIOLATION        "The value violates the domain definition."
+    FINDINSTANCE_ERR_TYPE   "CRXmlData::FindInstance error, unexpected type"
+    FINDINSTANCE_ERR_UNRESOLVED 
+                            "CRXmlData::FindInstance error, try to find unresolved instance from multiple instances."
+    FINDINSTANCE_ERR_CHILDMISSING 
+                            "CRXmlData::findInstance error, the instance is missing"
+    CRXMLDATA_FIND_ERR_MISSING_FOLDER_CHAR "CRXmlData::find error, path error"
+    CRXMLDATA_FIND_ERR_MISSING_ATTRIBUTE 
+                            "CRXmlData::find error, cannot find attribute"
+    FINDINSTANCE_ERR_PATH   "CRXmlData::findInstance error, wrong path"
+    FINDINSTANCELIST_ERR    "CRXmlData::findInstanceList can not find a single value"
+    CRXMLDATA_ADDTOPARENT_ERR "CRXmlData::addToParent error"
+    XSDPARSER_ERR           "The XML schema file could not be parsed."
+    DBTREESOURCE_INVALID_CHARACTER "DBTREESOURCE_INVALID_CHARACTER"
+    CALL_TRUNCATE_WITH_NEG_LENGTH 
+                            "The Truncate function was called with a negative length."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "MapTransform.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,23 @@
+<html>Reads a string which represents a one or more dimensional array. The array is represented
+					by enclosing array elements with a pair of curly brackets ('{' and '}'). Each array element can
+					be an array or a scalar element separated by comma (','). But the array elements
+					in an array must be all scalars or all arrays.<br>
+					The scalar data element can be represent by a CSV string.<br>
+					Double quotes to enclose the string is optional,
+					unless the string contains some special characters such as ",{}\n". Inside the double quoted
+					string each double quote must be escaped by two double quotes.
+					The optional 2nd argument is to specify the data type of the scalar data element. The data 
+					type is assume to be string if it is not specified.
+					<br><h2>Example:</h2><code><font size="4">
+					// one dimensional array which contain 4 string data elements<br>
+					$a1=ReadArrayString("{John,Steve,Dave,Eric}")
+					<br><br>
+					// one dimensional array which contain 3 boolean data elements<br>
+					$a2=ReadArrayString("{1,0,1}", "bool")
+					<br><br>
+					// 2 d array, the 1st array elements is an array which has 3 string data elements,
+					and the 2nd array elemets of the 2nd array elements contains a line break<br>
+					$a3=ReadArrayString('{{abc,"a,b","a""b"},{"de","d
+					"}}")
+					<br><br>
+					</font></code></html>

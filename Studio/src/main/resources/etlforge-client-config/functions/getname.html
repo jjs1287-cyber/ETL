@@ -1,0 +1,22 @@
+<html>
+returns the name of the variable. Some functions return named data element array,
+and GetName function let user retrieve the name of the value if it is defined.<p>
+Some of functions return the value with name:<p>
+
+<p>
+Example 1:
+<p>
+<code><font size="4">
+x={a="var1",b="var2"};<br>
+GetName(x[0]); // return a string var1<br>
+GetName(x)[0]; // also return a string var1<br>
+</font></code>
+<p>
+Example 2:
+<p>
+<code><font size="4">
+values=GetSourceInstanceArray([]); // the source is a simple text and [] represent the source element <br>
+GetName(values[0]); // return the first field name of the source element
+</font></code>
+<p>
+</html>

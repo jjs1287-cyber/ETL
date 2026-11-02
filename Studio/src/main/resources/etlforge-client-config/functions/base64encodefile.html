@@ -1,0 +1,24 @@
+<html><p>
+				Reads a binary file from the specified source and returns the contents as a Base64 encoded string.
+        This method need only be used for files that could be binary.
+        If you want to read a text file you can use ReadFile instead.
+        The file-type source used
+				in this function call must be defined as a source in
+				the current integration project. The available file-type sources are shown
+				in the "Project Items" tab in the lower section of the Formula Builder,
+				under the node called "File Locations".
+				</p>
+				<p>
+				The method returns the contents of the file pointed to by the specified source.
+				If the source filter selects more than one file, the first one will be used.
+				It is thus recommended to specify a source that uniquely identifies only one file.
+				</p>
+				<p>
+				The second argument, <tt>file_name</tt> is optional and can be used
+				to override the file name used in the source definition.
+				Alternatively, a global data element can be used to override the file name in the source definition.
+				Global data elements are referenced as "[de_name]" in the source definition.
+				</p><br><h2>Example:</h2><code><font size="4">
+        // Read a file called "requirements.doc" from the FTP directory defined by the source "Word Documents FTP".<br>
+				$file_contents = Base64EncodeFile("&lt;TAG&gt;Project Name/Sources/Word Documents FTP&lt;/TAG&gt;", "requirements.doc")<br>
+				</font></code></html>

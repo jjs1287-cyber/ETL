@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Input string</Label>
+		<Description>A comma-separated list of array elements, enclosed in '{' and '}'. Examples: "{John, Steve, Dave, Eric}".</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>Data &amp;Type</Label>
+		<Description>The data type of the array elements. The data type is assumed to be String if it is not specified.</Description>
+	</Argument>
+</Wizard>

@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CharacterEncodingConversion", "CharacterEncodingConversion.vcproj", "{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCharacterEncodingConversion", "..\..\Test\project\vc-8_0\TestCharacterEncodingConversion.vcproj", "{5199F8B5-520D-46D4-85C7-1BA99003611E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F} = {3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\Utils\project\vc-8_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Installer_Release|Win32 = Installer_Release|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Debug|Win32.Build.0 = Debug|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Installer_Release|Win32.ActiveCfg = Release|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Installer_Release|Win32.Build.0 = Release|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Release|Win32.ActiveCfg = Release|Win32
+		{3BEE8E9D-9447-47F5-94A6-3FAF0A92222F}.Release|Win32.Build.0 = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Debug|Win32.Build.0 = Debug|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Installer_Release|Win32.ActiveCfg = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Installer_Release|Win32.Build.0 = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Release|Win32.ActiveCfg = Release|Win32
+		{5199F8B5-520D-46D4-85C7-1BA99003611E}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+add_executable(etlforge_watchdog src/native/watchdog/Main.cpp)
+target_compile_features(etlforge_watchdog PRIVATE cxx_std_17)
+target_compile_definitions(etlforge_watchdog PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN _WIN32_WINNT=0x0602)
+target_link_libraries(etlforge_watchdog PRIVATE advapi32)
+set_target_properties(etlforge_watchdog PROPERTIES OUTPUT_NAME ETLForgeWatchdog RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/dist/bin")

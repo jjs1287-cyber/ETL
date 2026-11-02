@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.admin.Admin" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.admin.Admin" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.admin.Admin" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.admin.Admin" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="startEngine">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="startEngineResponse">
+    <complexType/>
+   </element>
+   <element name="stopEngine">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stopEngineResponse">
+    <complexType/>
+   </element>
+   <element name="isEngineRunning">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEngineRunningResponse">
+    <complexType>
+     <sequence>
+      <element name="isEngineRunningReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEngineStatus">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEngineStatusResponse">
+    <complexType>
+     <sequence>
+      <element name="getEngineStatusReturn" type="impl:ServerStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ServerStatus">
+    <sequence>
+     <element name="StatusBits" type="xsd:int"/>
+     <element name="Description" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="startScheduler">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="startSchedulerResponse">
+    <complexType/>
+   </element>
+   <element name="stopScheduler">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stopSchedulerResponse">
+    <complexType/>
+   </element>
+   <element name="isSchedulerRunning">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isSchedulerRunningResponse">
+    <complexType>
+     <sequence>
+      <element name="isSchedulerRunningReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSchedulerStatus">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSchedulerStatusResponse">
+    <complexType>
+     <sequence>
+      <element name="getSchedulerStatusReturn" type="impl:ServerStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="startJmsEngine">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="startJmsEngineResponse">
+    <complexType/>
+   </element>
+   <element name="stopJmsEngine">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stopJmsEngineResponse">
+    <complexType/>
+   </element>
+   <element name="isJmsEngineRunning">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isJmsEngineRunningResponse">
+    <complexType>
+     <sequence>
+      <element name="isJmsEngineRunningReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJmsEngineStatus">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJmsEngineStatusResponse">
+    <complexType>
+     <sequence>
+      <element name="getJmsEngineStatusReturn" type="impl:ServerStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="isSchedulerRunningRequest">
+
+      <wsdl:part element="impl:isSchedulerRunning" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isSchedulerRunningResponse">
+
+      <wsdl:part element="impl:isSchedulerRunningResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopJmsEngineResponse">
+
+      <wsdl:part element="impl:stopJmsEngineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEngineRunningRequest">
+
+      <wsdl:part element="impl:isEngineRunning" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEngineRunningResponse">
+
+      <wsdl:part element="impl:isEngineRunningResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSchedulerStatusResponse">
+
+      <wsdl:part element="impl:getSchedulerStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startEngineResponse">
+
+      <wsdl:part element="impl:startEngineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopSchedulerRequest">
+
+      <wsdl:part element="impl:stopScheduler" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startJmsEngineRequest">
+
+      <wsdl:part element="impl:startJmsEngine" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startJmsEngineResponse">
+
+      <wsdl:part element="impl:startJmsEngineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJmsEngineStatusResponse">
+
+      <wsdl:part element="impl:getJmsEngineStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJmsEngineStatusRequest">
+
+      <wsdl:part element="impl:getJmsEngineStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEngineStatusResponse">
+
+      <wsdl:part element="impl:getEngineStatusResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopEngineResponse">
+
+      <wsdl:part element="impl:stopEngineResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startSchedulerResponse">
+
+      <wsdl:part element="impl:startSchedulerResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopJmsEngineRequest">
+
+      <wsdl:part element="impl:stopJmsEngine" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopSchedulerResponse">
+
+      <wsdl:part element="impl:stopSchedulerResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isJmsEngineRunningRequest">
+
+      <wsdl:part element="impl:isJmsEngineRunning" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEngineStatusRequest">
+
+      <wsdl:part element="impl:getEngineStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSchedulerStatusRequest">
+
+      <wsdl:part element="impl:getSchedulerStatus" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopEngineRequest">
+
+      <wsdl:part element="impl:stopEngine" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isJmsEngineRunningResponse">
+
+      <wsdl:part element="impl:isJmsEngineRunningResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startEngineRequest">
+
+      <wsdl:part element="impl:startEngine" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="startSchedulerRequest">
+
+      <wsdl:part element="impl:startScheduler" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Admin">
+
+      <wsdl:operation name="startEngine">
+
+         <wsdl:input message="impl:startEngineRequest" name="startEngineRequest"/>
+
+         <wsdl:output message="impl:startEngineResponse" name="startEngineResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopEngine">
+
+         <wsdl:input message="impl:stopEngineRequest" name="stopEngineRequest"/>
+
+         <wsdl:output message="impl:stopEngineResponse" name="stopEngineResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEngineRunning">
+
+         <wsdl:input message="impl:isEngineRunningRequest" name="isEngineRunningRequest"/>
+
+         <wsdl:output message="impl:isEngineRunningResponse" name="isEngineRunningResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEngineStatus">
+
+         <wsdl:input message="impl:getEngineStatusRequest" name="getEngineStatusRequest"/>
+
+         <wsdl:output message="impl:getEngineStatusResponse" name="getEngineStatusResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startScheduler">
+
+         <wsdl:input message="impl:startSchedulerRequest" name="startSchedulerRequest"/>
+
+         <wsdl:output message="impl:startSchedulerResponse" name="startSchedulerResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopScheduler">
+
+         <wsdl:input message="impl:stopSchedulerRequest" name="stopSchedulerRequest"/>
+
+         <wsdl:output message="impl:stopSchedulerResponse" name="stopSchedulerResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isSchedulerRunning">
+
+         <wsdl:input message="impl:isSchedulerRunningRequest" name="isSchedulerRunningRequest"/>
+
+         <wsdl:output message="impl:isSchedulerRunningResponse" name="isSchedulerRunningResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSchedulerStatus">
+
+         <wsdl:input message="impl:getSchedulerStatusRequest" name="getSchedulerStatusRequest"/>
+
+         <wsdl:output message="impl:getSchedulerStatusResponse" name="getSchedulerStatusResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startJmsEngine">
+
+         <wsdl:input message="impl:startJmsEngineRequest" name="startJmsEngineRequest"/>
+
+         <wsdl:output message="impl:startJmsEngineResponse" name="startJmsEngineResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopJmsEngine">
+
+         <wsdl:input message="impl:stopJmsEngineRequest" name="stopJmsEngineRequest"/>
+
+         <wsdl:output message="impl:stopJmsEngineResponse" name="stopJmsEngineResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isJmsEngineRunning">
+
+         <wsdl:input message="impl:isJmsEngineRunningRequest" name="isJmsEngineRunningRequest"/>
+
+         <wsdl:output message="impl:isJmsEngineRunningResponse" name="isJmsEngineRunningResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJmsEngineStatus">
+
+         <wsdl:input message="impl:getJmsEngineStatusRequest" name="getJmsEngineStatusRequest"/>
+
+         <wsdl:output message="impl:getJmsEngineStatusResponse" name="getJmsEngineStatusResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="adminSoapBinding" type="impl:Admin">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="startEngine">
+
+                  <wsdlsoap:operation soapAction="konga_admin#startEngine"/>
+
+         <wsdl:input name="startEngineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="startEngineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopEngine">
+
+         <wsdlsoap:operation soapAction="konga_admin#stopEngine"/>
+
+         <wsdl:input name="stopEngineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stopEngineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEngineRunning">
+
+         <wsdlsoap:operation soapAction="konga_admin#isEngineRunning"/>
+
+         <wsdl:input name="isEngineRunningRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isEngineRunningResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEngineStatus">
+
+         <wsdlsoap:operation soapAction="konga_admin#getEngineStatus"/>
+
+         <wsdl:input name="getEngineStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEngineStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startScheduler">
+
+         <wsdlsoap:operation soapAction="konga_admin#startScheduler"/>
+
+         <wsdl:input name="startSchedulerRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="startSchedulerResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopScheduler">
+
+         <wsdlsoap:operation soapAction="konga_admin#stopScheduler"/>
+
+         <wsdl:input name="stopSchedulerRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stopSchedulerResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isSchedulerRunning">
+
+         <wsdlsoap:operation soapAction="konga_admin#isSchedulerRunning"/>
+
+         <wsdl:input name="isSchedulerRunningRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isSchedulerRunningResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSchedulerStatus">
+
+         <wsdlsoap:operation soapAction="konga_admin#getSchedulerStatus"/>
+
+         <wsdl:input name="getSchedulerStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSchedulerStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startJmsEngine">
+
+         <wsdlsoap:operation soapAction="konga_admin#startJmsEngine"/>
+
+         <wsdl:input name="startJmsEngineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="startJmsEngineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stopJmsEngine">
+
+         <wsdlsoap:operation soapAction="konga_admin#stopJmsEngine"/>
+
+         <wsdl:input name="stopJmsEngineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stopJmsEngineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isJmsEngineRunning">
+
+         <wsdlsoap:operation soapAction="konga_admin#isJmsEngineRunning"/>
+
+         <wsdl:input name="isJmsEngineRunningRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isJmsEngineRunningResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJmsEngineStatus">
+
+         <wsdlsoap:operation soapAction="konga_admin#getJmsEngineStatus"/>
+
+         <wsdl:input name="getJmsEngineStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJmsEngineStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AdminService">
+
+      <wsdl:port binding="impl:adminSoapBinding" name="admin">
+
+         <wsdlsoap:address location="http://localhost:46908/axis/konga_admin"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

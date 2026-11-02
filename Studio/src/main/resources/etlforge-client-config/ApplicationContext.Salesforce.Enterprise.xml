@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd"
+		default-lazy-init="true">
+
+	<bean id="Sfdc.Query.Download.Config" class="org.etlforge.integration.data.entity.sfquery.QueryDownloadConfig" factory-method="newConfig" /> 
+	<bean id="Sfdc.Upsert.Download.Config" class="org.etlforge.integration.data.entity.sfdc.SalesforceUpsertDownloadConfig" factory-method="newConfig" /> 
+	<bean id="Sfdc.Create.Download.Config" class="org.etlforge.integration.data.entity.sfdc.SalesforceCreateDownloadConfig" factory-method="newConfig" /> 
+	<bean id="Sfdc.Update.Download.Config" class="org.etlforge.integration.data.entity.sfdc.SalesforceUpdateDownloadConfig" factory-method="newConfig" /> 
+	<bean id="Sfdc.Delete.Download.Config" class="com.etlforge.integration.data.entity.sfdc.SalesforceDeleteDownloadConfig" factory-method="newConfig" /> 
+	<bean id="Sfdc.BulkLoad.Download.Config" class="com.etlforge.integration.data.entity.sfdc.SalesforceBulkLoadDownloadConfig" factory-method="newConfig" /> 
+		
+</beans>

@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.treemapper.TreeMapperInfoProvider" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.treemapper.TreeMapperInfoProvider" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.treemapper.TreeMapperInfoProvider" xmlns:tns2="http://webservice.implementation.server.integration.etlforge.invalid" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.treemapper.TreeMapperInfoProvider" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservice.implementation.server.integration.etlforge.invalid"/>
+   <element name="getJtrForStructureFile">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="serverStructureFileName" type="xsd:string"/>
+      <element name="rootName" type="xsd:string"/>
+      <element name="isTarget" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJtrForStructureFileResponse">
+    <complexType>
+     <sequence>
+      <element name="getJtrForStructureFileReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getJtrForWS">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="wsMethodData" type="impl:WebServiceMethodData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WebServiceMethodData">
+    <sequence>
+     <element name="WsGuid" nillable="true" type="xsd:string"/>
+     <element name="WsdlGuid" nillable="true" type="xsd:string"/>
+     <element name="Binding" nillable="true" type="xsd:string"/>
+     <element name="OpName" nillable="true" type="xsd:string"/>
+     <element name="OpInput" nillable="true" type="xsd:string"/>
+     <element name="OpOutput" nillable="true" type="xsd:string"/>
+     <element name="OpStyle" nillable="true" type="xsd:string"/>
+     <element name="SoapBodyUse" nillable="true" type="xsd:string"/>
+     <element name="IsTarget" type="xsd:boolean"/>
+     <element name="IsWSRequest" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <element name="getJtrForWSResponse">
+    <complexType>
+     <sequence>
+      <element name="getJtrForWSReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loadSourceData">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="input" type="impl:WsLoadSourceDataInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="PipelinePositionStruct">
+    <sequence>
+     <element name="EntityType" type="xsd:int"/>
+     <element name="ExecutionOrder" type="xsd:int"/>
+     <element name="RelativePosition" nillable="true" type="xsd:string"/>
+     <element name="PluginGuid" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfPipelinePositionStruct">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:PipelinePositionStruct"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsLoadSourceDataInput">
+    <sequence>
+     <element name="TransformationGuid" nillable="true" type="xsd:string"/>
+     <element name="SourceGuid" nillable="true" type="xsd:string"/>
+     <element name="CompressedBase64EncodedData" nillable="true" type="xsd:string"/>
+     <element name="PipelinePlugins" nillable="true" type="impl:ArrayOfPipelinePositionStruct"/>
+    </sequence>
+   </complexType>
+   <element name="loadSourceDataResponse">
+    <complexType>
+     <sequence>
+      <element name="loadSourceDataReturn" type="impl:WsLoadSourceResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsDataFile">
+    <sequence>
+     <element name="LocalPath" nillable="true" type="xsd:string"/>
+     <element name="CompressedData" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsLoadSourceResult">
+    <sequence>
+     <element name="Guid" nillable="true" type="xsd:string"/>
+     <element name="File" nillable="true" type="impl:WsDataFile"/>
+    </sequence>
+   </complexType>
+   <element name="testTransformation">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="transformationGuid" type="xsd:string"/>
+      <element name="sourceDataGuid" type="xsd:string"/>
+      <element name="compressedBase64EncodedData" type="xsd:string"/>
+      <element name="debuggingParams" type="impl:DebuggingParameters"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsDataElement">
+    <sequence>
+     <element name="Name" nillable="true" type="xsd:string"/>
+     <element name="Type" nillable="true" type="xsd:string"/>
+     <element name="Value" nillable="true" type="xsd:string"/>
+     <element name="Scope" nillable="true" type="xsd:string"/>
+     <element name="IsArray" type="xsd:boolean"/>
+     <element name="ArrValue" nillable="true" type="impl:ArrayOfWsDataElement"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfWsDataElement">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:WsDataElement"/>
+    </sequence>
+   </complexType>
+   <complexType name="BreakLocation">
+    <sequence>
+     <element name="OperationGuid" nillable="true" type="xsd:string"/>
+     <element name="TransformationGuid" nillable="true" type="xsd:string"/>
+     <element name="ScriptGuid" nillable="true" type="xsd:string"/>
+     <element name="NodePath" nillable="true" type="xsd:string"/>
+     <element name="LineNumber" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns2_WsKeyValue">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:WsKeyValue"/>
+    </sequence>
+   </complexType>
+   <complexType name="Breakpoint">
+    <sequence>
+     <element name="Location" nillable="true" type="impl:BreakLocation"/>
+     <element name="ConditionScript" nillable="true" type="xsd:string"/>
+     <element name="ConditionVariables" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfBreakpoint">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:Breakpoint"/>
+    </sequence>
+   </complexType>
+   <complexType name="DebuggingParameters">
+    <sequence>
+     <element name="ObserveBreakpoints" type="xsd:boolean"/>
+     <element name="BreakOnWarning" type="xsd:boolean"/>
+     <element name="BreakOnError" type="xsd:boolean"/>
+     <element name="Command" nillable="true" type="xsd:string"/>
+     <element name="DebuggingSessionId" nillable="true" type="xsd:string"/>
+     <element name="GlobalVariables" nillable="true" type="impl:ArrayOfWsDataElement"/>
+     <element name="Breakpoints" nillable="true" type="impl:ArrayOfBreakpoint"/>
+     <element name="GeneralKeyValues" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <element name="testTransformationResponse">
+    <complexType>
+     <sequence>
+      <element name="testTransformationReturn" type="impl:WsTestTransformationResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOfBreakLocation">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:BreakLocation"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsTestTransformationResult">
+    <sequence>
+     <element name="DebuggingSessionId" nillable="true" type="xsd:string"/>
+     <element name="DataFileGuid" nillable="true" type="xsd:string"/>
+     <element name="DataElements" nillable="true" type="impl:ArrayOfWsDataElement"/>
+     <element name="CallStack" nillable="true" type="impl:ArrayOfBreakLocation"/>
+     <element name="Warnings" nillable="true" type="xsd:string"/>
+     <element name="Errors" nillable="true" type="xsd:string"/>
+     <element name="IntermediateResult" nillable="true" type="xsd:string"/>
+     <element name="LinkFile" nillable="true" type="impl:WsDataFile"/>
+     <element name="TargetFile" nillable="true" type="impl:WsDataFile"/>
+     <element name="GeneralKeyValues" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <element name="testOperation">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="operationGuid" type="xsd:string"/>
+      <element name="transformationGuid" type="xsd:string"/>
+      <element name="debuggingParams" type="impl:DebuggingParameters"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testOperationResponse">
+    <complexType>
+     <sequence>
+      <element name="testOperationReturn" type="impl:WsTestOperationResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsDataFileInfo">
+    <sequence>
+     <element name="OperationGuid" nillable="true" type="xsd:string"/>
+     <element name="TransformationGuid" nillable="true" type="xsd:string"/>
+     <element name="Type" type="xsd:int"/>
+     <element name="NumberOfChunks" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfWsDataFileInfo">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:WsDataFileInfo"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsDataFilesInfo">
+    <sequence>
+     <element name="Guid" nillable="true" type="xsd:string"/>
+     <element name="DataFiles" nillable="true" type="impl:ArrayOfWsDataFileInfo"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsTestOperationResult">
+    <sequence>
+     <element name="DebuggingSessionId" nillable="true" type="xsd:string"/>
+     <element name="DataElements" nillable="true" type="impl:ArrayOfWsDataElement"/>
+     <element name="CallStack" nillable="true" type="impl:ArrayOfBreakLocation"/>
+     <element name="Warnings" nillable="true" type="xsd:string"/>
+     <element name="Errors" nillable="true" type="xsd:string"/>
+     <element name="IntermediateResult" nillable="true" type="xsd:string"/>
+     <element name="DataFileInfo" nillable="true" type="impl:WsDataFilesInfo"/>
+     <element name="GeneralKeyValues" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <element name="downloadDataFile">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="guid" type="xsd:string"/>
+      <element name="transformationGuid" type="xsd:string"/>
+      <element name="operationGuid" type="xsd:string"/>
+      <element name="identifier" type="impl:WsDataFileIdentifier"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsDataFileIdentifier">
+    <sequence>
+     <element name="Type" type="xsd:int"/>
+     <element name="OriginalFileNumber" type="xsd:int"/>
+     <element name="ChunkNumber" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="downloadDataFileResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadDataFileReturn" type="impl:WsDataFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testExpression">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="nameValuePairs" type="xsd:string"/>
+      <element name="expression" type="xsd:string"/>
+      <element name="debuggingParams" type="impl:DebuggingParameters"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="testExpressionResponse">
+    <complexType>
+     <sequence>
+      <element name="testExpressionReturn" type="impl:WsTestResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsTestResult">
+    <sequence>
+     <element name="DebuggingSessionId" nillable="true" type="xsd:string"/>
+     <element name="DataElements" nillable="true" type="impl:ArrayOfWsDataElement"/>
+     <element name="CallStack" nillable="true" type="impl:ArrayOfBreakLocation"/>
+     <element name="Warnings" nillable="true" type="xsd:string"/>
+     <element name="Errors" nillable="true" type="xsd:string"/>
+     <element name="Result" nillable="true" type="xsd:string"/>
+     <element name="GeneralKeyValues" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <element name="stop">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="debugSessionId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="stopResponse">
+    <complexType/>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.implementation.server.integration.etlforge.invalid" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.treemapper.TreeMapperInfoProvider"/>
+   <complexType name="WsKeyValue">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsKeyValuePairs">
+    <sequence>
+     <element name="keyValues" nillable="true" type="impl:ArrayOf_tns2_WsKeyValue"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="testExpressionRequest">
+
+      <wsdl:part element="impl:testExpression" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopRequest">
+
+      <wsdl:part element="impl:stop" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJtrForWSResponse">
+
+      <wsdl:part element="impl:getJtrForWSResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loadSourceDataRequest">
+
+      <wsdl:part element="impl:loadSourceData" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJtrForStructureFileResponse">
+
+      <wsdl:part element="impl:getJtrForStructureFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJtrForStructureFileRequest">
+
+      <wsdl:part element="impl:getJtrForStructureFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testOperationResponse">
+
+      <wsdl:part element="impl:testOperationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testTransformationResponse">
+
+      <wsdl:part element="impl:testTransformationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="stopResponse">
+
+      <wsdl:part element="impl:stopResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getJtrForWSRequest">
+
+      <wsdl:part element="impl:getJtrForWS" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loadSourceDataResponse">
+
+      <wsdl:part element="impl:loadSourceDataResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadDataFileResponse">
+
+      <wsdl:part element="impl:downloadDataFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testExpressionResponse">
+
+      <wsdl:part element="impl:testExpressionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadDataFileRequest">
+
+      <wsdl:part element="impl:downloadDataFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testTransformationRequest">
+
+      <wsdl:part element="impl:testTransformation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testOperationRequest">
+
+      <wsdl:part element="impl:testOperation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="TreeMapperInfoProvider">
+
+      <wsdl:operation name="getJtrForStructureFile">
+
+         <wsdl:input message="impl:getJtrForStructureFileRequest" name="getJtrForStructureFileRequest"/>
+
+         <wsdl:output message="impl:getJtrForStructureFileResponse" name="getJtrForStructureFileResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJtrForWS">
+
+         <wsdl:input message="impl:getJtrForWSRequest" name="getJtrForWSRequest"/>
+
+         <wsdl:output message="impl:getJtrForWSResponse" name="getJtrForWSResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loadSourceData">
+
+         <wsdl:input message="impl:loadSourceDataRequest" name="loadSourceDataRequest"/>
+
+         <wsdl:output message="impl:loadSourceDataResponse" name="loadSourceDataResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testTransformation">
+
+         <wsdl:input message="impl:testTransformationRequest" name="testTransformationRequest"/>
+
+         <wsdl:output message="impl:testTransformationResponse" name="testTransformationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testOperation">
+
+         <wsdl:input message="impl:testOperationRequest" name="testOperationRequest"/>
+
+         <wsdl:output message="impl:testOperationResponse" name="testOperationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadDataFile">
+
+         <wsdl:input message="impl:downloadDataFileRequest" name="downloadDataFileRequest"/>
+
+         <wsdl:output message="impl:downloadDataFileResponse" name="downloadDataFileResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testExpression">
+
+         <wsdl:input message="impl:testExpressionRequest" name="testExpressionRequest"/>
+
+         <wsdl:output message="impl:testExpressionResponse" name="testExpressionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stop">
+
+         <wsdl:input message="impl:stopRequest" name="stopRequest"/>
+
+         <wsdl:output message="impl:stopResponse" name="stopResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_treemapper_infoproviderSoapBinding" type="impl:TreeMapperInfoProvider">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getJtrForStructureFile">
+
+         <wsdlsoap:operation soapAction="getJtrForStructureFile"/>
+
+         <wsdl:input name="getJtrForStructureFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJtrForStructureFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getJtrForWS">
+
+         <wsdlsoap:operation soapAction="getJtrForWS"/>
+
+         <wsdl:input name="getJtrForWSRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getJtrForWSResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loadSourceData">
+
+         <wsdlsoap:operation soapAction="loadSourceData"/>
+
+         <wsdl:input name="loadSourceDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loadSourceDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testTransformation">
+
+         <wsdlsoap:operation soapAction="testTransformation"/>
+
+         <wsdl:input name="testTransformationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testTransformationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testOperation">
+
+         <wsdlsoap:operation soapAction="testOperation"/>
+
+         <wsdl:input name="testOperationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testOperationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadDataFile">
+
+         <wsdlsoap:operation soapAction="downloadDataFile"/>
+
+         <wsdl:input name="downloadDataFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadDataFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testExpression">
+
+         <wsdlsoap:operation soapAction="testExpression"/>
+
+         <wsdl:input name="testExpressionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testExpressionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="stop">
+
+         <wsdlsoap:operation soapAction="stop"/>
+
+         <wsdl:input name="stopRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="stopResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TreeMapperInfoProviderService">
+
+      <wsdl:port binding="impl:konga_treemapper_infoproviderSoapBinding" name="konga_treemapper_infoprovider">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_treemapper_infoprovider"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,39 @@
+<html>Calls the stored procedure or function sp_name using the connection information specified
+				by the source/target identified by database_id.
+				The returned result set is stored in result_set as XML [feature not implemented yet!].
+				If the stored procedure returns no result set this argument is ignored.
+				The remaining optional arguments are used to pass input/output parameters to
+				the stored procedure. The number of arguments needed depend on the signature of the stored procedure.
+				Input variables can be a hard coded value, the value of a source
+				data elment or the value of a calculation or a formula.
+				Output values (including the result set) are specified by reference as $de_name where "de_name" is the name
+				of the global data element that will hold the output value.
+				The return value/type of the function is the return value/type
+				of the procedure.<br>
+				In Oracle, parameters can also be custom data types declared outside of packages. In ETLForge, these are represented as Map/Dict variables. See example below.
+				<br>
+				<h2>Example:</h2><h3>Example 1</h3>
+							<p>
+							<code><font size="4">CallStoredProcedure("&lt;TAG&gt;MyProject/Targets/MyTarget&lt;/TAG&gt;,
+							"MyStoredProcedure", 0, Input, $output)</font></code>
+							</p>
+							<p>
+							Calls a stored procedure "MyStoredProcedure" which takes one input variable
+							and one output variable and ignores the result set. "Input" is the name of a source data element
+							which provides the input and "output" is the name of a data element that
+							is used to store the output.
+							</p>
+							<p>
+							Note: The value of the output parameter can be accessed either as $output
+							or Get("output");
+							</p>
+							<h3>Oracle Example</h3>
+							<p>
+							<code><font size="4">$myobj=CallStoredProcedure("&lt;TAG&gt;MyProject/Targets/MyOracle&lt;/TAG&gt;,
+							"GetMyObject", 0)</font></code>
+							</p>
+							<p>
+							Calls an Oracle function "GetMyObject" which takes no input variables and returns a map representing a custom object.<br>
+							The data from the resulting object can be retrieved like so:<br>
+							$myvalue=$myobj["PROPERTY"];
+							</p></html>

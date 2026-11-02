@@ -1,0 +1,12 @@
+<html>Returns the last error reported in the transformation.
+				Can be used together with <code><font size="4">ResetError</font></code> and <code><font size="4">Eval</font></code> for error handling.<br><h2>Example:</h2><code><font size="4">
+				&lt;trans&gt;<br>
+        // Discard previous errors<br>
+				ResetLastError();<br>
+        $error="";<br>
+				Eval($order_type = DBLookup("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",<br>
+				"SELECT ORDER_TYPE FROM PO_HEADER WHERE PO_NUMBER = " + PO_NUM),<br>
+				$error=GetLastError());  // On failure, put last error in a variable<br>
+				if( Length($error) &gt; 0, RaiseError("Failed to lookup Order Type: " + $error), $order_type)<br>
+				&lt;/trans&gt;<br>
+				</font></code></html>

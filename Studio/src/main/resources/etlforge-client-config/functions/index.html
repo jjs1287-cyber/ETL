@@ -1,0 +1,31 @@
+<html>Returns the position of a sub-string within a main string. The first
+				argument is the main string. The second argument is the string you are
+				searching for within the main string. The third argument is optional, its default
+				value is 1. In cases where the 
+				sub-string appears more than once in the main string, the last argument (n) is used to 
+				determine which specific instance of the sub-string is of interest. If n &lt; 0, 
+				the instance counting starts from the end of the main string. If |n| &gt; the maximum 
+				number of times the sub-string appears in the main string, the function returns -1. 
+				Otherwise, the function returns the sub-string's first character's position within 
+				the main string (starting at position 0).
+        <p>
+        There are a couple of special cases to consider:
+        <ul>
+        <li><code><font size="4">n = 0</font></code> returns the same result as <code><font size="4">n = 1</font></code>
+        <li>If <code><font size="4">needle</font></code> is an empty string:
+        <ul>
+        <li><code><font size="4">n &gt;= 0</font></code> always returns 0
+        <li><code><font size="4">n &lt; 0</font></code> always returns <code><font size="4">Length(haystack)</font></code>
+        </ul>
+        </ul><br><h2>Example:</h2><code><font size="4">Index("Mississippi","s")</font></code> returns 2. When called with only two arguments
+				the optional third argument defaults to 1, resulting in the index of the first match being returned.
+				<p>
+				<code><font size="4">Index("Mississippi","iss",3)</font></code> is searching for the 3rd instance of
+				"iss" within Mississippi, so it returns -1.
+				<p>
+				<code><font size="4">Index("Mississippi","si",2)</font></code> returns 6, as the 2nd instance of
+        the sub-string "si" starts at position 6. (The first letter "M" starts at position 0).
+        <p>
+        <code><font size="4">Index("Mississippi","",1)</font></code> returns 0.
+        <p>
+        <code><font size="4">Index("Mississippi","",-1)</font></code> returns 11.</html>

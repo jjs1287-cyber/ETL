@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>What is the &amp;string you want to right-trim?</Label>
+	</Argument>
+	<Argument>
+		<Label>Which &amp;characters do you want to remove from the string?</Label>
+	</Argument>
+</Wizard>

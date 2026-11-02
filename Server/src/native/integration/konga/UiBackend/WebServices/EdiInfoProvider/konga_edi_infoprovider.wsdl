@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:com.etlforge.integration.server.implementation.webservice.interchange.edi.EdiInfoProvider" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:com.etlforge.integration.server.implementation.webservice.interchange.edi.EdiInfoProvider" xmlns:intf="urn:com.etlforge.integration.server.implementation.webservice.interchange.edi.EdiInfoProvider" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:com.etlforge.integration.server.implementation.webservice.interchange.edi.EdiInfoProvider" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getAvailableEdiSefFiles">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAvailableEdiSefFilesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAvailableEdiSefFilesReturn" type="impl:CEdiSefFileFolder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CEdiSefFile">
+    <sequence>
+     <element name="Path" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCEdiSefFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CEdiSefFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CEdiSefFileFolder">
+    <sequence>
+     <element name="Name" nillable="true" type="xsd:string"/>
+     <element name="StructureFiles" nillable="true" type="impl:ArrayOfCEdiSefFile"/>
+    </sequence>
+   </complexType>
+   <element name="uploadEdiSefFile">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:string"/>
+      <element name="in3" type="xsd:string"/>
+      <element name="in4" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="uploadEdiSefFileResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getAvailableEdiSefFilesRequest">
+
+      <wsdl:part element="impl:getAvailableEdiSefFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadEdiSefFileResponse">
+
+      <wsdl:part element="impl:uploadEdiSefFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadEdiSefFileRequest">
+
+      <wsdl:part element="impl:uploadEdiSefFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAvailableEdiSefFilesResponse">
+
+      <wsdl:part element="impl:getAvailableEdiSefFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EdiInfoProvider">
+
+      <wsdl:operation name="getAvailableEdiSefFiles">
+
+         <wsdl:input message="impl:getAvailableEdiSefFilesRequest" name="getAvailableEdiSefFilesRequest"/>
+
+         <wsdl:output message="impl:getAvailableEdiSefFilesResponse" name="getAvailableEdiSefFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadEdiSefFile">
+
+         <wsdl:input message="impl:uploadEdiSefFileRequest" name="uploadEdiSefFileRequest"/>
+
+         <wsdl:output message="impl:uploadEdiSefFileResponse" name="uploadEdiSefFileResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_edi_infoproviderSoapBinding" type="impl:EdiInfoProvider">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getAvailableEdiSefFiles">
+
+         <wsdlsoap:operation soapAction="konga_edi_infoprovider#getAvailableEdiSefFiles"/>
+
+         <wsdl:input name="getAvailableEdiSefFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAvailableEdiSefFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadEdiSefFile">
+
+         <wsdlsoap:operation soapAction="konga_edi_infoprovider#uploadEdiSefFile"/>
+
+         <wsdl:input name="uploadEdiSefFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadEdiSefFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EdiInfoProviderService">
+
+      <wsdl:port binding="impl:konga_edi_infoproviderSoapBinding" name="konga_edi_infoprovider">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_edi_infoprovider"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

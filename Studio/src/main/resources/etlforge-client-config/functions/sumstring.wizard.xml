@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Input values</Label>
+		<Description>The collection of values to concatenate.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Delimiter (optional)</Label>
+		<DefaultValue>";"</DefaultValue>
+		<Description>The delimiter to use between each value. A semicolon is used by default.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Omit last (optional)</Label>
+		<DefaultValue>false</DefaultValue>
+		<Description>True to omit the delimiter after the last value. False to keep the last delimiter (this is the default).</Description>
+	</Argument>
+</Wizard>

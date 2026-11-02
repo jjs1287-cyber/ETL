@@ -1,0 +1,22 @@
+<html><p>
+        Initialize a new diff session. The string passed as the <tt>diff_id</tt> has to be different from all other
+        diff identifiers used on the system but it has to be the same each time the operation runs.
+        If a diff session is already running, the call to this method will fail.
+        To clear an old diff session (e.g. in case of system failure) run ResetDiff once.
+        </p>
+        <p>
+        This method is typically called in the pre-source script of the first operation that implements a
+        synchronization/diff.
+        </p><br><h2>Example:</h2><code><font size="4">
+        // Synchronize the order database.<br>
+        InitializeDiff("Order Database Synchronization 1");<br><br>
+        
+        // The primary keys for synchronizing are CustomerId and OrderId.<br>
+        DiffKeyList("CustomerId", "OrderId");<br><br>
+        
+        // We have a lot of memory and each record is not big so don't worry about memory use.<br>
+        SetDiffChunkSize(100000);<br><br>
+        
+        // We start by processing the added records in this operation.<br>
+        DiffAdd();
+        <code><font size="4"></html>

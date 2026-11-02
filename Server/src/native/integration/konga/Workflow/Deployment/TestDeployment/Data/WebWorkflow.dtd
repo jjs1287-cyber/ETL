@@ -1,0 +1,324 @@
+<!ENTITY % PreDocActType "UnknownItemType|BeginItem|SimpleAction|
+	TrueAction|FalseAction|EndifAction|SimpleComObject|ODBCItem|
+	DLLItem|FileRetrievalItem|FileUploadItem|
+	SimpleInFcnObject|RemovedLink|Comment|CORBAObject|EJBObject"
+>
+
+<!ENTITY % DataType "undefined|integer|float|string|long_string|boolean|short|short_integer|double|
+	Variant|long_integer|object|collection|date|
+	integer_byRef|float_byRef|string_byRef|boolean_byRef|short_byRef|short_integer_byRef|
+	double_byRef|Variant_byRef|Long_integer_byRef|
+	object_byRef|collection_byRef|void|Unknown"
+>
+
+<!ENTITY % OriginType "Task|ODBC|COM|Doc|Role|InFcn|Process|TaskName|Constant|EJB|CORBA|DLL|FileRetrieval|FileUpload">
+
+<!ENTITY % RouteItemType "UnknownItemType|BeginItem|
+	OrItem|AndItem|XorItem|EndItem|SourceTask|Comment|RemovedLink"
+>
+
+<!ENTITY % ValueType_t "constant|dataElement|none">
+
+<!ENTITY % NoteType "DocNote|TaskNote|LinkNote">
+<!ENTITY % MessageType "MHTML|Text">
+<!ENTITY % TaskSpecial "None|IsEscalationTask">
+<!ENTITY % FontStyle "Regular|Italic|Bold|BoldItalic">
+
+<!ELEMENT Process (Description?,Font?,InitTask*,Data*,Task*,Route*,Note*)>
+<!ATTLIST Process
+	Name CDATA #REQUIRED
+	ProcessPriority CDATA #REQUIRED
+>
+
+<!ELEMENT Description (#PCDATA)>
+<!ELEMENT InitTask EMPTY>
+<!ATTLIST InitTask
+	Name CDATA #REQUIRED
+>
+
+<!ELEMENT Font EMPTY>
+<!ATTLIST Font
+	Name CDATA #REQUIRED
+	Size CDATA #REQUIRED
+	Style (%FontStyle;) 'Regular'
+>
+
+<!ELEMENT Data EMPTY>
+<!ATTLIST Data
+	Name CDATA #REQUIRED
+	Type (%DataType;) 'string'
+	IO (I|O|B|R|i) 'I'
+	Origin (%OriginType;) 'Task'
+	Path CDATA #IMPLIED
+	ValueType (%ValueType_t;) 'none'
+	InitValue CDATA #IMPLIED
+	Required (0|1)	"0"
+>
+
+<!ELEMENT COMOptions EMPTY>
+<!ATTLIST COMOptions
+	Timeout CDATA #IMPLIED
+>
+
+<!ELEMENT COMReturnDE EMPTY>
+<!ATTLIST COMReturnDE
+	ReturnDataType CDATA #IMPLIED
+>
+	
+
+<!ELEMENT ODBCOptions EMPTY>
+<!ATTLIST ODBCOptions
+	Timeout	CDATA #IMPLIED
+>
+
+<!ELEMENT Expression EMPTY>
+<!ATTLIST Expression
+	LeftParentheses	CDATA #IMPLIED
+	NOTOpr		CDATA #IMPLIED
+	Attribute   CDATA #REQUIRED
+	FilterType	CDATA #REQUIRED
+	Value		CDATA #REQUIRED
+	RightParentheses	CDATA #IMPLIED
+	ANDOROpr	CDATA #IMPLIED
+>
+
+<!ELEMENT AddedAttributeList EMPTY>
+<!ATTLIST AddedAttributeList
+	Text CDATA #IMPLIED
+>
+
+<!ELEMENT Task (Description?,DisplayProperty?,PreDocActivityItem*,
+	Document?,ActivityItem*,Escalation?)
+>
+<!ATTLIST Task
+	Name CDATA #REQUIRED
+	Special (%TaskSpecial;) "None"
+	Terminate (False|True) "False"
+	TaskPriority CDATA #REQUIRED
+>
+
+<!ELEMENT Escalation (LinkDisplay?)>
+<!ATTLIST Escalation
+	TaskName CDATA #REQUIRED
+	RemindMinutes CDATA #REQUIRED
+>
+
+<!ELEMENT DisplayProperty (pos,rect)>
+<!ELEMENT pos EMPTY>
+<!ATTLIST pos
+	x CDATA #REQUIRED
+	y CDATA #REQUIRED
+>
+
+<!ELEMENT rect EMPTY>
+<!ATTLIST rect
+	left CDATA #REQUIRED
+	top CDATA #REQUIRED
+	right CDATA #REQUIRED
+	bottom CDATA #REQUIRED
+>
+
+<!ELEMENT DBData EMPTY>
+<!ATTLIST DBData
+	IsDSN				(Yes|No)							"Yes"
+	ConnectString		CDATA								#REQUIRED
+	EntityType			(Table|View|StoredProcedure)		"Table"
+	EntityName			CDATA								#REQUIRED
+	StatementType		(Select|Insert|Update|Delete|None)	"None"
+	IsAdvancedWhere		(Yes|No)							"No"
+	AdvancedWhereClause CDATA								""
+>
+<!ELEMENT DBAttribute EMPTY>
+<!ATTLIST DBAttribute
+	Name			CDATA					#REQUIRED
+	DataType		(%DataType;)			"integer"
+	IO				(I|O|B|R|F|i)			'I'
+	Value			CDATA					""
+	ValueType		(Constant|DataElement)	#REQUIRED
+	Filter			CDATA					""
+	FilterType		(Constant|DataElement)	#REQUIRED
+	DataSize		CDATA					#REQUIRED
+	DataTypeInfo	CDATA					""
+>
+
+<!ELEMENT FileXferObject EMPTY>
+<!ATTLIST FileXferObject
+	URL	CDATA	#REQUIRED
+	FileOrString	CDATA	#REQUIRED
+	Transfer	CDATA	#REQUIRED
+	Operation	CDATA	#REQUIRED
+	ResponseType	CDATA	""
+	ResponseDE	CDATA	""
+	ProvideLogonCredentials	CDATA	""
+	UID	CDATA	""
+	PWD	CDATA	""
+	StoreUIDPWDWithModel	CDATA	""
+	Certificate	CDATA	""
+	Timeout	CDATA	""
+>
+
+<!ELEMENT PreDocActivityItem (LinkDisplay?, FileXferObject?, Data*,String*,SQLColWidths?,ComColWidths?,CWX*, DBData?, DBAttribute*, Expression?, COMOptions?, ODBCOptions?, COMReturnDE?)>
+<!ATTLIST PreDocActivityItem
+	Type (%PreDocActType;) #REQUIRED
+	Text CDATA #REQUIRED
+	Instance CDATA	""
+	IsCommentedOut (Yes|No) "No"
+>		
+
+<!ELEMENT ActivityItem (LinkDisplay?, FileXferObject?, Data*,String*,SQLColWidths?,ComColWidths?,CWX*, DBData?, DBAttribute*, Expression?, COMOptions?, ODBCOptions?, COMReturnDE?)>
+<!ATTLIST ActivityItem
+	Type (%PreDocActType;|TargetTask) #REQUIRED
+	Text CDATA #REQUIRED
+	Instance CDATA	""
+	IsCommentedOut (Yes|No) "No"
+>		
+
+<!ELEMENT String EMPTY>
+<!ATTLIST String
+	Name CDATA #REQUIRED
+	Text CDATA #REQUIRED
+>
+
+<!ELEMENT RouteItem (LinkDisplay?)>
+<!ATTLIST RouteItem
+	Type (%RouteItemType;) #REQUIRED
+	Text CDATA #REQUIRED
+	IsCommentedOut (Yes|No)	"No" 
+>
+
+<!ELEMENT LinkDisplay EMPTY>
+<!ATTLIST LinkDisplay
+	c1 CDATA #REQUIRED
+    x1 CDATA #REQUIRED
+	y1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	y2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	y3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+	y4 CDATA #REQUIRED
+	c4 CDATA #REQUIRED
+>
+
+<!ELEMENT Document ((Data*,InitDEColWidths?)|(Subject?,Priority?,From?,To,ReplyTo?,Cc?,Bcc?,Message?,Attachment*,Data*,(Cx|QSColWidths)?,RespColWidths?)|(Operation, OperationProperty*, Data*))>
+<!ATTLIST Document
+	Type (Unknown|InitTask|Email|EmailNotificationOnly|Operation) 'Email'
+	URL CDATA #IMPLIED
+	Path CDATA #IMPLIED>
+
+<!ELEMENT Subject EMPTY>
+<!ATTLIST Subject
+	Text CDATA #IMPLIED>
+
+<!ELEMENT Priority EMPTY>
+<!ATTLIST Priority
+	Level (Highest|High|Normal|Low|Lowest) 'Normal'>
+
+<!ELEMENT From EMPTY>
+<!ATTLIST From
+	Text CDATA #IMPLIED>
+
+<!ELEMENT To EMPTY>
+<!ATTLIST To
+	Text CDATA #REQUIRED>
+
+<!ELEMENT ReplyTo EMPTY>
+<!ATTLIST ReplyTo
+	Text CDATA #IMPLIED>
+
+<!ELEMENT Cc EMPTY>
+<!ATTLIST Cc
+	Text CDATA #IMPLIED>
+
+<!ELEMENT Bcc EMPTY>
+<!ATTLIST Bcc
+	Text CDATA #IMPLIED>
+
+<!ELEMENT Operation EMPTY>
+<!ATTLIST Operation
+	Type	(Predefined|DataElement|AccountDocType) #IMPLIED
+	Id		CDATA #REQUIRED
+	Server	CDATA #REQUIRED
+	Login	CDATA #IMPLIED
+>
+<!ELEMENT OperationProperty EMPTY>
+<!ATTLIST OperationProperty
+	Name	CDATA #REQUIRED
+	Value	CDATA #REQUIRED
+>
+
+<!ELEMENT Message (#PCDATA)>
+<!ATTLIST Message
+	Type (%MessageType;) "Text"
+>
+
+<!ELEMENT Attachment EMPTY>
+<!ATTLIST Attachment
+	File CDATA #IMPLIED
+	List CDATA #IMPLIED
+> 
+
+<!ELEMENT Cx EMPTY>
+<!ATTLIST Cx
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #IMPLIED
+>
+
+<!ELEMENT CWX EMPTY>
+<!ATTLIST CWX x CDATA #REQUIRED>
+
+<!ELEMENT QSColWidths EMPTY>
+<!ATTLIST QSColWidths
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+>
+
+<!ELEMENT RespColWidths EMPTY>
+<!ATTLIST RespColWidths
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+>
+
+<!ELEMENT InitDEColWidths EMPTY>
+<!ATTLIST InitDEColWidths
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+>
+
+<!ELEMENT SQLColWidths EMPTY>
+<!ATTLIST SQLColWidths
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+>
+
+<!ELEMENT ComColWidths EMPTY>
+<!ATTLIST ComColWidths
+	x1 CDATA #REQUIRED
+	x2 CDATA #REQUIRED
+	x3 CDATA #REQUIRED
+	x4 CDATA #REQUIRED
+>
+
+<!ELEMENT Route (Description?,DisplayProperty?,RouteItem*)>
+<!ATTLIST Route
+	Target CDATA #REQUIRED
+>
+
+<!ELEMENT Note (DisplayProperty)>
+<!ATTLIST Note
+	Type (%NoteType;) "DocNote"
+	Text CDATA #IMPLIED
+	TaskName CDATA #IMPLIED
+	SourceTask CDATA #IMPLIED
+	TargetTask CDATA #IMPLIED
+>

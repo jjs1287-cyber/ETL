@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="ws.config.Callback" class="org.etlforge.integration.client.server.ui.WebServiceConfigurationCallbackImpl">
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="ws.CppPorts" class="org.etlforge.integration.client.server.ClientServerPorts" />
+	<bean id="ws.config.Cpp" class="org.etlforge.integration.client.server.webservice.CppWebServiceConfiguration">
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="ws.CppPorts" />
+		<constructor-arg ref="ws.config.Callback" />
+	</bean>
+	<bean id="ws.config.Java" class="org.etlforge.integration.client.server.webservice.JavaWebServiceConfiguration">
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="ws.CppPorts" />
+		<constructor-arg ref="ws.config.Callback" />
+	</bean>
+
+	<bean id="org.etlforge.integration.client.server.login.Authenticate"
+			name="server.LoginApi"
+			class="com.etlforge.integration.server.implementation.webservice.login.impl.EnterpriseAuthenticateWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="com.etlforge.integration.client.admin.project.ProjectDownloader" 
+			name="server.ProjectDownloader"
+			class="org.etlforge.integration.server.implementation.webservice.admin.project.impl.ProjectDownloaderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.ProjectManager" />
+	</bean>
+	<bean id="org.etlforge.integration.debug.serverapi.TestTransformationProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.TestTransformationProviderWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="org.etlforge.integration.debug.serverapi.TestOperationProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.TestOperationProviderWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="org.etlforge.integration.debug.serverapi.TestScriptProvider"
+			name="server.TestScriptProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.TestScriptProviderWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.DebugService" />
+	</bean>
+	<bean id="org.etlforge.integration.client.deploy.serverapi.IntegrationProjectDeployer"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.deploy.impl.DeployInterchangeModelWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="com.etlforge.integration.client.admin.project.ProjectAdministration"
+			name="server.ProjectAdmin"
+			class="org.etlforge.integration.server.implementation.webservice.admin.project.impl.ProjectAdministrationWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="org.etlforge.integration.client.server.useradmin.UserAdmin"
+			name="server.UserAdmin"
+			class="org.etlforge.integration.server.implementation.webservice.useradmin.impl.UserAdminWsImpl" 
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="platform.ServerManager" />
+	</bean>
+	<bean id="org.etlforge.integration.debug.serverapi.DataFileProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.DataFileProviderWsImpl" 
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.log.OperationLogProvider"
+			name="server.OperationLogProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.OperationLogProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.queue.OperationQueueProvider"
+			name="server.OperationQueueProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.OperationQueueProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.history.OperationHistoryProvider"
+			name="server.OperationHistoryProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.OperationHistoryProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.history.SourceHistoryProvider"
+			name="server.SourceHistoryProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.SourceHistoryProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.progress.OperationProgressProvider"
+			name="server.OperationProgressProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.OperationProgressProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.activity.serverapi.files.OperationFileProvider"
+			name="server.OperationFileProvider"
+			class="org.etlforge.integration.server.implementation.webservice.activity.impl.OperationFileProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.plugin.serverapi.PipelinePluginInfoProvider"
+			name="server.PluginInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.pluginmanagement.impl.PluginManagementWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.mapping.serverapi.webservice.WebServiceInfoProvider"
+			name="server.WebServiceInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.webservice.impl.WebServiceInfoProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.wsdl.serverapi.WsdlProvider"
+			class="com.etlforge.integration.server.implementation.webservice.interchange.ws.impl.EnterpriseWsdlProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.filetransfer.serverapi.FileDownloader"
+			class="org.etlforge.integration.server.implementation.webservice.filemanagement.impl.FileManagementWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.database.serverapi.OdbcInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.db.impl.OdbcInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.database.serverapi.JdbcInfoProvider"
+			name="Server.JdbcInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.db.impl.JdbcInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Java" />
+	</bean>
+	<bean id="org.etlforge.integration.client.datalocation.connection.serverapi.TestSourceConnectionApi"
+			name="server.TestSourceConnection"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.connection.impl.ConnectionTesterWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="Server.JdbcInfoProvider" />
+	</bean>
+	<bean id="org.etlforge.integration.client.datalocation.connection.serverapi.TestTargetConnectionApi"
+			name="server.TestTargetConnection"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.connection.impl.ConnectionTesterWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="Server.JdbcInfoProvider" />
+	</bean>
+	<bean id="org.etlforge.integration.client.admin.Admin"
+			name="server.Admin"
+			class="org.etlforge.integration.server.implementation.webservice.admin.impl.AdminImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.project.info.ProjectInfoProvider"
+			name="server.ProjectInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.project.info.impl.ProjectInfoProviderImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="EntityTypes" />
+	</bean>
+	<bean id="org.etlforge.integration.client.ui.operation.jobcontrol.JobControl"
+			name="server.JobControl"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.impl.JobControlWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.mapping.serverapi.transformation.TreeMapperInfoProvider"
+			name="server.TreeMapperInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.TreeMapperInfoProviderWsImpl"
+			scope="prototype" 
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.loadsource.serverapi.LoadSourceDataProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.treemapper.impl.TreeMapperInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	
+	<bean id="server.XmlInfoProvider.Folders" 
+			class="org.etlforge.integration.client.mapping.serverapi.xml.ServerFileFolderOrganizer" 
+			lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.mapping.serverapi.xml.JsonFolderFactory" />
+			</list>
+		</constructor-arg>
+		<constructor-arg value="true" />
+	</bean>
+	<bean id="org.etlforge.integration.client.mapping.serverapi.xml.XmlInfoProvider"
+			name="server.XmlInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.xml.impl.XmlInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="server.XmlInfoProvider.Folders" />
+	</bean>
+	<bean id="org.etlforge.integration.client.mapping.serverapi.json.JsonInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.json.impl.JsonInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="org.etlforge.integration.client.mapping.serverapi.ldap.LdapInfoProvider"
+			name="server.LdapInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.interchange.ldap.impl.LdapInfoProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Java" />
+	</bean>
+	<bean id="org.etlforge.integration.client.scheduler.server.TestScheduleProvider"
+			name="server.TestScheduleProvider"
+			class="org.etlforge.integration.server.implementation.webservice.scheduler.impl.TestScheduleProviderWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<bean id="com.etlforge.integration.client.admin.server.ServerAdministration"
+			name="server.ServerAdmin"
+			class="com.etlforge.integration.server.implementation.webservice.admin.server.impl.ServerAdministrationWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+		<constructor-arg ref="ws.config.Java" />
+	</bean>
+	<bean id="com.etlforge.integration.client.admin.project.ProjectBackupAdministration"
+			class="com.etlforge.integration.server.implementation.webservice.admin.project.backup.impl.ProjectBackupAdministrationWsImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Java" />
+	</bean>
+	<bean id="com.etlforge.integration.client.proxy.serverapi.ProxySettingsApi"
+			name="Server.ProxySettings"
+			class="org.etlforge.integration.server.implementation.webservice.admin.impl.AdminImpl"
+			scope="prototype" lazy-init="true">
+		<constructor-arg ref="ws.config.Cpp" />
+	</bean>
+	<!-- Mock: bean id="com.etlforge.integration.client.proxy.serverapi.ProxySettingsApi"
+			name="Server.ProxySettings"
+			class="com.etlforge.integration.client.proxy.serverapi.MockProxySettingsApi"
+			lazy-init="true" /-->
+	<bean id="com.etlforge.integration.client.sfdc.server.SalesforceInfoProvider"
+			name="server.SalesforceInfoProvider"
+			class="org.etlforge.integration.server.implementation.webservice.sfdc.impl.SalesforceInfoProviderWsImpl"
+			lazy-init="true">
+		<constructor-arg ref="ws.config.Java" />
+	</bean>
+
+</beans>

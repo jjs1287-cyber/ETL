@@ -1,0 +1,18 @@
+// SchedulerService.idl : IDL source for SchedulerService
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SchedulerService.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(111778E2-2058-4463-A3C5-3D13928E3097),
+	version(1.0),
+	helpstring("SchedulerService 1.0 Type Library")
+]
+library SchedulerServiceLib
+{
+	importlib("stdole2.tlb");
+};

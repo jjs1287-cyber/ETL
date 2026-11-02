@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.deploy.DeployInterchangeData" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.deploy.DeployInterchangeData" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.deploy.DeployInterchangeData" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.deploy.DeployInterchangeData" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="checkProjectForDeploy">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="projectGUID" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="entities" type="impl:CIntegrationEntity"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CIntegrationEntity">
+    <sequence>
+     <element name="EntityTypeId" type="xsd:int"/>
+     <element name="Id" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="checkProjectForDeployResponse">
+    <complexType>
+     <sequence>
+      <element name="checkProjectForDeployReturn" type="impl:CDeployProjectCheckResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CProjectMembership">
+    <sequence>
+     <element name="Item" nillable="true" type="impl:CIntegrationEntity"/>
+     <element name="ProjectGuid" nillable="true" type="xsd:string"/>
+     <element name="ProjectName" nillable="true" type="xsd:string"/>
+     <element name="OwnerGuid" nillable="true" type="xsd:string"/>
+     <element name="OwnerLoginName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCProjectMembership">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CProjectMembership"/>
+    </sequence>
+   </complexType>
+   <complexType name="CLastUpdate">
+    <sequence>
+     <element name="Item" nillable="true" type="impl:CIntegrationEntity"/>
+     <element name="UserGuid" nillable="true" type="xsd:string"/>
+     <element name="UserLogin" nillable="true" type="xsd:string"/>
+     <element name="ModifiedDate" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCLastUpdate">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CLastUpdate"/>
+    </sequence>
+   </complexType>
+   <complexType name="CDeployProjectCheckResult">
+    <sequence>
+     <element name="ProjectMembershipInfo" nillable="true" type="impl:ArrayOfCProjectMembership"/>
+     <element name="LastUpdated" nillable="true" type="impl:ArrayOfCLastUpdate"/>
+    </sequence>
+   </complexType>
+   <element name="deployInterchangeData">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="deletedData" type="impl:InterchangeIdHolder"/>
+      <element name="updatedData" type="impl:InterchangeDataHolder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeIdHolder">
+    <sequence>
+     <element name="CallRestrictionsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="DBFieldsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="DBTablesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="Document_DefinitionsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="DocumentsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="FolderItemTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="FoldersTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="GroupsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="HttpEndpointsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="InterchangeProjectsTab" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="JmsMessagesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="MessagesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="OperationDiff_Details_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="OperationsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceQueriesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceUpsertsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceCreatesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceUpdatesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceDeletesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SalesforceBulkLoadsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SchedulesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="ScriptsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SourcesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="SqlScriptTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="TargetsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="Tran_MessagesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="Tran_RelationsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="Trans_FilterTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="Transformation_DefinitionsTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="TransformationChainLinksTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="TransformationsTab_New_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="User_GroupTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="UsersTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="WebServicesTab_ids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataRow">
+    <sequence>
+     <element name="fields" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfInterchangeDataRow">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:InterchangeDataRow"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataTable">
+    <sequence>
+     <element name="columnNames" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="rows" nillable="true" type="impl:ArrayOfInterchangeDataRow"/>
+    </sequence>
+   </complexType>
+   <complexType name="CPermission">
+    <sequence>
+     <element name="ItemId" nillable="true" type="xsd:string"/>
+     <element name="EntityTypeId" type="xsd:int"/>
+     <element name="AllowBit" type="xsd:long"/>
+     <element name="DenyBits" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCPermission">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="CUserPermissions">
+    <sequence>
+     <element name="UserId" nillable="true" type="xsd:string"/>
+     <element name="Permissions" nillable="true" type="impl:ArrayOfCPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCUserPermissions">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CUserPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="CGroupPermissions">
+    <sequence>
+     <element name="GroupId" nillable="true" type="xsd:string"/>
+     <element name="Permissions" nillable="true" type="impl:ArrayOfCPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCGroupPermissions">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CGroupPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="PermissionsHolder">
+    <sequence>
+     <element name="UserPermissions" nillable="true" type="impl:ArrayOfCUserPermissions"/>
+     <element name="GroupPermissions" nillable="true" type="impl:ArrayOfCGroupPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataHolder">
+    <sequence>
+     <element name="CallRestrictionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DataElementsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DBFieldsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DBTablesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Document_DefinitionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DocumentsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="FolderItemTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="FoldersTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="HttpEndpointsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="HttpEndpointOperationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="InterchangeProjectsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="JmsLocationPropertiesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="JmsMessagesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="MessagesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationDiff_Details" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationGraphLayoutTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationTransformationTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceQueriesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceUpsertsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceCreatesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceUpdatesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceDeletesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceBulkLoadsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SchedulesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="ScriptsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SourcesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SqlScriptTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TargetsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Tran_RelationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Trans_FilterTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Transformation_DefinitionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TransformationChainLinksTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TransformationsTab_New" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="WebServicesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="CommonSourceOperationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="LdapFiltersTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="LdapStructureEntriesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="PipelinePluginEntityAssociations" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="EntityProperties" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationPipelines" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Permissions" nillable="true" type="impl:PermissionsHolder"/>
+    </sequence>
+   </complexType>
+   <element name="deployInterchangeDataResponse">
+    <complexType>
+     <sequence>
+      <element name="deployInterchangeDataReturn" type="impl:CDeployResults"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CDeployWarning">
+    <sequence>
+     <element name="Entity" nillable="true" type="impl:CIntegrationEntity"/>
+     <element name="Warning" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCDeployWarning">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CDeployWarning"/>
+    </sequence>
+   </complexType>
+   <complexType name="CDeployRename">
+    <sequence>
+     <element name="Entity" nillable="true" type="impl:CIntegrationEntity"/>
+     <element name="OldName" nillable="true" type="xsd:string"/>
+     <element name="NewName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCDeployRename">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CDeployRename"/>
+    </sequence>
+   </complexType>
+   <complexType name="CDeployResults">
+    <sequence>
+     <element name="Warnings" nillable="true" type="impl:ArrayOfCDeployWarning"/>
+     <element name="RenamedItems" nillable="true" type="impl:ArrayOfCDeployRename"/>
+     <element name="DeployStatus" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="checkRequiredFiles">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="fileDependencies" type="impl:CFileDependencies"/>
+      <element name="requiredFiles" type="impl:CRequiredFiles"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CFileDependencies">
+    <sequence>
+     <element name="ParentFilePath" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="ChildFilePath" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CRequiredFile">
+    <sequence>
+     <element name="Path" nillable="true" type="xsd:string"/>
+     <element name="MD5" nillable="true" type="xsd:string"/>
+     <element name="Type" type="xsd:int"/>
+     <element name="ModifiedTime" type="xsd:long"/>
+     <element name="ZippedBase64Contents" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCRequiredFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CRequiredFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CRequiredFiles">
+    <sequence>
+     <element name="RequiredFiles" nillable="true" type="impl:ArrayOfCRequiredFile"/>
+    </sequence>
+   </complexType>
+   <element name="checkRequiredFilesResponse">
+    <complexType>
+     <sequence>
+      <element name="checkRequiredFilesReturn" type="impl:CFileCheckResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CFileCheckResult">
+    <sequence>
+     <element name="FileCheckStatus" type="xsd:int"/>
+     <element name="AvailableRequiredFiles" nillable="true" type="impl:ArrayOfCRequiredFile"/>
+    </sequence>
+   </complexType>
+   <element name="uploadJtrFiles">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="impl:CJtrFiles"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CJtrFile">
+    <sequence>
+     <element name="TransformationGuid" nillable="true" type="xsd:string"/>
+     <element name="SourceJtrZippedBase64" nillable="true" type="xsd:string"/>
+     <element name="TargetJtrZippedBase64" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCJtrFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CJtrFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CJtrFiles">
+    <sequence>
+     <element name="JtrFiles" nillable="true" type="impl:ArrayOfCJtrFile"/>
+    </sequence>
+   </complexType>
+   <element name="uploadJtrFilesResponse">
+    <complexType>
+     <sequence>
+      <element name="uploadJtrFilesReturn" type="impl:CDeployResults"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="uploadJitterpak">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="base64EncodedJitterpak" type="impl:CUploadedJitterpak"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CUploadedJitterpak">
+    <sequence>
+     <element name="ProjectGuid" nillable="true" type="xsd:string"/>
+     <element name="Base64EncodedJitterpak" nillable="true" type="xsd:string"/>
+     <element name="Tag" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="uploadJitterpakResponse">
+    <complexType>
+     <sequence>
+      <element name="uploadJitterpakReturn" type="impl:CDeployResults"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteInterchangeProjects">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteInterchangeProjectsResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteInterchangeProjectsReturn" type="impl:CDeployResults"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="deleteInterchangeProjectsResponse">
+
+      <wsdl:part element="impl:deleteInterchangeProjectsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadJitterpakResponse">
+
+      <wsdl:part element="impl:uploadJitterpakResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkRequiredFilesRequest">
+
+      <wsdl:part element="impl:checkRequiredFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadJtrFilesResponse">
+
+      <wsdl:part element="impl:uploadJtrFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteInterchangeProjectsRequest">
+
+      <wsdl:part element="impl:deleteInterchangeProjects" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkProjectForDeployResponse">
+
+      <wsdl:part element="impl:checkProjectForDeployResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deployInterchangeDataRequest">
+
+      <wsdl:part element="impl:deployInterchangeData" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkProjectForDeployRequest">
+
+      <wsdl:part element="impl:checkProjectForDeploy" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkRequiredFilesResponse">
+
+      <wsdl:part element="impl:checkRequiredFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadJtrFilesRequest">
+
+      <wsdl:part element="impl:uploadJtrFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deployInterchangeDataResponse">
+
+      <wsdl:part element="impl:deployInterchangeDataResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadJitterpakRequest">
+
+      <wsdl:part element="impl:uploadJitterpak" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="DeployInterchangeData">
+
+      <wsdl:operation name="checkProjectForDeploy">
+
+         <wsdl:input message="impl:checkProjectForDeployRequest" name="checkProjectForDeployRequest"/>
+
+         <wsdl:output message="impl:checkProjectForDeployResponse" name="checkProjectForDeployResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deployInterchangeData">
+
+         <wsdl:input message="impl:deployInterchangeDataRequest" name="deployInterchangeDataRequest"/>
+
+         <wsdl:output message="impl:deployInterchangeDataResponse" name="deployInterchangeDataResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkRequiredFiles">
+
+         <wsdl:input message="impl:checkRequiredFilesRequest" name="checkRequiredFilesRequest"/>
+
+         <wsdl:output message="impl:checkRequiredFilesResponse" name="checkRequiredFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadJtrFiles">
+
+         <wsdl:input message="impl:uploadJtrFilesRequest" name="uploadJtrFilesRequest"/>
+
+         <wsdl:output message="impl:uploadJtrFilesResponse" name="uploadJtrFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadJitterpak">
+
+         <wsdl:input message="impl:uploadJitterpakRequest" name="uploadJitterpakRequest"/>
+
+         <wsdl:output message="impl:uploadJitterpakResponse" name="uploadJitterpakResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteInterchangeProjects">
+
+         <wsdl:input message="impl:deleteInterchangeProjectsRequest" name="deleteInterchangeProjectsRequest"/>
+
+         <wsdl:output message="impl:deleteInterchangeProjectsResponse" name="deleteInterchangeProjectsResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_deploy_interchange_dataSoapBinding" type="impl:DeployInterchangeData">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkProjectForDeploy">
+
+         <wsdlsoap:operation soapAction="checkProjectForDeploy"/>
+
+         <wsdl:input name="checkProjectForDeployRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkProjectForDeployResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deployInterchangeData">
+
+         <wsdlsoap:operation soapAction="deployInterchangeData"/>
+
+         <wsdl:input name="deployInterchangeDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deployInterchangeDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkRequiredFiles">
+
+         <wsdlsoap:operation soapAction="checkRequiredFiles"/>
+
+         <wsdl:input name="checkRequiredFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkRequiredFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadJtrFiles">
+
+         <wsdlsoap:operation soapAction="uploadJtrFiles"/>
+
+         <wsdl:input name="uploadJtrFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadJtrFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadJitterpak">
+
+         <wsdlsoap:operation soapAction="uploadJitterpak"/>
+
+         <wsdl:input name="uploadJitterpakRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadJitterpakResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteInterchangeProjects">
+
+         <wsdlsoap:operation soapAction="deleteInterchangeProjects"/>
+
+         <wsdl:input name="deleteInterchangeProjectsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteInterchangeProjectsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="DeployInterchangeDataService">
+
+      <wsdl:port binding="impl:konga_deploy_interchange_dataSoapBinding" name="konga_deploy_interchange_data">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_deploy_interchange_data"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

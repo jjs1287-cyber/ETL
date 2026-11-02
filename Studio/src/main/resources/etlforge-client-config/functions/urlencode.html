@@ -1,0 +1,8 @@
+<html>Encodes the given string according to RFC 1738. Valid values for the optional option is:<br><br>
+        0: Standard URL encoding. Encodes ASCII control characters, Non-ASCII characters, "reserved" and "unsafe" characters. This is the default if the option is omitted.<br>
+        1: Don't encode unsafe characters (" &lt ;&gt ; # % { } | \ ^ ~ [ ] ` and the space character).<br>
+        2: Don't encode reserved characters (; / ? : @ & = ).<br>
+        3: Don't encode unsafe characters and reserved characters.<br>
+        The following characters are considered "safe" and are never encoded: $ - _ . + ! * ' ( ) ,<br><h2>Example:</h2><code><font size="4">
+        $url = "http://hostname/get_doc?name1=" + UrlEncode($value1) + "&name2=" + UrlEncode($value2);
+        </font></code></html>

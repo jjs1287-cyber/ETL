@@ -1,0 +1,27 @@
+<html>
+This function decrypts an AES encrypted string.
+<p>
+The first input argument is the base 64 encoded AES encrypted value.
+</p>
+<p>
+The 2nd through 5th arguments specify the parameters to generate the key and should be the same as when AES encryption was applied.
+See the documentation for the AESEncryption function.
+</p>
+<p>
+The decrypted output is a string.
+</p>
+<br>
+
+<h2>Example:</h2>
+<code><font size="4">
+<p>
+encrypted = AESEncryption("Hello world!", "password");<br>
+decrypted = AESDecryption(encrypted, "password");
+</p>
+<p>
+encrypted = AESEncryption("Hello world!", "password", "00FFAE01", 256, 1024);<br>
+decrypted = AESDecryption(encrypted, "password", "00FFAE01", 256, 1024);
+</p>
+</font>
+</code>
+</html>

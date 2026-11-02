@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>What is the &amp;date you want to format?</Label>
+		<Description>A variable holding the date to convert.</Description>
+	</Argument>
+	<Argument>
+		<Label>What is the &amp;old format of the date?</Label>
+		<Description>The format of the date variable in its current form, e.g. "mmddyy".</Description>
+	</Argument>
+	<Argument>
+		<Label>What is the &amp;new format you want the date to have?</Label>
+		<Description>The format to convert to, e.g. "yyyy-mm-dd".</Description>
+	</Argument>
+</Wizard>

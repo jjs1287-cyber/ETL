@@ -1,0 +1,303 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-jdbcenginec-d.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-laxis2_axiom"/>
+			<Lib File="-laxis2_engine"/>
+			<Lib File="-laxis2_parser"/>
+			<Lib File="-laxutil"/>
+			<Lib File="-lguththila"/>
+			<Lib File="-lneethi"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-jdbcenginec-d.so ../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-jdbcenginec.so"
+		CompilerConfigName="Latest Version"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-laxis2_axiom"/>
+			<Lib File="-laxis2_engine"/>
+			<Lib File="-laxis2_parser"/>
+			<Lib File="-laxutil"/>
+			<Lib File="-lguththila"/>
+			<Lib File="-lneethi"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-jdbcenginec.so ../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../adb_ArrayOf_xsd_string.c"/>
+			<F N="../../adb_ArrayOfWsKeyValue.c"/>
+			<F N="../../adb_ArrayOfWsResultSetRow.c"/>
+			<F N="../../adb_cachedDbLookup.c"/>
+			<F N="../../adb_cachedDbLookupResponse.c"/>
+			<F N="../../adb_closeSession.c"/>
+			<F N="../../adb_closeSessionResponse.c"/>
+			<F N="../../adb_commitTransactions.c"/>
+			<F N="../../adb_commitTransactionsResponse.c"/>
+			<F N="../../adb_dbExecute.c"/>
+			<F N="../../adb_dbExecuteResponse.c"/>
+			<F N="../../adb_dbLookup.c"/>
+			<F N="../../adb_dbLookupResponse.c"/>
+			<F N="../../adb_readSource.c"/>
+			<F N="../../adb_readSourceResponse.c"/>
+			<F N="../../adb_rollbackTransactions.c"/>
+			<F N="../../adb_rollbackTransactionsResponse.c"/>
+			<F N="../../adb_startNewSession.c"/>
+			<F N="../../adb_startNewSessionResponse.c"/>
+			<F N="../../adb_writeTarget.c"/>
+			<F N="../../adb_writeTargetResponse.c"/>
+			<F N="../../adb_WsConnectionParams.c"/>
+			<F N="../../adb_WsDbExecuteResult.c"/>
+			<F N="../../adb_WsDbLookupParams.c"/>
+			<F N="../../adb_WsDbLookupResult.c"/>
+			<F N="../../adb_WsJdbcError.c"/>
+			<F N="../../adb_WsJdbcSessionId.c"/>
+			<F N="../../adb_WsJdbcStartNewSessionResult.c"/>
+			<F N="../../adb_WsKeyValue.c"/>
+			<F N="../../adb_WsReadSourceParams.c"/>
+			<F N="../../adb_WsResultSet.c"/>
+			<F N="../../adb_WsResultSetRow.c"/>
+			<F N="../../adb_WsWriteTargetParams.c"/>
+			<F N="../../axis2_stub_JdbcEngineService.c"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../adb_ArrayOf_xsd_string.h"/>
+			<F N="../../adb_ArrayOfWsKeyValue.h"/>
+			<F N="../../adb_ArrayOfWsResultSetRow.h"/>
+			<F N="../../adb_cachedDbLookup.h"/>
+			<F N="../../adb_cachedDbLookupResponse.h"/>
+			<F N="../../adb_closeSession.h"/>
+			<F N="../../adb_closeSessionResponse.h"/>
+			<F N="../../adb_commitTransactions.h"/>
+			<F N="../../adb_commitTransactionsResponse.h"/>
+			<F N="../../adb_dbExecute.h"/>
+			<F N="../../adb_dbExecuteResponse.h"/>
+			<F N="../../adb_dbLookup.h"/>
+			<F N="../../adb_dbLookupResponse.h"/>
+			<F N="../../adb_readSource.h"/>
+			<F N="../../adb_readSourceResponse.h"/>
+			<F N="../../adb_rollbackTransactions.h"/>
+			<F N="../../adb_rollbackTransactionsResponse.h"/>
+			<F N="../../adb_startNewSession.h"/>
+			<F N="../../adb_startNewSessionResponse.h"/>
+			<F N="../../adb_writeTarget.h"/>
+			<F N="../../adb_writeTargetResponse.h"/>
+			<F N="../../adb_WsConnectionParams.h"/>
+			<F N="../../adb_WsDbExecuteResult.h"/>
+			<F N="../../adb_WsDbLookupParams.h"/>
+			<F N="../../adb_WsDbLookupResult.h"/>
+			<F N="../../adb_WsJdbcError.h"/>
+			<F N="../../adb_WsJdbcSessionId.h"/>
+			<F N="../../adb_WsJdbcStartNewSessionResult.h"/>
+			<F N="../../adb_WsKeyValue.h"/>
+			<F N="../../adb_WsReadSourceParams.h"/>
+			<F N="../../adb_WsResultSet.h"/>
+			<F N="../../adb_WsResultSetRow.h"/>
+			<F N="../../adb_WsWriteTargetParams.h"/>
+			<F N="../../axis2_stub_JdbcEngineService.h"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="">
+			<F
+				N="JdbcEngineC.mak"
+				Type="Makefile"/>
+		</Folder>
+	</Files>
+</Project>

@@ -1,0 +1,19 @@
+<html><p>
+				This is a special function which should be called from a user defined script for text validation. It is provided so that the validation script can include the same validation as defined in text document. It takes three paramters to define the validation function. 
+				There are two required parameters: <code><font size="4">operator</font></code>
+				 and <code><font size="4">argument</font></code>, and
+				third parameter <code><font size="4">ignore_case</font></code> is optional with false as the default value.
+				<br>
+				<h2>Example:</h2>
+				<p>If we want to validate a date in this quarter but not in the weekend, the script can looks like this</p>
+				<code><font size="4">
+					&lt;trans&gt;<br>
+					d=Date(CvtDate(_1,_3,"yyyy-mm-dd HH:MM:SS"));<br>
+					dow=DayOfWeek(d);<br>
+					// formula_bulder function Validate() assume at least three input arguments are provided from the calling script<br>
+					//  _1(input_string), _2(data_type), _3(format) from calling script<br>
+					v=Validate("=","THIS_QUARTER",false);<br>
+					dow!=0 &amp;&amp; dow!=6 &amp;&amp; $v<br>
+					&lt;/trans&gt;
+				</font></code>
+        </p></html>

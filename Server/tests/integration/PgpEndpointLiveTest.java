@@ -1,0 +1,42 @@
+import java.nio.file.*;
+import java.nio.charset.StandardCharsets;
+import java.net.URL;
+import java.util.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.etlforge.integration.server.implementation.webservice.interchange.deploy.client.*;
+import org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.client.*;
+public final class PgpEndpointLiveTest {
+ static Path root;static String hash,priv,pub,wrong,ssh;static int checks;static List<String> operations=new ArrayList<>();static List<String> keys=new ArrayList<>();static ObjectMapper json=new ObjectMapper();
+ static void check(boolean b,String s){if(!b)throw new AssertionError(s);System.out.println("PASS "+s);System.out.flush();checks++;}
+ static String guid(){return UUID.randomUUID().toString();}
+ static ObjectNode action(String s){ObjectNode n=json.createObjectNode();n.put("action",s);return n;}
+ static JsonNode request(ObjectNode n)throws Exception{SftpKeysLiveTest.hash=hash;return SftpKeysLiveTest.request(n);}
+ static String key(Path file,String type,String pass)throws Exception{ObjectNode n=action("ssh.save");n.put("type",type);String name="PGP verification "+guid();n.put("name",name);n.put(type.equals("pgp")&&file.toString().endsWith("public.asc")?"publicKey":"privateKey",new String(Files.readAllBytes(file),StandardCharsets.UTF_8));n.put("passphrase",pass);JsonNode result=request(n);check(!result.toString().contains("PRIVATE KEY BLOCK")&&!result.toString().contains("fixture-pass"),"key API does not expose secret material");for(JsonNode k:result.path("keys"))if(k.path("name").asText().equals(name)){String id=k.path("id").asText();keys.add(id);return id;}throw new AssertionError("Missing imported key");}
+ static String state(String id)throws Exception{JobControl jobs=new JobControlServiceLocator().getkonga_jobcontrol(new URL("http://127.0.0.1:47100/axis/konga_jobcontrol"));long instance=jobs.runOperationInstanceMD5Password("Admin",hash,id).getOperationInstanceId();for(int n=0;n<1800;n++){String state=NativeJavaScriptMappingTest.status(instance);if(!state.isEmpty()&&!state.equals("0")&&!state.equals("2")){System.out.println("Instance "+instance+" status "+state);return state;}Thread.sleep(100);}throw new AssertionError("Timed out: "+instance);}
+ static void deploy()throws Exception{
+ ArrayList<String[]> sources=new ArrayList<>(),targets=new ArrayList<>(),ops=new ArrayList<>(),pipes=new ArrayList<>(),props=new ArrayList<>();String project=guid();
+ for(int n=0;n<8;n++){String s=guid(),t=guid(),o=guid();operations.add(o);Path source=n==1||n==4||n==5?root.resolve("out0"):n==3?root.resolve("out2"):root.resolve("input");String pattern=n==1||n==4||n==5?"result.pgp":n==3?"bundle.zip.pgp":n==2?"*.bin":"a.bin";
+ Path target=root.resolve("out"+n);Files.createDirectories(target);
+ sources.add(new String[]{s,"PGP source "+n,"16",source.toString(),pattern,null,null,null,null,null});targets.add(new String[]{t,"PGP target "+n,"16",target.toString(),n==3?"[file].[ext]":n==2?"file_[file].[ext]":"result",null,null,null,null,null,"-1"});ops.add(new String[]{o,"PGP verification "+n,"1",s,t,"1",null,null,null,null,null,null});pipes.add(new String[]{o,"3",s});pipes.add(new String[]{o,"4",t});
+ if(n==0||n==2||n==6){props.add(new String[]{"3",t,"pgp_enabled","true"});props.add(new String[]{"3",t,"pgp_key_id",pub});if(n==6)props.add(new String[]{"3",t,"pgp_armor","true"});}
+ if(n==1||n==3||n==4||n==5){props.add(new String[]{"2",s,"pgp_enabled","true"});props.add(new String[]{"2",s,"pgp_key_id",n==4?wrong:n==5?pub:priv});}
+ if(n==2){props.add(new String[]{"3",t,"compression_enabled","true"});props.add(new String[]{"3",t,"compression_format","zip"});props.add(new String[]{"3",t,"compression_mode","combined"});props.add(new String[]{"3",t,"compression_archive_name","bundle"});}
+ if(n==3)props.add(new String[]{"2",s,"compression_enabled","true"});
+ }
+ InterchangeDataHolder d=new InterchangeDataHolder();d.setInterchangeProjectsTab(StudioFileCopySmoke.table(new String[]{"InterchangeProject_ID","InterchangeProject_Name"},new String[]{project,"PGP verification "+root.getFileName()}));d.setSourcesTab(StudioFileCopySmoke.table(new String[]{"Source_ID","Source_Name","Source_Type_ID","Locator","File_Name","Login","Password","Driver","DriverType","ConnectString"},sources.toArray(new String[0][])));d.setTargetsTab(StudioFileCopySmoke.table(new String[]{"Target_ID","Target_Name","Source_Type_ID","Locator","File_Name","Login","Password","Driver","DriverType","ConnectString","Target_Target_ID"},targets.toArray(new String[0][])));d.setOperationsTab(StudioFileCopySmoke.table(new String[]{"Operation_ID","Operation_Name","Operation_Type_ID","Source_ID","Target_ID","Ignore_History","Schedule_ID","Transformation_ID","Success_Operation_ID","Success_Message_ID","Failure_Operation_ID","Failure_Message_ID"},ops.toArray(new String[0][])));d.setOperationPipelines(StudioFileCopySmoke.table(new String[]{"Operation_ID","ActivityType_ID","Activity_ID"},pipes.toArray(new String[0][])));d.setEntityProperties(StudioFileCopySmoke.table(new String[]{"EntityType_ID","Entity_ID","KeyName","KeyValue"},props.toArray(new String[0][])));CDeployResults result=new DeployInterchangeDataServiceLocator().getkonga_deploy_interchange_data(new URL("http://127.0.0.1:47100/axis/konga_deploy_interchange_data")).deployInterchangeData("Admin",hash,new InterchangeIdHolder(),d);check(result.getDeployStatus()<=1,"deploy PGP endpoint settings");
+ }
+ public static void main(String[] args)throws Exception{
+ LocalVariablesRuntimeTest.init();hash=LocalVariablesRuntimeTest.hash;root=Files.createTempDirectory(Paths.get("C:/ETL/Reports/pgp-compare"),"live-");Files.createDirectories(root.resolve("input"));Path fixture=Paths.get(new String(Files.readAllBytes(Paths.get("C:/ETL/Reports/pgp-fixture-path.txt")),StandardCharsets.UTF_8).trim());
+ try{priv=key(fixture.resolve("private.asc"),"pgp","fixture-pass");pub=key(fixture.resolve("public.asc"),"pgp","");wrong=key(fixture.resolve("private.asc"),"pgp","incorrect");
+ byte[] a=new byte[1024];for(int i=0;i<a.length;i++)a[i]=(byte)(i%256);byte[] b="caf\u00e9 \u4e2d\u6587 \ud83d\ude80\r\n".getBytes(StandardCharsets.UTF_8);Files.write(root.resolve("input/a.bin"),a);Files.write(root.resolve("input/b.bin"),b);deploy();
+ check(state(operations.get(0)).equals("3"),"public-key encrypted target completes");check(Files.exists(root.resolve("out0/result.pgp")),"encrypted target filename suffix");check(state(operations.get(1)).equals("3"),"private-key decrypted source completes");check(Arrays.equals(a,Files.readAllBytes(root.resolve("out1/result"))),"live source-target binary roundtrip");
+ check(state(operations.get(2)).equals("3"),"combined ZIP then PGP target completes");check(state(operations.get(3)).equals("3"),"PGP decrypt then ZIP expansion completes");java.util.List<byte[]> outputs=new ArrayList<>();try(java.util.stream.Stream<Path> paths=Files.list(root.resolve("out3"))){for(Path p:(Iterable<Path>)paths::iterator)outputs.add(Files.readAllBytes(p));}check(outputs.size()==2,"combined encrypted archive expands all files");check(outputs.stream().anyMatch(v->Arrays.equals(v,a))&&outputs.stream().anyMatch(v->Arrays.equals(v,b)),"archive members match binary and Unicode originals");
+ for(int n:new int[]{4,5}){check(state(operations.get(n)).equals("6"),"invalid decryption credentials fail cleanly "+n);try(java.util.stream.Stream<Path> paths=Files.list(root.resolve("out"+n))){check(paths.count()==0,"failed decryption has no target output "+n);}}
+ check(state(operations.get(6)).equals("3"),"ASCII armored output operation");check(new String(Files.readAllBytes(root.resolve("out6/result.asc")),StandardCharsets.US_ASCII).contains("BEGIN PGP MESSAGE"),"armored output format");check(state(operations.get(7)).equals("3"),"disabled encryption retains ordinary file copy");check(Arrays.equals(a,Files.readAllBytes(root.resolve("out7/result"))),"disabled encryption preserves exact bytes");
+ Path vault=Paths.get("C:/ETL/Server/instances/dev/private/ssh-keys");try(java.util.stream.Stream<Path> paths=Files.list(vault)){check(paths.noneMatch(p->p.getFileName().toString().startsWith("pgp-")||p.toString().endsWith(".pem")),"no transient PGP keyrings or key files left");}
+ System.out.println("PASSED "+checks+"; fixture="+root);
+ }finally{for(String id:keys){ObjectNode r=action("ssh.delete");r.put("id",id);request(r);}}
+ }
+}
+

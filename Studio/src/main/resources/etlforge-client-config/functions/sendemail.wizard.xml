@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;From</Label>
+		<Description>The sender's email address.</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;To</Label>
+		<Description>The recipient's email address.</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Subject</Label>
+	</Argument>
+	<Argument>
+		<Label>&amp;Message</Label>
+	</Argument>
+	<Argument optional="true">
+		<Label>SMTP Ser&amp;ver(s)</Label>
+		<Description>The SMTP server that will be asked to send the email. Several servers can be defined, separated by a comma. If empty, the value is read
+		from the ETLForge server configuration file. If the mail server uses a non-default port you can append ":port" to the smtp server name.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Account</Label>
+		<Description>The name of the SMTP account. If empty, the value is read from the ETLForge server configuration file.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Password</Label>
+		<Description>The SMTP account's password. If empty, the value is read from the ETLForge server configuration file.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;CC</Label>
+		<Description>A comma-separated list of CC recipients.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;BCC</Label>
+		<Description>A comma-separated list of BCC recipients.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Reply-To</Label>
+		<Description>The reply-to address. The From address is used if this field is empty.</Description>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;UseSSL</Label>
+		<Description>Boolean flag for SSL/TLS encryption use.</Description>
+	</Argument>
+</Wizard>

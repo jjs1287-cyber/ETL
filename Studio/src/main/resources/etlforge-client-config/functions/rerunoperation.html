@@ -1,0 +1,13 @@
+<html><p>
+            Re-runs the current operation. Takes an optional boolean argument that determines if the operation should run 
+			synchronously (the default) or asynchronously.
+            </p>
+			<p>
+			<b>Warning:</b> Since this ends up being a recursive call, make sure you have some sort of stop-condition. 
+			Otherwise you will end up in an infinite loop of operation calls.
+			</p>
+            <p>
+			The behavior of this methods with respect to return value and data elements is identical to <code><font size="4">RunOperation</font></code>. 
+			Refer to  the documentation of that method for a description of how re-running the operation synchronously or 
+			asynchronously affects global data elements.<br><h2>Example:</h2><code><font size="4">ReRunOperation() // re-runs the current operation synchronously</font></code><br>
+				<code><font size="4">ReRunOperation(false) // re-runs the current operation asynchronously</font></code></html>

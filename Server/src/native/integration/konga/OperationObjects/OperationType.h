@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 1998-2011 Jitterbit, Inc.
+ *
+ */
+#ifndef KONGA_OPERATION_TYPE_H
+#define KONGA_OPERATION_TYPE_H
+
+namespace konga {
+
+	enum OperationType {
+		OPERATION_NOTDEFINED			= 0,
+		OPERATION_ARCHIVE				= 1,
+		OPERATION_EMAIL_NOTIFICATION	= 2,
+		OPERATION_TRANSFORMATION		= 3,
+		OPERATION_WORKFLOW				= 4,
+		OPERATION_FTP_APPEND			= 5,
+		OPERATION_WEBSERVICE_CALL		= 6,
+		OPERATION_HOSTED_WEBSERVICE		= 7,
+		OPERATION_SCRIPT				= 8,
+		OPERATION_XSLT = 23,
+        OPERATION_SALESFORCE_BULK_LOAD	= 101,
+	};
+
+};
+
+#endif                          
+

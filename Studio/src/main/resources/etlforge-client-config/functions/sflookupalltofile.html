@@ -1,0 +1,24 @@
+<html>
+Logs in to Salesforce (if necessary) and retrives the result of the query from Salesforce to a CSV file.
+The function returns the number of records retrieved.
+<p>
+The login call is made using the credentials in the specified Salesforce Org.
+<code><font size="4">null</font></code> is returned if either login or query returns no record. 
+API fails. Use <code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+Example 1:
+<p>
+<code><font size="4">
+nrec = SFLookupAllToFile("&lt;TAG&gt;Salesforce Orgs/...&lt;/TAG&gt;", "SELECT Id, Name FROM Account", "&lt;TAG&gt;Targets/...&lt;/TAG&gt;");<br>
+</font></code>
+<p>
+Example 2:
+<p>
+<code><font size="4">
+soql="SELECT Id, AccountNumber, Name, CreatedBy.ContactId, CreatedBy.FirstName, CreatedBy.LastName FROM Account";<br>
+nrec=SfLookupAll("&lt;TAG&gt;Salesforce Orgs/...&lt;/TAG&gt;", soql, "&lt;TAG&gt;Targets/...&lt;/TAG&gt;");<br>
+</font></code>
+<p>
+As an alternative to this function, see <code><font size="4">SFLookup()</font></code> and <code><font size="4">SFLookupAll()</font></code>.
+<p>
+</html>

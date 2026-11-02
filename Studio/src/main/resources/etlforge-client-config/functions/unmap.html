@@ -1,0 +1,7 @@
+<html>Sets the target field to be treated as unmapped. So far this affects only database targets. The return value is null<br><h2>Example:</h2><code><font size="4">
+				$valueToInsert = DbLookup(....);<br>
+				// If $valueToInsert is null we want to treat this field as unmapped, i.e. we do not<br> 
+				// want to include it in the INSERT statement that gets generated for the DB target<br>
+				// for this record.<br>
+				If (Length($valueToInsert) == 0, Unmap(), $valueToInsert);<br>
+				</font></code></html>

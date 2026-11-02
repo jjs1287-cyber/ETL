@@ -1,0 +1,13 @@
+<html>
+Logs in to Salesforce, using the specified Salesforce Org.
+<p>
+After a successful login, the following global data elements have been set and can be used
+in subsequent scripts or mappings:
+<ul>
+<li>$Salesforce.SessionID: The Salesforce session ID.</li>
+<li>$Salesforce.ServerURL: The URL to use in subsequent calls to Salesforce in the same session.</li>
+<li>$Salesforce.UserID: The ID of the Salesforce user.</li>
+</ul>
+<p>
+Returns true if the login was successful. Returns false if login failed. Call GetLastError() to get the error message.
+</html>

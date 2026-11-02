@@ -1,0 +1,42 @@
+<html><p>
+				Writes <tt>file_contents</tt> to the file-type target specified by <tt>target_id</tt>.
+        If <tt>file_contents</tt> is of type binary, the binary data is written to the file.
+        In all other cases a string representation of the data is written.
+        </p>
+				<p>
+				Writes the string <tt>file_contents</tt> to the file-type target specified by <tt>target_id</tt>.
+				The file-type target used
+				in this function call must be defined as a target in
+				the current integration project. The available file-type targets are shown
+				in the "Project Items" tab in the lower section of the Formula Builder,
+				under the node called <tt>"File Locations"</tt>.
+				</p>
+				<p>
+				The third argument, <tt>file_name</tt> is optional and can be used to override the file name used in the target.
+				Alternatively, a global data element can be used to override the file name in the target definition.
+				Global data elements are referenced as "[de_name]" in the target definition.
+				</p>
+				<p>
+				The file contents is buffered locally until FlushFile() is called on the target
+				or the transformation finishes successfully, so calling WriteFile several times
+				without calling FlushFile() will just append data to the current buffer and everything
+				is written to the actual file-type target at the end of the transformation.
+				A file buffer is uniquely identified by the target and the file_name so you can use the
+				same target to write to different files in the same directory and the file buffers
+				will be separate.
+				</p>
+				<p>
+				Files are not actually written to the target in a test transformation,
+				unless <tt>FlushFile()</tt> is called. If a transformation is run in an operation
+				or as part of a test operation,
+				the file will be written when the transformation finishes successfully, or <tt>FlushFile</tt>
+				is called in the script.
+				</p>
+        <p>
+        This method can also be used to write/post data to an http target.
+        </p><br><h2>Example:</h2><code><font size="4">
+				WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents)<br>
+				<br>
+				// Use the name "test.txt" instead of whatever is defined in this target.<br>
+				WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents, "test.txt")<br>
+				</font></code></html>

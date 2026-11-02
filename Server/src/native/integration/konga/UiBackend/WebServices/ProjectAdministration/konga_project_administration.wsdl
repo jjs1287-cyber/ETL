@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.projectadmin.ProjectAdministration" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.projectadmin.ProjectAdministration" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.projectadmin.ProjectAdministration" xmlns:tns2="http://webservice.implementation.server.integration.etlforge.invalid" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.projectadmin.ProjectAdministration" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservice.implementation.server.integration.etlforge.invalid"/>
+   <element name="DisableSchedules">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="schedules" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="DisableSchedulesResponse">
+    <complexType/>
+   </element>
+   <element name="EnableSchedules">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="schedules" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="EnableSchedulesResponse">
+    <complexType/>
+   </element>
+   <element name="DisableScheduleForOperation">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="operations" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="DisableScheduleForOperationResponse">
+    <complexType/>
+   </element>
+   <element name="EnableScheduleForOperation">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="operations" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="EnableScheduleForOperationResponse">
+    <complexType/>
+   </element>
+   <element name="FindScheduledOperations">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="schedules" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="operations" type="xsd:string"/>
+      <element name="ISO8601StartTime" type="xsd:string"/>
+      <element name="ISO8601EndTime" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="FindScheduledOperationsResponse">
+    <complexType>
+     <sequence>
+      <element name="FindScheduledOperationsReturn" type="impl:FindScheduledOperationsResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ScheduledOperation">
+    <sequence>
+     <element name="ScheduleGuid" nillable="true" type="xsd:string"/>
+     <element name="ScheduleName" nillable="true" type="xsd:string"/>
+     <element name="OperationGuid" nillable="true" type="xsd:string"/>
+     <element name="OperationName" nillable="true" type="xsd:string"/>
+     <element name="ISO8601ExecutionTimes" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfScheduledOperation">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ScheduledOperation"/>
+    </sequence>
+   </complexType>
+   <complexType name="FindScheduledOperationsResult">
+    <sequence>
+     <element name="ScheduledOperations" nillable="true" type="impl:ArrayOfScheduledOperation"/>
+    </sequence>
+   </complexType>
+   <element name="TestScheduleWithKeyValues">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="scheduleProperties" type="tns2:WsKeyValuePairs"/>
+      <element name="iso8601StartTime" type="xsd:string"/>
+      <element name="iso8601EndTime" type="xsd:string"/>
+      <element name="maxInstances" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_WsKeyValue">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:WsKeyValue"/>
+    </sequence>
+   </complexType>
+   <element name="TestScheduleWithKeyValuesResponse">
+    <complexType>
+     <sequence>
+      <element name="TestScheduleWithKeyValuesReturn" type="impl:FindScheduledOperationsResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="TestScheduleWithGuid">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="schedule" type="xsd:string"/>
+      <element name="iso8601StartTime" type="xsd:string"/>
+      <element name="iso8601EndTime" type="xsd:string"/>
+      <element name="maxInstances" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="TestScheduleWithGuidResponse">
+    <complexType>
+     <sequence>
+      <element name="TestScheduleWithGuidReturn" type="impl:FindScheduledOperationsResult"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.implementation.server.integration.etlforge.invalid" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:org.etlforge.integration.server.implementation.webservice.projectadmin.ProjectAdministration"/>
+   <complexType name="WsKeyValue">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsKeyValuePairs">
+    <sequence>
+     <element name="keyValues" nillable="true" type="impl:ArrayOf_tns2_WsKeyValue"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="EnableScheduleForOperationResponse">
+
+      <wsdl:part element="impl:EnableScheduleForOperationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DisableSchedulesResponse">
+
+      <wsdl:part element="impl:DisableSchedulesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DisableScheduleForOperationResponse">
+
+      <wsdl:part element="impl:DisableScheduleForOperationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DisableSchedulesRequest">
+
+      <wsdl:part element="impl:DisableSchedules" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="FindScheduledOperationsRequest">
+
+      <wsdl:part element="impl:FindScheduledOperations" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TestScheduleWithKeyValuesRequest">
+
+      <wsdl:part element="impl:TestScheduleWithKeyValues" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TestScheduleWithKeyValuesResponse">
+
+      <wsdl:part element="impl:TestScheduleWithKeyValuesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TestScheduleWithGuidRequest">
+
+      <wsdl:part element="impl:TestScheduleWithGuid" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="DisableScheduleForOperationRequest">
+
+      <wsdl:part element="impl:DisableScheduleForOperation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EnableScheduleForOperationRequest">
+
+      <wsdl:part element="impl:EnableScheduleForOperation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EnableSchedulesRequest">
+
+      <wsdl:part element="impl:EnableSchedules" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TestScheduleWithGuidResponse">
+
+      <wsdl:part element="impl:TestScheduleWithGuidResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="FindScheduledOperationsResponse">
+
+      <wsdl:part element="impl:FindScheduledOperationsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EnableSchedulesResponse">
+
+      <wsdl:part element="impl:EnableSchedulesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ProjectAdministration">
+
+      <wsdl:operation name="DisableSchedules">
+
+         <wsdl:input message="impl:DisableSchedulesRequest" name="DisableSchedulesRequest"/>
+
+         <wsdl:output message="impl:DisableSchedulesResponse" name="DisableSchedulesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="EnableSchedules">
+
+         <wsdl:input message="impl:EnableSchedulesRequest" name="EnableSchedulesRequest"/>
+
+         <wsdl:output message="impl:EnableSchedulesResponse" name="EnableSchedulesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="DisableScheduleForOperation">
+
+         <wsdl:input message="impl:DisableScheduleForOperationRequest" name="DisableScheduleForOperationRequest"/>
+
+         <wsdl:output message="impl:DisableScheduleForOperationResponse" name="DisableScheduleForOperationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="EnableScheduleForOperation">
+
+         <wsdl:input message="impl:EnableScheduleForOperationRequest" name="EnableScheduleForOperationRequest"/>
+
+         <wsdl:output message="impl:EnableScheduleForOperationResponse" name="EnableScheduleForOperationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="FindScheduledOperations">
+
+         <wsdl:input message="impl:FindScheduledOperationsRequest" name="FindScheduledOperationsRequest"/>
+
+         <wsdl:output message="impl:FindScheduledOperationsResponse" name="FindScheduledOperationsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="TestScheduleWithKeyValues">
+
+         <wsdl:input message="impl:TestScheduleWithKeyValuesRequest" name="TestScheduleWithKeyValuesRequest"/>
+
+         <wsdl:output message="impl:TestScheduleWithKeyValuesResponse" name="TestScheduleWithKeyValuesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="TestScheduleWithGuid">
+
+         <wsdl:input message="impl:TestScheduleWithGuidRequest" name="TestScheduleWithGuidRequest"/>
+
+         <wsdl:output message="impl:TestScheduleWithGuidResponse" name="TestScheduleWithGuidResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_project_administrationSoapBinding" type="impl:ProjectAdministration">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="DisableSchedules">
+
+         <wsdlsoap:operation soapAction="DisableSchedules"/>
+
+         <wsdl:input name="DisableSchedulesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="DisableSchedulesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="EnableSchedules">
+
+         <wsdlsoap:operation soapAction="EnableSchedules"/>
+
+         <wsdl:input name="EnableSchedulesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="EnableSchedulesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="DisableScheduleForOperation">
+
+         <wsdlsoap:operation soapAction="DisableScheduleForOperation"/>
+
+         <wsdl:input name="DisableScheduleForOperationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="DisableScheduleForOperationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="EnableScheduleForOperation">
+
+         <wsdlsoap:operation soapAction="EnableScheduleForOperation"/>
+
+         <wsdl:input name="EnableScheduleForOperationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="EnableScheduleForOperationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="FindScheduledOperations">
+
+         <wsdlsoap:operation soapAction="FindScheduledOperations"/>
+
+         <wsdl:input name="FindScheduledOperationsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="FindScheduledOperationsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="TestScheduleWithKeyValues">
+
+         <wsdlsoap:operation soapAction="TestScheduleWithKeyValues"/>
+
+         <wsdl:input name="TestScheduleWithKeyValuesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="TestScheduleWithKeyValuesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="TestScheduleWithGuid">
+
+         <wsdlsoap:operation soapAction="TestScheduleWithGuid"/>
+
+         <wsdl:input name="TestScheduleWithGuidRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="TestScheduleWithGuidResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ProjectAdministrationService">
+
+      <wsdl:port binding="impl:konga_project_administrationSoapBinding" name="konga_project_administration">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_project_administration"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

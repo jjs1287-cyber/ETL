@@ -1,0 +1,33 @@
+<html>
+Logs in to Salesforce and retrives the current system time from Salesforce. 
+<p>
+The login call is made using
+the credentials in the specified Salesforce Org. The timestamp is returned in the format 
+yyyy-mm-dd HH:MM:SS, using your org's timezone setting by default.
+<code><font size="4">null</font></code> is returned if either login or the call to the getServerTimestamp 
+API fails. Use <code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+An optional second argument can be used to set the timezone to use. The timezone of your Salesforce org
+is used by default if a timezone is not provided.
+<p>
+Example:
+<p>
+<code><font size="4">
+$timestamp = LoginToSalesforceAndGetTimestamp("<TAG>Salesforce Orgs/...");<br>
+if(IsNull($timestamp), RaiseError(GetLastError());
+</font></code>
+<p>
+The following examples show how to specify which timezone to use:
+<p>
+<code><font size="4">
+// Get the timestamp in UTC:<br>
+$timestamp = LoginToSalesforceAndGetTimestamp("<TAG>Salesforce Orgs/...", "UTC");<br>
+// Get the timestamp in Pacific Standard Time:<br>
+$timestamp = LoginToSalesforceAndGetTimestamp("<TAG>Salesforce Orgs/...", "PST");
+</font></code>
+<p>
+The timezone argument must be a timezone recognized by Java's TimeZone class 
+(see <a href="http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html">http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html</a>).
+<p>
+As an alternative to this function, see <code><font size="4">GetSalesforceTimestamp()</font></code>.
+</html>

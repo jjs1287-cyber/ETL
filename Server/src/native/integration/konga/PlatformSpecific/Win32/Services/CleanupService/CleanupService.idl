@@ -1,0 +1,18 @@
+// CleanupService.idl : IDL source for CleanupService
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CleanupService.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(B67992D2-1DF5-4851-A3AD-E4D26C016EFC),
+	version(1.0),
+	helpstring("CleanupService 1.0 Type Library")
+]
+library CleanupServiceLib
+{
+	importlib("stdole2.tlb");
+};

@@ -1,0 +1,12 @@
+<html>Converts any data type to a string. If the data being evaluated is a string already, no conversion takes place.
+        If the data type is a date or time record, the date is returned in ISO 8601 format (yyyy-mm-dd HH:MM:SS).
+        For other date formats use CVTDate or FormatDate.
+        Binary data that contains NULL bytes is returned as a string representing the hexadecimal values of each byte,
+        just as if BinaryToHex had been called. If the binary data contains no NULL bytes then a string representation
+        is returned with the assumption that the bytes represent a UTF-8 encoded string.
+        If you always want a hexadecimal representation then use the BinaryToHex function instead.
+        For a boolean value the strings "1" or "0" are returned.
+        
+        <br><h2>Example:</h2><code><font size="4">String(98)</font></code> returns a value of "98". <br>
+        <code><font size="4">String(true)</font></code> returns a value of "1".
+</html>

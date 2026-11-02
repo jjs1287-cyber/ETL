@@ -1,0 +1,7 @@
+<html>Runs the specified script and then continues execution of the current script.
+        The available scripts are shown in the "Project Items" tab in the lower section
+		of the Formula Builder, under the node called "Scripts".
+        By double clicking on a script node, the corresponding script tag will be
+        inserted into the formula expression. (The tag is constructed by wrapping the project path
+        of the selected script within &lt;TAG&gt;...&lt;/TAG&gt;
+        tags.) This method returns the return value of the called script on success.<br><h2>Example:</h2><code><font size="4">$result = RunScript("&lt;TAG&gt;MyProject/Scripts/CalculateSomething&lt;/TAG&gt;")</font></code></html>

@@ -1,0 +1,331 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdKonga"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -g -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				DependsRef="Debug"
+				ClearProcessBuffer="1">
+				<Exec CmdLine="cd %rp../../../../..; make server DEBUG=1"/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				DependsRef="Debug"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Dependencies Name="Debug">
+			<Dependency Project="../../UiBackend/Workflow/mod_konga_wf/project/SlickEdit/mod_konga_wf.vpj"/>
+			<Dependency Project="../../mod_konga_ws/project/SlickEdit/mod_konga_ws.vpj"/>
+			<Dependency Project="../../OperationEngine/Process/project/SlickEdit/OperationEngineProc.vpj"/>
+			<Dependency Project="../../Authentication/project/SlickEdit/Authentication.vpj"/>
+			<Dependency Project="../../DataElement/project/SlickEdit/DataElement.vpj"/>
+			<Dependency Project="../../InterchangeProject/project/SlickEdit/InterchangeProject.vpj"/>
+			<Dependency Project="../../ItemAccess/project/SlickEdit/ItemAccess.vpj"/>
+			<Dependency Project="../../Messaging/project/SlickEdit/Messaging.vpj"/>
+			<Dependency Project="../../OperationContext/project/SlickEdit/OperationContext.vpj"/>
+			<Dependency Project="../../OperationDataElements/project/SlickEdit/OperationDataElements.vpj"/>
+			<Dependency Project="../../OperationEngine/project/SlickEdit/OperationEngine.vpj"/>
+			<Dependency Project="../../OperationLog/project/SlickEdit/OperationLog.vpj"/>
+			<Dependency Project="../../PipelinePluginEntityManager/project/SlickEdit/PipelinePluginEntityManager.vpj"/>
+			<Dependency Project="../../PipelinePluginExecutor/project/SlickEdit/PipelinePluginExecutor.vpj"/>
+			<Dependency Project="../../PluginManager/project/SlickEdit/PluginManager.vpj"/>
+			<Dependency Project="../../SchemaManager/project/SlickEdit/SchemaManager.vpj"/>
+			<Dependency Project="../../Server/project/SlickEdit/Server.vpj"/>
+			<Dependency Project="../../ServerVersion/project/SlickEdit/ServerVersion.vpj"/>
+			<Dependency Project="../../TransformationEngine/project/SlickEdit/TransformationEngine.vpj"/>
+			<Dependency Project="../../UiBackend/GuidMappings/project/SlickEdit/GuidMappings.vpj"/>
+			<Dependency Project="../../UiBackend/UploadedFilesManager/project/SlickEdit/UploadedFilesManager.vpj"/>
+			<Dependency Project="../../Workflow/DbWriter/project/SlickEdit/WfDbWriter.vpj"/>
+			<Dependency Project="../../Workflow/Validation/project/SlickEdit/WorkflowValidation.vpj"/>
+			<Dependency Project="../../Workflow/XmlReader/project/SlickEdit/WfXmlReader.vpj"/>
+			<Dependency Project="../../Workflow/project/SlickEdit/Workflow.vpj"/>
+			<Dependency Project="../../FileCleanup/project/SlickEdit/FileCleanup.vpj"/>
+			<Dependency Project="../../DbRelations/project/SlickEdit/DbRelations.vpj"/>
+			<Dependency Project="../../ETLForgeUtils/project/SlickEdit/ETLForgeUtils.vpj"/>
+			<Dependency Project="../../JmsUtils/project/SlickEdit/JmsUtils.vpj"/>
+			<Dependency Project="../../OperationObjects/project/SlickEdit/OperationObjects.vpj"/>
+			<Dependency Project="../../ProjectBackup/project/SlickEdit/ProjectBackup.vpj"/>
+			<Dependency Project="../../ItemProperties/project/SlickEdit/ItemProperties.vpj"/>
+			<Dependency Project="../../TransformationLogging/project/SlickEdit/TransformationLogging.vpj"/>
+			<Dependency Project="../../TransformationUtils/project/SlickEdit/TransformationUtils.vpj"/>
+			<Dependency Project="../../Deployer/project/SlickEdit/Deployer.vpj"/>
+			<Dependency Project="../../OperationPipeline/project/SlickEdit/OperationPipeline.vpj"/>
+			<Dependency Project="../../SystemVariables/project/SlickEdit/SystemVariables.vpj"/>
+			<Dependency Project="../../HttpEndpoint/project/SlickEdit/HttpEndpoint.vpj"/>
+			<Dependency Project="../../ScheduleUtils/project/SlickEdit/ScheduleUtils.vpj"/>
+			<Dependency Project="../../SchedulerProc/project/SlickEdit/SchedulerProc.vpj"/>
+			<Dependency Project="../../Scheduler/project/SlickEdit/Scheduler.vpj"/>
+			<Dependency Project="../../JavaBackend/JavaBackendConfiguration/project/SlickEdit/JavaBackendConfiguration.vpj"/>
+			<Dependency Project="../../JdbcUtils/project/SlickEdit/JdbcUtils.vpj"/>
+			<Dependency Project="../../JavaBackend/JdbcEngineC/project/SlickEdit/JdbcEngineC.vpj"/>
+			<Dependency Project="../../OperationEngine/Process/project/SlickEdit/OperationEngineProc.vpj"/>
+			<Dependency Project="../../OperationEngine/Process/project/SlickEdit/OperationEngineProc.vpj"/>
+			<Dependency Project="../../ProcessEngine/project/SlickEdit/ProcessEngine.vpj"/>
+			<Dependency Project="../../TransformationDataStore/project/SlickEdit/TransformationDataStore.vpj"/>
+		</Dependencies>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../lib/konga/"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdKonga"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				DependsRef="Release"
+				ClearProcessBuffer="1">
+				<Exec CmdLine="cd %rp../../../../..; make server"/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				DependsRef="Release"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Dependencies Name="Release">
+			<Dependency Project="../../UiBackend/Workflow/mod_konga_wf/project/SlickEdit/mod_konga_wf.vpj"/>
+			<Dependency Project="../../Authentication/project/SlickEdit/Authentication.vpj"/>
+			<Dependency Project="../../DataElement/project/SlickEdit/DataElement.vpj"/>
+			<Dependency Project="../../InterchangeProject/project/SlickEdit/InterchangeProject.vpj"/>
+			<Dependency Project="../../ItemAccess/project/SlickEdit/ItemAccess.vpj"/>
+			<Dependency Project="../../Messaging/project/SlickEdit/Messaging.vpj"/>
+			<Dependency Project="../../OperationContext/project/SlickEdit/OperationContext.vpj"/>
+			<Dependency Project="../../OperationDataElements/project/SlickEdit/OperationDataElements.vpj"/>
+			<Dependency Project="../../OperationLog/project/SlickEdit/OperationLog.vpj"/>
+			<Dependency Project="../../PipelinePluginEntityManager/project/SlickEdit/PipelinePluginEntityManager.vpj"/>
+			<Dependency Project="../../PipelinePluginExecutor/project/SlickEdit/PipelinePluginExecutor.vpj"/>
+			<Dependency Project="../../PluginManager/project/SlickEdit/PluginManager.vpj"/>
+			<Dependency Project="../../SchemaManager/project/SlickEdit/SchemaManager.vpj"/>
+			<Dependency Project="../../ServerVersion/project/SlickEdit/ServerVersion.vpj"/>
+			<Dependency Project="../../TransformationEngine/project/SlickEdit/TransformationEngine.vpj"/>
+			<Dependency Project="../../UiBackend/GuidMappings/project/SlickEdit/GuidMappings.vpj"/>
+			<Dependency Project="../../UiBackend/UploadedFilesManager/project/SlickEdit/UploadedFilesManager.vpj"/>
+			<Dependency Project="../../Workflow/DbWriter/project/SlickEdit/WfDbWriter.vpj"/>
+			<Dependency Project="../../Workflow/Validation/project/SlickEdit/WorkflowValidation.vpj"/>
+			<Dependency Project="../../Workflow/XmlReader/project/SlickEdit/WfXmlReader.vpj"/>
+			<Dependency Project="../../Workflow/project/SlickEdit/Workflow.vpj"/>
+			<Dependency Project="../../FileCleanup/project/SlickEdit/FileCleanup.vpj"/>
+			<Dependency Project="../../DbRelations/project/SlickEdit/DbRelations.vpj"/>
+			<Dependency Project="../../ETLForgeUtils/project/SlickEdit/ETLForgeUtils.vpj"/>
+			<Dependency Project="../../JmsUtils/project/SlickEdit/JmsUtils.vpj"/>
+			<Dependency Project="../../OperationObjects/project/SlickEdit/OperationObjects.vpj"/>
+			<Dependency Project="../../ProjectBackup/project/SlickEdit/ProjectBackup.vpj"/>
+			<Dependency Project="../../ItemProperties/project/SlickEdit/ItemProperties.vpj"/>
+			<Dependency Project="../../TransformationLogging/project/SlickEdit/TransformationLogging.vpj"/>
+			<Dependency Project="../../TransformationUtils/project/SlickEdit/TransformationUtils.vpj"/>
+			<Dependency Project="../../Deployer/project/SlickEdit/Deployer.vpj"/>
+			<Dependency Project="../../OperationPipeline/project/SlickEdit/OperationPipeline.vpj"/>
+			<Dependency Project="../../SystemVariables/project/SlickEdit/SystemVariables.vpj"/>
+			<Dependency Project="../../HttpEndpoint/project/SlickEdit/HttpEndpoint.vpj"/>
+			<Dependency Project="../../ScheduleUtils/project/SlickEdit/ScheduleUtils.vpj"/>
+			<Dependency Project="../../SchedulerProc/project/SlickEdit/SchedulerProc.vpj"/>
+			<Dependency Project="../../Scheduler/project/SlickEdit/Scheduler.vpj"/>
+			<Dependency Project="../../JavaBackend/JavaBackendConfiguration/project/SlickEdit/JavaBackendConfiguration.vpj"/>
+			<Dependency Project="../../JdbcUtils/project/SlickEdit/JdbcUtils.vpj"/>
+			<Dependency Project="../../JavaBackend/JdbcEngineC/project/SlickEdit/JdbcEngineC.vpj"/>
+			<Dependency
+				Project="../../Server/project/SlickEdit/Server.vpj"
+				Config="Private_Release"/>
+			<Dependency
+				Project="../../Server/project/SlickEdit/Server.vpj"
+				Config="Release"/>
+			<Dependency
+				Project="../../mod_konga_ws/project/SlickEdit/mod_konga_ws.vpj"
+				Config="Private_Release"/>
+			<Dependency
+				Project="../../mod_konga_ws/project/SlickEdit/mod_konga_ws.vpj"
+				Config="Release"/>
+			<Dependency
+				Project="../../OperationEngine/project/SlickEdit/OperationEngine.vpj"
+				Config="Private_Release"/>
+			<Dependency
+				Project="../../OperationEngine/project/SlickEdit/OperationEngine.vpj"
+				Config="Release"/>
+			<Dependency Project="../../OperationEngine/Process/project/SlickEdit/OperationEngineProc.vpj"/>
+			<Dependency Project="../../ProcessEngine/project/SlickEdit/ProcessEngine.vpj"/>
+			<Dependency Project="../../TransformationDataStore/project/SlickEdit/TransformationDataStore.vpj"/>
+		</Dependencies>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../lib/konga/"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if"/>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+		</Folder>
+		<F
+			N="Konga.mak"
+			Type="Makefile"/>
+	</Files>
+</Project>

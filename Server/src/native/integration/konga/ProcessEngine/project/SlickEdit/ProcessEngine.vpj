@@ -1,0 +1,366 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	VCSProject="CVS:"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdETLForgeProcessEngine"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ %xup -O0 -g -Wall -o "%o" %objs %~other'
+					OtherOptions="$(LD_FLAGS_EXE)"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-dbmaintenance-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-filetransfer-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-idb-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-log-d"/>
+			<Lib File="-lkonga-mime-d"/>
+			<Lib File="-lkonga-msgdb-d"/>
+			<Lib File="-lkonga-networking-d"/>
+			<Lib File="-lkonga-operationengine-d"/>
+			<Lib File="-lkonga-operationlog-d"/>
+			<Lib File="-lkonga-pdb-d"/>
+			<Lib File="-lkonga-pluginmanager-d"/>
+			<Lib File="-lkonga-server-d"/>
+			<Lib File="-lkonga-serverversion-d"/>
+			<Lib File="-lkonga-sysinfo-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-transformationengine-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-workflow-d"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)-d"/>
+			<Lib File="-lodbc"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdETLForgeProcessEngine ../../../../../../bin/konga/Debug/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdETLForgeProcessEngine"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ %xup -O3 -Wall -o "%o" %objs %~other'
+					OtherOptions="$(LD_FLAGS_EXE)"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../lib/konga"/>
+			<Lib File="-lkonga-dbmaintenance"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-filetransfer"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-idb"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-log"/>
+			<Lib File="-lkonga-mime"/>
+			<Lib File="-lkonga-msgdb"/>
+			<Lib File="-lkonga-networking"/>
+			<Lib File="-lkonga-operationengine"/>
+			<Lib File="-lkonga-operationlog"/>
+			<Lib File="-lkonga-pdb"/>
+			<Lib File="-lkonga-pluginmanager"/>
+			<Lib File="-lkonga-server"/>
+			<Lib File="-lkonga-serverversion"/>
+			<Lib File="-lkonga-sysinfo"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-transformationengine"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-workflow"/>
+			<Lib File="-lboost_thread-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lboost_filesystem-$(BOOST_LIB_TAG)"/>
+			<Lib File="-lodbc"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdETLForgeProcessEngine ../../../../../../bin/konga/Release/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<Folder
+				Name="DB"
+				Filters="">
+				<F N="../../Engine/BindParam.cpp"/>
+				<F N="../../Engine/BindParam.h"/>
+				<F N="../../Engine/SpArgs.h"/>
+				<F N="../../Engine/SpCaller.cpp"/>
+				<F N="../../Engine/SpCaller.h"/>
+				<F N="../../Engine/SpException.cpp"/>
+				<F N="../../Engine/SpException.h"/>
+			</Folder>
+			<Folder
+				Name="Engine"
+				Filters="">
+				<Folder
+					Name="Messenger"
+					Filters="">
+					<F N="../../Engine/Messenger/msgfile.h"/>
+					<F N="../../Engine/Messenger/msgrCore.cpp"/>
+					<F N="../../Engine/Messenger/msgrCore.h"/>
+					<F N="../../Engine/Messenger/parseSMTP.cpp"/>
+					<F N="../../Engine/Messenger/POPAccount.h"/>
+				</Folder>
+				<F N="../../Engine/ActivityEngineCore.cpp"/>
+				<F N="../../Engine/com_caller.cpp"/>
+				<F N="../../Engine/ComCallerRemote.cpp"/>
+				<F N="../../Engine/corba_caller.cpp"/>
+				<F N="../../Engine/corba_util.cpp"/>
+				<F N="../../Engine/corba_util.h"/>
+				<F N="../../Engine/ejb_caller.cpp"/>
+				<F N="../../Engine/ejb_caller.h"/>
+				<F N="../../Engine/ejb_corba_srv.cpp"/>
+				<F N="../../Engine/engine_util.cpp"/>
+				<F N="../../Engine/engine_util.h"/>
+				<F N="../../Engine/EngineCore.cpp"/>
+				<F N="../../Engine/EngineCore.h"/>
+				<F N="../../Engine/EngineDebugUtils.cpp"/>
+				<F N="../../Engine/EngineDebugUtils.h"/>
+				<F N="../../Engine/FaultToleranceEngineCore.cpp"/>
+				<F N="../../Engine/FaultTolerantObject.cpp"/>
+				<F N="../../Engine/FaultTolerantObject.h"/>
+				<F N="../../Engine/IncomingMsg.cpp"/>
+				<F N="../../Engine/IncomingMsg.h"/>
+				<F N="../../Engine/InstanceEngineCore.cpp"/>
+				<F N="../../Engine/IRBrowser.cpp"/>
+				<F N="../../Engine/IRBrowser.h"/>
+				<F N="../../Engine/LDAPWrapper.cpp"/>
+				<F N="../../Engine/LDAPWrapper.h"/>
+				<F N="../../Engine/ObjectAccessControl.cpp"/>
+				<F N="../../Engine/ObjectAccessControl.h"/>
+				<F N="../../Engine/ProgressStatus.h"/>
+				<F N="../../Engine/resource.h"/>
+				<F N="../../Engine/RoutingEngineCore.cpp"/>
+				<F N="../../Engine/script.cpp"/>
+				<F N="../../Engine/SoapCaller.cpp"/>
+				<F N="../../Engine/SoapCaller.h"/>
+				<F N="../../Engine/SoapException.cpp"/>
+				<F N="../../Engine/SoapException.h"/>
+				<F N="../../Engine/SoapPacket.cpp"/>
+				<F N="../../Engine/SoapPacket.h"/>
+				<F N="../../Engine/TaskDataElement.cpp"/>
+				<F N="../../Engine/TaskDataElement.h"/>
+				<F N="../../Engine/ThreadData.cpp"/>
+				<F N="../../Engine/ThreadData.h"/>
+				<F N="../../Engine/ThreadManager.cpp"/>
+				<F N="../../Engine/ThreadManager.h"/>
+				<F N="../../Engine/trio.h"/>
+				<F N="../../Engine/ui_enums.h"/>
+				<F N="../../Engine/UtilityEngineCore.cpp"/>
+				<F N="../../Engine/ValidationEngineCore.cpp"/>
+			</Folder>
+			<F N="../../Globals.cpp"/>
+			<F N="../../ProcessEngine.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ComponentInfo.h"/>
+			<F N="../../Globals.h"/>
+			<F N="../../mcmsg.h"/>
+			<F N="../../ProcessEngine.h"/>
+			<F N="../../resource.h"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="">
+			<F N="../../Last Message Id.txt"/>
+		</Folder>
+		<F
+			N="ProcessEngine.mak"
+			Type="Makefile"/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

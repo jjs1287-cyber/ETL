@@ -1,0 +1,321 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	VCSProject="CVS:"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-trandb-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O0 -g -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-dtldbutils-d"/>
+			<Lib File="-lkonga-dtltrandb-d"/>
+			<Lib File="-lkonga-utils-d"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-trandb-d.so ../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-trandb.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ -c %xup %defd -O0 -fPIC -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -shared -fPIC -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../lib/konga"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-dtldbutils"/>
+			<Lib File="-lkonga-dtltrandb"/>
+			<Lib File="-lkonga-utils"/>
+		</Libs>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-trandb.so ../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../DBFieldsTab.cpp"/>
+			<F N="../../DBTablesTab.cpp"/>
+			<F N="../../Document_DefinitionsTab.cpp"/>
+			<F N="../../DocumentsTab.cpp"/>
+			<F N="../../FolderItemTab.cpp"/>
+			<F N="../../HistoryLogsView.cpp"/>
+			<F N="../../interchangeprojectfolderstab.cpp"/>
+			<F N="../../interchangeprojectoperationstab.cpp"/>
+			<F N="../../JmsProvidersTab.cpp"/>
+			<F N="../../Key_Values.cpp"/>
+			<F N="../../LogAuxTab.cpp"/>
+			<F N="../../LogTab.cpp"/>
+			<F N="../../MessagesTab.cpp"/>
+			<F N="../../OperationLogsView.cpp"/>
+			<F N="../../OperationsTab.cpp"/>
+			<F N="../../PipelinePluginInstanceTab.cpp"/>
+			<F N="../../PipelinePluginPositionTab.cpp"/>
+			<F N="../../PluginsTab.cpp"/>
+			<F N="../../ProjectOperationsView.cpp"/>
+			<F N="../../ScheduledOperationView.cpp"/>
+			<F N="../../ScheduleTab.cpp"/>
+			<F N="../../ScriptsTab.cpp"/>
+			<F N="../../SourceDtdView.cpp"/>
+			<F N="../../SourcesTab.cpp"/>
+			<F N="../../SpInsertLogTab.cpp"/>
+			<F N="../../SpInsertOperationInstanceTab.cpp"/>
+			<F N="../../SqlScriptTab.cpp"/>
+			<F N="../../TargetDtdView.cpp"/>
+			<F N="../../TargetsTab.cpp"/>
+			<F N="../../Tran_RelationsTab.cpp"/>
+			<F N="../../Trans_FilterTab.cpp"/>
+			<F N="../../Transformation_DefinitionsTab.cpp"/>
+			<F N="../../TransformationChainLinksTab.cpp"/>
+			<F N="../../TransformationFunctionTab.cpp"/>
+			<F N="../../TRANSFORMATIONSTAB_V.cpp"/>
+			<F N="../../UsersTab.cpp"/>
+			<F N="../../Variable_TypesTab.cpp"/>
+			<F N="../../WebServicesTab.cpp"/>
+			<F N="../../WebServiceView2.cpp"/>
+			<F N="../../WsdlTab.cpp"/>
+			<F N="../../XferHist.cpp"/>
+			<F N="../../XferHistoryLogsView.cpp"/>
+			<F N="../../XmlDtdChildrenView.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../DBFieldsTab.h"/>
+			<F N="../../DBTablesTab.h"/>
+			<F N="../../Document_DefinitionsTab.h"/>
+			<F N="../../DocumentsTab.h"/>
+			<F N="../../FolderItemTab.h"/>
+			<F N="../../HistoryLogsView.h"/>
+			<F N="../../interchangeprojectfolderstab.h"/>
+			<F N="../../interchangeprojectoperationstab.h"/>
+			<F N="../../JmsProvidersTab.h"/>
+			<F N="../../Key_Values.h"/>
+			<F N="../../LogAuxTab.h"/>
+			<F N="../../LogTab.h"/>
+			<F N="../../MessagesTab.h"/>
+			<F N="../../OperationLogsView.h"/>
+			<F N="../../OperationsTab.h"/>
+			<F N="../../PipelinePluginInstanceTab.h"/>
+			<F N="../../PipelinePluginPositionTab.h"/>
+			<F N="../../PluginsTab.h"/>
+			<F N="../../ProjectOperationsView.h"/>
+			<F N="../../ScheduledOperationView.h"/>
+			<F N="../../ScheduleTab.h"/>
+			<F N="../../ScriptsTab.h"/>
+			<F N="../../SourceDtdView.h"/>
+			<F N="../../SourcesTab.h"/>
+			<F N="../../SpInsertLogTab.h"/>
+			<F N="../../SpInsertOperationInstanceTab.h"/>
+			<F N="../../SqlScriptTab.h"/>
+			<F N="../../TargetDtdView.h"/>
+			<F N="../../TargetsTab.h"/>
+			<F N="../../Tran_RelationsTab.h"/>
+			<F N="../../Trans_FilterTab.h"/>
+			<F N="../../Transformation_DefinitionsTab.h"/>
+			<F N="../../TransformationChainLinksTab.h"/>
+			<F N="../../TransformationFunctionTab.h"/>
+			<F N="../../TRANSFORMATIONSTAB_V.h"/>
+			<F N="../../UsersTab.h"/>
+			<F N="../../Variable_TypesTab.h"/>
+			<F N="../../WebServicesTab.h"/>
+			<F N="../../WebServiceView2.h"/>
+			<F N="../../WsdlTab.h"/>
+			<F N="../../XferHist.h"/>
+			<F N="../../XferHistoryLogsView.h"/>
+			<F N="../../XmlDtdChildrenView.h"/>
+		</Folder>
+		<F
+			N="TranDb.mak"
+			Type="Makefile"/>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

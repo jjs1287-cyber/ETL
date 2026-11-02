@@ -1,0 +1,16 @@
+org/etlforge/integration/dataelement/DataElement.class
+org/etlforge/integration/dataelement/DataElement$*.class
+org/etlforge/integration/dataelement/DataElementContext.class
+org/etlforge/integration/dataelement/DataElementContext$*.class
+org/etlforge/integration/dataelement/DataElementMapContext.class
+org/etlforge/integration/dataelement/DataElementMapContext$*.class
+org/etlforge/integration/dataelement/DataElementResolver.class
+org/etlforge/integration/dataelement/DataElementResolver$*.class
+org/etlforge/integration/dataelement/DataElementTemplate.class
+org/etlforge/integration/dataelement/DataElementTemplate$*.class
+org/etlforge/integration/dataelement/DataElementType.class
+org/etlforge/integration/dataelement/DataElementType$*.class
+org/etlforge/integration/dataelement/DefaultDataElementTemplate.class
+org/etlforge/integration/dataelement/DefaultDataElementTemplate$*.class
+org/etlforge/integration/dataelement/GlobalDE.class
+org/etlforge/integration/dataelement/GlobalDE$*.class

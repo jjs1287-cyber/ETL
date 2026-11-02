@@ -1,0 +1,244 @@
+<?xml version="1.0" ?>
+<SalesforceConfig>
+	<Wsdl>
+		<Namespace>urn:enterprise.soap.sforce.com</Namespace>
+		<ServiceName>SforceService</ServiceName>
+		<SoapAction></SoapAction>
+		<SoapStyle>document</SoapStyle>
+		<SoapBodyUse>literal</SoapBodyUse>
+		<BindingName>SoapBinding</BindingName>
+		<PortName>Soap</PortName>
+		<SObjectNamespace>urn:sobject.enterprise.soap.sforce.com</SObjectNamespace>
+		<SObjectLocalName>sObject</SObjectLocalName>
+		<SObjectFields>
+			<Field>fieldsToNull</Field>
+			<Field>Id</Field>
+		</SObjectFields>
+	</Wsdl>
+	<ChunkSize>200</ChunkSize>
+	<TreeMapper>
+		<RequestHeader>root$transaction.header$</RequestHeader>
+		<RequestBody>root$transaction.body$</RequestBody>
+		<ResponseBody>root$transaction.response$body$</ResponseBody>
+		<RequestHeaderInResponse>root$transaction.request$header$</RequestHeaderInResponse>
+		<RequestBodyInResponse>root$transaction.request$body$</RequestBodyInResponse>
+	</TreeMapper>
+	<Methods>
+		<Method enum="QUERY">
+			<Name>query</Name>
+			<InputMessage>queryRequest</InputMessage>
+			<OutputMessage>queryResponse</OutputMessage>
+			<SimpleRootPath>
+				<Response>queryResponse$result$records.</Response>
+			</SimpleRootPath>
+			<SimpleMappingTreeRepresentation>
+				<Response>true</Response>
+			</SimpleMappingTreeRepresentation>
+			<Paths>
+				<Path name="BatchSize" RelativeTo="RequestHeader">QueryOptions$batchSize$</Path>
+				<Path name="QueryString" RelativeTo="RequestBody">query$queryString$</Path>
+			</Paths>
+		</Method>
+		<Method enum="UPSERT">
+			<Name>upsert</Name>
+			<InputMessage>upsertRequest</InputMessage>
+			<OutputMessage>upsertResponse</OutputMessage>
+			<SimpleRootPath>
+				<Request>upsert$sObjects.</Request>
+				<Response RelativeTo="RequestBodyInResponse">upsert$sObjects.</Response>
+			</SimpleRootPath>
+			<SimpleMappingTreeRepresentation>
+				<Request>true</Request>
+			</SimpleMappingTreeRepresentation>
+			<Paths>
+				<Path name="TruncateFieldsHeader" RelativeTo="RequestHeader">AllowFieldTruncationHeader$allowFieldTruncation$</Path>
+				<Path name="DebugLevelHeader" RelativeTo="RequestHeader">DebuggingHeader$debugLevel$</Path>
+				<Path name="AutoResponseEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerAutoResponseEmail$</Path>
+				<Path name="OtherEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerOtherEmail$</Path>
+				<Path name="UserEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerUserEmail$</Path>
+				<Path name="AllOrNoneHeader" RelativeTo="RequestHeader">AllOrNoneHeader$allOrNone$</Path>
+				<Path name="ExternalIdField" RelativeTo="RequestBody">upsert$externalIDFieldName$</Path>
+				<Path name="ResponseSuccess" RelativeTo="ResponseBody">upsertResponse$result.success$</Path>
+				<Path name="ResponseSfId" RelativeTo="ResponseBody">upsertResponse$result.id$</Path>
+				<Path name="ResponseExternalId" RelativeTo="RequestBodyInResponse">upsert$sObjects#.{0}${1}$</Path>
+				<Path name="ResponseError" RelativeTo="ResponseBody">upsertResponse$result.errors#.message$</Path>
+			</Paths>
+			<ConstantHeaderMappings>
+				<Mapping>
+					<Path>AssignmentRuleHeader$useDefaultRule$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>DisableFeedTrackingHeader$disableFeedTracking$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>StreamingEnabledHeader$streamingEnabled$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+				<Mapping>
+					<Path>AllOrNoneHeader$allOrNone$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+			</ConstantHeaderMappings>
+		</Method>
+		<Method enum="CREATE">
+			<Name>create</Name>
+			<InputMessage>createRequest</InputMessage>
+			<OutputMessage>createResponse</OutputMessage>
+			<SimpleRootPath>
+				<Request>create$sObjects.</Request>
+				<Response RelativeTo="RequestBodyInResponse">create$sObjects.</Response>
+			</SimpleRootPath>
+			<SimpleMappingTreeRepresentation>
+				<Request>true</Request>
+			</SimpleMappingTreeRepresentation>
+			<Paths>
+				<Path name="TruncateFieldsHeader" RelativeTo="RequestHeader">AllowFieldTruncationHeader$allowFieldTruncation$</Path>
+				<Path name="DebugLevelHeader" RelativeTo="RequestHeader">DebuggingHeader$debugLevel$</Path>
+				<Path name="AutoResponseEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerAutoResponseEmail$</Path>
+				<Path name="OtherEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerOtherEmail$</Path>
+				<Path name="UserEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerUserEmail$</Path>
+				<Path name="ResponseSuccess" RelativeTo="ResponseBody">createResponse$result.success$</Path>
+				<Path name="ResponseError" RelativeTo="ResponseBody">createResponse$result.errors#.message$</Path>
+			</Paths>
+			<ConstantHeaderMappings>
+				<Mapping>
+					<Path>AssignmentRuleHeader$useDefaultRule$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>DisableFeedTrackingHeader$disableFeedTracking$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>StreamingEnabledHeader$streamingEnabled$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+				<Mapping>
+					<Path>AllOrNoneHeader$allOrNone$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+			</ConstantHeaderMappings>
+		</Method>
+		<Method enum="UPDATE">
+			<Name>update</Name>
+			<InputMessage>updateRequest</InputMessage>
+			<OutputMessage>updateResponse</OutputMessage>
+			<SimpleRootPath>
+				<Request>update$sObjects.</Request>
+				<Response RelativeTo="RequestBodyInResponse">update$sObjects.</Response>
+			</SimpleRootPath>
+			<SimpleMappingTreeRepresentation>
+				<Request>true</Request>
+			</SimpleMappingTreeRepresentation>
+			<Paths>
+				<Path name="TruncateFieldsHeader" RelativeTo="RequestHeader">AllowFieldTruncationHeader$allowFieldTruncation$</Path>
+				<Path name="DebugLevelHeader" RelativeTo="RequestHeader">DebuggingHeader$debugLevel$</Path>
+				<Path name="AutoResponseEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerAutoResponseEmail$</Path>
+				<Path name="OtherEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerOtherEmail$</Path>
+				<Path name="UserEmailHeader" RelativeTo="RequestHeader">EmailHeader$triggerUserEmail$</Path>
+				<Path name="ResponseSuccess" RelativeTo="ResponseBody">updateResponse$result.success$</Path>
+				<Path name="ResponseError" RelativeTo="ResponseBody">updateResponse$result.errors#.message$</Path>
+			</Paths>
+			<ConstantHeaderMappings>
+				<Mapping>
+					<Path>AssignmentRuleHeader$useDefaultRule$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>DisableFeedTrackingHeader$disableFeedTracking$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>StreamingEnabledHeader$streamingEnabled$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+				<Mapping>
+					<Path>AllOrNoneHeader$allOrNone$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+			</ConstantHeaderMappings>
+		</Method>
+		<Method enum="DELETE">
+			<Name>delete</Name>
+			<InputMessage>deleteRequest</InputMessage>
+			<OutputMessage>deleteResponse</OutputMessage>
+			<SimpleRootPath>
+				<Request>delete$ids.</Request>
+			</SimpleRootPath>
+			<SimpleMappingTreeRepresentation>
+				<Request>true</Request>
+			</SimpleMappingTreeRepresentation>
+			<Paths>
+				<Path name="ResponseSuccess" RelativeTo="ResponseBody">deleteResponse$result.success$</Path>
+				<Path name="ResponseError" RelativeTo="ResponseBody">deleteResponse$result.errors#.message$</Path>
+				<Path name="RequestID" RelativeTo="RequestBodyInResponse">delete$ids.</Path>
+			</Paths>
+			<ConstantHeaderMappings>
+				<Mapping>
+					<Path>DisableFeedTrackingHeader$disableFeedTracking$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>AllowFieldTruncationHeader$allowFieldTruncation$</Path>
+					<Type>boolean</Type>
+					<Value>true</Value>
+				</Mapping>
+				<Mapping>
+					<Path>AllOrNoneHeader$allOrNone$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+				<Mapping>
+					<Path>DebuggingHeader$debugLevel$</Path>
+					<Type>string</Type>
+					<Value>NONE</Value>
+				</Mapping>
+				<Mapping>
+					<Path>EmailHeader$triggerAutoResponseEmail$</Path>
+					<Type>boolean</Type>
+					<Value>NONE</Value>
+				</Mapping>
+				<Mapping>
+					<Path>EmailHeader$triggerOtherEmail$</Path>
+					<Type>boolean</Type>
+					<Value>NONE</Value>
+				</Mapping>
+				<Mapping>
+					<Path>EmailHeader$triggerUserEmail$</Path>
+					<Type>boolean</Type>
+					<Value>NONE</Value>
+				</Mapping>
+				<Mapping>
+					<Path>StreamingEnabledHeader$streamingEnabled$</Path>
+					<Type>boolean</Type>
+					<Value>false</Value>
+				</Mapping>
+			</ConstantHeaderMappings>
+		</Method>
+		<Method enum="LOGIN">
+			<Name>login</Name>
+			<InputMessage>loginRequest</InputMessage>
+			<OutputMessage>loginResponse</OutputMessage>
+		</Method>
+		<Method enum="LOGOUT">
+			<Name>logout</Name>
+			<InputMessage>logoutRequest</InputMessage>
+			<OutputMessage>logoutResponse</OutputMessage>
+		</Method>
+	</Methods>
+</SalesforceConfig>

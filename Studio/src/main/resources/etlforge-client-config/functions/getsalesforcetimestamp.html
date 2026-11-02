@@ -1,0 +1,39 @@
+<html>
+Retrives the current system time from Salesforce.
+<p>
+The timestamp is returned in the format yyyy-mm-dd HH:MM:SS, 
+using your org's timezone setting by default. You must have logged in to Salesforce before using this function.
+<code><font size="4">null</font></code> is returned if the call fails. Use 
+<code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+The function takes two required input arguments:
+<ul>
+<li>The URL to use when calling Salesforce;</li>
+<li>The Salesforce session ID.</li>
+</ul>
+An optional third argument can be used to set the timezone to use. The timezone of your Salesforce org
+is used by default if a timezone is not provided.
+<p>
+In a common scenario, the function <code><font size="4">SalesforceLogin</font></code> is called first. The URL and
+session ID are then available in the global data elements $Salesforce.ServerUrl and $Salesforce.SessionId:
+<p>
+<code><font size="4">
+if(!SalesforceLogin("..."), RaiseError(GetLastError()));<br>
+$timestamp = GetSalesforceTimestamp($Salesforce.ServerUrl, $Salesforce.SessionId);<br>
+if(IsNull($timestamp), RaiseError(GetLastError());
+</font></code>
+<p>
+The following examples show how to specify which timezone to use:
+<p>
+<code><font size="4">
+// Get the timestamp in UTC:<br>
+$timestamp = GetSalesforceTimestamp($Salesforce.ServerUrl, $Salesforce.SessionId, "UTC"),<br><br>
+// Get the timestamp in Pacific Standard Time:<br>
+$timestamp = GetSalesforceTimestamp($Salesforce.ServerUrl, $Salesforce.SessionId, "PST"),<br>
+</font></code>
+<p>
+The timezone argument must be a timezone recognized by Java's TimeZone class 
+(see <a href="http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html">http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html</a>).
+<p>
+As an alternative to this function, see <code><font size="4">LoginToSalesforceAndGetTimestamp()</font></code>.
+</html>

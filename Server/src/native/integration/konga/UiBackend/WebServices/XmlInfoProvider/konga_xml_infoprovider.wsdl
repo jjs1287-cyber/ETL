@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.xml.XmlInfoProvider" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.xml.XmlInfoProvider" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.xml.XmlInfoProvider" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.xml.XmlInfoProvider" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getXmlStructureFiles">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getXmlStructureFilesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getXmlStructureFilesReturn" type="impl:CXmlStructureFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CXmlStructureFile">
+    <sequence>
+     <element name="Path" nillable="true" type="xsd:string"/>
+     <element name="MD5" nillable="true" type="xsd:string"/>
+     <element name="ZippedBase64Contents" nillable="true" type="xsd:string"/>
+     <element name="SchemaType" type="xsd:int"/>
+     <element name="ModifiedTime" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="getXmlStructureFile">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="structureFile" type="impl:CXmlStructureFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getXmlStructureFileResponse">
+    <complexType>
+     <sequence>
+      <element name="getXmlStructureFileReturn" type="impl:CXmlStructureFileDownloadResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOfCXmlStructureFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CXmlStructureFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="CXmlStructureFileDownloadResult">
+    <sequence>
+     <element name="StructureFile" nillable="true" type="impl:CXmlStructureFile"/>
+     <element name="Dependencies" nillable="true" type="impl:ArrayOfCXmlStructureFile"/>
+    </sequence>
+   </complexType>
+   <element name="getPossibleRootNames">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="impl:CXmlStructureFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPossibleRootNamesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getPossibleRootNamesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="uploadStructureFile">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="structureFile" type="impl:CXmlStructureFile"/>
+      <element name="parentStructureFile" type="impl:CXmlStructureFile"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="uploadStructureFileResponse">
+    <complexType>
+     <sequence>
+      <element name="uploadStructureFileReturn" type="impl:CXmlStructureFileUploadResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CXmlStructureFileUploadResult">
+    <sequence>
+     <element name="XmlStructureFile" nillable="true" type="impl:CXmlStructureFile"/>
+     <element name="MissingStructureFiles" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="ExistingDependencies" nillable="true" type="impl:ArrayOfCXmlStructureFile"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="uploadStructureFileRequest">
+
+      <wsdl:part element="impl:uploadStructureFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getXmlStructureFileRequest">
+
+      <wsdl:part element="impl:getXmlStructureFile" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getXmlStructureFileResponse">
+
+      <wsdl:part element="impl:getXmlStructureFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPossibleRootNamesResponse">
+
+      <wsdl:part element="impl:getPossibleRootNamesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPossibleRootNamesRequest">
+
+      <wsdl:part element="impl:getPossibleRootNames" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="uploadStructureFileResponse">
+
+      <wsdl:part element="impl:uploadStructureFileResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getXmlStructureFilesRequest">
+
+      <wsdl:part element="impl:getXmlStructureFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getXmlStructureFilesResponse">
+
+      <wsdl:part element="impl:getXmlStructureFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="XmlInfoProvider">
+
+      <wsdl:operation name="getXmlStructureFiles">
+
+         <wsdl:input message="impl:getXmlStructureFilesRequest" name="getXmlStructureFilesRequest"/>
+
+         <wsdl:output message="impl:getXmlStructureFilesResponse" name="getXmlStructureFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getXmlStructureFile">
+
+         <wsdl:input message="impl:getXmlStructureFileRequest" name="getXmlStructureFileRequest"/>
+
+         <wsdl:output message="impl:getXmlStructureFileResponse" name="getXmlStructureFileResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPossibleRootNames">
+
+         <wsdl:input message="impl:getPossibleRootNamesRequest" name="getPossibleRootNamesRequest"/>
+
+         <wsdl:output message="impl:getPossibleRootNamesResponse" name="getPossibleRootNamesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadStructureFile">
+
+         <wsdl:input message="impl:uploadStructureFileRequest" name="uploadStructureFileRequest"/>
+
+         <wsdl:output message="impl:uploadStructureFileResponse" name="uploadStructureFileResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_xml_infoproviderSoapBinding" type="impl:XmlInfoProvider">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getXmlStructureFiles">
+
+         <wsdlsoap:operation soapAction="konga_xml_infoprovider#getXmlStructureFiles"/>
+
+         <wsdl:input name="getXmlStructureFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getXmlStructureFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getXmlStructureFile">
+
+         <wsdlsoap:operation soapAction="konga_xml_infoprovider#getXmlStructureFile"/>
+
+         <wsdl:input name="getXmlStructureFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getXmlStructureFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPossibleRootNames">
+
+         <wsdlsoap:operation soapAction="konga_xml_infoprovider#getPossibleRootNames"/>
+
+         <wsdl:input name="getPossibleRootNamesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPossibleRootNamesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="uploadStructureFile">
+
+         <wsdlsoap:operation soapAction="konga_xml_infoprovider#uploadStructureFile"/>
+
+         <wsdl:input name="uploadStructureFileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadStructureFileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="XmlInfoProviderService">
+
+      <wsdl:port binding="impl:konga_xml_infoproviderSoapBinding" name="konga_xml_infoprovider">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_xml_infoprovider"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

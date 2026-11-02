@@ -1,0 +1,128 @@
+/*
+ * Copyright (c) 1998-2005 Jitterbit, Inc.
+ *
+ */
+
+#ifndef CR_SMTP_H
+#define CR_SMTP_H
+
+#include <konga/Mime/CrMime.h>
+#include <konga/Mime/Attachment.h>
+
+#include <konga/Networking/SockProtocol.h>	// (base) class SockProtocol
+
+namespace konga {
+
+	enum smtpPriority { prHighest=1, prHigh=2, prNormal=3, prLow=4, prLowest=5 };
+
+	namespace {
+	// Returns the priority given the string representation used by the Modeler (called Level there).
+		smtpPriority GetPriorityFromLevel(const std::string& stLevel) {
+			if ( stLevel == "Lowest" )
+				return prLowest;
+			else if ( stLevel == "Low" )
+				return prLow;
+			else if ( stLevel == "Normal" )
+				return prNormal;
+			else if ( stLevel == "High" )
+				return prHigh;
+			else if ( stLevel == "Highest" )
+				return prHighest;
+			else
+				return prNormal;
+		}
+	}
+	
+	struct smtp_exception : public protocol_exception { } ;
+	
+	class smtp : public SockProtocol
+	{
+	public:
+		smtp();
+		virtual ~smtp();
+	
+		void To(const std::string& to) { m_to = to; }
+		void CC(const std::string& cc) { m_cc = cc; }
+		void BCC(const std::string& bcc) { m_bcc = bcc; }
+		void From(const std::string& from) { m_from = from; }
+		void Subject(const std::string& subject) { m_subject = subject; }
+		void ReplyTo(const std::string& replyTo) { m_replyTo = replyTo; }
+		void Priority(short priority)
+		{
+			switch(priority)
+			{
+			case 1: m_priority = prHigh; break;
+			case 2: m_priority = prHigh; break;
+			case 3: m_priority = prNormal; break;
+			case 4: m_priority = prLow; break;
+			case 5: m_priority = prLow; break;
+			default: m_priority = prNormal;
+			}
+		}
+	
+		void Headers(const std::string& headers) { m_headers = headers; }
+		void AddHeader(const std::string& header) { m_headers += header + "\n"; }
+	
+		void Body(const std::string& body) { m_body = body; } // Non-MHTML
+		void HtmlFileName(const std::string& filename, const std::string& originalUrl="") // MHTML
+		{
+			m_body = "";
+			m_htmlFileName = filename;
+			m_htmlOriginalUrl = originalUrl;
+		}
+		std::string HtmlFileName() { return m_htmlFileName; }
+	
+		void AddAttachment(const std::string& filename) { m_AttMgr.AddAttachment( filename ); }
+	
+		bool Send();
+		bool VerifyConnection();
+	
+		void Reset()
+		{
+			m_AttMgr.clear();
+			m_htmlFileName = "";
+			m_body = "", m_headers = "", m_to="", m_cc="", m_bcc="", m_from="", m_subject="";
+			m_replyTo = "", m_priority = prNormal;
+			m_Mime.Reset();
+		}
+	
+		std::string GetFullMessage(); // For debugging
+	
+		int GetRetryCounter() const { return m_RetryCounter;}
+		int GetMaxRetryCounter() { return m_MaxRetryCounter;}
+		void AddRetryCounter() { ++m_RetryCounter; }
+		void RetryCounter(int retryCounter) { m_RetryCounter = retryCounter; }
+		bool GetFailStatusPermanent() const { return m_FailStatusPermanent;}
+		void ResetFailStatusPermanent(bool FailStatusPermanent) { m_FailStatusPermanent = FailStatusPermanent;}
+		void ResetFailStatusPermanent();
+	
+	protected:
+		void DoSend();
+		virtual bool GetResponse(std::string& response);
+		virtual bool IsErrorResponse(const std::string& res) 
+		{ 
+			// What does this do?
+			return false;
+	//		return res.length() < 4 || atoi( (char*)res.Left(3).GetBuffer( res.Left(3).GetLength())) >= 400  ;
+		}
+		virtual bool IsEndOfResponse(const std::string& res)
+		{
+			return res.length() <= 4 || res[3] != '-';
+		}
+	
+		bool ExtractEmailAddress(std::string& toList, std::string& email);
+		void DoVerifyConnection();
+		std::string GetMimeHeaders();
+	private:
+		smtpPriority m_priority;
+		bool m_FailStatusPermanent;
+		int m_MaxRetryCounter, m_RetryCounter;
+		CrMime m_Mime;
+		AttachmentManager m_AttMgr;
+		std::string m_to, m_cc, m_bcc, m_from, m_subject, m_headers;
+		std::string m_body, m_htmlFileName, m_htmlOriginalUrl, m_replyTo;
+	
+	};
+} // namespace konga
+
+#endif // CR_SMTP_H

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Input string</Label>
+	</Argument>
+	<Argument>
+		<Label>&amp;Old</Label>
+		<Description>The sub-string(s) to replace.</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Replacement</Label>
+		<Description>The string that will replace all matching sub-strings in the input value.</Description>
+	</Argument>
+</Wizard>

@@ -1,0 +1,17 @@
+<html>Sends an email using the pre-configured From address, smtp servers and account.
+				These are defined in the server configuration file. If these have not been defined
+				you need to use one of the other email functions.
+				The method returns a string with an error message if the email could not be sent,
+				on success an empty string is returned.<br><h2>Example:</h2><code><font size="4">
+				SendSystemEmail(Get("manager_email"),
+				"FYI", "About to process a new purchase order with POID = "<br>
+				+ Get("POID") + ". Should be available for review in a few minutes.")
+				</font></code>
+				<br><br>
+				Example of a etlforge.conf entry for sending system emails.<br>
+				[SmtpClient]<br>
+				DefaultSmtpServers=mail.yourdomain.com<br>
+				DefaultFromEmail=some.user@yourdomain.com<br>
+				# If your smtp server needs authentication the account and password can be added here.<br>
+				DefaultAccount=<br>
+				DefaultAccountPassword=<br></html>

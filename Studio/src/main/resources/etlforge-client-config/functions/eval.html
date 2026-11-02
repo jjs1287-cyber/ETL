@@ -1,0 +1,8 @@
+<html>Evaluates the first argument (exp_to_evaluate). If the result is valid, the
+				function returns the results as a string. Otherwise, the default value is returned.
+        
+        This can be used as a "try-catch" statement in that the second argument will be evaluated if the first one fails.<br><h2>Example:</h2><code><font size="4">Eval(book*36.4, "Bad Entry")</font></code> returns "Bad Entry"<br>
+				<code><font size="4">Eval(4*25,"Bad Entry")</font></code> returns a value of "100",
+				which is the string representation of 4 multiplied by 25.<br>
+        // Execute the SQL statement and terminate the transformation if it fails.<br>
+        Eval(DbLookup("<TAG>Project Name/Sources/Source Name</TAG>", "SELECT col FROM table"), RaiseError("Failed to execute SQL statement: " + GetLastError()));</html>

@@ -1,0 +1,42 @@
+<help-resources>
+	<base>http://www.etlforge.invalid/Docs/WebHelp/</base>
+	<home>index.htm</home>
+	<link id="welcome">index.htm</link>
+	<link id="jie.overview">Overview/ETLForge_Overview.htm</link>
+	<link id="consoles.error">Administration/Monitoring_System_Processes_and_Errors.htm</link>
+	<link id="administration.consoles.scheduler">Administration/SchedulerConsole.htm</link>
+	<link id="administration.consoles.system">Administration/SystemConsole.htm</link>
+	<link id="administration.consoles.users">Administration/Users_and_Groups.htm</link>
+	<link id="integration.textstructure.main">Text_Structures/Creating_a_Text_Document_Definition.htm</link>
+	<link id="text_structure_from_file_template">Text_Structures/How_to_Create_a_Text_Document_Definition_from_a_Template_File.htm</link>
+	<link id="integration.httpendpoint.main">HTTP_EndPoint.htm</link>
+	<link id="integration.emailmessage.main">Email_Messages/How_to_Create_an_Email_Message.htm</link>
+	<link id="integration.schedule.main">Schedules/Schedules.htm</link>
+	<link id="integration.script.main">Scripts.htm</link>
+	<link id="integration.source.main">Sources/Working_with_Sources.htm</link>
+	<link id="integration.source.fileshare">Sources/Creating_a_FileShare_Source.htm</link>
+	<link id="integration.source.ftp">Sources/Creating_an_FTP_Source.htm</link>
+	<link id="integration.source.temporarystorage">Sources/Creating_a_Temporary_Storage_Source.htm</link>
+	<link id="integration.source.http">Sources/Creating_an_HTTP_Source.htm</link>
+	<link id="integration.source.database">Sources/Creating_a_Database_Source.htm</link>
+	<link id="integration.source.ldap">Sources/Creating_an_LDAP_Source.htm</link>
+	<link id="integration.target.main">Targets/Tour_Defining_Targets.htm</link>
+	<link id="integration.target.ftp">Targets/HowtoCreateanFTPTarget.htm</link>
+	<link id="integration.target.temporarystorage">Targets/Temporary_Storage_Target_Definition.htm</link>
+	<link id="integration.target.http">Targets/HTTP_Target.htm</link>
+	<link id="integration.target.database">Targets/Creating_a_Database_Target.htm</link>
+	<link id="integration.target.fileshare">Targets/Target_File_Share_Definition.htm</link>
+	<link id="integration.target.ldap">Targets/LDAP_Target.htm</link>
+	<link id="integration.transformation.mapping">Transformations/Transformation_Mapping.htm</link>
+	<link id="Create_a_Web_Service_Method">Web_Services/Creating_a_Web_Service_Method.htm</link>
+	<link id="Import_Jitterpak">Jitterpaks/Import_Jitterpak.htm</link>
+	<link id="Export_Jitterpak">Jitterpaks/Export_as_Jitterpak.htm</link>
+	<link id="activity.operation.history">Operations/History.htm</link>
+	<link id="activity.operation.log">Operations/ReviewOperationLog.htm</link>
+	<link id="activity.operation.queue">Operations/ReviewOperationsQueue.htm</link>
+	<link id="Known_Servers">Administration/Known_Servers.htm</link>
+	<link id="consoles.integration.permissions">Operations/Permissions.htm</link>
+	<link id="integration.transformation.formulabuilder">Formula_Builder/Formula_Builder_Overview.htm</link>
+	<link id="Applying_Pipeline_Plugins">Reference/ApplyingPipelinePlugins.htm</link>
+	<link id="Login_to_Server">Overview/Login_to_Server.htm</link>
+</help-resources>

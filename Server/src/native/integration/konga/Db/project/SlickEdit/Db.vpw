@@ -1,0 +1,19 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+	<Projects>
+		<Project File="Db.vpj"/>
+		<Project File="../../../DbRelations/project/SlickEdit/DbRelations.vpj"/>
+		<Project File="../../DbUtils/project/SlickEdit/DbUtils.vpj"/>
+		<Project File="../../DtlDbUtils/project/SlickEdit/DtlDbUtils.vpj"/>
+		<Project File="../../DtlIDb/project/SlickEdit/DtlIDb.vpj"/>
+		<Project File="../../DtlMsgDb/project/SlickEdit/DtlMsgDb.vpj"/>
+		<Project File="../../DtlPDb/project/SlickEdit/DtlPDb.vpj"/>
+		<Project File="../../DtlTranDb/project/SlickEdit/DtlTranDb.vpj"/>
+		<Project File="../../IDb/project/SlickEdit/IDb.vpj"/>
+		<Project File="../../MsgDb/project/SlickEdit/MsgDb.vpj"/>
+		<Project File="../../PDb/project/SlickEdit/PDb.vpj"/>
+		<Project File="../../SchemaInfo/project/SlickEdit/SchemaInfo.vpj"/>
+		<Project File="../../TranDb/project/SlickEdit/TranDb.vpj"/>
+		<Project File="../../TranDbUtils/project/SlickEdit/TranDbUtils.vpj"/>
+	</Projects>
+</Workspace>

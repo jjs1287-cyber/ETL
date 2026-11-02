@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Soap", "Soap.vcproj", "{6D91281A-B315-4799-8800-84CC30160D29}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\Utils\project\vc-8_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Xml", "..\..\..\Xml\project\vc-8_0\Xml.vcproj", "{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestSoap", "..\..\Test\project\vc-8_0\TestSoap.vcproj", "{9E968783-7D94-4585-A778-889C63DA1C67}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{6D91281A-B315-4799-8800-84CC30160D29} = {6D91281A-B315-4799-8800-84CC30160D29}
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F} = {38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Installer_Release|Win32 = Installer_Release|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D91281A-B315-4799-8800-84CC30160D29}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Debug|Win32.Build.0 = Debug|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Release|Win32.ActiveCfg = Release|Win32
+		{6D91281A-B315-4799-8800-84CC30160D29}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Debug|Win32.Build.0 = Debug|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Installer_Release|Win32.ActiveCfg = Installer_Release|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Installer_Release|Win32.Build.0 = Installer_Release|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Release|Win32.ActiveCfg = Release|Win32
+		{38EA26E5-8FBF-4A89-AB66-1B5FA748C24F}.Release|Win32.Build.0 = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Debug|Win32.Build.0 = Debug|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Installer_Release|Win32.ActiveCfg = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Installer_Release|Win32.Build.0 = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Release|Win32.ActiveCfg = Release|Win32
+		{9E968783-7D94-4585-A778-889C63DA1C67}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

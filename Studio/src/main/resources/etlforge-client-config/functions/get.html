@@ -1,0 +1,16 @@
+<html>Returns the value of the global variable with the given <code><font size="4">name</font></code>.
+        If the first argument is an array or the name of an array
+				data element, you can get a specific element
+				by specifying its index (or indices for a multi-dimensional array such as a record-set)
+				as the second argument. Arrays are zero indexed, i.e.
+				the first item is at index 0 and the last item is at index Length($arr)-1.
+        Attempting to get an element beyond the end of the array will result in an array out of range error.<br><h2>Example:</h2><code><font size="4">
+					// Return the value of a global variable<br>
+					Get("Count")<br><br>
+					// Return the third array element<br>
+					Get($arr, 2)<br><br>
+					// Same as the above<br>
+					Get("arr", 2)<br><br>
+					// Get the n:th element of the m:th array in arr<br>
+					Get($arr, m-1, n-1)<br>
+					</font></code></html>

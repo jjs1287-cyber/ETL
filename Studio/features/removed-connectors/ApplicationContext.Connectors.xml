@@ -1,0 +1,951 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd"
+		default-lazy-init="true">
+
+  <!-- Overrides the definition from Core.Common. Defines the connector EntityTypes that are 
+		 only available in the enterprise edition. -->
+  <bean id="EntityTypes.Edition" class="com.google.common.collect.ImmutableList" factory-method="copyOf" lazy-init="false">
+    <constructor-arg>
+      <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+        <value>SapEndpoint</value>
+        <value>SapFunction</value>
+        <value>MSCrmEndpoint</value>
+        <value>MSCrmQuery</value>
+        <value>MSCrmCreate</value>
+        <value>MSCrmUpdate</value>
+        <value>MSCrmUpsert</value>
+        <value>MSCrmDelete</value>
+        <value>MSGPEndpoint</value>
+        <value>MSGPCreate</value>
+        <value>MSGPUpdate</value>
+        <value>MSGPDelete</value>
+        <value>AutoDeskEndpoint</value>
+        <value>AutoDeskGet</value>
+        <value>AutoDeskCreate</value>
+        <value>AutoDeskUpsert</value>
+        <value>AutoDeskUpdate</value>
+        <value>AutoDeskDelete</value>
+        <value>MSAXEndpoint</value>
+        <value>MSAXFunction</value>
+        <value>EBSEndpoint</value>
+        <value>EBSFunction</value>
+        <value>NetSuiteEndpoint</value>
+        <value>NetSuiteCreate</value>
+        <value>NetSuiteUpsert</value>
+        <value>NetSuiteUpdate</value>
+        <value>NetSuiteDelete</value>
+        <value>NetSuiteQuery</value>
+      </util:list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Core.Common. Defines the connector OperationTypes that are 
+		 only available in the enterprise edition. -->
+  <bean id="OperationTypes.Edition" class="com.google.common.collect.ImmutableList" factory-method="copyOf">
+    <constructor-arg>
+      <util:list>
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.SapOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.MSCrmOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.MSGPOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.AutoDeskOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.MSAXOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.EBSOperationType.TYPE" />
+        <util:constant static-field="org.etlforge.integration.data.connector.operation.NetSuiteOperationType.TYPE" />
+      </util:list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Common. Defines top-level categories for the connector EntityTypes that are 
+		 only available in the enterprise edition. -->
+  <!--bean id="ic.ETLForgeConnect.Edition" class="com.google.common.collect.ImmutableList" factory-method="copyOf"-->
+  <bean id="ic.EntityTypeCategories.Edition" class="com.google.common.collect.ImmutableList" factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.ui.connector.ConnectorTopLevelCategory">
+          <constructor-arg>
+            <list>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="Autodesk PLM 360" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>AutoDeskEndpoint</value>
+                    <value>AutoDeskGet</value>
+                    <value>AutoDeskCreate</value>
+                    <value>AutoDeskUpsert</value>
+                    <value>AutoDeskUpdate</value>
+                    <value>AutoDeskDelete</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="AutoDeskEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="Microsoft Dynamics AX" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>MSAXEndpoint</value>
+                    <value>MSAXFunction</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="MSAXEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="Microsoft Dynamics CRM" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>MSCrmEndpoint</value>
+                    <value>MSCrmQuery</value>
+                    <value>MSCrmCreate</value>
+                    <value>MSCrmUpsert</value>
+                    <value>MSCrmUpdate</value>
+                    <value>MSCrmDelete</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="MSCrmEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="Microsoft Dynamics GP" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>MSGPEndpoint</value>
+                    <value>MSGPCreate</value>
+                    <value>MSGPUpdate</value>
+                    <value>MSGPDelete</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="MSGPEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="NetSuite" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>NetSuiteEndpoint</value>
+                    <value>NetSuiteCreate</value>
+                    <value>NetSuiteUpsert</value>
+                    <value>NetSuiteUpdate</value>
+                    <value>NetSuiteDelete</value>
+                    <value>NetSuiteQuery</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="NetSuiteEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="Oracle EBS" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>EBSEndpoint</value>
+                    <value>EBSFunction</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="EBSEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+              <bean class="org.etlforge.integration.client.ui.interchange.MultipleTypeEntityCategory">
+                <constructor-arg value="SAP" />
+                <constructor-arg>
+                  <util:list value-type="org.etlforge.integration.data.entity.EntityType">
+                    <value>SapEndpoint</value>
+                    <value>SapFunction</value>
+                  </util:list>
+                </constructor-arg>
+                <constructor-arg>
+                  <bean class="org.etlforge.integration.client.ui.interchange.EntityTypeIconsProvider">
+                    <constructor-arg value="SapEndpoint" />
+                  </bean>
+                </constructor-arg>
+              </bean>
+            </list>
+          </constructor-arg>
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Entity. Defines the operation graph configurations for
+		 the connector specific pipeline activity types. -->
+  <bean id="ic.Operation.GraphConfig.Edition" class="com.google.common.collect.ImmutableList" factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.ui.connector.sap.operation.SapFunctionActivityTypeConfig" />
+        <bean class="org.etlforge.integration.client.ui.connector.mscrm.operation.MSCrmFunctionActivityTypeConfig" />
+        <bean class="org.etlforge.integration.client.ui.connector.msgp.operation.MSGPFunctionActivityTypeConfig" />
+        <bean class="org.etlforge.integration.client.ui.connector.autodesk.operation.AutoDeskFunctionActivityTypeConfig" />
+
+        <bean class="org.etlforge.integration.client.ui.connector.msax.operation.MSAXFunctionActivityTypeConfig" />
+        <bean class="org.etlforge.integration.client.ui.connector.ebs.operation.EBSFunctionActivityTypeConfig" />
+        <bean class="org.etlforge.integration.client.ui.connector.netsuite.operation.NetSuiteFunctionActivityTypeConfig" />
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="org.etlforge.integration.client.connector.serverapi.TestConnectorConnectionApi"
+			name="connector.server.ConnectionTester"
+			class="com.etlforge.integration.server.implementation.webservice.connector.ConnectorConnectionTesterWsImpl">
+    <constructor-arg ref="ws.config.Java" />
+  </bean>
+
+  <bean id="connector.ConnectionTesterFactory"
+			class="org.etlforge.integration.client.ui.connector.ConnectorConnectionTesterFactory">
+    <constructor-arg ref="connector.server.ConnectionTester" />
+  </bean>
+
+  <bean id="org.etlforge.integration.client.connector.serverapi.ConnectorCallInfoProvider"
+			name="server.ConnectorCallInfoProvider"
+			class="com.etlforge.integration.server.implementation.webservice.connector.ConnectorCallInfoProviderWsImpl">
+    <constructor-arg ref="ws.config.Java" />
+    <constructor-arg ref="server.XmlInfoProvider" />
+  </bean>
+
+  <bean id="connector.action.TestConnection" class="org.etlforge.integration.client.ui.connector.TestConnectionAction">
+    <constructor-arg ref="ui.AppWin" />
+    <constructor-arg ref="connector.ConnectionTesterFactory" />
+    <constructor-arg ref="ic.EntityPageSaveGate" />
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Common. Used by the ic.action.TestAllConnections bean. -->
+  <bean id="ic.AdditionalConnectionTesterFactories"
+			class="com.google.common.collect.ImmutableSet"
+			factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <ref bean="connector.ConnectionTesterFactory" />
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="ConnectorEndpoint.Config" parent="ic.EntityConfig.Base" abstract="true">
+    <property name="testConnectionAction" ref="connector.action.TestConnection" />
+    <property name="searchValuesCollector">
+      <bean class="org.etlforge.integration.client.ui.connector.EndpointSearchValuesCollector" />
+    </property>
+  </bean>
+
+  <!-- Overrides the definition from Server.Common -->
+  <bean id="server.XmlInfoProvider.Folders"
+			class="org.etlforge.integration.client.mapping.serverapi.xml.ServerFileFolderOrganizer">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.mapping.serverapi.xml.JsonFolderFactory" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.AutoDeskServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.MSAXServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.MSCrmServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.MSGPServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.EBSServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.NetSuiteServerFileFolder" />
+        <bean class="org.etlforge.integration.client.connector.serverapi.SapServerFileFolder" />
+      </list>
+    </constructor-arg>
+    <constructor-arg value="true" />
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Entity -->
+  <bean id="Transformation.WizardConfig.AdditionalTypes"
+			class="com.google.common.collect.ImmutableSet"
+			factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.ui.connector.sap.function.txwiz.SapFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.sap.function.txwiz.SapFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.mscrm.function.txwiz.MSCrmFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.mscrm.function.txwiz.MSCrmFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.msgp.function.txwiz.MSGPFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.msgp.function.txwiz.MSGPFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.autodesk.function.txwiz.AutoDeskFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.autodesk.function.txwiz.AutoDeskFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.msax.function.txwiz.MSAXFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.msax.function.txwiz.MSAXFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.ebs.function.txwiz.EBSFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.ebs.function.txwiz.EBSFunctionResponseType" />
+        <bean class="org.etlforge.integration.client.ui.connector.netsuite.function.txwiz.NetSuiteFunctionRequestType" />
+        <bean class="org.etlforge.integration.client.ui.connector.netsuite.function.txwiz.NetSuiteFunctionResponseType" />
+
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Entity -->
+  <bean id="Transformation.StructureEditorFactories.Additional"
+			class="com.google.common.collect.ImmutableMap"
+			factory-method="copyOf">
+    <constructor-arg>
+      <map>
+        <entry key="ConnectorCallRequest">
+          <bean class="org.etlforge.integration.client.ui.connector.ConnectorCallStructureEditorFactory" />
+        </entry>
+        <entry key="ConnectorCallResponse">
+          <bean class="org.etlforge.integration.client.ui.connector.ConnectorCallStructureEditorFactory" />
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Core.Common -->
+  <bean id="core.MappingStructureFactory.Additional"
+			class="com.google.common.collect.ImmutableList"
+			factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.mapping.connector.ConnectorMappingStructureFactory">
+          <constructor-arg ref="server.TreeMapperInfoProvider" />
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Overrides the definition from Interchange.Entity -->
+  <bean id="ic.TxToOpFactory.Types"
+			class="com.google.common.collect.ImmutableList"
+			factory-method="copyOf">
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.SapOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.MSCrmOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.MSAXOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.AutoDeskOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.EBSOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.MSGPOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+        <bean class="org.etlforge.integration.client.ui.interchange.entity.FunctionCallTransformationToOperationPipelineFactory">
+          <constructor-arg>
+            <util:constant static-field="org.etlforge.integration.data.connector.operation.NetSuiteOperationType.TYPE" />
+          </constructor-arg>
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- Plugs in connector specific actions into the ACTION section of the interchange view's context menu -->
+  <bean id="Connector.ContextMenu.Action" class="org.etlforge.application.ui.action.popup.SectionFactories">
+    <constructor-arg value="ACTION" />
+    <constructor-arg>
+      <list>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg ref="connector.action.TestConnection" />
+          <constructor-arg value="org.etlforge.integration.data.connector.ConnectorEndpoint" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.SapOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.SapFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.SapFunction" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.MSCrmOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.MSCrmFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.MSCrmFunction" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.MSGPOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.MSGPFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.MSGPFunction" />
+        </bean>
+        <!-- 				AutoDeskOperationType -->
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.AutoDeskOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.AutoDeskFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.AutoDeskFunction" />
+        </bean>
+
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallTransformationAction" factory-method="forRequest">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.ConnectorCall" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallTransformationAction" factory-method="forResponse">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.ConnectorCall" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.MSAXOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.MSAXFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.MSAXFunction" />
+        </bean>
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.EBSOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.EBSFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.EBSFunction" />
+        </bean>
+
+        <!-- 				NetSuiteOperationType -->
+        <bean class="org.etlforge.application.ui.action.popup.SingleItemPopupMenuFactory">
+          <constructor-arg>
+            <bean class="org.etlforge.integration.client.ui.entity.wizard.CreateFunctionCallOperationAction">
+              <constructor-arg ref="ui.ActiveObjectService" />
+              <constructor-arg ref="ic.EntityExplorerService" />
+              <constructor-arg>
+                <util:constant static-field="org.etlforge.integration.data.connector.operation.NetSuiteOperationType.TYPE" />
+              </constructor-arg>
+              <constructor-arg value="org.etlforge.integration.data.connector.NetSuiteFunction" />
+            </bean>
+          </constructor-arg>
+          <constructor-arg value="org.etlforge.integration.data.connector.NetSuiteFunction" />
+        </bean>
+
+      </list>
+    </constructor-arg>
+  </bean>
+
+  
+  
+
+  <!-- MSCRM Connector -->
+  <bean id="org.etlforge.integration.client.connector.mscrm.serverapi.MSCrmDesignInfoProvider"
+  name="server.MSCrmDesignInfoProvider"
+  class="com.etlforge.integration.server.implementation.webservice.connector.MSCrmDesignInfoProviderWsImpl">
+    <constructor-arg ref="ws.config.Java" />
+    <constructor-arg ref="server.XmlInfoProvider" />
+  </bean>
+  <bean id="MSCRM.ObjectCache" class="org.etlforge.integration.client.ui.connector.mscrm.MSCrmObjectFileCache">
+    <constructor-arg>
+      <bean class="org.etlforge.io.Folder">
+        <constructor-arg ref="platform.CacheDirLocation" />
+        <constructor-arg>
+          <list>
+            <value>ConnectorObjectCache</value>
+            <value>MSCrm</value>
+          </list>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg value="30" />
+    <constructor-arg value="DAYS" />
+  </bean>
+  <bean id="MSCrmEndpoint.Config" parent="ConnectorEndpoint.Config" class="org.etlforge.integration.client.ui.connector.mscrm.endpoint.MSCrmEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="MSCrmEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.MSCrmEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="MSCrmFunction.Base" parent="ic.EntityConfig.Base" abstract="true">
+    <constructor-arg index="1">
+      <bean class="org.etlforge.integration.client.ui.connector.mscrm.function.wizard.MSCrmFunctionWizardFactory">
+        <constructor-arg>
+          <bean class="org.etlforge.integration.client.ui.connector.mscrm.function.wizard.MSCrmFunctionWizardInfoProvider">
+            <constructor-arg ref="server.MSCrmDesignInfoProvider" />
+            <constructor-arg ref="MSCRM.ObjectCache" />
+          </bean>
+        </constructor-arg>
+        <constructor-arg ref="MSCRM.ObjectCache" />
+        <constructor-arg ref="ic.EntityExplorerService" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg  index="2" ref="server.TreeMapperInfoProvider" />
+    <constructor-arg index="3" ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg index="4" ref="core.MappingStructureFactory" />
+  </bean>
+  <!--MSCrmCreate New Entity MSCrmCreate    -->
+  <bean id="MSCrmCreate.Config" parent="MSCrmFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.mscrm.function.MSCrmFunctionConfig">
+    <constructor-arg index="0" value="MSCrmCreate" />
+  </bean>
+  <!--MSCrmUpsert New Entity MSCrmUpsert    -->
+  <bean id="MSCrmUpsert.Config" parent="MSCrmFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.mscrm.function.MSCrmFunctionConfig">
+    <constructor-arg index="0" value="MSCrmUpsert" />
+  </bean>
+  <!--MSCrmUpdate New Entity MSCrmUpdate    -->
+  <bean id="MSCrmUpdate.Config" parent="MSCrmFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.mscrm.function.MSCrmFunctionConfig">
+    <constructor-arg index="0" value="MSCrmUpdate" />
+  </bean>
+  <!--MSCrmDelete New Entity MSCrmDelete    -->
+  <bean id="MSCrmDelete.Config" parent="MSCrmFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.mscrm.function.MSCrmFunctionConfig">
+    <constructor-arg index="0" value="MSCrmDelete" />
+  </bean>
+  <bean id="MSCrmQuery.Config" parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.connector.mscrm.query.MSCrmQueryConfig">
+    <constructor-arg>
+      <bean class="org.etlforge.integration.client.ui.connector.mscrm.query.wizard.MSCrmQueryWizardFactory">
+        <constructor-arg ref="server.MSCrmDesignInfoProvider" />
+        <constructor-arg ref="MSCRM.ObjectCache" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="server.TreeMapperInfoProvider" />
+    <constructor-arg ref="core.MappingStructureFactory" />
+    <constructor-arg>
+      <bean class="org.etlforge.integration.client.ui.connector.mscrm.MSCrmObjectLookupFactory">
+        <constructor-arg ref="MSCRM.ObjectCache" />
+        <constructor-arg ref="server.MSCrmDesignInfoProvider" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="server.MSCrmDesignInfoProvider" />
+  </bean>
+
+  <!-- MSGP Connector -->
+  <bean id="MSGP.ObjectCache" class="org.etlforge.integration.client.ui.connector.ConnectorObjectFileCache">
+    <constructor-arg>
+      <bean class="org.etlforge.io.Folder">
+        <constructor-arg ref="platform.CacheDirLocation" />
+        <constructor-arg>
+          <list>
+            <value>ConnectorObjectCache</value>
+            <value>MSGP</value>
+          </list>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg value="30" />
+    <constructor-arg value="DAYS" />
+  </bean>
+  <bean id="MSGPEndpoint.Config" parent="ConnectorEndpoint.Config" class="org.etlforge.integration.client.ui.connector.msgp.endpoint.MSGPEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="MSGPEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.MSGPEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="MSGPFunction.Base" parent="ic.EntityConfig.Base" abstract="true">
+    <constructor-arg index="1">
+      <bean class="org.etlforge.integration.client.ui.connector.msgp.function.wizard.MSGPFunctionWizardFactory">
+
+        <constructor-arg ref="server.ConnectorCallInfoProvider" />
+        <constructor-arg ref="MSGP.ObjectCache" />
+        <constructor-arg ref="ic.EntityExplorerService" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg  index="2" ref="server.TreeMapperInfoProvider" />
+    <constructor-arg index="3" ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg index="4" ref="core.MappingStructureFactory" />
+  </bean>
+  <!--MSGPCreate New Entity MSGPCreate    -->
+  <bean id="MSGPCreate.Config" parent="MSGPFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.msgp.function.MSGPFunctionConfig">
+    <constructor-arg index="0" value="MSGPCreate" />
+  </bean>
+  <!--MSGPUpdate New Entity MSGPUpdate    -->
+  <bean id="MSGPUpdate.Config" parent="MSGPFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.msgp.function.MSGPFunctionConfig">
+    <constructor-arg index="0" value="MSGPUpdate" />
+  </bean>
+  <!--MSGPDelete New Entity MSGPDelete    -->
+  <bean id="MSGPDelete.Config" parent="MSGPFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.msgp.function.MSGPFunctionConfig">
+    <constructor-arg index="0" value="MSGPDelete" />
+  </bean>
+
+  <!-- AutoDesk Connector -->
+  <bean id="AutoDesk.ObjectCache" class="org.etlforge.integration.client.ui.connector.ConnectorObjectFileCache">
+    <constructor-arg>
+      <bean class="org.etlforge.io.Folder">
+        <constructor-arg ref="platform.CacheDirLocation" />
+        <constructor-arg>
+          <list>
+            <value>ConnectorObjectCache</value>
+            <value>PLM360</value>
+          </list>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg value="30" />
+    <constructor-arg value="DAYS" />
+  </bean>
+  <bean id="AutoDeskEndpoint.Config" parent="ConnectorEndpoint.Config" class="org.etlforge.integration.client.ui.connector.autodesk.endpoint.AutoDeskEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="AutoDeskEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.AutoDeskEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="AutoDeskFunction.Base" parent="ic.EntityConfig.Base" abstract="true">
+    <constructor-arg index="1">
+      <bean class="org.etlforge.integration.client.ui.connector.autodesk.function.wizard.AutoDeskFunctionWizardFactory">
+        <!-- 				<constructor-arg ref="server.AutoDeskConnectorCallInfoProvider" /> -->
+        <constructor-arg ref="server.ConnectorCallInfoProvider" />
+        <constructor-arg ref="AutoDesk.ObjectCache" />
+        <constructor-arg ref="ic.EntityExplorerService" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg  index="2" ref="server.TreeMapperInfoProvider" />
+    <constructor-arg index="3" ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg index="4" ref="core.MappingStructureFactory" />
+  </bean>
+  <!--AutoDeskGet New Entity AutoDeskGet    -->
+  <bean id="AutoDeskGet.Config" parent="AutoDeskFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.autodesk.function.AutoDeskFunctionConfig">
+    <constructor-arg index="0" value="AutoDeskGet" />
+  </bean>
+  <!--AutoDeskCreate New Entity AutoDeskCreate    -->
+  <bean id="AutoDeskCreate.Config" parent="AutoDeskFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.autodesk.function.AutoDeskFunctionConfig">
+    <constructor-arg index="0" value="AutoDeskCreate" />
+  </bean>
+  <!--AutoDeskUpsert New Entity AutoDeskUpsert    -->
+  <bean id="AutoDeskUpsert.Config" parent="AutoDeskFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.autodesk.function.AutoDeskFunctionConfig">
+    <constructor-arg index="0" value="AutoDeskUpsert" />
+  </bean>
+  <!--AutoDeskUpdate New Entity AutoDeskUpdate    -->
+  <bean id="AutoDeskUpdate.Config" parent="AutoDeskFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.autodesk.function.AutoDeskFunctionConfig">
+    <constructor-arg index="0" value="AutoDeskUpdate" />
+  </bean>
+  <!--AutoDeskDelete New Entity AutoDeskDelete    -->
+  <bean id="AutoDeskDelete.Config" parent="AutoDeskFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.autodesk.function.AutoDeskFunctionConfig">
+    <constructor-arg index="0" value="AutoDeskDelete" />
+  </bean>
+
+  <!-- MSAX Connector -->
+  <bean id="MSAXEndpoint.Config" parent="ConnectorEndpoint.Config"
+			 class="org.etlforge.integration.client.ui.connector.msax.endpoint.MSAXEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="MSAXEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.MSAXEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="MSAXFunction.Config" parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.connector.msax.function.MSAXFunctionConfig">
+    <constructor-arg>
+      <bean class="org.etlforge.integration.client.ui.connector.msax.function.wizard.MSAXFunctionWizardFactory">
+        <constructor-arg ref="server.ConnectorCallInfoProvider" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.client.ui.connector.ConnectorObjectFileCache">
+            <constructor-arg>
+              <bean class="org.etlforge.io.Folder">
+                <constructor-arg ref="platform.CacheDirLocation" />
+                <constructor-arg>
+                  <list>
+                    <value>ConnectorObjectCache</value>
+                    <value>MSAX</value>
+                  </list>
+                </constructor-arg>
+              </bean>
+            </constructor-arg>
+            <constructor-arg value="30" />
+            <constructor-arg value="DAYS" />
+          </bean>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="server.TreeMapperInfoProvider" />
+    <constructor-arg ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg ref="core.MappingStructureFactory" />
+  </bean>
+
+  <!-- EBS Connector -->
+  <bean id="EBSEndpoint.Config" parent="ConnectorEndpoint.Config"
+	class="org.etlforge.integration.client.ui.connector.ebs.endpoint.EBSEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="EBSEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.EBSEndpoint"
+					factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="EBSFunction.Config" parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.connector.ebs.function.EBSFunctionConfig">
+    <constructor-arg>
+      <bean class="org.etlforge.integration.client.ui.connector.ebs.function.wizard.EBSFunctionWizardFactory">
+        <constructor-arg ref="server.ConnectorCallInfoProvider" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.client.ui.connector.ConnectorObjectFileCache">
+            <constructor-arg>
+              <bean class="org.etlforge.io.Folder">
+                <constructor-arg ref="platform.CacheDirLocation" />
+                <constructor-arg>
+                  <list>
+                    <value>ConnectorObjectCache</value>
+                    <value>EBS</value>
+                  </list>
+                </constructor-arg>
+              </bean>
+            </constructor-arg>
+            <constructor-arg value="30" />
+            <constructor-arg value="DAYS" />
+          </bean>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="server.TreeMapperInfoProvider" />
+    <constructor-arg ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg ref="core.MappingStructureFactory" />
+  </bean>
+
+  <!-- NetSuite Connector -->
+  <bean id="org.etlforge.integration.client.connector.netsuite.serverapi.NetSuiteDesignInfoProvider"
+			name="server.NetSuiteInfoProvider"
+			class="com.etlforge.integration.server.implementation.webservice.connector.NetSuiteDesignInfoProviderWsImpl">
+    <constructor-arg ref="ws.config.Java" />
+    <constructor-arg ref="server.ConnectorCallInfoProvider" />
+  </bean>
+  <bean id="org.etlforge.integration.client.connector.serverapi.TestNetSuiteQueryApi"
+			name="server.TestNetSuiteQuery"
+			class="com.etlforge.integration.server.implementation.webservice.connector.TestNetSuiteQueryApiSoapImpl">
+    <constructor-arg ref="ws.config.Java" />
+  </bean>
+  <bean id="NetSuite.ObjectCache" class="org.etlforge.integration.client.ui.connector.netsuite.NetSuiteObjectFileCache">
+    <constructor-arg>
+      <bean class="org.etlforge.io.Folder">
+        <constructor-arg ref="platform.CacheDirLocation" />
+        <constructor-arg>
+          <list>
+            <value>ConnectorObjectCache</value>
+            <value>NetSuite</value>
+          </list>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg value="30" />
+    <constructor-arg value="DAYS" />
+  </bean>
+  <bean id="NetSuite.DefDesignLookup"
+			class="org.etlforge.integration.client.ui.connector.netsuite.lookup.DefaultNetSuiteDefinitionDesignLookup">
+    <constructor-arg ref="server.NetSuiteInfoProvider" />
+    <constructor-arg ref="NetSuite.ObjectCache" />
+  </bean>
+  <bean id="NetSuite.CfLookup"
+			class="org.etlforge.integration.client.ui.connector.netsuite.lookup.DefaultNetSuiteCustomFieldsDesignLookup">
+    <constructor-arg ref="server.NetSuiteInfoProvider" />
+    <constructor-arg ref="NetSuite.ObjectCache" />
+  </bean>
+  <bean id="NetSuite.SearchDefLookup"
+			class="org.etlforge.integration.client.ui.connector.netsuite.lookup.DefaultNetSuiteDefinitionQueryBuilderLookup">
+    <constructor-arg ref="NetSuite.DefDesignLookup" />
+  </bean>
+  <bean id="NetSuite.SearchCustomFieldDefLookup"
+			class="org.etlforge.integration.client.ui.connector.netsuite.lookup.DefaultNetSuiteCustomFieldsQueryBuilderLookup">
+    <constructor-arg ref="NetSuite.DefDesignLookup" />
+    <constructor-arg ref="NetSuite.CfLookup" />
+  </bean>
+  <bean id="NetSuite.SearchObjectSavedSearchLookup"
+			class="org.etlforge.integration.client.ui.connector.netsuite.lookup.DefaultNetSuiteSearchObjectSavedSearchLookup">
+    <constructor-arg ref="server.NetSuiteInfoProvider" />
+  </bean>
+  <bean id="NetSuiteEndpoint.Config" parent="ConnectorEndpoint.Config" class="org.etlforge.integration.client.ui.connector.netsuite.endpoint.NetSuiteEndpointConfig">
+    <constructor-arg ref="server.NetSuiteInfoProvider" />
+    <constructor-arg ref="core.MappingStructureFactory" />
+    <constructor-arg ref="NetSuite.SearchDefLookup" />
+    <constructor-arg ref="NetSuite.SearchCustomFieldDefLookup" />
+    <constructor-arg ref="NetSuite.SearchObjectSavedSearchLookup" />
+    <constructor-arg ref="NetSuite.DefDesignLookup" />
+    <constructor-arg ref="NetSuite.CfLookup" />
+   <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="NetSuiteEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.NetSuiteEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="NetSuiteFunction.Base" parent="ic.EntityConfig.Base" abstract="true">
+    <constructor-arg index="1">
+      <bean class="org.etlforge.integration.client.ui.connector.netsuite.function.wizard.NetSuiteFunctionWizardFactory">
+        <constructor-arg ref="server.NetSuiteInfoProvider" />
+        <constructor-arg ref="NetSuite.ObjectCache" />
+        <constructor-arg ref="ic.EntityExplorerService" />
+        <constructor-arg ref="NetSuite.DefDesignLookup" />
+        <constructor-arg ref="NetSuite.CfLookup" />
+     </bean>
+    </constructor-arg>
+    <constructor-arg  index="2" ref="server.TreeMapperInfoProvider" />
+    <constructor-arg index="3" ref="server.NetSuiteInfoProvider" />
+    <constructor-arg index="4" ref="core.MappingStructureFactory" />
+    <constructor-arg index="5" ref="NetSuiteEndpoint.Config" />
+ </bean>
+  <bean id="NetSuiteCreate.Config" parent="NetSuiteFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.netsuite.function.NetSuiteFunctionConfig">
+    <constructor-arg index="0" value="NetSuiteCreate" />
+  </bean>
+  <bean id="NetSuiteUpsert.Config" parent="NetSuiteFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.netsuite.function.NetSuiteFunctionConfig">
+    <constructor-arg index="0" value="NetSuiteUpsert" />
+  </bean>
+  <bean id="NetSuiteUpdate.Config" parent="NetSuiteFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.netsuite.function.NetSuiteFunctionConfig">
+    <constructor-arg index="0" value="NetSuiteUpdate" />
+  </bean>
+  <bean id="NetSuiteDelete.Config" parent="NetSuiteFunction.Base"
+			class="org.etlforge.integration.client.ui.connector.netsuite.function.NetSuiteFunctionConfig">
+    <constructor-arg index="0" value="NetSuiteDelete" />
+  </bean>
+  <bean id="NetSuiteQuery.Config" parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.connector.netsuite.search.NetSuiteQueryConfig">
+    <constructor-arg index="0">
+      <bean class="org.etlforge.integration.client.ui.connector.netsuite.search.wizard.NetSuiteQueryWizardFactory">
+        <constructor-arg ref="server.NetSuiteInfoProvider" />
+        <constructor-arg ref="NetSuite.ObjectCache" />
+        <constructor-arg ref="NetSuite.SearchDefLookup" />
+        <constructor-arg ref="NetSuite.SearchCustomFieldDefLookup" />
+        <constructor-arg ref="NetSuite.SearchObjectSavedSearchLookup" />
+        <constructor-arg ref="NetSuite.DefDesignLookup" />
+        <constructor-arg ref="NetSuite.CfLookup" />
+		<constructor-arg ref="server.TestNetSuiteQuery" />
+        <constructor-arg ref="ic.EntityExplorerService" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg index="1" ref="server.TreeMapperInfoProvider" />
+    <constructor-arg index="2" ref="server.NetSuiteInfoProvider" />
+    <constructor-arg index="3" ref="core.MappingStructureFactory" />
+    <constructor-arg index="4" ref="NetSuite.SearchDefLookup" />
+    <constructor-arg index="5" ref="NetSuite.SearchCustomFieldDefLookup" />
+    <constructor-arg index="6" ref="NetSuite.SearchObjectSavedSearchLookup" />
+    <constructor-arg index="7" ref="server.TestNetSuiteQuery" />
+  </bean>
+
+  <!-- Sap Connector -->
+  <bean id="SapEndpoint.Config" parent="ConnectorEndpoint.Config"
+			class="org.etlforge.integration.client.ui.connector.sap.endpoint.SapEndpointConfig">
+    <property name="valueCache">
+      <bean factory-bean="core.EntityValueCacheFactory" factory-method="newValueCache">
+        <constructor-arg value="SapEndpoint" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.data.connector.SapEndpoint" factory-method="getNamesOfCachedProperties" />
+        </constructor-arg>
+      </bean>
+    </property>
+  </bean>
+  <bean id="SapFunction.Config" parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.connector.sap.function.SapFunctionConfig">
+    <constructor-arg>
+      <bean class="org.etlforge.integration.client.ui.connector.sap.function.wizard.SapFunctionWizardFactory">
+        <constructor-arg ref="server.ConnectorCallInfoProvider" />
+        <constructor-arg>
+          <bean class="org.etlforge.integration.client.ui.connector.ConnectorObjectFileCache">
+            <constructor-arg>
+              <bean class="org.etlforge.io.Folder">
+                <constructor-arg ref="platform.CacheDirLocation" />
+                <constructor-arg>
+                  <list>
+                    <value>ConnectorObjectCache</value>
+                    <value>SAP</value>
+                  </list>
+                </constructor-arg>
+              </bean>
+            </constructor-arg>
+            <constructor-arg value="30" />
+            <constructor-arg value="DAYS" />
+          </bean>
+        </constructor-arg>
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="server.TreeMapperInfoProvider" />
+    <constructor-arg ref="server.ConnectorCallInfoProvider" />
+    <constructor-arg ref="core.MappingStructureFactory" />
+  </bean>
+
+</beans>

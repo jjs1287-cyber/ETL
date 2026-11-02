@@ -1,0 +1,29 @@
+<html>
+<p>
+Persists data written to a file buffer with <tt>WriteFile()</tt>.
+When FlushFile() is called, the current contents of the buffer is written
+to the target and the local buffer is discarded.
+</p>
+<p>
+The second argument, <tt>file_name</tt> is optional and can be used to override the file name used in the target definition
+if it was similarly overridden in the call to WriteFile. Flushing a file that has never been written to has no effect.
+</p>        
+<p>
+Alternatively, a global data element can be used to override the file name in the target definition.
+Global data elements are referenced as "[de_name]" in the target definition.
+If an override file name is used, each buffer is flushed separately for each unique name.
+</p>
+<br><h2>Example:</h2>
+<code><font size="4">
+WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents);<br>
+<br>
+// Actually write to the target<br>
+FlushFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;");<br>
+<br>
+// Write another file (overriding the file name)<br>
+WriteFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", $contents, "test.txt");<br>
+<br>
+FlushFile("&lt;TAG&gt;Project Name/Targets/FTP Target&lt;/TAG&gt;", "test.txt");<br>
+</font>
+</code>
+</html>

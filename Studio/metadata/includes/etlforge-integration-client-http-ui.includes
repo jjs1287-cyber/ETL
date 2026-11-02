@@ -1,0 +1,12 @@
+org/etlforge/integration/client/ui/http/HttpPropertiesEditor.class
+org/etlforge/integration/client/ui/http/HttpPropertiesEditor$*.class
+org/etlforge/integration/client/ui/http/HttpPropertiesPanel.class
+org/etlforge/integration/client/ui/http/HttpPropertiesPanel$*.class
+org/etlforge/integration/client/ui/http/LaunchPropertiesEditorAction.class
+org/etlforge/integration/client/ui/http/LaunchPropertiesEditorAction$*.class
+org/etlforge/integration/client/ui/http/SslVersionSelector.class
+org/etlforge/integration/client/ui/http/SslVersionSelector$*.class
+org/etlforge/integration/client/ui/http/Strings.class
+org/etlforge/integration/client/ui/http/Strings$*.class
+org/etlforge/integration/client/ui/http/resources/HttpUiResources.class
+org/etlforge/integration/client/ui/http/resources/HttpUiResources$*.class

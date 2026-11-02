@@ -1,0 +1,15 @@
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+ProxyRequests Off
+ProxyPreserveHost On
+ProxyTimeout 600
+ProxyPassMatch "^/axis/services/(konga_salesforce_infoprovider|konga_ldap_infoprovider|konga_projectbackupadmin|konga_jdbc_engine|konga_json_engine|konga_jdbc_infoprovider|konga_serveradmin|konga_function_engine|konga_salesforce_engine|konga_bulkload_infoprovider|konga_wsexample_engine|konga_bulkload_engine)$" "http://127.0.0.1:@BACKEND_PORT@/axis/services/$1" connectiontimeout=5 timeout=600 retry=0
+ProxyPassReverse "/axis/services/" "http://127.0.0.1:@BACKEND_PORT@/axis/services/"
+<Location "/axis/services">
+ SetHandler none
+ Require all denied
+</Location>
+<LocationMatch "^/axis/services/(konga_salesforce_infoprovider|konga_ldap_infoprovider|konga_projectbackupadmin|konga_jdbc_engine|konga_json_engine|konga_jdbc_infoprovider|konga_serveradmin|konga_function_engine|konga_salesforce_engine|konga_bulkload_infoprovider|konga_wsexample_engine|konga_bulkload_engine)$">
+ SetHandler proxy-server
+ Require local
+</LocationMatch>

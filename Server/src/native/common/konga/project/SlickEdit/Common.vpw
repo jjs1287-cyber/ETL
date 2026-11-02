@@ -1,0 +1,22 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+	<Projects>
+		<Project File="../../CharacterEncodingConversion/project/SlickEdit/CharacterEncodingConversion.vpj"/>
+		<Project File="Common.vpj"/>
+		<Project File="../../Crypto/project/SlickEdit/Crypto.vpj"/>
+		<Project File="../../Debugger/project/SlickEdit/Debugger.vpj"/>
+		<Project File="../../FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+		<Project File="../../JbParser/project/SlickEdit/JbParser.vpj"/>
+		<Project File="../../Ldap/project/SlickEdit/Ldap.vpj"/>
+		<Project File="../../Log/project/SlickEdit/Log.vpj"/>
+		<Project File="../../MailClient/project/SlickEdit/MailClient.vpj"/>
+		<Project File="../../Mime/project/SlickEdit/Mime.vpj"/>
+		<Project File="../../Networking/project/SlickEdit/Networking.vpj"/>
+		<Project File="../../Soap/project/SlickEdit/Soap.vpj"/>
+		<Project File="../../SysInfo/project/SlickEdit/SysInfo.vpj"/>
+		<Project File="../../Utils/project/SlickEdit/Utils.vpj"/>
+		<Project File="../../WebService/project/SlickEdit/WebService.vpj"/>
+		<Project File="../../Xml/project/SlickEdit/Xml.vpj"/>
+		<Project File="../../Zip/project/SlickEdit/Zip.vpj"/>
+	</Projects>
+</Workspace>

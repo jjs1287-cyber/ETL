@@ -1,0 +1,29 @@
+<html><p>
+            Runs an operation synchronously or asynchronously, with synchronous being the default.
+            The second argument is optional and determines how the operation will run.
+            </p>
+            
+            <p>
+            If <b>run_synchronously=true</b> the operation and any success/failure operations will run inside the current operation and the current
+            operation will wait for the whole operation chain to finish. All global data elements are inherited by the operation to be run
+            and any changes to the global data elements will be reflected in the current operation.
+            This is the default behavior if the second argument is not supplied.
+            Returns <i>false</i> if the operation resulted in a failure. Call GetLastError() to get the error message.
+            </p>
+            
+            <p>
+            If <b>run_synchronously=false</b> this method puts an operation on the ETLForge processing queue to be processed once
+            any operations that come before it have been processed. All global data elements are inherited by the
+            operation to be run but changes to those data elements will <i>not</i> be reflected in the current operation.
+            The current operation will continue to run independently of the operation to be run
+            and there is no guarantee as to which operation will finish first.
+            Returns <i>false</i> if the operation could not be added to the queue. Call GetLastError() to get the error message.
+            </p>
+            
+            <p>
+            The available operations are shown in the "Project Items" tab in the lower  section of the Formula Builder,
+            under the node called "Operations".
+            By double clicking on an operation node, the corresponding operation ID will be
+            inserted into the formula expression. The ID is constructed by wrapping the project path
+            of the selected operation within &lt;TAG&gt;...&lt;/TAG&gt; tags.
+            </p><br><h2>Example:</h2><code><font size="4">RunOperation("&lt;TAG&gt;MyProject/Operations/MyOperation&lt;/TAG&gt;")</font></code></html>

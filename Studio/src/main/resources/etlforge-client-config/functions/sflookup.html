@@ -1,0 +1,16 @@
+<html>
+Logs in to Salesforce (if necessary) and retrives the result of the query from Salesforce. Only the value from the first field of the first record is returned.
+<p>
+The login call is made using the credentials in the specified Salesforce Org.
+<code><font size="4">null</font></code> is returned if either login or query returns no record. 
+API fails. Use <code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+Example:
+<p>
+<code><font size="4">
+my_id = SFLookup("&lt;TAG&gt;Salesforce Orgs/...&lt;/TAG&gt;", "SELECT Id FROM Account WHERE Name='My Account'");<br>
+if(IsNull(my_id), RaiseError(GetLastError());
+</font></code>
+<p>
+As an alternative to this function, see <code><font size="4">SFLookupAll()</font></code> and <code><font size="4">SFLookupAllToFile()</font></code>.
+</html>

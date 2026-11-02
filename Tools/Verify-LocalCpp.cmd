@@ -1,0 +1,10 @@
+@echo off
+call "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+if errorlevel 1 exit /b %errorlevel%
+set "PATH=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja;%PATH%"
+cmake -S C:\ETL\Server -B C:\ETL\Server\build\windows-x64 -G Ninja -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
+if errorlevel 1 exit /b %errorlevel%
+cmake --build C:\ETL\Server\build\windows-x64 --parallel 2 --target etlforge_memutils_tests etlforge_vectorutils_tests etlforge_tokenizer_tests etlforge_xmlstrings_tests
+if errorlevel 1 exit /b %errorlevel%
+ctest --test-dir C:\ETL\Server\build\windows-x64 --output-on-failure -R "^native\.(memutils|vectorutils|tokenizer|xmlstrings)$"
+exit /b %errorlevel%

@@ -1,0 +1,9 @@
+<html><p>
+        Use this method instead of DiffKeyList in cases where the source records are guaranteed to be in a certain order.
+        Set the list of keys to use for uniquely identifying a record in the source and if the record order is ascending
+        or descending for that key. The diff processing is a lot more efficient if the source fields are ordered the same way
+        each time. In this case no chunk size will be used and memory use is not an issue.
+        </p>
+        <p>
+        This method is typically called in conjunction with InitializeDiff.
+        </p></html>

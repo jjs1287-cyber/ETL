@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ETLForge-Studio" default="compile" basedir=".">
+  <property name="jdk.home" location="C:/ETL/Tools/jdk8u504-b01"/>
+  <property name="source.dir" location="src/main/java"/>
+  <property name="classes.dir" location="build/classes"/>
+    <property file="features.properties"/>
+  <property name="feature.profiling.enabled" value="false"/>
+  <condition property="profiling.source.dir" value="features/profiling/src/main/java" else="build/disabled-profiling-source">
+    <istrue value="${feature.profiling.enabled}"/>
+  </condition>
+  <path id="dependencies"><fileset dir="lib" includes="*.jar" excludes="wsc-22.jar,sfdc-partner-wsdl-24.jar"/><fileset dir="C:/ETL/Dependencies/java/salesforce" includes="*.jar"/></path>
+  <target name="compile">
+    <mkdir dir="${classes.dir}"/><mkdir dir="build/disabled-profiling-source"/>
+    <javac srcdir="${source.dir}" destdir="${classes.dir}" source="1.8" target="1.8" encoding="UTF-8"
+       debug="true" includeantruntime="false" fork="true" executable="${jdk.home}/bin/javac.exe" memoryMaximumSize="3g">
+      <src path="${profiling.source.dir}"/><classpath refid="dependencies"/>
+      <compilerarg value="-Xmaxerrs"/><compilerarg value="10000"/>
+    </javac>
+  </target>
+  <target name="jar" depends="compile">
+    <mkdir dir="dist/lib"/>
+    <jar destfile="dist/lib/etlforge-application.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-application.includes"/>
+      <fileset dir="src/main/resources/etlforge-application"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-application-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-application-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-application-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-cli.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-cli.includes"/>
+      <fileset dir="src/main/resources/etlforge-cli"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-client-config.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="src/main/resources/etlforge-client-config"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-collections-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-collections-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-collections-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-crypto-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-crypto-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-crypto-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-db-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-db-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-db-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-activity.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-activity.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-activity"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-activity-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-activity-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-activity-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-admin.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-admin.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-admin"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-admin-enterprise.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-admin-enterprise.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-admin-enterprise"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-connect-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-connect-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-connect-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-crom-tree-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-crom-tree-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-crom-tree-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data-binding-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data-binding-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data-binding-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data-connector.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data-connector.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data-connector"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data-definitions.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data-definitions.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data-definitions"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data-download.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data-download.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data-download"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-data-sfdc.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-data-sfdc.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-data-sfdc"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-database.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-database.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-database"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-database-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-database-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-database-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-dataelement-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-dataelement-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-dataelement-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-dataloader-migration.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-dataloader-migration.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-dataloader-migration"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-datalocation-cache.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-datalocation-cache.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-datalocation-cache"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-datalocation-connection.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-datalocation-connection.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-datalocation-connection"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-deploy.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-deploy.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-deploy"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-deploy-enterprise.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-deploy-enterprise.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-deploy-enterprise"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-deploy-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-deploy-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-deploy-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-enterprise-server-admin.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-enterprise-server-admin.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-enterprise-server-admin"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-search.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-search.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-search"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-search-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-search-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-search-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-settings.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-settings.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-settings"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-testhistory-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-testhistory-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-testhistory-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-uidelegate.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-uidelegate.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-uidelegate"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-entity-value-cache.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-entity-value-cache.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-entity-value-cache"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-filetransfer.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-filetransfer.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-filetransfer"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-http-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-http-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-http-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-icons.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-icons.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-icons"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-info.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-info.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-info"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-enterprise.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-enterprise.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-enterprise"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-locatable.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-locatable.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-locatable"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-operation.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-operation.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-operation"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-schedule.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-schedule.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-schedule"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-textdocument.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-textdocument.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-textdocument"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-transformation.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-transformation.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-transformation"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-interchange-wscall.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-interchange-wscall.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-interchange-wscall"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-jitterpak-impl.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-jitterpak-impl.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-jitterpak-impl"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-jitterpak-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-jitterpak-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-jitterpak-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-ldap.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-ldap.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-ldap"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-ldap-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-ldap-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-ldap-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-license.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-license.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-license"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-load-source.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-load-source.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-load-source"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-mapping-structure.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-mapping-structure.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-mapping-structure"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-operation-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-operation-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-operation-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-plugin.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-plugin.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-plugin"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-plugin-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-plugin-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-plugin-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-admin.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-admin.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-admin"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-download-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-download-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-download-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-import.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-import.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-import"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-info.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-info.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-info"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-manager.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-manager.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-manager"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-permissions.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-permissions.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-permissions"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-permissions-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-permissions-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-permissions-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-persistor.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-persistor.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-persistor"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-project-upgrade.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-project-upgrade.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-project-upgrade"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-proxy.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-proxy.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-proxy"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-scheduler.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-scheduler.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-scheduler"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-script-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-script-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-script-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-script-wizards.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-script-wizards.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-script-wizards"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server-api.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server-api.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server-api"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server-debug.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server-debug.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server-debug"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server-debug-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server-debug-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server-debug-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server-info.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server-info.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server-info"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-server-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-server-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-server-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-bulkload.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-bulkload.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-bulkload"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-config.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-config.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-config"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-delete.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-delete.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-delete"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-query.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-query.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-query"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-server.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-server.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-server"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-soap.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-soap.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-soap"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-soap-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-soap-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-soap-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-ucu.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-ucu.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-ucu"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-wizards.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-wizards.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-wizards"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-sfdc-wsdl.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-sfdc-wsdl.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-sfdc-wsdl"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-soql-builder.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-soql-builder.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-soql-builder"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-soql-parser.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-soql-parser.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-soql-parser"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-standard-connect.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-standard-connect.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-standard-connect"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-structure-editor.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-structure-editor.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-structure-editor"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-transformation-wizard.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-transformation-wizard.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-transformation-wizard"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-validation-ui.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-validation-ui.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-validation-ui"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-wsdl.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-wsdl.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-wsdl"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-wsimpl.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-wsimpl.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-wsimpl"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-client-wsimpl-enterprise.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-client-wsimpl-enterprise.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-client-wsimpl-enterprise"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-connector.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-connector.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-connector"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-database.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-database.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-database"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-json.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-json.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-json"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-mscrm.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-mscrm.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-mscrm"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-server.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-server.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-server"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-sfdc.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-sfdc.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-sfdc"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-common-user.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-common-user.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-common-user"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-dataelement.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-dataelement.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-dataelement"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-entity.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-entity.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-entity"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-http.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-http.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-http"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-ldap-util.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-ldap-util.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-ldap-util"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-plugin.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-plugin.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-plugin"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-integration-structure.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-integration-structure.includes"/>
+      <fileset dir="src/main/resources/etlforge-integration-structure"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-io-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-io-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-io-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-jitterpak-deployer.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-jitterpak-deployer.includes"/>
+      <fileset dir="src/main/resources/etlforge-jitterpak-deployer"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-json-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-json-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-json-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-lang-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-lang-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-lang-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-ui-graph.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-ui-graph.includes"/>
+      <fileset dir="src/main/resources/etlforge-ui-graph"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-ui-util.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-ui-util.includes"/>
+      <fileset dir="src/main/resources/etlforge-ui-util"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-util.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-util.includes"/>
+      <fileset dir="src/main/resources/etlforge-util"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-ws-client.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-ws-client.includes"/>
+      <fileset dir="src/main/resources/etlforge-ws-client"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-ws-client-enterprise.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-ws-client-enterprise.includes"/>
+      <fileset dir="src/main/resources/etlforge-ws-client-enterprise"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-xml-utils.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-xml-utils.includes"/>
+      <fileset dir="src/main/resources/etlforge-xml-utils"/>
+    </jar>
+    <jar destfile="dist/lib/etlforge-xmlviewer.jar" duplicate="fail">
+      <manifest><attribute name="Implementation-Title" value="ETLForge Studio reconstructed module"/><attribute name="Implementation-Version" value="42.0.0.0"/></manifest>
+      <fileset dir="${classes.dir}" includesfile="metadata/includes/etlforge-xmlviewer.includes"/>
+      <fileset dir="src/main/resources/etlforge-xmlviewer"/>
+    </jar>
+  </target>
+  <target name="test-compile" depends="jar">
+    <mkdir dir="build/test-classes"/>
+    <javac srcdir="src/test/java" destdir="build/test-classes" source="1.8" target="1.8" encoding="UTF-8" includeantruntime="false" fork="true" executable="${jdk.home}/bin/javac.exe">
+      <classpath><fileset dir="dist/lib" includes="*.jar"/><path refid="dependencies"/></classpath>
+    </javac>
+  </target>
+  <target name="test" depends="test-compile">
+    <java classname="etlforge.studio.StudioRecoverySmoke" fork="true" failonerror="true" jvm="${jdk.home}/bin/java.exe">
+      <jvmarg value="-Djava.awt.headless=true"/>
+      <arg value="--rebuilt"/>
+      <classpath><pathelement location="build/test-classes"/><fileset dir="dist/lib" includes="*.jar"/><path refid="dependencies"/></classpath>
+    </java>
+  </target>
+  <target name="run" depends="jar">
+    <java classname="org.etlforge.integration.client.main.IntegrationMain" fork="true" jvm="${jdk.home}/bin/java.exe" dir="${basedir}" maxmemory="2g">
+      <jvmarg value="-Duser.home=${basedir}/run-user-home-etlforge"/><jvmarg value="-DRunUpgradeScripts=false"/>
+      <arg value="-d"/><arg value="${basedir}/run-user-home-etlforge/application"/>
+      <classpath><pathelement location="configuration"/><fileset dir="dist/lib" includes="*.jar"/><path refid="dependencies"/></classpath>
+    </java>
+  </target>
+  <target name="clean">
+    <property name="expected.classes.dir" location="build/classes"/>
+    <condition property="safe.clean"><equals arg1="${classes.dir}" arg2="${expected.classes.dir}" casesensitive="false"/></condition>
+    <fail unless="safe.clean">Refusing to clean an unexpected classes directory.</fail>
+        <property name="module.jars.dir" location="dist/lib"/>
+    <property name="expected.module.jars.dir" location="dist/lib"/>
+    <condition property="safe.jar.clean"><equals arg1="${module.jars.dir}" arg2="${expected.module.jars.dir}" casesensitive="false"/></condition>
+    <fail unless="safe.jar.clean">Refusing to clean an unexpected module output directory.</fail>
+    <delete dir="${classes.dir}"/>
+    <delete dir="${module.jars.dir}"/>
+  </target>
+</project>
+
+
+

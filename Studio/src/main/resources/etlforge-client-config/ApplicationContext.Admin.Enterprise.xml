@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="admin.UserConsole.Controller" class="org.etlforge.integration.client.ui.admin.component.user2.UserConsoleController" scope="prototype" lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="server.UserAdmin" />
+		<constructor-arg>
+			<list>
+				<bean class="com.etlforge.integration.client.ui.admin.user.UploadToAnotherServerAction">
+					<constructor-arg ref="server.ServerAdmin" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+			
+	<util:list id="admin.ProjectConsole.Actions.Project" scope="prototype">
+		<bean class="com.etlforge.integration.client.ui.project.download.admin.DownloadProjectAction">
+			<constructor-arg ref="platform.ProjectManager" />
+			<constructor-arg ref="server.ProjectDownloader" />
+		</bean>
+		<bean class="com.etlforge.integration.client.ui.admin.project.backup.ViewAvailableBackupsAction" />
+		<bean class="com.etlforge.integration.client.ui.admin.project.DeleteProjectsAction">
+			<constructor-arg ref="ui.AppWin" />
+			<constructor-arg ref="server.ProjectAdmin" />
+		</bean>
+	</util:list>
+
+</beans>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData" xmlns:tns2="http://webservice.implementation.server.integration.etlforge.invalid" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservice.implementation.server.integration.etlforge.invalid"/>
+   <element name="checkoutInterchangeProject">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="interchangeProjectId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkoutInterchangeProjectResponse">
+    <complexType>
+     <sequence>
+      <element name="checkoutInterchangeProjectReturn" type="impl:InterchangeDataHolder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataRow">
+    <sequence>
+     <element name="fields" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfInterchangeDataRow">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:InterchangeDataRow"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataTable">
+    <sequence>
+     <element name="columnNames" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="rows" nillable="true" type="impl:ArrayOfInterchangeDataRow"/>
+    </sequence>
+   </complexType>
+   <complexType name="CPermission">
+    <sequence>
+     <element name="ItemId" nillable="true" type="xsd:string"/>
+     <element name="EntityTypeId" type="xsd:int"/>
+     <element name="AllowBit" type="xsd:long"/>
+     <element name="DenyBits" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCPermission">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="CUserPermissions">
+    <sequence>
+     <element name="UserId" nillable="true" type="xsd:string"/>
+     <element name="Permissions" nillable="true" type="impl:ArrayOfCPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCUserPermissions">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CUserPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="CGroupPermissions">
+    <sequence>
+     <element name="GroupId" nillable="true" type="xsd:string"/>
+     <element name="Permissions" nillable="true" type="impl:ArrayOfCPermission"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCGroupPermissions">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CGroupPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="PermissionsHolder">
+    <sequence>
+     <element name="userPermissions" nillable="true" type="impl:ArrayOfCUserPermissions"/>
+     <element name="groupPermissions" nillable="true" type="impl:ArrayOfCGroupPermissions"/>
+    </sequence>
+   </complexType>
+   <complexType name="InterchangeDataHolder">
+    <sequence>
+     <element name="Warnings" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="CallRestrictionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DBFieldsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DBTablesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Document_DefinitionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="DocumentsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="FolderItemTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="FoldersTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="FunctionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="GroupsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="InterchangeProjectsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="MessagesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationDiff_Details" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="OperationTransformationTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceQueriesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceUpsertsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceCreatesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceUpdatesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceDeletesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SalesforceBulkLoadsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SchedulesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SourcesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="SqlScriptTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TargetsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Tran_MessagesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Tran_RelationsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Trans_FilterTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Transformation_DefinitionsTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TransformationChainLinksTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="TransformationsTab_New" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="User_GroupTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="UsersTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="WebServicesTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="WebServiceFunctionTransformationView" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="WsdlTab" nillable="true" type="impl:InterchangeDataTable"/>
+     <element name="Permissions" nillable="true" type="impl:PermissionsHolder"/>
+    </sequence>
+   </complexType>
+   <element name="downloadIntegrationProject">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="projectId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadIntegrationProjectResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadIntegrationProjectReturn" type="impl:DownloadDataHolder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_WsKeyValue">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:WsKeyValue"/>
+    </sequence>
+   </complexType>
+   <complexType name="DownloadedItemProperties">
+    <sequence>
+     <element name="ItemGUID" nillable="true" type="xsd:string"/>
+     <element name="Properties" nillable="true" type="tns2:WsKeyValuePairs"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDownloadedItemProperties">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:DownloadedItemProperties"/>
+    </sequence>
+   </complexType>
+   <complexType name="DownloadedItems">
+    <sequence>
+     <element name="ItemType" type="xsd:long"/>
+     <element name="Items" nillable="true" type="impl:ArrayOfDownloadedItemProperties"/>
+    </sequence>
+   </complexType>
+   <complexType name="DownloadDataHolder">
+    <sequence>
+     <element name="Projects" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Sources" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Targets" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Schedules" nillable="true" type="impl:DownloadedItems"/>
+     <element name="EmailMessages" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Scripts" nillable="true" type="impl:DownloadedItems"/>
+     <element name="TextStructures" nillable="true" type="impl:DownloadedItems"/>
+     <element name="DocumentDefinitions" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Transformations" nillable="true" type="impl:DownloadedItems"/>
+     <element name="TransformationDefinitions" nillable="true" type="impl:DownloadedItems"/>
+     <element name="TransformationRelations" nillable="true" type="impl:DownloadedItems"/>
+     <element name="TransformationFilters" nillable="true" type="impl:DownloadedItems"/>
+     <element name="TransformationChainLinks" nillable="true" type="impl:DownloadedItems"/>
+     <element name="DbFields" nillable="true" type="impl:DownloadedItems"/>
+     <element name="DbTables" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SqlScripts" nillable="true" type="impl:DownloadedItems"/>
+     <element name="LdapSearchParameters" nillable="true" type="impl:DownloadedItems"/>
+     <element name="LdapStructureEntries" nillable="true" type="impl:DownloadedItems"/>
+     <element name="WebServiceMethods" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Wsdls" nillable="true" type="impl:DownloadedItems"/>
+     <element name="CallRestrictions" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Folders" nillable="true" type="impl:DownloadedItems"/>
+     <element name="FolderItems" nillable="true" type="impl:DownloadedItems"/>
+     <element name="Operations" nillable="true" type="impl:DownloadedItems"/>
+     <element name="OperationPipelineActivities" nillable="true" type="impl:DownloadedItems"/>
+     <element name="OperationTransformationTab" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SiblingOperations" nillable="true" type="impl:DownloadedItems"/>
+     <element name="OperationGraphLayout" nillable="true" type="impl:DownloadedItems"/>
+     <element name="HttpEndpoints" nillable="true" type="impl:DownloadedItems"/>
+     <element name="HttpEndpointOperations" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceQueries" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceUpserts" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceCreates" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceUpdates" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceDeletes" nillable="true" type="impl:DownloadedItems"/>
+     <element name="SalesforceBulkLoads" nillable="true" type="impl:DownloadedItems"/>
+     <element name="UserPermissions" nillable="true" type="impl:DownloadedItems"/>
+     <element name="GroupPermissions" nillable="true" type="impl:DownloadedItems"/>
+     <element name="AppliedPlugins" nillable="true" type="impl:DownloadedItems"/>
+     <element name="JtrFiles" nillable="true" type="impl:DownloadedItems"/>
+    </sequence>
+   </complexType>
+   <element name="downloadRequiredFiles">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="entityType" type="xsd:int"/>
+      <element name="guid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadRequiredFilesResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadRequiredFilesReturn" type="impl:RequiredFiles"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="RequiredFile">
+    <sequence>
+     <element name="ClientPath" nillable="true" type="xsd:string"/>
+     <element name="ZippedBase64EncodedContents" nillable="true" type="xsd:string"/>
+     <element name="Dependencies" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfRequiredFile">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:RequiredFile"/>
+    </sequence>
+   </complexType>
+   <complexType name="RequiredFiles">
+    <sequence>
+     <element name="Files" nillable="true" type="impl:ArrayOfRequiredFile"/>
+    </sequence>
+   </complexType>
+   <element name="getOperationTree">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOperationTreeResponse">
+    <complexType>
+     <sequence>
+      <element name="getOperationTreeReturn" type="impl:InterchangeDataHolder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getInterchangeProjects">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getInterchangeProjectsResponse">
+    <complexType>
+     <sequence>
+      <element name="getInterchangeProjectsReturn" type="impl:CInterchangeProjects"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CInterchangeProject">
+    <sequence>
+     <element name="Id" nillable="true" type="xsd:string"/>
+     <element name="Name" nillable="true" type="xsd:string"/>
+     <element name="Description" nillable="true" type="xsd:string"/>
+     <element name="OwnerUserId" nillable="true" type="xsd:string"/>
+     <element name="OwnerUserName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfCInterchangeProject">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:CInterchangeProject"/>
+    </sequence>
+   </complexType>
+   <complexType name="CInterchangeProjects">
+    <sequence>
+     <element name="InterchangeProjects" nillable="true" type="impl:ArrayOfCInterchangeProject"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.implementation.server.integration.etlforge.invalid" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.checkout.CheckoutInterchangeData"/>
+   <complexType name="WsKeyValue">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsKeyValuePairs">
+    <sequence>
+     <element name="keyValues" nillable="true" type="impl:ArrayOf_tns2_WsKeyValue"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getInterchangeProjectsResponse">
+
+      <wsdl:part element="impl:getInterchangeProjectsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationTreeRequest">
+
+      <wsdl:part element="impl:getOperationTree" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadIntegrationProjectResponse">
+
+      <wsdl:part element="impl:downloadIntegrationProjectResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkoutInterchangeProjectRequest">
+
+      <wsdl:part element="impl:checkoutInterchangeProject" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationTreeResponse">
+
+      <wsdl:part element="impl:getOperationTreeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getInterchangeProjectsRequest">
+
+      <wsdl:part element="impl:getInterchangeProjects" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadIntegrationProjectRequest">
+
+      <wsdl:part element="impl:downloadIntegrationProject" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadRequiredFilesResponse">
+
+      <wsdl:part element="impl:downloadRequiredFilesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="downloadRequiredFilesRequest">
+
+      <wsdl:part element="impl:downloadRequiredFiles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkoutInterchangeProjectResponse">
+
+      <wsdl:part element="impl:checkoutInterchangeProjectResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CheckoutInterchangeData">
+
+      <wsdl:operation name="checkoutInterchangeProject">
+
+         <wsdl:input message="impl:checkoutInterchangeProjectRequest" name="checkoutInterchangeProjectRequest"/>
+
+         <wsdl:output message="impl:checkoutInterchangeProjectResponse" name="checkoutInterchangeProjectResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadIntegrationProject">
+
+         <wsdl:input message="impl:downloadIntegrationProjectRequest" name="downloadIntegrationProjectRequest"/>
+
+         <wsdl:output message="impl:downloadIntegrationProjectResponse" name="downloadIntegrationProjectResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadRequiredFiles">
+
+         <wsdl:input message="impl:downloadRequiredFilesRequest" name="downloadRequiredFilesRequest"/>
+
+         <wsdl:output message="impl:downloadRequiredFilesResponse" name="downloadRequiredFilesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationTree">
+
+         <wsdl:input message="impl:getOperationTreeRequest" name="getOperationTreeRequest"/>
+
+         <wsdl:output message="impl:getOperationTreeResponse" name="getOperationTreeResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getInterchangeProjects">
+
+         <wsdl:input message="impl:getInterchangeProjectsRequest" name="getInterchangeProjectsRequest"/>
+
+         <wsdl:output message="impl:getInterchangeProjectsResponse" name="getInterchangeProjectsResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_checkout_interchange_dataSoapBinding" type="impl:CheckoutInterchangeData">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkoutInterchangeProject">
+
+         <wsdlsoap:operation soapAction="checkoutInterchangeProject"/>
+
+         <wsdl:input name="checkoutInterchangeProjectRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkoutInterchangeProjectResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadIntegrationProject">
+
+         <wsdlsoap:operation soapAction="downloadIntegrationProject"/>
+
+         <wsdl:input name="downloadIntegrationProjectRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadIntegrationProjectResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadRequiredFiles">
+
+         <wsdlsoap:operation soapAction="downloadRequiredFiles"/>
+
+         <wsdl:input name="downloadRequiredFilesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadRequiredFilesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationTree">
+
+         <wsdlsoap:operation soapAction="getOperationTree"/>
+
+         <wsdl:input name="getOperationTreeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOperationTreeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getInterchangeProjects">
+
+         <wsdlsoap:operation soapAction="getInterchangeProjects"/>
+
+         <wsdl:input name="getInterchangeProjectsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getInterchangeProjectsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CheckoutInterchangeDataService">
+
+      <wsdl:port binding="impl:konga_checkout_interchange_dataSoapBinding" name="konga_checkout_interchange_data">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_checkout_interchange_data"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

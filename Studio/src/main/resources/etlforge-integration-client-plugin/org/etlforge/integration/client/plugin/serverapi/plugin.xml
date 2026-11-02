@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<ETLForgePlugin SpecVersion="1.2.0.0">
+	<PipelinePlugin SpecVersion="1.0">
+		<Name>http://www.etlforge.invalid/plugins/filters/system/compression</Name>
+		<Version>0.9.17-beta</Version>
+		<DisplayName>ETLForge Compression</DisplayName>
+		<Author>ETLForge, Inc.</Author>
+		<Description>Handles compression and decompression.</Description>
+		<UpdateUrl>http://www.etlforge.invalid/plugins/filters/system/compression</UpdateUrl>
+		<DocumentationUrl>http://www.etlforge.invalid/plugins/filters/system/compression/docs</DocumentationUrl>
+		<Command>compression.exe</Command>
+		<Arguments>-zip</Arguments>
+		<DataElement Name="CompressionLevel" Type="int" Required="false">
+			<Documentation>
+				1-9 where 1 = lowest, 9 = highest
+			</Documentation>
+			<DefaultValue>9</DefaultValue>
+		</DataElement>
+		<DataElement Name="CollateFiles" Type="bool" Required="false">
+			<Documentation>
+				Set CollateFiles to false if you prefer compressing each target file separately. Set CollateFiles to true to create a compressed archive containing all target files.
+			</Documentation>
+			<DefaultValue>true</DefaultValue>
+		</DataElement>
+		<PipelinePosition Optional="true" Relative="Pre" ExecutionOrder="20">Target</PipelinePosition>
+	</PipelinePlugin>
+	<!--
+	<PipelinePlugin SpecVersion="1.0">
+		<Name>http://www.etlforge.invalid/plugins/filters/system/decompression</Name>
+		<Version>0.9.22-beta</Version>
+		<DisplayName>ETLForge Decompression</DisplayName>
+		<Author>ETLForge, Inc.</Author>
+		<Description>Handles decompression and decompression.</Description>
+		<UpdateUrl>http://www.etlforge.invalid/plugins/filters/system/decompression</UpdateUrl>
+		<DocumentationUrl>http://www.etlforge.invalid/plugins/filters/system/decompression/docs</DocumentationUrl>
+		<Command>compression.exe</Command>
+		<Arguments>-unzip</Arguments>
+		<PipelinePosition Optional="False" Relative="Pre" ExecutionOrder="25">Target</PipelinePosition>
+	</PipelinePlugin>
+	-->
+</ETLForgePlugin> 

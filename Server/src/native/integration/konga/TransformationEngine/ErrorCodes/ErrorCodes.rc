@@ -1,0 +1,1381 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_SOURCFILE_OPENFAILED "Unable to open source file '%s'."
+    ID_SOURCFILE_OBJ_NOTALLOCATED 
+                            "Failed to allocate object for source file '%s'."
+    ID_FAILED_TO_ALLOCATE_TOKENIZER_OBJECT 
+                            "Failed to allocate Tokenizer object."
+    ID_UNABLE_TO_PARSE_STRUCTURE_FILE 
+                            "Unable to parse the structure file '%s'."
+    ID_UNABLE_TO_PARSE_STRUCTURE_FILE_FOR_SOURCE_FILE 
+                            "Unable to parse the structure file '%s' for source file '%s'."
+    ID_UNABLE_TO_PARSE_SOURCE_DATA_FILE 
+                            "Unable to parse source data file '%s'."
+    ID_FAILED_TO_CREATEINDEX_TREE "Failed to create index tree."
+    ID_UNABLE_TO_READ_STRUCTURE_FILE "Unable to read the structure file. '%s'"
+    ID_UNABLE_TO_ADD_NODE_AT_LEVEL0 
+                            "Unable to add Node %s at Level = %d, Level < 0."
+    ID_UNABLE_TO_ADD_NODE_AT_LEVEL1 
+                            "Unable to add Node %s at Level = %d, Level > (max level + 1) that exists in the tree."
+    ID_UNABLE_TO_ADD_NODE_AT_LEVEL2 
+                            "Unable to add Node %s at Level = %d, error while popping stack."
+    ID_UNABLE_TO_ALLOCATE_MEMORY_FOR_ROOT_NODE 
+                            "Unable to allocate memory for root node."
+    ID_ATTEMPTED_TO_ADD_NODE_WITHOUT_ROOT_NODE 
+                            "Attempt to add a node at level 0 without creating a root node."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LINK_NODE_DOES_NOT_HAVE_CHILD0 
+                            "Link node for %s does not have a child."
+    ID_LINK_NODE_DOES_NOT_HAVE_CHILD1 
+                            "Link node for %s does not have a child (2)."
+    ID_UNABLE_TO_ALLOCATE_NODE "Unable to allocate node."
+    ID_STRUCTURE_INFO_NOT_AVAILABLE_TO_ADD_NODE 
+                            "Error the structure information not available to add a node."
+    ID_UNABLE_TO_ADD_ATTRIBUTE0 
+                            "Unable to add attribute %s at Level = %d, Level < 0."
+    ID_UNABLE_TO_ADD_ATTRIBUTE1 
+                            "Unable to add attribute %s at Level = %d, Level > (max level + 1) that exists in the tree."
+    ID_UNABLE_TO_ADD_ATTRIBUTE2 
+                            "Unable to add attribute %s at Level = %d, error while poping stack."
+    ID_NO_NODE_TO_ADD_ATTRIBUTE0 
+                            "There is no node to which we can add this attribute '%s' = '%s'"
+    ID_NO_NODE_TO_ADD_ATTRIBUTE1 
+                            "There is no node to which we can add this attribute '%s' = '%s' (2)"
+    ID_UNABLE_TO_ALLOCATE_ATTRIBUTE_NODE "Unable to allocate Attribute node."
+    ID_TABLE_NOT_DEFINED_IN_STRUCTURE_FILE 
+                            "Table '%s' not defined in the structure file."
+    ID_UNABLE_TO_CREATE_FILE_FOR_LOADDB "Unable to create the file %s."
+    ID_NO_TABLE_IN_SCHEMA_FILE "No table found in schema file."
+    ID_UNABLE_ALLOCATE_MEMORY_FOR_TABLE_HEADER_NODE 
+                            "Unable to allocate memory for table header node for table %s."
+    ID_TABLE_NOT_FOUND_IN_SOURCE_SCHEMA_FILE 
+                            "Table %s not found in the source schema file."
+    ID_NUMBER_OF_COLUMNS_DOES_NOT_MATCH_INFO_IN_SCHEMA_FILE 
+                            "The number of columns for the input '%s' does not match in the information in the schema file.\nThe table has '%d' columns where as the schema file indicates that it has '%d' columns."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PARSEDATAFILE_TABLE_NOT_DEFINED_IN_STRUCTURE_FILE 
+                            "Table '%s' not defined in the structure file."
+    ID_DATA_AND_STRUCTURE_FILE_NOT_COLUMN_CONSISTENT 
+                            "The data file has the table %s to have %d column where as the structure file defines this table to have %d columns."
+    ID_UNABLE_ALLOCATE_MEMORY_FOR_FLAT_FILE 
+                            "Unable to allocate memory for table node for totally flat file."
+    ID_DATA_AND_STRUCTURE_FILE_NOT_COLUMN_CONSISTENT2 
+                            "The data file has the table %s to have %d column where as the structure file defines this table to have %d columns (2)."
+    ID_UNEXPECTED_TOKEN0    "Unexpected token '%s'."
+    ID_DATA_AND_STRUCTURE_FILE_NOT_COLUMN_CONSISTENT3 
+                            "The data file has the table %s to have %d column where as the structure file defines this table to have %d columns (3)."
+    ID_UNEXPECTED_TOKEN1    "Unexpected token '%s' (2)."
+    ID_UNEXPECTED_TOKEN_EXPECTED_DELIMTER 
+                            """ Unexpected token '%s' expected delimiter %s"""
+    ID_UNEXPECTED_TOKEN_EXPECTED_LT0 "Unexpected token '%s', expecting '<'."
+    ID_TABLE_NOT_IN_TRUCTURE_FILE_WHILE_PARSING0 
+                            "Table '%s' not defined in the structure file while parsing."
+    ID_UNABLE_TO_ALLOCATE_MEMORY_FOR_HEADER0 
+                            "Unable to allocate memory for table header for table %s."
+    ID_UNEXPECTED_TOKEN_EXPECTING_TABLE_NAME 
+                            "Unexpected token '%s', expecting table name."
+    ID_UNEXPECTED_TOKEN_EXPECTING_GT "Unexpected token '%s', expecting '>'."
+    ID_TABLE_NOT_IN_TRUCTURE_FILE_WHILE_PARSING1 
+                            "Table '%s' not defined in the structure file while parsing (2)."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UNEXPECTED_TOKEN_EXPECTED_LT_FOR_STRING_QUALIFIER 
+                            "Unexpected token '%s', expecting '<' for String qualifier."
+    ID_LENGTH_OF_STRING_QUALIFIER_GT_1 
+                            "The length of the string qualifier '%s' is > 1"
+    ID_UNEXPECTED_TOKEN_EXPECTING_LT_FOR_INTEGER_QUALIFIER 
+                            "Unexpected token '%s', expecting '<' for integer qualifier."
+    ID_LENGTH_OF_STRING_QUALIFIER_GT_1_1 
+                            "The length of the string qualifier '%s' is > 1 (2)"
+    ID_UNEXPECTED_TOKEN_EXPECTED_LT1 
+                            "Unexpected token '%s', expecting '<' (2)."
+    ID_UNEXPECTED_TOKEN_EXPECTING_GT_AFTER_FIELD_DELIMITER 
+                            "Unexpected token '%s', expecting '>' after field delimiter."
+    ID_UNEXPECTED_TOKEN_EXPECTING_START_POSITION 
+                            "Unexpected token '%s', expecting Start position."
+    ID_UNEXPECTED_TOKEN_EXPECTING_COMMA_AFTER_START_POSITION 
+                            "Unexpected token '%s', expecting ',' after start position."
+    ID_UNEXPECTED_TOKEN_EXPECTING_END_POSITION 
+                            "Unexpected token '%s', expecting end position."
+    ID_TABLE_DEFINED_COLUMNS_INCONSISTENT0 
+                            "The table %s has been defined to have %d columns but there are %d columns of data on this row."
+    ID_TABLE_DEFINED_COLUMNS_INCONSISTENT1 
+                            "The table %s has been defined to have %d columns but there are %d columns of data on this row (2)."
+    ID_TABLE_NOT_IN_TRUCTURE_FILE_WHILE_PARSING2 
+                            "Table '%s' not defined in the structure file while parsing (3)."
+    ID_NO_COLUMN_BEGIN_AND_END_IN_SCHEMA_FILE1 
+                            "%s.%s does not have column begin and end information defined in the schema file (2)."
+    ID_LENGTH_OF_STRING_QUALIFIER_GT_1_0 
+                            "The length of the string qualifier '%s' is > 1."
+    ID_NUMBER_OF_COLS_MORE_THAN_DEFINED 
+                            "Number of data columns are more than %d as defined in the structure file for table %s."
+    NON_NUMERIC_DATA_ASSIGNED_TO_NUMERIC_FIELD 
+                            "Table %s : Non numeric data '%s' assigned to numeric field %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UNABLE_TO_ALLOCATE_MEMORY_FOR_HEADER1 
+                            "Unable to allocate memory for table header for table %s (2)."
+    ID_UNABLE_TO_ALLOCATE_MEMORY_FOR_ROW_HEADER_FOR_TABLE 
+                            "Unable to allocate memory for row header for table %s."
+    ID_TABLE_NOT_FOUND_IN_SCHEMA0 "Table '%s' not found in schema file."
+    ID_FIRST_OBJECT_NOT_FOUND_IN_SCHEMA 
+                            "First object '%s' not found in schema."
+    ID_FIELD_NOT_MAPPED     "Warning : Schema attribute/field '%s' not mapped."
+    ID_TABLE_NOT_FOUND_IN_SCHEMA1 "Table '%s' not found in schema file (2)."
+    ID_UNABLE_TO_GET_INSTALL_PATH_WDI_REGISTRY 
+                            "Unable to get the Install Path for WDI from the Registry."
+    ID_UNABLE_TO_GET_INSTALL_HTTPPATH_WDI_REGISTRY 
+                            "Unable to get the HTTP Path for WDI from the Registry."
+    ID_UNABLE_TO_INSTANTIATE_REMOTEDB_OBJECT 
+                            "Unable to instantiate the object 'CommerceRoute.RemoteDB'."
+    ID_UNABLE_TO_GET_INTERFACE_POINTER 
+                            "Unable to get the interface pointer to IRemoteDBCaller."
+    ID_WRITEDATAFILE_NO_FILE_SPECIFIED "No file specified."
+    ID_WRITEDATAFILE_UNABLE_TO_OPEN_FILE "Unable to open the file '%s'."
+    ID_TABLE_NOT_SPECIFIED_IN_TARGET_SCHEMA_FILE 
+                            "The table %s not specified in the target schema file."
+    ID_UNABLE_TO_GET_COLUMN_INFO_FOR_TABLE 
+                            "Unable to get column information for the table %s."
+    ID_NO_DELIMITER_AND_COLUMN_POS_FOR_TABLE 
+                            "The table %s does not have Delimiter or column postion and length specified in the target schema file."
+    ID_UNABLE_TO_FIND_FIELD_LEN_FOR_FIELD 
+                            "Unable to find the field length for the field %s.%s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PS_TARGET_ERROR_CONNECT 
+                            "PeopleSoft Target Error : Target Info - Locator - '%s' Login - '%s' Passwd - 'Not Displayed' Activity Name - '%s' Msg Defn - '%s'."
+    ID_PS_TARGET_ERROR_STARTMESSAGE 
+                            "PeopleSoft Target Error : Target Info - Locator - '%s' Login - '%s' Passwd - 'Not Displayed' Activity Name - '%s' Msg Defn - '%s' (2)."
+    ID_PS_TARGET_ERROR_DISCONNECT 
+                            "PeopleSoft Target Error : Target Info - Locator - '%s' Login - '%s' Passwd - 'Not Displayed' Activity Name - '%s' Msg Defn - '%s' (3)."
+    ID_PS_TARGET_ERROR_LOADPSMSG_API "PeopleSoft Target Error: %s."
+    ID_FAILED_DB_CONNECT    "Connecting to database failed. Last reported error: %s\n(DSN = %s, User = %s, Driver = %s, Server = %s, DbName = %s, ConnectString = %s)"
+    ID_FAILED_DB_DISCONNECT "Disconnecting from database failed. ""DSN = %s, User = %s, Driver = %s, Server = %s, DbName = %s, ConnectString = %s."
+    ID_FAILED_CONNECT_TO_MSGDB 
+                            "Failed connect to MessageDb: ""DSN = %s, User = %s, Driver = %s, Server = %s, DbName = %s, ConnectString = %s."
+    ID_FAILED_MSGDB_EXECUTE "Failed to execute SQL statement in Message DB.  Info = %s, SQL = %s."
+    ID_WRITETODB_UNABLE_TO_OBTAIN_COLUMN_INFO_FOR_TABLE 
+                            "Unable to obtain column information for the table %s."
+    ID_ENTERTODB_NO_TABLE_NAME_AVAILABLE 
+                            "Error Writing to Database : No table name available. (This can happen when the target database structure is flat)"
+    ID_ENTERTODB_INSERTUPDATEMODE_INSERTSQL_EMPTY 
+                            "Insert SQL statement is empty (Insert/Update mode). This might be caused by empty source data. For example, if your source is a text file, this error will occur if the text file contains empty lines."
+    ID_ENTERTODB_INSERTUPDATEMODE_UPDATESQL_EMPTY 
+                            "Update SQL statement is empty (Insert/Update mode)."
+    ID_ENTERTODB_INSERTUPDATEMODE_UPDATESQL_EXEC_FAILED 
+                            "Update SQL statement failed to execute (%s mode).  Info=%s, SQL = %s, Message=%s."
+    ID_ENTERTODB_INSERTUPDATESQL_EXEC_FAILED 
+                            "Insert/Update SQL execution failed.  Insert SQL=%s, Update SQL=%s, Message=%s."
+    ID_ENTERTODB_INSERTMODE_INSERTSQL_EMPTY 
+                            "Insert SQL statement is empty. All the values for the insert statement might be undefined (NULL). (%s mode)."
+    ID_ENTERTODB_INSERTMODE_INSERTSQL_EXEC_FAILED 
+                            "Insert SQL statement failed to execute (Insert mode).  %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ENTERTODB_UPDATEMODE_UPDATESQL_EMPTY 
+                            "Update SQL statement is empty (Update mode)."
+    ID_ENTERTODB_UPDATEMODE_UPDATEEXEC_FAILED 
+                            "Update SQL statement failed to execute (Update mode).  Update SQL=%s, Message=%s."
+    ID_ENTERTODB_UPDATEINSERTMODE_INSERTSQL_EMPTY 
+                            "Insert SQL statement is empty (Update/Insert mode)."
+    ID_ENTERTODB_UPDATEINSERTMODE_INSERT_EXEC_FAILED 
+                            "Insert SQL statement failed to execute (Update/Insert mode).  Update SQL=%s, Insert SQL=%s, Message=%s."
+    ID_ENTERTODB_DELETEMODE_DELETESQL_EMPTY 
+                            "Delete SQL statement is empty (Delete mode)."
+    ID_ENTERTODB_DELETEMODE_DELETE_EXEC_FAILED 
+                            "Delete SQL statement failed to execute (Delete mode).  Delete SQL=%s,  Message=%s."
+    ID_ENTERTODB_INVALID_MODE 
+                            "Incorrect DbLogic MODE ('%d') specified for what action to perform for writing into database."
+    ID_SETPSFIELD_UNABLE_TO_OBTAIN_INFO_FOR_TABLE 
+                            "Unable to obtain column information for the table %s."
+    ID_WSTRANSFORMATION_FAILED 
+                            "Call to webservice at %s failed. Reported error:\n%s"
+    ID_REMOTEDB_ERROR       "Error Returned by RemoteDB.DLL  = '%s'.  IRemoteDb::ExecMultSql( DSN = '%s', HttpSCMFile = '%s', HttpDatFile = '%s', User = '%s', Pwd = 'Not Displayed', Driver = '%s', DriverLoc = '%s', IPAddr = '%s', DbLogicMode = '%d') Failed."
+    ID_REMOTEDB_EXCEPTION   "Exception thrown by RemoteDB.DLL.  IRemoteDb::ExecMultSql( DSN = '%s', HttpSCMFile = '%s', HttpDatFile = '%s', User = '%s', Pwd = 'Not Displayed', Driver = '%s', DriverLoc = '%s', IPAddr = '%s', DbLogicMode = '%d') Failed."
+    ID_GETCOMPOUNDKEY_UNABLE_TO_FIND_KEY_COLUMN_FOR_TABLE0 
+                            "Unable to find key column %s in table %s."
+    ID_GETCOMPOUNDKEY_UNABLE_TO_FIND_KEY_COLUMN_FOR_TABLE1 
+                            "Unable to find key column %s in table %s."
+    ID_THERE_IS_NO_DATA_FOR_TABLE0 "There is no data for the table %s."
+    ID_THERE_IS_NO_DATA_FOR_TABLE1 "There is no data for the table %s."
+    ID_THERE_IS_NO_DATA_FOR_TABLE2 "There is no data for the table %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_REQUIRED_FIELD_PARAM_EMPTY "The Required field parameter is empty."
+    ID_MAPPING_HAD_MULTIPLE_PERIOD 
+                            "The mapping %s has a multiple ('.') after the last singleton ('$') which is not allowed for this transformation."
+    ID_UNABLE_TO_FIND_TREE_WITH_TABLES 
+                            "Unable to find a tree with the tables %s in it."
+    ID_TABLE_NAME_LIST_EMPTY_FOR_HF_SOURCE 
+                            "Table name list is empty for a HF source."
+    ID_TRANSFORM_VALUE_NULL "VALUE_NULL"
+    ID_UNABLE_TO_FIND_FIELD "Unable to find field."
+    ID_FAILED_TO_OPEN_TRANSFORMATIONSTAB 
+                            "Error - %s Can't open TransformationsTab with the filter: %s."
+    ID_SOURCE_OR_TARGET_TYPE_NOT_SUPPORTED 
+                            "Unexpected error for sourceType=%d (%s), targetType=%d (%s).\nStructure file is missing. Try to deploy everything in your project again."
+    ID_TRANSFORMATION_HAS_NO_MAPPINGS "This transformation has no mappings."
+    ID_FAILED_TO_OPEN_TARGETSTAB "Can't open TargetsTab with the filter: %s."
+    ID_GETTRANDB_GENERAL_EXCEPTION 
+                            "General exception caught while reading from internal database TranDb."
+    ID_LOADTEXTSRC_LOADDATA_FAILED 
+                            "Error: Loading text Source failed (%s,%s) :%s."
+    ID_LOADSCM_FAILED       "Error: Unable to load the Schema (SCM) file '%s' - \n%s."
+    ID_LOADEDISRC_LOADEDI_FAILED 
+                            "Error: Unable to load EDI source (SEF FILE = %s, DATA FILE = %s) failed:%s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOADREMDBSRC_LOADSCM_FAILED 
+                            "Error: Unable to load database source in Loading Schema File(%s) failed:%s."
+    ID_LOADREMDBSRC_DB_EXCEPTION0 
+                            "Database error in opening remote database '%s' [%s]."
+    ID_LOADREMDBSRC_FAILED_CREATE_TEMP_FILE 
+                            "Error: Loading data from Remote Database failed:\nUnable to create a temporary file for data from remote database."
+    ID_LOADREMDBSRC_SOURCE_SCHEMA_LOADDATA_FAILED 
+                            "Error:  Loading data from Remote Database failed:\nSource Schema File = %s\n%s."
+    ID_LOADREMDBSRC_TARGETDTD_CREATE_FAILED 
+                            "Error: targetDTD.Create(%s) failed before srcTxtParser.LoadFlatData."
+    ID_LOADREMDBSRC_DB_EXCEPTION1 
+                            "Exception - Loading data from Remote Database \nDatabase error: %s [%s]."
+    ID_LOADREMDBSRC_EXCEPTION_MESSAGE 
+                            "Exception - Loading data from Remote Database \nDatabase error: %s."
+    ID_LOADREMDBSRC_COM_EXCEPTION 
+                            "Loading data from Remote Database \nCOM Exception : RemoteDb.Dll\nTreeMapper::LoadRemDbSrc()\nDSN=%s\nSQL=%s\nUID=%s\nPWD=TopSecret\nDriverName=%s\nDriverLocation=%s\nServerLocation=%s."
+    ID_LOADREMDBSRC_LOADFLATDATA_FAILED 
+                            "Error: Loading flat data from Remote Database failed\n%s."
+    ID_LOADDBSRC_SOURCE_LOADSCM_FAILED 
+                            "Error: Loading flat data from Remote Database  loading schema file (%s) failed:\n%s."
+    ID_LOADDBSRC_SOURCE_DSN_NOT_SPECIFIED 
+                            "Error:  Unable to load data from the source Database because the SourceDSN is empty."
+    ID_LOADDBSRC_SOURCE_SQL_NOT_SPECIFIED 
+                            "Error: Unable to load data from the source database because the SQL statement is empty.\nDSN (password not shown) = '%s'"
+    ID_LOADDBSRC_DB_EXCEPTION 
+                            "Error opening database. DSN (password not shown): %s\nReported error: %s"
+    ID_LOADDBSRC_UNABLE_CREATE_TEMP_FILE 
+                            "Error: Loading data from database source failed:\nUnable to create a temporary file for data from database."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOADDBSRC_TARGETDTD_CREATE_FAILED 
+                            "Error: targetDTD.Create(%s) failed before srcTxtParser.LoadFlatData."
+    ID_LOADDBSRC_SOURCE_LOADFLATDATA_FAILED 
+                            "Error: Unable to load flat data \n%s."
+    ID_CREATEFILETABLEWISE_SOURCE_HANDLE_NULL 
+                            "Unable to load hierarchic database source data - The source structure handle to the SCM file is NULL."
+    ID_LOADDBSRC_DB_EXCEPTION1 
+                            "Unable to load database source data.\nDSN (password not shown) = '%s'\nDatabase error: %s [%s]"
+    ID_LOADDBSRC_EXCEPTION_MESSAGE "General Exception: %s."
+    ID_LOADDBSRC_GENERAL_EXCEPTION 
+                            "General Exception caught in loading database source data while - %s."
+    ID_DBFLATTRANSFORM_TARGETDTD_CREATE_FAILED 
+                            "Error: targetDTD.Create(%s) failed before srcTxtParser.LoadFlatData."
+    ID_DBFLATTRANSFORM_SOURCE_LOADFLATDATA_FAILED 
+                            "Error: Unable to load source flat failed\n%s."
+    ID_PROCESSFLATTEXTTOXML_SOURCE_LOADSCM_FAILED 
+                            "Error: Transforming Flat data to XML :\nUnable to load the schema file %s."
+    ID_PROCESSFLATTEXTTOEDI_SOURCE_LOADSCM_FAILED 
+                            "Error: Transforming Flat data to EDI failed:\nUnable to load the schema file %s."
+    ID_PROCESSDBSOURCEI_SOURCE_LOADSCM_FAILED 
+                            "Error: Loading the source schema file (%s) failed:\n%s."
+    ID_PROCESSDBSOURCE_SOURCE_DSN_NOT_SPECIFIED 
+                            "Error: Unable to load data from the source database because the source DSN is empty."
+    ID_PROCESSDBSOURCEI_SOURCE_SQL_NOT_SPECIFIED 
+                            "Error: Unable to load data from the source Database because the SourceSQL is empty.\nSourceDSN = '%s'\nSourceSQL = '%s'."
+    ID_PROCESSDBSOURCE_DB_EXCEPTION 
+                            "Error opening  database. DSN (password not shown) =  '%s'\nReported error: %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PROCESSDBSOURCE_DB_EXCEPTION1 
+                            "Unable to load data from database source.\nDSN (password not shown) = '%s'\n Database error: %s [%s] \nSQL = %s."
+    ID_PROCESSDBSOURCE_EXCEPTION_MESSAGE "General Exception: %s."
+    ID_PROCESSDBSOURCE_GENERAL_EXCEPTION 
+                            "General Exception caught in loading from database source while - %s."
+    ID_LOADPSMSGAGNSRC_SOURCE_LOADSCM_FAILED 
+                            "Error: loading PeopleSoft Source data , Loading schema file (%s) failed:\n%s\n."
+    ID_LOADPSMSGAGNSRC_PSACCESS_FAILED "Failed to connect to People Soft: %s."
+    ID_LOADPSMSGAGNSRC_LOADPS_FAILED 
+                            "Failed to load People Soft Message API: %s."
+    ID_LOADPSMSGAGNSRC_STARTMESSAGE_FAILED "People Soft failed: %s."
+    ID_LOADPSMSGAGNSRC_SETFIELD_FAILED "Failed to set PS field: %s."
+    ID_LOADPSMSGAGNSRC_PROCESSMESSAGE_FAILED "Failed to process PS: %s."
+    ID_LOADPSMSGAGNSRC_PS_DISCONNECT_FAILED 
+                            "Failed to disconnect from People Soft: %s."
+    ID_LOADPSSRC_SOURCE_LOADSCM_FAILED 
+                            "Error: TreeMapper::LoadPeopleSoftSrc LoadSCM(%s) failed:\n%s\n."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOADPSSRC_CONNECTSTRING_NOT_SPECIFIED 
+                            "Error: TreeMapper::LoadPeopleSoftSrc \n Unable to load data from the source Database because the ConnectString is empty.\nSourceDSN = '%s'\nSourceSQL = '%s'."
+    ID_LOADPSSRC_SOURCE_SQL_NOT_SPECIFIED 
+                            "Error: TreeMapper::LoadPeopleSoftSrc \n Unable to load data from the source Database because the SourceSQL is empty\nSourceDSN = '%s'\nSourceSQL = '%s'."
+    ID_LOADPSSRC_PS_QUERY_EXCEPTION 
+                            "Error: TreeMapper::LoadPeopleSoftSrc - Could not update PeopleSoft Query-Parameters\n"
+    ID_LOADPSSRC_TABSEP_CREATE_EXCEPTION 
+                            "Error: TreeMapper::LoadPeopleSoftSrc - Unable to connect to the database \nSourceDSN = '%s'\nSourceSQL = '%s'."
+    ID_LOADPSSRC_CREATE_TEMPFILE_FAILED 
+                            "Error: TreeMapper::LoadPeopleSoftSrc() failed:\nUnable to create a temporary file for data from PeopleSoft source."
+    ID_LOADPSSRC_TARGETDTD_CREATE_FAILED 
+                            "Error: targetDTD.Create(%s) failed before srcTxtParser.LoadFlatData."
+    ID_LOADPSSRC_LOADFLATDATA_FAILED 
+                            "Error: srcTxtParser.LoadFlatData failed."
+    ID_LOADPSSRC_DB_EXCEPTION 
+                            "MapByTransformationID() - TreeMapper::LoadPeopleSoftSrc()\n Connect string (password not shown) = %s\nDatabase error: %s [%s]."
+    ID_DOBULKTRANSFORM_GETTEMPLATESTRING_FAILED 
+                            "Error: GetTemplateString failed - %s"
+    ID_DOBULKTRANSFORM_INITIALIZE_FAILED 
+                            "Error: Failed to intialize bulk transform"
+    ID_DOBULKTRANSFORM_GENERAL_FAILURE "Error: BulkTransform failed - %s"
+    ID_INSERTTEXTTORDB_UNABLE_TO_GET_HTTP_PATH 
+                            "Error - Unable to get the HTTP Path for WDI from the Registry"
+    ID_INSERTTEXTTORDB_UNABLE_TO_INSTANTIATE_OBJECT 
+                            "Error - Unable to instantiate the object 'CommerceRoute.RemoteDB'"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERTTEXTTORDB_UNABLE_TO_GET_INTERFACE_POINTER_IREMOTEDBCALLER 
+                            "Error - Unable to get the interface pointer to IRemoteDBCaller."
+    ID_INSERTTEXTTORDB_REMOTEDBERROR 
+                            "Error Returned by RemoteDB.DLL  = '%s'\nIRemoteDb::ExecMultSql( DSN = '%s', HttpSCMFile = '%s', HttpDatFile = '%s', User = '%s', Pwd = 'Not Displayed', Driver = '%s', DriverLoc = '%s', IPAddr = '%s', DbLogicMode = '%d') Failed.\n"
+    ID_INSERTTEXTTORDB_EXCEPTION 
+                            "Error - Exception thrown by RemoteDB.DLL  \nIRemoteDb::ExecMultSql( DSN = '%s', HttpSCMFile = '%s', HttpDatFile = '%s', User = '%s', Pwd = 'Not Displayed', Driver = '%s', DriverLoc = '%s', IPAddr = '%s', DbLogicMode = '%d') Failed.\n"
+    ID_PROCESSBYPART_SOURCE_LOADSCM_FAILED 
+                            "Error: TreeMapper::ProcessByPart() failed:\nUnable to load the schema file %s."
+    ID_PROCESSBYPART_TARGET_LOADSCM_FAILED 
+                            "Unable to load the target SCM file - %s"
+    ID_PROCESSBYPART_EXCEPTION_IN_BULKTRANSFORM 
+                            "Exception caught in DoBulkTransform\nInput file = '%s'\nOutput file = '%s'\n"
+    ID_PROCESSBYPART_REMDB_EXCEPTION_IN_BULKTRANSFORM 
+                            "(RemDb to Text) Exception caught in DoBulkTransform\nInput file = '%s'\nOutput file = '%s'\n"
+    ID_STREAM_TRANSFORMATION_UNABLE_TO_CREATE_TEMP_FILE 
+                            "Unable to create a temporary file name."
+    ID_PROCESSBYPART_BULKTRANSFORM_FOR_TEXT_SOURCE_FAILED 
+                            "DoStreamingTransform fails for Text source"
+    ID_PROCESSBYPART_BULKTRANSFORM_EXCEPTION 
+                            "(Db Target) Exception caught in DoBulkTransform\nInput file = '%s'\nOutput file = '%s'\n"
+    ID_PROCESSBYPART_BULKTRANSFORM_EXCEPTION1 
+                            "(Db to Text) - Exception caught in DoBulkTransform\nInput file = '%s'\nOutput file = '%s'\n"
+    ID_PROCESSBYPART_NO_INPUT_FILE_SPECIFIED 
+                            "No input file name specified for transformation id =  '%d'.\n"
+    ID_PROCESSBYPART_UNABLE_TO_OPEN_INPUT_FILE 
+                            "Unable to open the input data file '%s'.\n"
+    ID_PROCESSBYPART_UNABLE_TO_CREATE_TEMPDATAFILE 
+                            "Unable to create the temporary data file %s"
+    ID_PROCESSBYPART_FAILED_TO_PROCESS_DELETE_DELTA_FILE 
+                            "Failed to process delete delta file.\n"
+    ID_PROCESSBYPART_FAILED_TO_PROCESS_INSERT_DELTA_FILE 
+                            "Failed to process insert delta file.\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PROCESSBYPART_FAILED_TO_PROCESS_UPDATE_DELTA_FILE 
+                            "Failed to process update delta file.\n"
+    ID_PROCESSINSERTTESTTODB_UNABLE_TO_INSERT 
+                            "Unable to insert data into database."
+    ID_UPDATESRCDB_UPDATEFIELDS_EMPTY "Update fields empty."
+    ID_UPDATESRCDB_SOURCE_TABLE_NOT_FOUND_IN_SCHEMA 
+                            "Source table '%s' not found in the source schema file."
+    ID_UPDATESRCDB_UNABLE_TO_OPEN_SOURCE_DATA_FILE 
+                            "TransformationID=%d. Unable to open the source data file '%s' to update source database.\n"
+    ID_UPDATESRCDB_UNABLE_TO_CONNECT_TO_SOURCE_DB 
+                            "Unable to connect to the source database to update status\n%s\nDSN = %s, User = %s"
+    ID_LOADPSMSGAPI_LOAD_DLL_FAILED 
+                            "Unable to load the dll (NOTE : Please make sure you have P:\\pt750\\bin\\CLIENT\\WINX86 in the path) %s"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGCONNECT_FAILED 
+                            "Unable to GetProcAddress for PSMsgConnect in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGSTARTCONNECT_FAILED 
+                            "Unable to GetProcAddress for PSMsgStartMessage in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGPROCESSMESSAGE_FAILED 
+                            "Unable to GetProcAddress for PSMsgProcessMessage in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGSETFIELD_FAILED 
+                            "Unable to GetProcAddress for PSMsgSetField in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGDISCONNECT_FAILED 
+                            "Unable to GetProcAddress for PSMsgDisconnect in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGGETERROR_FAILED 
+                            "Unable to GetProcAddress for PSMsgGetErrorExplainText in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGGETERRORRECORDNAME_FAILED 
+                            "Unable to GetProcAddress for PSMsgGetErrorRecordName in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGGETERRORFIELDNAME_FAILED 
+                            "Unable to GetProcAddress for PSMsgGetErrorFieldName in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGFINDFIRSTFIELD_FAILED 
+                            "Unable to GetProcAddress for PSMsgFindFirstField in PSMsgApi.dll\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGGETFIELDNAME_FAILED 
+                            "Unable to GetProcAddress for PSMsgGetFieldName in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGGETVALUE_FAILED 
+                            "Unable to GetProcAddress for PSMsgGetValue in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGFINDNEXTFIELD_FAILED 
+                            "Unable to GetProcAddress for PSMsgFindNextField in PSMsgApi.dll\n"
+    ID_LOADPSMSGAPI_GETPROCADDRESS_PSMSGFINDNEXTOUTPUTROW_FAILED 
+                            "Unable to GetProcAddress for PSMsgFindNextOutputRow in PSMsgApi.dll\n"
+    ID_PSACCESS_CONNECT_NO_POINTER_FAILED 
+                            "Function pointer for PSMsgConnect not available - Please make sure CPSAccess::LoadPSMsgApi() has been called successfully."
+    ID_PSACCESS_CONNECT_FAILED "PeopleSoft connect failed."
+    ID_PSACCESS_STARTMESSAGE_FAILED "PeopleSoft startmessage failed."
+    ID_PSACCESS_PROCESSMESSAGE_FAILED "PeopleSoft ProcessMessage failed."
+    ID_PSACCESS_SETFIELD_FAILED "PeopleSoft setfield failed."
+    ID_PSACCESS_DISCONNECT_FAILED "PeopleSoft disconnect failed."
+    ID_PSACCESS_FINDNEXTOUTPUTROW_FAILED 
+                            "PeopleSoft FindNextOutputRow failed."
+    ID_PSACCESS_FINDNEXTFIELD_FAILED "PeopleSoft FindNextField failed."
+    ID_PSACCESS_FINDFIRSTFIELD_FAILED "PeopleSoft FindFirstField failed."
+    ID_DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION 
+                            "DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION 1"
+    ID_CREATEFLATBROWSETREE_DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION 
+                            "DTDPARSER_ERR_UNKNOWN_FILE_EXTENSION 1"
+    ID_CREATEBROWSETREE_OPEN_TO_WRITE_JAVAFILE_FAILED 
+                            "Unable to create the file %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CREATEFLATBROWSETREE_OPEN_TO_WRITE_JAVAFILE_FAILED 
+                            "Unable to create the file %s"
+    ID_CRXMLPARSER_READ_EXCEPTION "Read error.  XmlFile %s\n"
+    ID_CRXMLPARSER_LOADDOCSYNC_FAILED 
+                            "Invalid Xml generated (%s)\n Line = %d\nReason = %s\n Source Text = %s"
+    ID_CRXMLPARSER_LOADDOCSYNC_EXCEPTION 
+                            "Unknown Error : while loading .xml file %s\n "
+    ID_UPDATESRCDB_NUMBER_ROWS_SOURCE_GT_TABLE 
+                            "Warning - the number of columns in the source row %s are more than defined in the table, this row will be ignored."
+    ID_UPDATESRCDB_FAILED_TO_READ_LINE_FROM_INPUT_FILE 
+                            "Failed to read line from input file '%s'.  File error=%d.\n"
+    ID_SETDTD_CREATEINSTANCE_FAILED 
+                            "Error: CRXmlParser::SetDtd : dtd file %s : system %s "
+    ID_XML_PARSER_CREATE_DOM_NODE_ERROR 
+                            "Error: CRXmlParser::SetDtd : dtd file %s : system %s"
+    ID_SETDTD_COM_EXCEPTION "Error: CRXmlParser::SetDtd : dtd file %s : system %s"
+    ID_INSERTNODE_FAILED    "Error: CRXmlParser::InsertNode: element name %s : value %s"
+    ID_INSERTNODE_XML_PARSER_CREATE_DOM_NODE_ERROR 
+                            "Error: CRXmlParser::InsertNode: element name %s : value %s"
+    ID_INSERTNODE_APPEND_NODE_ERROR 
+                            "Error: CRXmlParser::InsertNode: element name %s : value %s\n"
+    ID_INSERTNODE_COM_EXCEPTION 
+                            "Error: CRXmlParser::InsertNode: element name %s : value %s "
+    ID_DELETENODE_FAILED    "Error: CRXmlParser::DeleteNode: element name %s\n"
+    ID_DELETENODE_COM_EXCEPTION 
+                            "Error: CRXmlParser::DeleteNode: element name %s"
+    ID_APPENDATTRIBUTE_COM_EXCEPTION 
+                            "Error: CRXmlParser::AppendAttribute: Attribute Name %s : Value %s\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SETVALUE_COM_EXCEPTION "Error: CRXmlParser::SetValue: Element Value %s"
+    ID_CREATEDOMNODE_COM_EXCEPTION 
+                            "Error: CRXmlParser::CreateDOMNode: Element Name %s : Type %d "
+    ID_CREATEDOMNODE_CALLED_ERE_CREATEDOC_ELEMENT 
+                            "Error: CRXmlParser::CreateDOMNode: called before creating Document Element"
+    ID_FINDVALUE_RESTOREPATH_FAILED 
+                            "Error: CRXmlParser::FindValue() error in RestoreXPath(beginPath0=""%s"",endPath0=""%s"")"
+    ID_FINDINSTANCE_FAILED  "CRXmlParser::findInstance has problem calling m_pDTDParser->RestoreXPath(beginPath=""%s"", endPath=""%s"")\n"
+    ID_FINDINSTANCE_COM_EXCEPTION 
+                            "Error: CRXmlParser::findInstance failed: Path begin '%s' , end '%s' \n"
+	ID_XML_SAVE_FAILED      "Error: CRXmlParser::Save: file: %s,\nReason: %s\n"
+    ID_SAVE_CANNOT_OPEN_FILE_FOR_READING 
+	                        "Error: CRXmlParser::Save: Cannot open file for reading. File: %s, Reason: %s"
+    ID_SAVE_CANNOT_OPEN_FILE_FOR_WRITING 
+                            "Error: CRXmlParser::Save: file %s error, cannot open to write\n"
+    ID_SAVE_CLOSING_TAG_MISMATCH 
+                            "Error: CRXmlParser::Save: file %s closing tag %s mismatch"
+    ID_SAVE_FILE_EXCEPTION  "Error: CRXmlParser::Save: file %s open/write error %s"
+    ID_XML_PARSER_DOM_LOOP_NEXT_NODE_ERROR 
+                            "Error: CDomLoop::NextNode failed: com error \n"
+    ID_FAILED_TEST_RUN      "TestRun TokenizeTemplate failed\n"
+    ID_TEST_RUN_READ_FAILED "TestRun failed to read %s, err=%d\n"
+    ID_TEST_RUN_FAILED_PARTIAL "TestRun failed partial result=\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DTD_PARSER_CREATE_OPEN_FILE_FAILED 
+                            "DTDParser Error can't open DTD file %s"
+    ID_DTD_PARSER_REWIND_FILE_FAILED "DTDParser Error, dtdfile %s"
+    ID_DTD_PARSER_READDTDDEF_FAILED "ReadDtdDef call failed.  File %s."
+    ID_DTD_PARSER_EXCEPTION "DTDParser::Create - Error Message(%d): %s - \nUnable to read the file  %s"
+    ID_DTD_PARSER_READFILEDEF_FAILED "ReadFileDef function call failed."
+    ID_DTD_PARSER_UNABLE_TO_READ_EXCEPTION 
+                            "DTDParser::Create - Error Message(%d): %s - \nUnable to read the file  %s"
+    ID_FAILED_PARSEELEMENT_FAILED "%d Error Message: %s --- at\n"
+    ID_PARSEATTLIST_FAILED  "%d Error Message: %s --- at\n"
+    ID_PROCESS_ENTITY_FAILED "%d Error Message:%s\n"
+    ID_READFILEDEF_DEFINEPRIMARYKEY_FAILED 
+                            "DefinePrimaryKey error, parent=%p, ""%s"",\n pkey_str=""%s""\n"
+    ID_READFILEDEF_CANT_FIND_PARENT_LINK 
+                            "DTDParser::ReadFileDef error\n can't find parent %s\nlink %s %s<- %s %s"
+    ID_READFILEDEF_DEFINEFOREIGNKEY_FAILED 
+                            "DefineForeignKey error, obj=%p,\n ""%s"", pkey_str=""%s"", fkey_str=""%s""\n"
+    ID_GETHFLOOP_UPDATEENDPATH_FAILED 
+                            "Error: GetHfLoop UpdateEndPath failed\n path_to_update=%s, endPath=%s\nThis occur usually when there are illegal mappings."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ATTRIBUTENODES_EVALUATE_FAILED "Evaluate target: %s failed. %s."
+    ID_ATTRIBUTENODES_GETFOREIGNKEYVALUE_FAILED 
+                            "%s\nTable: %s, ForeignKey: %s, PrimaryKey: %s"
+    ID_ADDATTRIBUTENODES_GETSTRING_FAILED 
+	"Unable to evaluate the formula for the taget node: %s, expression: %s = '%s', the target data type = '%s'"
+    ID_DOXMLXMLMAP_TARGETXMLPARSER_INSERTNODE_FAILED 
+                            "Error: CRXmlParser::InsertNode method failed : %s\n%s"
+    ID_DOXMLXMLMAP_GETCDOMLOOP_FAILED "Function call failed."
+    ID_DOXMLXMLMAP_TARGETXMLPARSER_INSERTNODE_FAILED1 
+                            "Error: DoXmlXmlMap CRXmlParser::InsertNode method failed : %s\n%s"
+    ID_DOXMLXMLMAP_INTERNAL_ERR_EXPECT_ELEMENT_OR_COLLECTION 
+                            "Error: %s\n TargetNode=%s m_Type=%x\n"
+    ID_DOHFXMLMAP_TARGETXMLPARSER_INSERTNODE 
+                            "Error: CRXmlParser::InsertNode method failed : %s\n%s"
+    ID_DOHFXMLMAP_INTERNAL_ERR_EXPECT_ELEMENT_OR_COLLECTION 
+                            "Error: TargetNode = %s m_Type = 0x%x, it must be a type of Value, Attribute, or Element, Collections\n"
+    ID_DOHFXMLMAP_GETHFLOOP_FAILED "Function call failed."
+    ID_DOHFXMLMAP_TARGETXMLPARSER_INSERTNODE1 
+                            "Error: CRXmlParser::InsertNode method failed : %s\n%s"
+    ID_DOHFXMLMAP_INTERNAL_ERR_EXPECT_ELEMENT_OR_COLLECTION1 
+                            "Error: TargetNode=%s m_Type=%x\n"
+    ID_DOHFXMLMAP_COLLECTALLCHILDNODE_FAILED "Function call failed."
+    ID_DOHFXMLMAP_GETHFLOOP_FAILED1 "Function call failed."
+    ID_GETCDOMLOOP_UPDATEENDPATH_FAILED 
+                            "Error: TreeMapper::GetCDomLoop UpdateEndPath failed\npath_to_update=%s\nendPath=%s\nThis usually occurs when there are illegal mappings."
+    ID_GETCDOMLOOP_CREATION_FAILED 
+                            "CDomLoop creation failed: Path begin '%s' , end '%s' %s\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADDVALUEATTRIBUTE_EVALUATE_FAILED 
+                            "CreateNodeWithValueAttribute error in Evaluate(""%s"")\n"
+    ID_ADDVALUEATTRIBUTE_TARGETXMLPARSET_SETVALUE_FAILED 
+                            "SetValue method failed : \n TargetNode=%s value=%s\n"
+    ID_ADDVALUEATTRIBUTE_TARGETXMLPARSET_APPENDATTRIBUTE_FAILED 
+                            "AppendAttribute method failed\n TargetNode=%s value=%s\n"
+    ID_COMPFILE_CREATE_KEYCOLUMNS_ERROR 
+                            "Create KeyColumns error format_str:%s, err:%s"
+    ID_COMPFILE_CANT_ALLOCATE_BUFFER 
+                            "Can't allocate oldBuf nKB=%d maybe too large"
+    ID_COMPFILE_COMPAREFILE_FAILED "Function call failed."
+    ID_COMPFILE_RENAME_FAILED "rename error, oldname:%s, newname:%s"
+    ID_COMPFILE_COMPAREFILE_FAILED1 "Function call failed."
+    ID_COMPAREFILE_FIX_COLUMN_LENGTH_ERROR 
+                            "Fix line length %d exceed maximum allocation %d\n"
+    ID_COLLECTDATAELEMENTS_ADDINPUTDELIST_FAILED 
+                            "Error: AddToInputDEList(""%s"") called by CollectAllDataElements\n"
+    ID_COLLECTDATAELEMENTS_ADDINPUTDELIST_FAILED1 
+                            "Error: AddToInputDEList(path=""%s"") called by CollectAllDataElements\n"
+    ID_FILLDATAELEMENTS_FINDVALUE_FAILED 
+                            "WARNING : FillDataElements CRXmlParser::FindValue failed:  Source Path=%s, Value Path=%s\n"
+    ID_FILLDATAELEMENTS_FINDVALUE_FAILED1 
+                            "WARNING : FillDataElements CTxtParser::FindValue failed: Source Path=%s, Value Path=%s\n"
+    ID_FINDHIERARCH_FAILED  "Function call failed."
+    ID_FINDHIERARCH_ADDTOINPUTDELIST_FAILED 
+                            "CROM::FindHierarch error, failed to AddToInputDEList, attribute:%s, source_path:%s\n"
+    ID_FINDHIERARCH_ADDTOINPUTDELIST_FAILED1 "%s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FINDHIERARCH_FINDNAME_FAILED 
+                            "CROM::FindHierarch error, failed find attribute %s from flat table"
+    ID_FINDHIERARCH_TARGETCHILD_FAILED "Child node is NULL."
+    ID_FINDHIERARCH_TARGETCHILD_FAILED1 "Child node is NULL."
+    ID_LOADFLATDATA_CREATE_FAILED "Loading flat data failed: %s."
+    ID_LOADFLATDATA_FLATDELIST_FAILED 
+                            "Failed instantiation Data Element list."
+    ID_LOADFLATDATA_CREATE_FAILED1 "Failed creating DTD Parser: %s."
+    ID_LOADFLATDATA_OPEN_FILE_FAILED 
+                            "LoadFlatData error, can't open file '%s'. Reason: %s"
+    ID_LOADFLATDATA_CREATEDATANODE_FAILED "Create Data Node failed: %s."
+    ID_LOADEDIDATA_FAILED_CREATE_DISPATCH 
+                            "EDI: Failed to create EDIDEV Dispatch."
+    ID_LOADEDIDATA_LOOP_TRIGGER_GT_ONE 
+                            "Loop trigger %s cannot have a maximum use greater than 1."
+    ID_LOADEDIDATA_OLE_EXCEPTION "OLE Exception: SCODE: %08lx."
+    ID_LOADEDIDATA_OLEDISPATCH_EXCEPTION 
+                            "OLE Dispatch Exception. SCODE: %08lx, Description: ""%s""."
+    ID_LOADEDIDATA_GENERAL_EXCEPTION "General Exception caught."
+    ID_CONVERTTOEDIVALUE_DATATYPE_INCOMPATIBLE_WITH_VALUE 
+                            "Generating.  Data type %s is incompatible with value %s"
+    ID_STARTINTERCHANGE_FAILED_CREATE "EDI: Failed to create new interchange"
+    ID_STARTINTERCHANGE_SETHEADERELEMENT_FAILED "EDI error: %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_STARTFUNCTIONAL_GROUP_CREATE_FAILED 
+                            "EDI: Failed to create Functional Group: %d"
+    ID_STARTTRANSACTIONSET_NOT_IN_SEF 
+                            "EDI: Transaction set Id not in SEF table: %s"
+    ID_EDIWRITER_CREATEDISPATCH_FAILED 
+                            "EDI: Failed to create EDIDEV Dispatch."
+    ID_EDIWRITER_SETHEADERELEMENT_FAILED "EDI error: %s."
+    ID_EDIWRITER_OLE_EXCEPTION "OLE Exception: SCODE: %08lx."
+    ID_EDIWRITER_OLEDISPATCH_EXCEPTION 
+                            "OLE Dispatch Exception. SCODE: %08lx, Description: ""%s""."
+    ID_EDIWRITER_GENERAL_EXCEPTION "General Exception caught."
+    ID_SETCURRENTLOOPINSTANCE_FAILED "EDI error: %s."
+    ID_SETPARENTLOOP_SETCURRENTLOOPINSTANCE_FAILED "EDI error: %s."
+    ID_INTERCHANGE_SETHEADERELEMENT_FAILED "EDI error: %s."
+    ID_INTERCHANGE_SETHEADERELEMENT_FAILED1 "EDI error: %s."
+    ID_INTERCHANGE_SETHEADERELEMENT_FAILED2 "EDI error: %s."
+    ID_INTERCHANGE_SETTRAILERELEMENT_FAILED "EDI error: %s."
+    ID_INTERCHANGE_SETTRAILERELEMENT_FAILED1 "EDI error: %s."
+    ID_FUNCTIONALGROUP_SETHEADERELEMENT_FAILED "EDI error: %s."
+    ID_FUNCTIONALGROUP_SETHEADERELEMENT_FAILED1 "EDI error: %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNCTIONALGROUP_SETHEADERELEMENT_FAILED2 "EDI error: %s."
+    ID_FUNCTIONALGROUP_SETTRAILERELEMENT_FAILED "EDI error: %s."
+    ID_FUNCTIONALGROUP_SETTRAILERELEMENT_FAILED1 "EDI error: %s."
+    ID_FUNCTIONALGROUP_SETTRAILERELEMENT_FAILED2 "EDI error: %s."
+    ID_TRANSACTIONSET_SETHEADERELEMENT_FAILED "EDI error: %s."
+    ID_TRANSACTIONSET_SETHEADERELEMENT_FAILED1 "EDI error: %s."
+    ID_TRANSACTIONSET_SETHEADERELEMENT_FAILED2 "EDI error: %s."
+    ID_EDIWRITER_GS_MUST_BE_MAPPED 
+                            "Invalid mapping.  Functional group must be mapped."
+    ID_EDIWRTIER_TRANSACTIONSET_SETTRAILERELEMENT_FAILED "EDI error: %s."
+    ID_EDIWRTIER_TRANSACTIONSET_SETTRAILERELEMENT_FAILED1 "EDI error: %s."
+    ID_EDIWRITER_GS_MUST_BE_MAPPED2 
+                            "Invalid mapping.  Functional group must be mapped."
+    ID_EDIWRITER_TRANSACTIONSET_SETSEGMENTELEMENTINLOOPINSTANCE 
+                            "EDI error: %s."
+    ID_EDIWRITER_TRANSACTIONSET_SETSEGMENTELEMENTINLOOPINSTANCE1 
+                            "EDI error: %s."
+    ID_EDIWRITER_TRANSACTIONSET_SETSEGMENTELEMENTINLOOPINSTANCE2 
+                            "EDI error: %s."
+    ID_EDIWRITER_GS_MUST_BE_MAPPED3 
+                            "Invalid mapping.  Functional group must be mapped."
+    ID_EDIWRITER_ST_MUST_BE_MAPPED3 
+                            "Invalid mapping.  For valid EDI file, Transaction set/Message control header must be mapped."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SAPACCESS_LOADLIBRARY_FAILED 
+                            "Failed to load CR SAP library %s.  Error=%d.\n"
+    ID_SAPACCESS_WRITETOSAP "Invalid call made.  Environment not set properly.\n"
+    ID_SAPACCESS_CONNECT_FAILED "Failed to connect to SAP server.\n"
+    ID_SAPACCESS_RFC_CALL_FAILED "Call to RFC failed.\n"
+    ID_SAPACCESS_FAILED_TO_GET_DB_CONNECTINFO 
+                            "Failed to get connect info from DB.\n"
+    ID_SAPACCESS_GENERAL_FAILURE "SAP General Failure.\n"
+    ID_SAPACCESS_DLLFUNCTION_FAILED 
+                            "Failed to make DLL function (DoSapRfcToXmlDsn) call.  Error=%d.\n"
+    ID_SAPACCESS_GENERAL_EXCEPTION "General Exception caught.  Error=%d.\n"
+    ID_TABLESEPARATOR_ADDROW_DBEXCEPTION 
+                            "Database Error: in accessing table '%s' Column# = %d CTableSeparator::AddRow  [%s]"
+    ID_TABLESEPARATOR_ADDROW_GENERAL_EXCEPTION 
+                            "CTableSeparator::AddRow Exception : in accessing table '%s' Column# = %d "
+    ID_TREEMAPPER_MAPBYTRANSFORMATIONID_INVALID_TRANSFORMATION 
+                            "Error - The transformation '%s' has validation errors.\nPlease validate this transformation in the ETLForge Client and try again."
+    ID_TREEMAPPER_XMLXMLWRITER_SETDTD_FAILED 
+                            "Error: CRXmlParser::SetDtd method failed targetDTDFileName:%s, %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TREEMAPPER_XMLXMLWRITER_XMLSAVE_FAILED 
+                            "Error: Saving Target .xml file failed: targetXMLFileName=%s\n%s"
+    ID_XMLXMLWRITER_VALIDATE_SOURCE_FAILED 
+                            "Failed to validate the source XML file against the specified %s.\n%s"
+    ID_XMLXMLWRITER_VALIDATE_TARGET_FAILED 
+                            "Failed to validate the target XML file against the specified %s.\n%s"
+    ID_TREEMAPPER_SOURCEDTD_CREATE_FAILED 
+                            "DTDParser::Create(%s) method failed:\n%s\n"
+    ID_TREEMAPPER_HFXMLWRITER_DOHFXMLMAP_FAILED 
+                            "Error: DoXmlMap failed\n TargetPath:""%s"", SourcePath:""%s""\n"
+    ID_HFXMLWRITER_VALIDATE_TARGET_FAILED 
+                            "Failed to validate the target XML file against the specified %s.\n%s"
+    ID_TREEMAPPER_XMLHFWRITER_TARGET_ROOT_NODE_ISNULL 
+                            "Target root node is NULL."
+    ID_TREEMAPPER_TARGETDTD_CREATE_FAILED 
+                            "DTDParser::Create(%s) method failed:\n%s\n"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PROCESSDELTASBYPART_UNABLE_TO_OPEN_INPUT_FILE 
+                            "Unable to open the input data file '%s'.\n"
+    ID_STARTINTERCHANGE_SETHEADERELEMENT_FAILED1 "EDI error: %s."
+    ID_STARTFUNCTIONAL_GROUP_SETHEADERELEMENT_FAILED "EDI error: %s."
+    ID_STARTFUNCTIONAL_GROUP_SETHEADERELEMENT_FAILED1 "EDI error: %s."
+    ID_EDIWRTIER_TRANSACTIONSET_SETTRAILERELEMENT_FAILED2 "EDI error: %s."
+    ID_PROCESSDELTASBYPART_UNABLE_TO_CREATE_TEMPDATAFILE 
+                            "Unable to create the temporary data file %s\n"
+    ID_PROCESSDELTASBYPART_GENERAL_EXCEPTION "General Exception."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FAILED_TO_GET_DB_CONNECTINFO "Failed to get connect info from DB.\n"
+    ID_CTABLESEPARATOR_CREATEFILEFROMDB_GENERAL_EXCEPTION 
+                            "CTableSeparator::CreateFileFromDb Exception : in accessing Column# = %d in the SQL statement '%s' "
+    ID_TREEMAPPER_XMLXMLWRITER_DOXMLXMLMAP_FAILED 
+                            "Error: TreeMapper::DoXmlMap method failed Source Path:""%s"", Target Path:""%s""\n"
+    ID_CROMDATA_PARSEDSN_INVALID_DSN 
+                            "Error: Incorrectly formed DSN - (Db name) %s"
+    ID_CROMDATA_PARSEDSN_INVALID_DSN_USER_NAME 
+                            "Error : Incorrectly formed DSN - (User name) %s."
+    ID_CROMDATA_PARSEDSN_INVALID_DSN_PASSWORD 
+                            "Error : Incorrectly formed DSN - (Password) %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CROMDATA_ISREMOTETABLEPRESENT_GETTABLESMETA_FAILED 
+                            "Remote DB Error: %s."
+    ID_CROMDATA_ISREMOTETABLEPRESENT_GETTABLECOUNT_FAILED 
+                            "Remote DB Error: %s."
+    ID_CROMDATA_ISREMOTETABLEPRESENT_EXECUTESQLSTR_FAILED 
+                            "Remote DB Error: %s."
+    ID_CROMDATA_ISREMOTETABLEPRESENT_GETVALUEBYID_FAILED 
+                            "Remote DB Error: %s."
+    ID_CDBACCESS_GETERROR_FAILED 
+                            "SqlState = %s NativeError = %d ErrorMsg = %s\n"
+    ID_CTRANSFORM_EXECFUNCTION_ERROR 
+                            "%s Called from CTransform::ExecFunction %s\n"
+    ID_CTRANSFORM_DEFINESOURCEDE_ERROR 
+                            "%s\nFrom CTransform::DefineSourceDE input: ...%s...)"
+    ID_CTRANSFORM_EXECCOMMETHOD_ERROR "%s %s\nExecComMethod(%s)\n"
+    ID_CTRANSFORM_EXECCOMMETHOD_SYNTAX_ERROR 
+                            "%s\n    Called from CTransform::ExecComMethod(""%s"")"
+    ID_CTRANSFORM_EXECCOMMETHOD_TRANSFORM_LOAD_COM_INVOKER_FAIL 
+                            "%s\n    Called from CTransform::ExecComMethod(""%s"")"
+    ID_CTRANSFORM_EXECFUNCTION_ERROR1 
+                            "%s Called from CTransform::ExecComMethod(""%s"")\n"
+    ID_CTRANSFORM_EVALUATE_ERROR "Evaluate Error: %s."
+    ID_CTRANSFORM_EVALUATE_ERROR1 "%s called from Evaluate('%s')"
+    ID_CTRANSFORM_BULKTRANSFORM_TRANSFORM_DE_READ_ERROR "%s reading ...%s...\nfor data element ""%s"""
+    ID_CTRANSFORM_DEFINESOURCEDE_ERROR1 "ERROR: %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CTRANSFORM_DEFINESOURCEDE_ERROR2 "ERROR: %s\nin Expression: ""%s"""
+    ID_DOHFHFMAP_GENERATOR_EMPTY "The generator for '%s' is NULL."
+    ID_SRCFILE_OPEN_FAILED  "Unable to open the file."
+    IDS_CRYPTO_NULL         "Unable to create an instance of Crypto.exe\nPlease check to see if Crypto.exe is present and registered."
+    ID_REMOTESESSION_FAILED_TO_GET_DOMAIN_FROM_USER_ID 
+                            "Failed to get Domain name from user id.  User='%s'."
+    ID_REMOTESESSION_FAILED_TO_GET_DB_NAME_FROM_UNC_PATH 
+                            "Failed to get the Server name from DB Name.  DB Name='%s'."
+    ID_REMOTESESSION_FAILED_TO_CREATE_SESSION_WITH_REMOTE_SERVER 
+                            "Failed to create remote session with server.  Server='%s', Domain='%s', User='%s'.  System Error=%d."
+    ID_REMOTESESSION_CREATE_GENERAL_EXCEPTION_ENCOUNTERED 
+                            "General exception encountered when attempting to create session with remote server."
+    ID_REMOTESESSION_DESTROY_GENERAL_EXCEPTION_ENCOUNTERED 
+                            "General exception encountered when attempting to end remote session with server."
+    ID_FAILED_TO_END_REMOTE_SESSION 
+                            "Failed to end remote session with server '%s'.  System Error=%d."
+    ID_LOADPSSRC_TABLESEPARATOR_EXCEPTION 
+                            "Error: Database exception encountered.  Message: %s.  Native Origin: %s"
+    ID_TYPECAST_FAILED      "Unable to cast the source '%s' =  '%s' into the target: %s(%s)"
+    ID_NODE_NOT_FOUND       "Error : Unable to find the node = '%s' in the schema tree."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CROM_STACK_EMPTY     "The internal stack for EDI source is <= 0"
+    ID_TREEMAPPER_FINDGENERATOR_VALUES_NOT_SET 
+                            "m_targetDTDParser or m_sourceDTDParser is 0 in TreeMapper::findGenerators(), these value must be set before calling this method\n."
+    ID_TREEMAPPER_FINDGENERATOR_ROOT_IS_ZERO_TARGET 
+                            "m_targetDTDParser'root is 0 in TreeMapper::findGenerators()\n"
+    ID_TREEMAPPER_FINDGENERATOR_ROOT_IS_ZERO_SOURCE 
+                            "m_sourceDTDParser'root is 0 in TreeMapper::findGenerators()\n"
+	ID_TREEMAPPER_FINDGENERATOR_ERROR "Failed to find the multiplicity of the target loop node: ""%s""\n%s"
+    ID_TRANSFORM_DE_ERROR   "Warning : read error in Rec# '%d' Col# '%d' Data = '%s'"
+    ID_NATIVE_ODBC_ERROR    "SqlState = %s NativeError = %d ErrorMsg = %s\n"
+    ID_FORMATFORFLATDB_DBEXCEPTION "Database error during DIFF operation: %s."
+    ID_FORMATFORFLATDB_GENERAL_EXCEPTION 
+                            "General Exception encountered during DIFF operation."
+    ID_DIFF_ARCHIVEFILE_FAILURE "Failed to Archive DIFF files: %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DIFF_GETDIFFINFO_FAILURE "Failure while obtaining DIFF info: %s."
+    ID_DIFF_GETDIFFINFO_GENERAL_EXCEPTION 
+                            "General Exception encountered while obtaining DIFF info."
+    ID_LOAD_WSDL_FAILED     "Failed to load the WSDL file '%s'. Reason: %s"
+    ID_CREATE_XSD_FROM_WSDL_FAILED 
+                            "Failed to create the XSD file '%s' from the WSDL file '%s'. Reason: %s"
+    ID_INVALID_SCHEMA_BASED_XML 
+                            "The XML file\n\n'%s'\n\n is invalid according to the schema file\n\n'%s'\n\n%s"
+    ID_DIFF_DISCOVERDELTA_COMPFILE_FAILED 
+                            "DIFF File comparison operation failed."
+    ID_DIFF_GETFORMAT_FAILURE "Error in obtaining key format: %s."
+    ID_DIFF_GETFORMAT_GENERAL_EXCEPTION 
+                            "General Exception encountered while obtaining key format."
+    ID_DIFF_GETFORMATFORFLATTEXT_DBEXCEPTION 
+                            "Database error encountered while getting key format: %s."
+    ID_DIFF_GETFORMATFORFLATTEXT_FAILURE 
+                            "Error while obtaining key format: %s."
+    ID_DIFF_GETFORMATFORFLATTEXT_GENERAL_EXCEPTION 
+                            "General Exception encountered while getting key format."
+    ID_FORMATFORFLATDB_FAILURE "Error while obtaining key format: %s."
+    ID_DIFF_ARCHIVEFILE_EXCEPTION 
+                            "General exception encountered while archiving DIFF file."
+    ID_DIFF_FAILED_TO_OPEN_FILE "Failed to open file '%s' for DIFF operation."
+    ID_DIFF_GETDIFFINFO_INITIALIZATION_FAILURE 
+                            "DIFF initialization failure: %s."
+    ID_DIFF_GETDIFFINFO_INITIALIZATION_GENERAL_EXCEPTION 
+                            "General Exception encountered while initializing DIFF."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DIFF_DISCOVERDELTA_ACTUAL_TEMP_FILE_CREATE_FAILED 
+                            "Failed to create temporary file."
+    ID_DIFF_DISCOVERDELTA_FAILED "DIFF compare operation failed: %s."
+    ID_DIFF_DISCOVERDELTA_GENERAL_EXCEPTION 
+                            "General exception encountered during DIFF compare operation."
+    ID_LOADEDIDATA_FILE_EXCEPTION 
+                            "File exception occurred while loading EDI data.  OS=%d, File=%s."
+    ID_LOADEDIDATA_DB_EXCEPTION 
+                            "Database exception encountered while loading EDI data.  Message: %s.  Native Origin: %s"
+    ID_LOADEDIDATA_FAILURE  "Error loading EDI data: %s."
+    ID_EDIWRITER_FILE_EXCEPTION 
+                            "File exception encountered while generating EDI.  OS=%s,  File=%s."
+    ID_EDIWRITER_DB_EXCEPTION 
+                            "Database exception encountered while generating EDI.  Message: %s.  Native Origin: %s"
+    ID_EDIWRITER_FAILURE    "Error generating EDI: %s."
+    ID_LOADEDI_EDIADDLEVEL_DATA_ELEMENT_NOT_DEFINED 
+                            "Failed to add node.  Data element '%s' not defined in SEF file."
+    ID_LOADEDI_EDIADDLEVEL_NO_HL_PARENT 
+                            "HL segment is referencing a parent id '%s' which does not exist."
+    ID_LOADEDI_EDIADDLEVEL_UPDATENODEPOSITION_FAILURE 
+                            "Failed to update node position at index=%d, key='%s', parent id='%s'."
+    ID_LOADEDI_EDIADDLEVEL_ADDNODE_FAILED 
+                            "Failed to add node '%s' at level %d."
+    ID_LOADEDI_EDIADDLEVEL_GENERAL_EXCEPTION_ENCOUNTERED 
+                            "General Exception encountered while adding a Data Segment Node."
+    ID_LOADEDI_EDIPROCESSELEMENTS_GENERAL_EXCEPTION_ENCOUNTERED 
+                            "General Exception encountered while adding Data Element attributes to hierarchical tree."
+    ID_LOADEDI_EDIPROCESSELEMENTS_FAILED_GETTING_ELEMENTPOS 
+                            "Failed to get Data Element position %d for Data Segment '%s'."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOADEDI_EDIPROCESSELEMENTS_ADDATTRIBUTE_FAILED 
+                            "Failed to add Data Element attribute at level %d.  Key='%s', value='%s'."
+    ID_CTABLESEPARATOR_ADDROW_DB_EXCEPTION 
+                            "Database Error: in accessing table '%s' Column# = %d CTableSeparator::AddRow  [%s]"
+    ID_CTABLESEPARATOR_ADDROW_GENERAL_EXCEPTION 
+                            "CTableSeparator::AddRow Exception : in accessing table '%s' Column# = %d "
+    ID_CRXMLPARSER_READ_ERROR "Error: CRXmlParser::Read : XmlFile %s\n"
+    ID_CRXMLPARSER_LOADDOCUMENTSYN_ERROR "Failed to load XML document %s."
+    ID_CRXMLPARSER_LOADDOCUMENTSYNC_PUT_ASYNC_ERROR 
+                            "Error: CRXmlParser::LoadDocumentSync : while loading .xml file %s\n"
+    ID_FINDVALUE_IS_ZERO    "Error: CRXmlParser::FindValue() m_pDTDParser is 0"
+    ID_GETTRANDBINFO_DECRYPT_PASSWORD_FAILED 
+                            "COM Error : In Crypto.DecryptString: %s."
+    ID_TREEMAPPER_UNKNOWN_ERROR_CAUGHT 
+                            "Unknown error caught in TreeMapper::MapByTransformationID\n Last Error = %s"
+    ID_TXTPARSER_GETOPERATIONINFO_OPEN_USERSTAB_FAILED 
+                            "Error - %s Can't open UsersTab with the filter:%s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TXTPARSER_GETOPERATIONINFO_CRYPTO_INSTANCE_FAILED 
+                            "Failed in GetOperationInfoFromTranDB. Failed to create instance of CrCrypto."
+    ID_TXTPARSER_GETOPERATIONINFO_PASSWORD_DECRYPT_FAILED 
+                            "Failed in GetOperationInfoFromTranDB, failed to decrypt the password."
+    ID_TXTPARSER_GETOPERATIONINFO_CRYPTO_GETLASTERROR_FAILED 
+                            "Failed to get the last Error from CrCrypto."
+    ID_TXTPARSER_GETOPERATIONINFO_CRYPTO_LASTERROR 
+                            "Crypto Failure Reason: %s."
+    ID_TXTPARSER_GETOPERATIONINFO_INVALID_OPERATIONID 
+                            "Failed in GetOperationInfoFromTranDB, illegal Operation Id = %d."
+    ID_TXTPARSER_GETOPERATIONINFO_OPEN_OPERATION_FAILED 
+                            "Error - %s Can't open Operation with the filter:%s."
+    ID_TXTPARSER_GETOPERATIONINFO_ILLEGAL_SCHEDULE 
+                            "Failed in GetOperationInfoFromTranDB, illegal Schedule Id = %d."
+    ID_TXTPARSER_GETOPERATIONINFO_OPEN_SCHEDULETAB_FAILED 
+                            "Error - %s Can't open ScheduleTab with the filter:%s"
+    ID_TXTPARSER_GETOPERATIONINFO_VALIDATEUSER_FAILED 
+                            "Failed in ValidateUser. An error occurred while accesing the user information in database.  Error message is: %s."
+    ID_TXTPARSER_GETOPERATIONINFO_VALIDATEUSER_UNKNOWN_ERROR 
+                            "Failed in ValidateUser. An unknown error occurred while accessing the user information in database."
+    ID_EDIWRITER_ILLEGAL_MAPPING_MULTIPLE_ROOT_FAILED 
+                            "Invalid mapping detected.  Target tree generated multiple Interchange Control Headers."
+    IDS_TRANDB_BAD_FILTER   "Database  CrTranDb - %s"
+    ID_FUNCKACK_INITIALIZE_CREATEDISPATCH_FAILED 
+                            "Failed to initialize Functional Acknowledgment system."
+    ID_FUNCKACK_INITIALIZE_CREATEINTERCHANGE_FAILED 
+                            "Failed to create interchange for Functional Acknowledgment.  File Name=%s."
+    ID_FUNCKACK_INITIALIZE_EXCEPTION 
+                            "Exception encountered while initializing Functional Acknowledgment."
+    ID_FUNCKACK_RECORDTRANSACTIONSET_EXCEPTION 
+                            "Exception encountered while recording Functional Acknowledgment error for transaction set."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNCKACK_RECORDFUNCTIONALGROUP_EXCEPTION 
+                            "Exception encountered while recording Functional Acknowledgment error for Functional Group."
+    ID_FUNCKACK_TRANSACTIONSETSUMMARY_EXCEPTION 
+                            "Exception encountered while recording transaction set summary in Functional Acknowledgment."
+    ID_FUNCKACK_GROUPSUMMARY_EXCEPTION 
+                            "Exception encountered while recording functional group summary in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDGROUPERROR_EXCEPTION 
+                            "Exception encountered while recording Functional Group error in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDTRANSACTIONSETERROR_EXCEPTION 
+                            "Exception encountered while recording transaction set error in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDSEGMENTTERROR_EXCEPTION 
+                            "Exception encountered while recording data segment error in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDELEMENTERROR_EXCEPTION 
+                            "Exception encountered while recording data element error in Functional Acknowledgment."
+    ID_FUNCKACK_INITIALIZE_IMPORT_FAILED 
+                            "Failed to import Functional Acknowledgment SEF file."
+    ID_FUNCKACK_RECORDTRANSACTIONSET_SETLOOPINSTANCE_FAILED 
+                            "Failed to set the instance of a loop while building Functional Acknowledgment.  Loop Area=%s,  Loop Instance=%d."
+    ID_FUNCKACK_RECORDTRANSACTIONSET_SETSEGMENT_FAILED 
+                            "Failed to assign values to data segment of transacion set while building Functional Acknowledgment."
+    ID_FUNCKACK_RECORDGROUP_BEGINSET_FAILED 
+                            "Failed to create new Transaction Set while recording errors in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDGROUP_SETSEGMENT_FAILED 
+                            "Failed to assign values to data segment of functional group while building Functional Acknowledgment."
+    ID_FUNCKACK_SETSUMMARY_SETSEGMENT_FAILED 
+                            "Failed to assign values to data segment while recording transaction set summary of Functional Acknowledment."
+    ID_FUNCKACK_GROUPSUMMARY_SETLOOPINSTANCE_FAILED 
+                            "Failed to set a loop instance while recording functional group summary of Functional Acknowledgment.  Loop Area=%s,  Loop Instance=%d."
+    ID_FUNCKACK_GROUPSUMMARY_SETSEGMENT_FAILED 
+                            "Failed to assign values to data segment while recording functional group summary of Functional Acknowledgment."
+    ID_FUNCKACK_RECORDSEGMENTERROR_SETLOOPINSTANCE_FAILED 
+                            "Failed to set a loop instance while recording data segment error of Functional Acknowledgment.  Loop Area=%s,  Loop Instance=%d."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNCKACK_RECORDSEGMENTERROR_SETSEGMENT_FAILED 
+                            "Failed to assign value while recording functional group error in Functional Acknowledgment."
+    ID_FUNCKACK_RECORDELEMENTERROR_SETLOOPINSTANCE_FAILED 
+                            "Failed to set loop instance while recording data element error in Functional Acknowledgment.  Loop Area=%s,  Loop Instance=%d."
+    ID_FUNCKACK_RECORDELEMENTERROR_SETSEGMENT_FAILED 
+                            "Failed to assign value while recording data element error in Functional Acknowledgment."
+    ID_FUNCKACK_SETSUMMARY_SETLOOPINSTANCE_FAILED 
+                            "Failed to set a loop instance while recording transaction set summary of Functional Acknowledgment.  Loop Area=%s,  Loop Instance=%d."
+    ID_FUNCKACK_SETSEGMENTELEMENTINLOOPINSTANCE_FAILED 
+                            "Failed to assign value to segment.  Area=%s,  Segment=%s, Loop=%s, Element=%s, Composite=%s, Use Count=%d, Loop Instance=%d."
+    ID_FUNCKACK_SETSEGMENTELEMENT_SETSEGMENT_FAILED 
+                            "Failed to assign value to segment.  Segment=%s, Element=%s, Composite=%s, Use Count=%d."
+    ID_FUNCKACK_SETSEGMENTELEMENTINLOOPINSTANCE2_FAILED 
+                            "Failed to assign value to segment.  Area=%s,  Segment=%s, Loop=%s, Element Pos=%d, Composite=%s, Use Count=%d, Loop Instance=%d."
+    ID_ENTERTODB_UPDATE_ZERO_ROWS_AFFECTED 
+							"This update did not change the database (%s mode) - Update SQL = %s"
+    IDS_ORACLE_SEQNO        "There is no SQL specified after the tag <ORASEQNO>"
+    ID_POST_PROCESS_DB_ERR  "Error can't find default identity sql statement, please use <CURRVAL> in the mapping to specify the user define identity."
+    ID_DBLOOKUP_EXCEPTION_THROWN 
+                            "Exception thrown in DBLookup.  SQL Statement='%s',  Error='%s'"
+    ID_SCRIPT_EXEC_ERR      "Unable to execute '%s' - '%s'"
+    IDS_COMPLEXTEXT_ATLEASTONE_ERR 
+                            "The Node '%s' = '%s' must have atleast one child '%s' node but there are %d node(s)."
+    IDS_COMPLEXTEXT_ONETOONE_ERR 
+                            "The Node '%s' = '%s' must have exactly one child '%s' node but there are %d node(s)."
+    IDS_COMPLEXTEXT_OPTIONAL_ERR 
+                            "The Node '%s' = '%s' must have one or zero child '%s' nodes but there are %d node(s)."
+    IDS_COMPLEX_TEXT_DOCDEFERR 
+                            "Please check the document definition for errors for this source."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_COMPLEX_TEXT_NO_FILEOPEN "Unable to open the complex text file '%s'"
+    IDS_COMPLEXTEXT_NONODE  "Warning - Line(%d) : The node with format '%s' was not found in the document definition."
+    IDS_COMPLEXTETXT_RECLENGTHERR 
+                            "Warning - Line(%d) : The column %s.%s has start position %d and a length of %d but the length of this row is only %d"
+    IDS_RN_INITIALIZE_ERROR "Exception encountered while initializing Rosettanet parameters. Error: %s"
+    IDS_RN_INIT_GENERAL_EXCEPTION 
+                            "General exception while initializing Rosettanet parameters."
+    ID_RNACCESS_LOADLIBRARY_FAILED 
+                            "Failed to load CR Rosettanet library %s.  Error=%d.\n"
+    ID_RNACCESS_GENERAL_FAILURE "Rosettanet General Failure.\n"
+    ID_RNACCESS_FAILED_TO_GET_DB_CONNECTINFO 
+                            "Failed to get connect info from DB.\n"
+    ID_RNACCESS_GENERAL_EXCEPTION "General Exception caught.  Error=%d.\n\n"
+    IDS_RNACCESS_DLLFUNC_ERROR 
+                            "Failed to make DLL function (InvokePIP) call.  Error=%d.\n"
+    IDS_ODBC_ERROR          "ODBC Error : (%s mode) %s"
+    IDS_COMPLEXTEXT_RECLENGTH_ERR2 
+                            "Warning - Line(%d) : There are less number of columns in the source file than defined in the source document definition."
+    IDS_SOURCE_DB_EMPTY     "Database Source  Empty : There were no rows returned for the SQL statement - %s"
+    IDS_ROSETTANET_CREATE_ERR 
+                            "RosettaNet Target : Unable to create RosettaNet accessor."
+    IDS_ROSETTANET_INVOKE_ERR 
+                            "RosettaNet Target : Unable to invoke RosettaNet process. Reported error: %s"
+    IDS_ROSETTANET_UNKNOWN_ERR 
+                            "RosettaNet Target : Unknow error processing RosettaNet target - '%s'"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CREATEFILESRCTREE_SOURCE_HANDLE_NULL 
+                            "DB as Source: Unable to load hierarchic database source data - The source structure handle to the SCM file is NULL."
+    ID_CREATEFILESRCTREE_DTD_ROOT_NULL 
+                            "DB as Source: Unable to load hierarchic database source data - The source structure root is NULL."
+    ID_NUMBER_OF_SQL_PARAMETERS_ERROR 
+                            "DB as Source: The number of parameter markers in the SQL statement is not equal to the numbers of bound application variables.\n%s"
+    ID_SQL_BIND_PARAMETER_ERROR 
+                            "DB as Source: An error occurred when binding parameter #%d in the SQL statement to an application variable %s.\n%s"
+    ID_SQL_PREPARE_STATEMENT_ERROR 
+                            "DB as Source: An error occurred when preparing a SQL statement for execution.\n%s"
+    ID_PARENT_TABLE_HAS_NO_CHILDREN 
+                            "DB as Source: The data tree parent ('%s') of the current table is empty. "
+    ID_SQL_EXECUTE_STMT_ERROR 
+                            "DB as Source: An error occurred when executing the SQL statement.\n%s"
+    ID_SQL_PUTDATA_ERROR    "DB as Source: An error occurred when a SQL statement with parameter markers was executed. The application failed to bind a value to one of the parameters.\n%s"
+    ID_SQL_PARAMDATA_ERROR  "DB as Source: An error occurred when a SQL statement with parameter markers was executed. Failure to to supply parameter data at statement execution time.\n%s"
+    ID_NUMCOLS_IN_RECSET_NEQ_NUMCOLS_IN_SCMFILE 
+                            "DB as Source: The number of columns in the result set does not match the number of columns in the SCM file.\nThe SQL statement was: '%s'"
+    ID_SQL_DESCRIBECOL_ERROR 
+                            "DB as Source: An error occurred when determining the SQL data type and nullability of the columns in the result set.\n%s"
+    ID_SQL_CLOSECURSOR_ERROR 
+	"DB as Source: An error occurred when closing the database cursor.\n(%s)"
+    ID_NO_LINKS_TO_PARENT   "DB as Source: A child table does not contain any links to its parent.\n(%s)"
+    ID_NO_TABLES_IN_DB_SOURCE 
+                            "DB as Source: The source database does not contain any tables according to the SCM file."
+    ID_NO_COLUMNS_IN_SOURCE_TABLE_SCM 
+                            "DB as Source: The table '%s' does not contain any columns that are needed for the transformation (e.g. links or mapped columns)."
+    ID_LINKFIELD_NOT_FOUND_IN_PARENT 
+                            "DB as Source: The specified link column was not found in the parent table.\n(%s)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INITTREESRC_ALLOC_HANDLES_ERROR 
+                            "DB as Source: Error allocating handles for source database."
+    ID_GETDBCOLINFO_SQLCOLUMNNS_ERROR 
+                            "DB as Source: An error occurred when the application tried to get information about the columns in the table '%s'."
+    ID_BINDCOLUMNS_SQLBINDCOL_ERROR 
+	"DB as Source: An error occurred when binding the column '%s' to an output buffer. error message: %s\n"
+    ID_LOADFLATDATA_EMPTY_SOURCE "The source file '%s' is empty."
+    ID_LOADCOMPLEXTEXTDATA_EMPTY_SOURCE "The source file '%s' is empty."
+    ID_DBTREESRC_SOURCE_IS_EMPTY 
+                            "Database Source Empty : No rows were returned from the source database."
+    ID_BULKTRANSFORM_SOURCE_EMPTY "The source file is empty."
+    ID_TABSEP_DB_SOURCE_IS_EMPTY "The database source is empty."
+    ID_XSDPARSER_CREATEINSTANCE_FAILED 
+                            "XSDParser::Create -- Failed to create an instance of the XMLDomDocument.\n%s"
+    ID_XSDPARSER_LOAD_FAILED 
+                            "Failed to load the schema file '%s'.\nReason: %s"
+    ID_XSDPARSER_FAILED_TO_LOCATE_SCHEMA_ELEMENT 
+                            "Failed to locate the schema element in the schema document '%s'."
+    ID_XSDPARSER_INVALID_SCHEMA "The schema '%s' is not valid. Error:\n%s"
+    ID_REQUIRED_DBCOLUMN_IS_NULL 
+                            "An error ocurred when trying to INSERT/UPDATE the target table '%s': %s"
+    IDS_COMPLEXTEXT_RECLENGTH_ERR3 
+                            "Warning - Line(%d) : There are more columns in the source file than defined in the source document definition."
+    ID_DBSOURCE_CONNECT_FAILED 
+                            "Failed to connect to the source database. The connection string was (password not shown for security reasons): %s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TRANSFORM_GETSRCTGT_DBEXCEPTION 
+                            "An error occurred when opening %s.\nReported error: %s%s"
+    ID_CRXMLPARSER_ROOT_MISMATCH 
+                            "The root specified in the source xml file '%s' does not match the root that was specified in the transformation. The root in the source file is '%s', whereas the root specified in the transformation was '%s'."
+    ID_CRXMLPARSER_DTD_MISMATCH 
+                            "The DTD filename specified in the source xml file '%s' does not match the DTD filename that was specified in the transformation. The filename in the source file is '%s', whereas the filename specified in the transformation was '%s'."
+    ID_XML_LOADSCHEMA_FAILED 
+                            "The schema file %s could not be loaded. Reported error:\n%s"
+    ID_XML_VALIDATE_XSDXML_FAILED 
+                            "The %s XML document is not valid according to the specified schema.\nReported error: %s"
+    ID_CRXMLPARSER_READXSDXML_EXCEPTION 
+                            "An error occurred reading the XML file %s. Reported error: %s."
+    ID_XSDPARSER_AMBIGUOUS_ROOT 
+                            "The schema file '%s' contains more than one possible root element. The possible root elements are: %s.\n(When using this schema, the name of the root element must be defined explicitly when defining the transformation.)"
+    ID_XSDPARSER_ROOTNAME_MISMATCH 
+                            "The schema file '%s' does not contain any root element that matches the name of the root element given in the transformation definition ('%s')."
+    ID_XSDPARSER_NO_ROOT_FOUND 
+                            "The schema file '%s' does not contain a valid root element. The root name is '%s'"
+    ID_CRXMLPARSER_SAVE_CREATEINSTANCE_FAILED 
+                            "CRXmlParser::Save -- Failed to create an instance of the XMLDomDocument.\n%s"
+    ID_CREATEFILEFROMDB_CDBEXCEPTION 
+                            "An error occurred when accessing the source database. The reported error was:\n%s"
+    ID_CREATEFILETABLEWISE_CDBEXCEPTION 
+                            "An error occurred when accessing the source database. The reported error was:\n%s"
+    ID_DBTREESOURCE_CDBEXCEPTION 
+                            "An error occurred when accessing the source database. Reported error:\n%s"
+    ID_DBTREESOURCE_STDEXCEPTION 
+	                        "An unexpected standard exception occurred when building the source database tree. Caught: %s, Type: %s"
+    ID_DBTREESOURCE_GENERALEXCEPTION 
+                            "A general exception occurred when building the source database tree."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERTTEXTTODB_ALLTGTOPERATIONS_FAILED 
+                            "All the %s operations on the target database failed."
+    ID_DFDUMPDATATODB_ALLOPERATIONS_FAILED 
+                            "All the %s operations on the target database failed."
+    ID_GETFLATDBSOURCEDESTRING_FAILED 
+	"Failed to create the source data element string. This can be due to an error in the source structure file ('%s') or none of the source data elements is used in the mapping(s)."
+    ID_SOURCEFILE_IS_EMPTY  "The source file '%s' is empty."
+    IDS_FAILED_TO_UPDATE_XFERHIST 
+                            "Failed to update XferHist to status %s.\n%s"
+    IDS_FAILED_TO_INSERT_INTO_XFERHIST 
+                            "Failed to INSERT an entry into XferHistTab.\n%s"
+    ID_FAILED_TO_COPY_FILE  "Failed to copy the source file %s to the target location %s."
+    ID_CALL_TO_OPRESOLVER_FAILED "%s"
+    ID_WRITING_SCHEMAFILE_FAILED 
+                            "Failed to write the schema file '%s'. Reason: %s"
+    ID_INVALID_WS_INPUT     "An attempt was made to call a web service with invalid input."
+    ID_OPEN_HOSTED_WS_RESPONSE_FILE_FAILED 
+                            "Failed to open the file %s. Reason: %s."
+    ID_GET_HOSTED_WS_RESPONSE_SIZE_FAILED 
+                            "Failed to get the size of the file %s. Reason: %s."
+    ID_CONSTRUCT_HOSTED_WS_RESPONSE_STRING_FAILED 
+                            "Failed to construct a string of the hosted webservice response. Reason: %s."
+    ID_READ_HOSTED_WS_INPUT_FAILED 
+                            "Failed to read the hosted webservice request. Reason: %s."
+    ID_OPEN_HOSTED_WS_REQUEST_FILE_FAILED 
+                            "Failed to open the file %s for writing. Reason: %s."
+    ID_INEXPECTED_HOSTED_WS_INPUT_DATA 
+                            "Unexpected variant data sent to hosted webservice call: %s."
+	ID_ENTERTODB_TARGET_EMPTY
+	                        "No target data generated. There is no data available to insert/update database table %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HOSTED_WS_ACCESS_DENIED 
+                            "The specified user name ('%s') and password (not shown for security reasons) does not have access to the webservice."
+    ID_XML_SCHEMA_VALIDATION_FAILED 
+                            "Failed to validate the schema file '%s'. This does not necessarily mean the schema file is invalid. Reported error: %s."
+    ID_EMPTY_WS_INPUT_NOT_ALLOWED 
+                            "An attempt was made to send empty input to a web service that requires input data."
+    ID_CREATENOVALUECONTENTXML_INVALID_ROOTNAME 
+                            "The specified root '%s', in the namespace '%s', doesn't exist in the schema."
+    ID_CREATENOVALUECONTENTXML_DOMDOC_ERROR "%s"
+    ID_CREATENOVALUECONTENTXML_SAVE_ERROR 
+                            "Failed to save the XML file '%s' to disk. Reported error: %s."
+    ID_LOAD_XSDPARSER_FAILED 
+                            "Failed to load the XSDParser. Reported error: %s."
+    ID_XSDFROMWSDLCREATOR_SETPROCCONTATTR_FAILED 
+                            "Failed to set the processContent attribute in the schema's any-elements. Reported error: %s."
+    ID_XSDFROMWSDLCREATOR_SAVE_SCHEMA_FAILED "%s"
+    ID_XSDFROMWSDLCREATOR_REPLACESOAPARRAYS_FAILED 
+                            "Failed to replace the SOAP arrays in the schema '%s'. Reported error: %s"
+    ID_XML_SCHEMA_INSERT_IMPORT_FAILED 
+                            "Failed to insert an import node for the namespace '%s' with the schemaLocation '%s' into the schema."
+    ID_XSDFROMWSDL_BRIDGESCHEMA_MSGPARTS_FAILED 
+                            "Failed to insert elements for the message parts into the schema. Reported error: %s."
+    ID_XSDFROMWSDL_SAVEBRIDGESCHEMA_FAILED 
+                            "Failed to create bridge schema: %s"
+    ID_XSDFROMWSDL_BRIDGESCHEMA_INVALID "Invalid bridge schema: %s"
+    ID_XSDFROM_WSDL_CORRECTKNOWNSCHEMALOCS_FAILED 
+                            "Failed to correct known schema locations. Reported error: %s"
+    ID_XML_SCHEMA_INSERT_INCLUDE_FAILED 
+                            "Failed to insert an include node for the namespace '%s' with the schemaLocation '%s' into the schema."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_XSDFROMWSDL_FINDWSDLSCHEMAS_FAILED 
+                            "Failed to locate the defined schema(s) in the WSDL file '%s'. Reported error: %s"
+    ID_CREATENOVALUECONTENT_DOMTREE_FAILED 
+                            "Failed to create the DOM tree for the no-value content XML. Reported error: %s"
+    ID_PROCESS_HOSTED_WS_OUTPUT_FAILED 
+                            "Failed to create the SOAP-envelope for the output from the hosted webservice. Reported error: %s"
+    ID_PROCESS_HOSTED_WS_INPUT_FAILED 
+                            "Failed to extract the request data (header and/or body) from the SOAP-envelope that was sent as input to the hosted webservice. Reported error: %s"
+    ID_NON_WEBSERVICE_TRANSFORMATION 
+                            "The transformation with ID=%d is not a webservice."
+    ID_HOSTED_WS_ENDPOINT_WITHOUT_WS_TRANSFORMATION 
+                            "There is no webervice transformation in the chain leading to or from the transformation with ID=%d."
+    ID_NO_TRANSFORMATION_IN_OPERATION 
+                            "The operation with ID=%d has no transformations defined."
+    ID_FAILED_TO_CREATE_TRANSFORMATION_CHAIN 
+                            "Failed to retrieve the transformation chain information from the database for the operation with ID=%d. Reported error: %s"
+    ID_WS_CALL_SYNCHRONIZE_RESPONSE_FAILED 
+                            "The webservice response does not match the structure defined by the schema file. Reported error: %s"
+    ID_CREATENOVALUECONTENTXML_FAILED 
+                            "Failed to create a SOAP-envelope corresponding to the void input for the webservice. Reported error: %s"
+    ID_CREATESOAPDOMDOCUMENT_FAILED 
+                            "Failed to create a DOMDocument2 when generating the SOAP-envelope. Reported error: %s"
+    ID_CREATESOAPCONTENT_NO_ROOT 
+                            "The XML that is to be wrapped in a SOAP-envelope does not have a root element. The XML was read from the file %s."
+    ID_CREATESOAPHEADER_FAILED 
+                            "Failed to create the SOAP-header. Reported error: %s"
+    ID_CREATESOAPBODY_FAILED 
+                            "Failed to create the SOAP-body. Reported error: %s"
+    ID_SAVING_SOAPENVELOPE_FAILED 
+                            "Failed to save the SOAP-envelope to disk. Reported error: %s"
+    ID_CREATESOAPCONTENT_UNKNOWN_ERROR 
+                            "An unknown error occurred when creating the SOAP-envelope for the webservice %s."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CREATESOAPCONTENT_FAILED 
+                            "Failed to create the SOAP-envelope for the webservice %s. Reported error: %s"
+    ID_WEBSERVICECALL_FAILED "The webservice call failed. %s"
+    ID_PROCESS_SOAPENV_DOMDOC_FAILED 
+                            "Failed to create a DOMDocument2 when processing the SOAP-envelope. Reported error: %s"
+    ID_PROCESS_SOAPENV_RESOLVE_HREFS_FAILED 
+                            "Failed to resolve ID/HREFs in the SOAP-envelope in the file %s. Reported error: %s"
+    ID_PROCESS_SOAPENV_CREATE_TRANS_STRUCT_FAILED 
+                            "An error occurred when creating the transformation structure from the SOAP-envelope in the file %s: %s"
+    ID_MERGE_MULTIPLE_WS_RESPONSES_FAILED 
+                            "Failed to merge the %d responses from the webservice to one XML document. Reported error: %s"
+    ID_MERGE_MULTIPLE_WS_RESPONSES_LOAD_XML_FAILED 
+                            "Failed to load the XML file %s in the process of merging the %d webservice responses to one XML document. Reported error: %s"
+    ID_WS_CALL_DATASTRUCTURE_LOAD_FAILED 
+                            "Failed to load the structure of the webservice input and/or output. Reported error: %s"
+    ID_XSDFROMWSDL_DOCSTYLE_TOPSTRUCTURE_FAILED 
+                            "Failed to create the <root> and <transaction> nodes. Reported error: %s"
+    ID_XSDFROMWSDL_DOCSTYLE_FAILED 
+                            "Failed to create the main schema for the webservice structure. Reported error: %s"
+    ID_XSDFROMWSDL_DOCSTYLE_MISSING_HEADERPART "%s"
+    ID_XSDFROMWSDL_DOCSTYLE_CREATEHEADERBODY_FAILED 
+                            "Failed to create the header and/or body structure. Reported error: %s"
+    ID_XSDFROMWSDL_RPCSTYLE_FAILED 
+                            "Failed to create the main schema for the webservice structure. Reported error: %s"
+    ID_XSDFROMWSDL_BRIDGESCHEMAREF_INSERT_FAILED 
+                            "Failed to insert the reference to the bridge schema element. Reported error: %s"
+    ID_XSDFROMWSDL_CREATEMAINSCHEMANODE_FAILED 
+                            "Failed to create the schema node for the main schema. Reported error: %s"
+    ID_XSDFROMWSDL_CREATEMAINSCHEMADOC_FAILED "%s"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_XSDFROMWSDL_MAINSCHEMA_INVALID 
+                            "The main schema for the webservice input/output is invalid. Reported error: %s"
+    ID_XSDFROMWSDL_MAINSCHEMA_SAVE_FAILED "%s"
+    ID_XSDFROMWSDL_LOADWSDL_FAILED 
+                            "Failed to load the WSDL file and extract the required information. Reported error: %s."
+    ID_XSDFROMWSDL_ADDMISSINGIMPORTS_TO_WSDLXSD_FAILED 
+                            "Failed to add missing import statements to the schema(s) that is(are) defined in the WSDL file. Reported error: %s"
+    ID_XSDFROMWSDL_INVALID_WSDLXSD 
+                            "The schema(s) that is(are) defined in the WSDL file is(are) invalid: %s"
+    ID_XSDFROMWSDL_CREATEBRIDGESCHEMADOCUMENT_FAILED 
+                            "Failed to create the bridge schema: %s"
+    ID_XSDFROMWSDL_BRIDGESCHEMA_IMPORTS_FAILED 
+                            "Failed to import the schema(s) defined in the WSDL file that has(have) the same targetnamespace as the bridge schema. Reported error: %s"
+    ID_XSDFROMWSDL_CREATEBRIDGESCHEMA_COM_ERROR 
+                            "Failed to create the bridgeschema for the webservice %s. A COM error occurred: %s"
+    ID_PROCESS_SOAPENV_MISSING_BODY 
+                            "The SOAP-envelope in the file %s does not have a body."
+    ID_XSDPARSER_FATAL_ERROR 
+                            "Failed to parse the schema %s. Reported error: %s"
+    ID_TREEMAPPER_FAILED_CREATE_DOMDUCUMENT 
+                            "Failed to create target DOMDOCUMENT"
+    ID_EXEC_FUNCTION_ERR    "Evaluation of a function failed, %s "
+    ID_XSDFROM_WSDL_RESOLVEREMOTESCHEMALOCS_FAILED 
+                            "Failed to resolve remote schema locations. Reported error: %s"
+    ID_FAILED_TO_CONVERT_NUMERIC_VALUE_DB 
+                            "The string value '%s' for column '%s' could not be converted to a numeric type."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ENTERTODB_INSERTUPDATEMODE_COUNT_FAILED 
+                            "Failed to check if the record identified by the WHERE clause ""%s"" existed in the target database. Reported error: %s."
+    ID_DBTREESOURCE_CREXCEPTION 
+                            "An error occurred while building the source database tree: %s"
+	ID_ENTERTODB_TARGET_NEXTVAL_ERROR
+							"An error occurred while exec user define NextVal sqlStatement: %s, error: %s"
+	ID_ENTERTODB_TARGET_CURRVAL_ERROR
+							"An error occurred while exec user define CurrVal sqlStatement: %s, error: %s"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

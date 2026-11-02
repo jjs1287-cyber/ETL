@@ -1,0 +1,15 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+	<Projects>
+		<Project File="../../../../../../../common/cpp/konga/Crypto/project/SlickEdit/Crypto.vpj"/>
+		<Project File="../../../../DbRelations/project/SlickEdit/DbRelations.vpj"/>
+		<Project File="../../../DbUtils/project/SlickEdit/DbUtils.vpj"/>
+		<Project File="../../../DtlDbUtils/project/SlickEdit/DtlDbUtils.vpj"/>
+		<Project File="../../../DtlTranDb/project/SlickEdit/DtlTranDb.vpj"/>
+		<Project File="../../../../UiBackend/GuidMappings/project/SlickEdit/GuidMappings.vpj"/>
+		<Project File="../../../TranDb/project/SlickEdit/TranDb.vpj"/>
+		<Project File="TranDbUtils.vpj"/>
+		<Project File="../../Test/project/SlickEdit/TranDbUtilsTest.vpj"/>
+		<Project File="../../../../../../../common/cpp/konga/Utils/project/SlickEdit/Utils.vpj"/>
+	</Projects>
+</Workspace>

@@ -1,0 +1,16 @@
+<html>
+This function caches the key/value result to a dictionary. If the key already exists in the dictionary, the coresponding value will be return.
+Otherwise, the third argument would be evaluated as the value of the function, and the key/value would be stored in the dictionary.
+<br>
+<h2>Example:</h2>
+<code><font size="4">
+d = Dict();<br>
+i=0;<br>
+$a=MapCache(d, "key1", ++i);<br>
+$b=MapCache(d, "key2", ++i);<br>
+$c=MapCache(d, "key1", ++i);<br>
+i<br>
+</font>
+</code>
+The result will be 2, and $a=1, $b=2, $c=1.
+</html>

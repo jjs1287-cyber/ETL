@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean id="ic.PublicTypesFilter" class="org.etlforge.integration.data.functors.EntityFilters" factory-method="oneOfTypes">
+		<constructor-arg ref="EntityTypes" />
+	</bean>
+	
+	<bean id="ic.NewEntityMenuFactory" 
+			class="org.etlforge.integration.client.ui.interchange.component.menu.NewEntityMenuFactory" 
+			lazy-init="true">
+		<constructor-arg ref="ic.EntityTypeCategories" />
+	</bean>
+
+	<bean id="ic.OperationTesterFactory" 
+			class="org.etlforge.integration.client.ui.interchange.entity.transformation.data.OperationTesterFactory" 
+			lazy-init="true">
+		<constructor-arg ref="ic.DeployFacade" />
+	</bean>
+
+	<!-- Extension bean that can be overridden by edition specific contexts to provide TX-to-OP transforms
+	for edition-specific operation types. -->
+	<bean id="ic.TxToOpFactory.Types" class="java.util.Collections" factory-method="emptyList" lazy-init="true" />
+	<bean id="ic.TxToOpFactory"
+			class="org.etlforge.integration.client.ui.interchange.entity.TransformationToOperationFactory" 
+			lazy-init="true">
+		<constructor-arg ref="ic.EntityExplorerService" />
+		<constructor-arg ref="ic.TxToOpFactory.Types" />
+	</bean>
+	
+	<bean id="ic.EntityConfig.Base" abstract="true">
+		<property name="appWin" ref="ui.AppWin" />
+		<property name="currentProjectService" ref="core.CurrentProject" />
+		<property name="entityFactory" ref="ic.EntityExplorerService" />
+		<property name="projectPersistor" ref="ic.ProjectPersistor" />
+		<property name="deployFacade" ref="ic.DeployFacade" />
+		<property name="projectExplorer" ref="ic.EntityExplorerService" />
+		<property name="popupMenuManager" ref="ic.ContextMenu" />
+		<property name="renamer">
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.DefaultEntityRenamer">
+				<constructor-arg ref="ic.ProjectPersistor" />
+			</bean>
+		</property>
+		<property name="publicTypesFilter">
+			<util:constant static-field="org.etlforge.integration.data.functors.EntityFilters.ACCEPTS_ALL" />
+		</property>
+		<property name="defaultToolbarActions">
+			<list>
+				<ref bean="action.ic.DeploySelectedObjects" />
+				<ref bean="action.ic.Permissions" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="ic.action.NewProject"
+			class="org.etlforge.integration.client.ui.interchange.core.action.NewProjectAction"
+			lazy-init="true">
+		<constructor-arg ref="ui.AppWin" />
+		<constructor-arg ref="platform.ProjectManager" />
+	</bean>
+	
+	<bean id="ic.EntityConfigRegistry" class="org.etlforge.integration.client.ui.interchange.EntityConfigRegistry" lazy-init="true" />
+
+	<bean id="ic.ProjectConfig" 
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.project.ProjectConfig" 
+			lazy-init="true">
+		<constructor-arg ref="ic.action.NewProject" />
+		<constructor-arg ref="ic.ProjectRenamer" />
+		<constructor-arg>
+			<list>
+				<ref bean="action.ic.DeployHistory" />
+				<ref bean="action.ic.TrashCan" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="operation.Preferences" class="org.etlforge.integration.client.ui.operation.prefs.ClientOperationPreferences" lazy-init="true" />
+	<bean id="ic.OperationConfig" parent="ic.EntityConfig.Base" 
+			class="org.etlforge.integration.client.ui.interchange.entity.operation.OperationConfig" 
+			lazy-init="true">
+		<constructor-arg ref="ic.Operation.GraphConfig" />
+		<property name="operationPreferences" ref="operation.Preferences" />
+		<property name="opRunnerFactory" ref="ic.OperationRunnerFactory" />
+		<property name="activityPageDisplayer" ref="ic.ProjectPageDisplayer" />
+		<property name="logApi" ref="server.OperationLogProvider" />
+		<property name="queueApi" ref="server.OperationQueueProvider" />
+		<property name="operationHistoryApi" ref="server.OperationHistoryProvider" />
+		<property name="sourceHistoryApi" ref="server.SourceHistoryProvider" />
+		<property name="graphActions">
+			<list>
+				<ref bean="action.ic.RunOperation" />
+				<ref bean="action.ic.DeploySelectedObjects" />
+				<ref bean="action.ic.Permissions" />
+				<ref bean="action.ic.AssignPlugin" />
+				<ref bean="action.ic.TestConnection" />
+				<ref bean="action.ic.ViewDependencies" />
+			</list>
+		</property>
+		<property name="saveConsequenceFactories">
+			<list>
+				<bean class="com.etlforge.integration.client.ui.sfdc.query.page.NewRequestSaveConsequenceFactory" />
+			</list>
+		</property>
+		<property name="transformGenerators">
+			<list>
+				<ref bean="ic.TxToOpFactory" />
+			</list>
+		</property>
+	</bean>
+	<!-- Edition-specific ActivityTypeConfigs for the operation graph. Defined as an empty list here; 
+		 can be overridden by edition-specific application context. -->
+	<bean id="ic.Operation.GraphConfig.Edition"
+			class="java.util.Collections"
+			factory-method="emptyList"
+			lazy-init="true" />
+	<bean id="ic.Operation.GraphConfig" 
+			class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.OperationGraphConfig"
+			lazy-init="true">
+		<constructor-arg>
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.SourceActivityTypeConfig" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.TargetActivityTypeConfig" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.TransformationActivityTypeConfig" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.ScriptActivityTypeConfig" /><bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.XsltTransformActivityTypeConfig" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.WebServiceActivityTypeConfig" />
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.operation.graph2d.BulkActivityTypeConfig" />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="ic.Operation.GraphConfig.Edition" />
+	</bean>
+	
+	<bean id="ic.TransformationConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.transformation.TransformationConfig"
+			lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.TransformationWizardFactory">
+				<constructor-arg ref="Transformation.WizardConfig" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="core.MappingStructureFactory" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.data.MappingTreeDataServiceFactory">
+				<constructor-arg ref="core.CurrentProject" />
+				<constructor-arg ref="platform.ServerManager" />
+				<constructor-arg ref="platform.DebugService" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="org.etlforge.integration.debug.serverapi.DataFileProvider" />
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.page.DefaultTestActionsFactory">
+				<constructor-arg ref="ic.OperationTesterFactory" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.transformation.tree.formula.FormulaBuilderUiFactory">
+				<constructor-arg ref="script.ScriptBuilderSections" />
+				<constructor-arg ref="Script.ScriptModeSelectorFactory" />
+				<constructor-arg ref="platform.DebugService" />
+				<constructor-arg ref="action.debug.All" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.structure.editor.StructureEditorFactories">
+				<constructor-arg>
+					<map>
+						<entry key="Text">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.text.TextStructureEditorFactory" />
+						</entry>
+						<entry key="ComplexText">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.text.TextStructureEditorFactory" />
+						</entry>
+						<entry key="XML">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.xml.XmlStructureEditorFactory" />
+						</entry>
+						<entry key="WebServiceRequest">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.ws.WebServiceStructureEditorFactory" />
+						</entry>
+						<entry key="WebServiceResponse">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.ws.WebServiceStructureEditorFactory" />
+						</entry>
+						<entry key="LDAP">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.ldap.LdapStructureEditorFactory" />
+						</entry>
+						<entry key="JSON">
+							<bean class="org.etlforge.integration.client.ui.structure.editor.json.JsonStructureEditorFactory" />
+						</entry>
+					</map>
+				</constructor-arg>
+				<constructor-arg ref="Transformation.StructureEditorFactories.Additional" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg ref="ic.TxToOpFactory" />
+	</bean>
+	
+	<bean id="ic.DataLocationValueCaches"
+			class="org.etlforge.integration.client.ui.interchange.entity.DataLocationValueCaches"
+			lazy-init="true">
+		<constructor-arg ref="core.EntityValueCacheFactory" />
+	</bean>
+	
+	<bean id="ic.SourceConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.source.SourceConfig"
+			lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="action.ic.TestConnection" />
+		<property name="transformGenerators">
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.TargetToSourceFactory">
+					<constructor-arg ref="ic.EntityExplorerService" />
+				</bean>
+			</list>
+		</property>
+		<property name="valueCaches" ref="ic.DataLocationValueCaches" />
+		<property name="assignPluginAction" ref="action.ic.AssignPlugin" />
+	</bean>
+	<bean id="ic.TargetConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.target.TargetConfig"
+			lazy-init="true">
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="action.ic.TestConnection" />
+		<property name="transformGenerators">
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.SourceToTargetFactory">
+					<constructor-arg ref="ic.EntityExplorerService" />
+				</bean>
+			</list>
+		</property>
+		<property name="valueCaches" ref="ic.DataLocationValueCaches" />
+		<property name="assignPluginAction" ref="action.ic.AssignPlugin" />
+	</bean>
+	<bean id="ic.WebServiceConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.webservice.WebServiceCallConfig"
+			lazy-init="true" />
+	<bean id="ic.ProjectVariableConfig" parent="ic.EntityConfig.Base" class="org.etlforge.integration.client.ui.interchange.entity.projectvariable.ProjectVariableConfig" lazy-init="true" />
+	<bean id="ic.XsltTransformConfig" parent="ic.EntityConfig.Base" class="org.etlforge.integration.client.ui.interchange.entity.xslt.XsltTransformConfig" lazy-init="true" />
+<bean id="ic.ScriptConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.script.ScriptConfig"
+			lazy-init="true">
+		<constructor-arg ref="ic.DebugService" />
+		<constructor-arg ref="script.ScriptBuilderUiFactory" />
+	</bean>
+	<bean id="ic.ScheduleConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.schedule.ScheduleConfig"
+			lazy-init="true">
+		<property name="testAction" ref="action.ic.TestSchedule" />
+	</bean>
+	<bean id="ic.EmailConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.message.EmailMessageConfig"
+			lazy-init="true">
+		<property name="testAction" ref="action.ic.TestEmail" />
+	</bean>
+	<bean id="ic.DocumentConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.document.TextDocumentConfig" 
+			lazy-init="true" />
+	<bean id="ic.HttpEndpointConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.ui.interchange.entity.httpendpoint.HttpEndpointConfig"
+			lazy-init="true">
+		<property name="transformGenerators">
+			<list>
+				<bean class="org.etlforge.integration.client.ui.interchange.entity.OperationToHttpEndpointFactory">
+					<constructor-arg ref="ic.EntityExplorerService" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="ic.Db2DbConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.connect.db2db.DatabaseToDatabaseConnectConfig"
+			lazy-init="true" />
+	<bean id="ic.Db2TextConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.connect.db2text.DatabaseToTextConnectConfig"  
+			lazy-init="true" />
+	<bean id="ic.Db2XmlConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.connect.db2xml.DatabaseToXmlConnectConfig"
+			lazy-init="true" />
+	<bean id="Text2DbConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.connect.text2db.TextToDatabaseConnectConfig"
+			lazy-init="true" />
+	<bean id="ic.Xml2DbConfig"
+			parent="ic.EntityConfig.Base"
+			class="org.etlforge.integration.client.connect.xml2db.XmlToDatabaseConnectConfig"
+			lazy-init="true" />
+	<bean id="ic.FolderConfig" 
+			class="org.etlforge.integration.client.ui.interchange.entity.FolderConfig" 
+			lazy-init="true">
+		<constructor-arg>
+			<bean class="org.etlforge.integration.client.ui.interchange.core.action.NewFolderAction">
+				<constructor-arg ref="ui.ActiveObjectService" />
+				<constructor-arg ref="ic.ParentFolderLocator" />
+				<constructor-arg ref="ic.ContentViewer" />
+			</bean>
+		</constructor-arg>
+		<property name="renamer">
+			<bean class="org.etlforge.integration.client.ui.interchange.entity.FolderRenamer">
+				<constructor-arg ref="ic.ProjectPersistor" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="script.PluginProvider" class="org.etlforge.integration.client.ui.interchange.entity.script.ScriptPluginProviderImpl">
+		<constructor-arg ref="server.PluginInfoProvider" />
+		<constructor-arg ref="platform.ServerManager" />
+		<constructor-arg ref="action.core.Login" />
+	</bean>
+		
+	<util:list id="script.ScriptBuilderSections">
+		<bean class="org.etlforge.integration.client.ui.script.builder.FunctionSelectorFactory" />
+		<bean class="org.etlforge.integration.client.ui.script.builder.ProjectItemSelectorFactory">
+			<constructor-arg>
+				<bean class="org.etlforge.integration.client.ui.script.builder.DefaultProjectItemTreeModelBuilder" />
+			</constructor-arg>
+		</bean>
+		<bean class="org.etlforge.integration.client.ui.script.builder.dataelement.DataElementSelectorFactory" />
+		<bean class="org.etlforge.integration.client.ui.script.builder.plugin.PluginSelectorFactory">
+			<constructor-arg ref="script.PluginProvider" />
+		</bean>
+	</util:list>
+	
+	<bean id="Script.ScriptModeSelectorFactory" class="com.etlforge.integration.client.ui.script.EnterpriseScriptModeSelectorFactory" lazy-init="true" />
+
+	<bean id="script.ScriptBuilderUiFactory" class="org.etlforge.integration.client.ui.script.builder.ScriptBuilderUiFactory" lazy-init="true">
+		<constructor-arg ref="script.ScriptBuilderSections" />
+		<constructor-arg ref="Script.ScriptModeSelectorFactory" />
+		<constructor-arg ref="platform.DebugService" />
+		<constructor-arg ref="action.debug.All" />
+	</bean>
+		
+	<!-- Defines the Transformation wizard types that are edition-specific, i.e. not available in all editions.
+		 The edition-specific configuration can override this bean definition to provide the additional 
+		 types. -->
+	<bean id="Transformation.WizardConfig.AdditionalTypes" class="java.util.Collections" factory-method="emptyList" lazy-init="true" />
+	<bean id="Transformation.WizardConfig" class="org.etlforge.integration.client.ui.interchange.transformation.wizard.DefaultWizardConfiguration" lazy-init="true">
+		<constructor-arg>
+			<list>
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.DATABASE" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.TEXT" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.XML" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.WEBSERVICE_REQUEST" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.WEBSERVICE_RESPONSE" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.LDAP" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.JSON" />
+				<util:constant static-field="org.etlforge.integration.client.ui.interchange.transformation.wizard.WizardTypes.EDI" />
+			</list>
+		</constructor-arg>
+		<constructor-arg ref="Transformation.WizardConfig.AdditionalTypes" />
+	</bean>
+
+	<!-- Defines DataStructure editors for Edit Transformation, for additional structures that are not common 
+		 for all editions. For example, the Enterprise edition have Connector Call structures.
+		 The edition-specific configuration can override this bean definition to provide the additional 
+		 type mappings. -->
+	<bean id="Transformation.StructureEditorFactories.Additional" class="java.util.Collections" factory-method="emptyMap" lazy-init="true" />
+	
+</beans>

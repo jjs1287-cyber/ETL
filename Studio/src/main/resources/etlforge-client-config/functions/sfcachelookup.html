@@ -1,0 +1,17 @@
+<html>
+Logs in to Salesforce (if necessary) and retrieves the result of the query from Salesforce. Only the value from the first field of the first record is returned.<br>
+Values are cached so that subsequent calls with the same exact parameters (login and SQL) do not call Salesforce.  Salesforce is only called the first time.
+<p>
+The login call is made using the credentials in the specified Salesforce Org.
+<code><font size="4">null</font></code> is returned if either login or query returns no record. 
+API fails. Use <code><font size="4">GetLastError()</font></code> to get the error message in this case.
+<p>
+Example:
+<p>
+<code><font size="4">
+my_id = SFCacheLookup("&lt;TAG&gt;Salesforce Orgs/...&lt;/TAG&gt;", "SELECT Id FROM Account WHERE Name='My Account'");<br>
+if(IsNull(my_id), RaiseError(GetLastError());
+</font></code>
+<p>
+</font></code>.
+</html>

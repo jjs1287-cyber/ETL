@@ -1,0 +1,20 @@
+\set ON_ERROR_STOP on
+BEGIN;
+DO $$ BEGIN IF EXISTS(SELECT 1 FROM operationinstancetab WHERE operation_instance_id BETWEEN -900000008 AND -900000001) THEN RAISE EXCEPTION 'fixture IDs already exist'; END IF; END $$;
+INSERT INTO operationinstancetab(operation_instance_id,operation_id,parent_operation_instance_id) SELECT -900000000-n,35,CASE WHEN n=8 THEN -900000007 ELSE -1 END FROM generate_series(1,8) n;
+INSERT INTO operationlogtab(operation_instance_id,operation_id,status,entered_ts,entered_tm,status_ts,status_tm)
+SELECT -900000000-n,35,CASE WHEN n IN(3,8) THEN 2 WHEN n IN(2,6) THEN 6 ELSE 3 END,
+(now() AT TIME ZONE 'UTC')-interval '35 days',0,(now() AT TIME ZONE 'UTC')- CASE WHEN n IN(4,8) THEN interval '3 days' ELSE interval '35 days' END,0 FROM generate_series(1,8) n;
+INSERT INTO operationmessagetab(operation_instance_id,field_name,message) SELECT -900000000-n,'cleanup fixture','preserve or expire atomically' FROM generate_series(1,8) n;
+INSERT INTO cloudlogging.delivery(operation_instance_id,upload_id,filename,payload,attempts) VALUES(-900000005,gen_random_uuid(),'retention-fixture-pending.json','{}',2),(-900000006,gen_random_uuid(),'retention-fixture-exhausted.json','{}',5);
+WITH expired AS MATERIALIZED (SELECT l.operation_instance_id FROM public.operationlogtab l WHERE l.status IN (1,3,4,5,6) AND l.status_ts < (now() AT TIME ZONE 'UTC') - interval '30 days' AND NOT EXISTS (SELECT 1 FROM cloudlogging.delivery d WHERE d.operation_instance_id=l.operation_instance_id AND d.uploaded_at IS NULL AND d.attempts<5) AND NOT EXISTS (SELECT 1 FROM public.operationinstancetab child JOIN public.operationlogtab cl ON cl.operation_instance_id=child.operation_instance_id WHERE child.parent_operation_instance_id=l.operation_instance_id AND cl.status IN (0,2)) AND NOT EXISTS (SELECT 1 FROM public.salesforceoperationstatustab s WHERE s.operation_instance_id=l.operation_instance_id) AND NOT EXISTS (SELECT 1 FROM public.bulkload_instance_tab s WHERE s.operation_instance_id=l.operation_instance_id) AND NOT EXISTS (SELECT 1 FROM public.bulkload_batch_tab s WHERE s.operation_instance_id=l.operation_instance_id) ORDER BY l.status_ts LIMIT 1000 FOR UPDATE OF l SKIP LOCKED), messages AS (DELETE FROM public.operationmessagetab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), files AS (DELETE FROM public.operationfilestatustab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), summaries AS (DELETE FROM public.operationsummarytab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), progress AS (DELETE FROM public.operation_progress_tab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), delivery AS (DELETE FROM cloudlogging.delivery WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), logs AS (DELETE FROM public.operationlogtab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)), instances AS (DELETE FROM public.operationinstancetab WHERE operation_instance_id IN (SELECT operation_instance_id FROM expired)) SELECT count(*) FROM expired;
+
+DO $$ BEGIN
+IF EXISTS(SELECT 1 FROM operationlogtab WHERE operation_instance_id IN(-900000001,-900000002,-900000006)) THEN RAISE EXCEPTION 'Expired completed history retained'; END IF;
+IF (SELECT count(*) FROM operationlogtab WHERE operation_instance_id IN(-900000003,-900000004,-900000005,-900000007,-900000008))<>5 THEN RAISE EXCEPTION 'Protected history removed'; END IF;
+IF EXISTS(SELECT 1 FROM operationmessagetab WHERE operation_instance_id IN(-900000001,-900000002,-900000006)) THEN RAISE EXCEPTION 'Expired messages retained'; END IF;
+IF NOT EXISTS(SELECT 1 FROM cloudlogging.delivery WHERE operation_instance_id=-900000005) THEN RAISE EXCEPTION 'Retryable cloud upload removed'; END IF;
+IF EXISTS(SELECT 1 FROM cloudlogging.delivery WHERE operation_instance_id=-900000006) THEN RAISE EXCEPTION 'Expired exhausted cloud payload retained'; END IF;
+RAISE NOTICE 'PASS: expired success/failure, fresh, running, active child and cloud retry history checks';
+END $$;
+ROLLBACK;

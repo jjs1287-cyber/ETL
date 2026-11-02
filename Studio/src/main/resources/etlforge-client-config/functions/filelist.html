@@ -1,0 +1,13 @@
+<html><p>
+				Get the list of filenames from the specified source. This will be the same list of files that you get when
+        you test a file type source. The file-type source used
+				in this function call must be defined as a source in
+				the current integration project. The available file-type sources are shown
+				in the "Project Items" tab in the lower  section of the Formula Builder,
+				under the node called "File Locations".
+				</p>
+				<p>
+				The method returns an array data element containing the file names matching the file filter of the specified source.
+				</p><br><h2>Example:</h2><code><font size="4">
+				$nfiles = Length(FileList("&lt;TAG&gt;Project Name/Sources/File Share Source&lt;/TAG&gt;"))<br>
+				</font></code></html>

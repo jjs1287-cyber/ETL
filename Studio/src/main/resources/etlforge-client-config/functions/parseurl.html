@@ -1,0 +1,8 @@
+<html>Parse the given url string, and return an array of decoded values. The value has a name tag, so the user can address it by the index or field name.<br><br>
+When retrieving the value, the case of the name is ignored.<br>
+<h2>Example:</h2><code><font size="4">
+url="http://hostname/user?email=john1990%40gmail.com&name=John%20Smith";<br>
+arr=ParseUrl(url);<br>
+email1=arr[0]; // email1 will be john1990@gmail.com<br>
+email2=arr["email"]; // same as email1<br>
+</font></code></html>

@@ -1,0 +1,5 @@
+<html>Counts all instances of a data element at a particular hierarchical level where
+				that data element contains a valid value (not null).<br><h2>Example:</h2>Assume your database contains a field called quantity in a table called Items that is a child
+				of POHeader (there are many items within one POHeader).<br>
+				<code><font size="4">Count(POHeader.Items#.Quantity)</font></code> will return the number of item rows
+				for a particular POHeader (purchase order) that have values in the quantity column (not null).</html>

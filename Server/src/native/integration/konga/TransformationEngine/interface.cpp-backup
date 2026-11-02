@@ -1,0 +1,365 @@
+/*
+ * Copyright (c) 1998-2005 Jitterbit, Inc.
+ *
+ */
+#include <jni.h>
+#include <java.h>
+
+#include <vector>
+
+#include "CDTDParser.h"
+#include "TreeMapper.h"
+#include "DETransform.h"
+
+#include <konga/Utils/StringUtils.h>
+
+namespace konga {
+
+	struct js_pair {
+		const char *s;
+		jstring &js;
+		js_pair(const char *s0, jstring &js0) : s(s0), js(js0){}
+	};
+
+	class JNIToolkit
+	{
+		std::vector<js_pair*> v;
+		JNIEnv *env;
+		jobject &obj;
+
+	public:
+		JNIToolkit(JNIEnv *env0, jobject &obj0) : env(env0), obj(obj0) {}
+		
+		~JNIToolkit(){
+			for(std::vector<js_pair*>::iterator it=v.begin();it!=v.end();it++){
+				js_pair*pair=*it;
+				env->ReleaseStringUTFChars(pair->js, pair->s);
+				delete pair;
+			}
+		}
+
+		const char* getUTFChars(jstring &js)
+		{
+			const char*s=env->GetStringUTFChars(js, 0);
+			v.push_back(new js_pair(s,js));
+			return s;
+		}
+
+		void setString(const std::string& sName, const std::string& sValue)
+		{
+			std::string sMethodName=std::string("set")+sName;
+			jclass cls=env->GetObjectClass(obj);
+			jmethodID mid=env->GetMethodID(cls, sMethodName.c_str(), "(Ljava/lang/String;)V");
+			jstring jsValue=env->NewStringUTF(sValue.c_str());
+			env->CallVoidMethod(obj, mid, jsValue);
+		}
+
+		void setInteger(const std::string& sName, int i)
+		{
+			std::string sMethodName=std::string("set")+sName;
+			jclass cls=env->GetObjectClass(obj);
+			jmethodID mid=env->GetMethodID(cls, sMethodName.c_str(), "(Ljava/lang/Integer;)V");
+			env->CallVoidMethod(obj, mid, i);
+		}
+
+		void throwException(const std::string& sMessage, const char* cls_name="java/lang/Exception")
+		{
+			jclass ec=env->FindClass(cls_name);
+			if(ec!=NULL)env->ThrowNew(ec,sMessage.c_str());
+		}
+	};
+}
+
+using namespace std;
+
+//	interface IDTDParser : IDispatch
+
+//[id(1), helpstring("method CreateBrowserTree")] HRESULT CreateBrowserTree([in] BSTR inputFileName, [in]BSTR rootName, [in]BSTR javaFileName, [in]BSTR title, [in]BSTR Click);
+JNIEXPORT void JNICALL Java_CDTDParser_CreateBrowserTree
+(JNIEnv *env, jobject obj, jstring jsInputFileName, jstring jsRootName, jstring jsJavaFileName, jstring jsTitle, jstring jsClick)
+{
+	konga::JNIToolkit kit(env, obj);
+	
+	const char *sInputFileName = kit.getUTFChars(jsInputFileName);
+	const char *sRootName = kit.getUTFChars(jsRootName);
+	const char *sJavaFileName = kit.getUTFChars(jsJavaFileName);
+	const char *sTitle = kit.getUTFChars(jsTitle);
+	const char *sClick = kit.getUTFChars(jsClick);
+	
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.CreateBrowserTree(sInputFileName, sRootName, sJavaFileName, sTitle, sClick);
+		kit.setString("ExtraDtdFiles",cdtd_parser.get_extraDtdFiles());
+	}
+	catch(...){
+		kit.throwException(cdtd_parser.get_LastError());
+	}
+	
+}
+/*
+//[id(2), helpstring("method CreateFlatBrowserTree")] HRESULT CreateFlatBrowserTree(BSTR inputFileName, [in]BSTR treeFileName, [in]BSTR javaFileName, [in]BSTR title, [in]BSTR Click);
+JNIEXPORT void JNICALL Java_com_edgeways_integration_jdi_CDTDParser_CreateFlatBrowserTree
+  (JNIEnv *env, jobject obj, jstring jsInputFileName, jstring jsTreeFileName, jstring jsJavaFileName, jstring jsTitle, jstring jsClick)
+{
+	const char* sInputFileName = env->GetStringUTFChars(jsInputFileName, 0);
+	const char* sTreeFileName = env->GetStringUTFChars(jsTreeFileName, 0);
+	const char* sJavaFileName = env->GetStringUTFChars(jsJavaFileName, 0);
+	const char* sTitle = env->GetStringUTFChars(jsTitle, 0);
+	const char* sClick = env->GetStringUTFChars(jsClick, 0);
+	
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.CreateFlatBrowserTree(sInputFileName, sTreeFileName, sJavaFileName, sTitle, sClick);
+		env->ReleaseStringUTFChars(jsInputFileName, sInputFileName);
+		env->ReleaseStringUTFChars(jsTreeFileName, sTreeFileName);
+		env->ReleaseStringUTFChars(jsJavaFileName, sJavaFileName);
+		env->ReleaseStringUTFChars(jsTitle, sTitle);
+		env->ReleaseStringUTFChars(jsClick, sClick);
+		jclass cls=env->GetObjectClass(obj);
+		jmethodID mid=env->GetMethodID(cls, "setExtraDtdFiles", "(Ljava/lang/String;)V");
+		jstring jsExtraDTDFiles=env->NewStringUTF(cdtd_parser.get_extraDtdFiles().c_str());
+		env->CallVoidMethod(obj, mid, jsExtraDTDFiles);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsInputFileName, sInputFileName);
+		env->ReleaseStringUTFChars(jsTreeFileName, sTreeFileName);
+		env->ReleaseStringUTFChars(jsJavaFileName, sJavaFileName);
+		env->ReleaseStringUTFChars(jsTitle, sTitle);
+		env->ReleaseStringUTFChars(jsClick, sClick);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+
+//[id(5), helpstring("method WriteTree")] HRESULT WriteTree([in] BSTR inputFileName, [in] BSTR rootName, [in] BSTR outputFileName);
+JNIEXPORT void JNICALL Java_CDTDParser_WriteTree
+  (JNIEnv *env, jobject obj, jstring jsInputFileName, jstring jsRootName, jstring jsOutputFileName)
+{
+	const char* sInputFileName = env->GetStringUTFChars(jsInputFileName, 0);
+	const char* sRootName = env->GetStringUTFChars(jsRootName, 0);
+	const char* sOutputFileName = env->GetStringUTFChars(jsOutputFileName, 0);
+	
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.WriteTree(sInputFileName, sRootName, sOutputFileName);
+		env->ReleaseStringUTFChars(jsInputFileName, sInputFileName);
+		env->ReleaseStringUTFChars(jsRootName, sRootName);
+		env->ReleaseStringUTFChars(jsOutputFileName, sOutputFileName);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsInputFileName, sInputFileName);
+		env->ReleaseStringUTFChars(jsRootName, sRootName);
+		env->ReleaseStringUTFChars(jsOutputFileName, sOutputFileName);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+
+//[id(6), helpstring("method CreateXSDFromWSDLForBothIO")] HRESULT CreateXSDFromWSDLForBothIO([in] BSTR bstrWDSLFileName, [in] BSTR bstrBinding, [in] BSTR bstrOperationName, [in] BSTR bstrSoapOperationStyle, [in] BSTR bstrSoapBodyUse, [in] BSTR bstrInputXSDFileName, [in] BSTR bstrOutputXSDFileName);
+JNIEXPORT void JNICALL Java_CDTDParser_CreateXSDFromWSDLForBothIO
+  (JNIEnv *env, jobject obj, jstring jsWsdlFileName, jstring jsBinding, jstring jsOperationName, jstring jsSoapOperationStyle, jstring jsSoapBodyUse, jstring JSInputXSDFileName, jstring jsOuputXSDFileName)
+{
+	const char* sWsdlFileName = env->GetStringUTFChars(jsWsdlFileName, 0);
+	const char* sBinding = env->GetStringUTFChars(jsBinding, 0);
+	const char* sOperationName = env->GetStringUTFChars(jsOperationName, 0);
+	const char* sSoapOperationStyle = env->GetStringUTFChars(jsSoapOperationStyle, 0);
+	const char* sSoapBodyUse = env->GetStringUTFChars(jsSoapBodyUse, 0);
+	const char* SInputXSDFileName = env->GetStringUTFChars(JSInputXSDFileName, 0);
+	const char* sOuputXSDFileName = env->GetStringUTFChars(jsOuputXSDFileName, 0);
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.CreateXSDFromWSDLForBothIO(sWsdlFileName, sBinding, sOperationName, sSoapOperationStyle, sSoapBodyUse, SInputXSDFileName, sOuputXSDFileName);
+		env->ReleaseStringUTFChars(jsWsdlFileName, sWsdlFileName);
+		env->ReleaseStringUTFChars(jsBinding, sBinding);
+		env->ReleaseStringUTFChars(jsOperationName, sOperationName);
+		env->ReleaseStringUTFChars(jsSoapOperationStyle, sSoapOperationStyle);
+		env->ReleaseStringUTFChars(jsSoapBodyUse, sSoapBodyUse);
+		env->ReleaseStringUTFChars(JSInputXSDFileName, SInputXSDFileName);
+		env->ReleaseStringUTFChars(jsOuputXSDFileName, sOuputXSDFileName);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsWsdlFileName, sWsdlFileName);
+		env->ReleaseStringUTFChars(jsBinding, sBinding);
+		env->ReleaseStringUTFChars(jsOperationName, sOperationName);
+		env->ReleaseStringUTFChars(jsSoapOperationStyle, sSoapOperationStyle);
+		env->ReleaseStringUTFChars(jsSoapBodyUse, sSoapBodyUse);
+		env->ReleaseStringUTFChars(JSInputXSDFileName, SInputXSDFileName);
+		env->ReleaseStringUTFChars(jsOuputXSDFileName, sOuputXSDFileName);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+//[id(7), helpstring("method GetRootSelectionList")] HRESULT GetRootSelectionList([in] BSTR bstrDtdFileName, [in] BSTR bstrOutputFileName, [in] BSTR bstrOutputFileName2);
+JNIEXPORT void JNICALL Java_CDTDParser_GetRootSelectionList
+  (JNIEnv *env, jobject obj, jstring jsDtdFileName, jstring jsOutputFileName, jstring jsOutputFileName2)
+{
+	const char* sDtdFileName = env->GetStringUTFChars(jsDtdFileName, 0);
+	const char* sOutputFileName = env->GetStringUTFChars(jsOutputFileName, 0);
+	const char* sOutputFileName2 = env->GetStringUTFChars(jsOutputFileName2, 0);
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.GetRootSelectionList(sDtdFileName, sOutputFileName, sOutputFileName2);
+		env->ReleaseStringUTFChars(jsDtdFileName, sDtdFileName);
+		env->ReleaseStringUTFChars(jsOutputFileName, sOutputFileName);
+		env->ReleaseStringUTFChars(jsOutputFileName2, sOutputFileName2);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsDtdFileName, sDtdFileName);
+		env->ReleaseStringUTFChars(jsOutputFileName, sOutputFileName);
+		env->ReleaseStringUTFChars(jsOutputFileName2, sOutputFileName2);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+//[id(8), helpstring("method GetSystemRootName")] HRESULT GetSystemRootName([in] BSTR bstrSampleXmlFileName, [out, retval] BSTR* pbstrName);
+JNIEXPORT jstring JNICALL Java_CDTDParser_GetSystemRootName
+  (JNIEnv *env, jobject obj, jstring jsSampleXmlFileName)
+{
+	const char* sSampleXmlFileName = env->GetStringUTFChars(jsSampleXmlFileName, 0);
+	CDTDParser cdtd_parser;
+	try {
+		std::string sSystemRootName=cdtd_parser.GetSystemRootName(sSampleXmlFileName);
+		env->ReleaseStringUTFChars(jsSampleXmlFileName, sSampleXmlFileName);
+		return env->NewStringUTF(sSystemRootName.c_str());
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsSampleXmlFileName, sSampleXmlFileName);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+		else
+			return NULL;
+	}
+}
+
+//[id(9), helpstring("method CreateJtrForWS")] HRESULT CreateJtrForWS([in] BSTR bstrWsdlFileName, [in] BSTR bstrBinding, [in] BSTR bstrOperation, [in] BSTR bstrSoapOperationStyle, [in] BSTR bstrSoapBodyUse, [in] BSTR bstrRequestJtrFileName, [in] BSTR bstrResponseJtrFileName);
+JNIEXPORT void JNICALL Java_CDTDParser_CreateJtrForWS
+  (JNIEnv *env, jobject obj, jstring jsWsdlFileName, jstring jsBinding, jstring jsOperation, jstring jsSoapOperationStyle, jstring jsSoapBodyUse, jstring jsRequestJtrFileName, jstring jsResponseJtrFileName)
+{
+	const char* sWsdlFileName = env->GetStringUTFChars(jsWsdlFileName, 0);
+	const char* sBinding = env->GetStringUTFChars(jsBinding, 0);
+	const char* sOperation = env->GetStringUTFChars(jsOperation, 0);
+	const char* sSoapOperationStyle = env->GetStringUTFChars(jsSoapOperationStyle, 0);
+	const char* sSoapBodyUse = env->GetStringUTFChars(jsSoapBodyUse, 0);
+	const char* sRequestJtrFileName = env->GetStringUTFChars(jsRequestJtrFileName, 0);
+	const char* sResponseJtrFileName = env->GetStringUTFChars(jsResponseJtrFileName, 0);
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.CreateJtrForWS(sWsdlFileName, sBinding, sOperation, sSoapOperationStyle, sSoapBodyUse, sRequestJtrFileName, sResponseJtrFileName);
+		env->ReleaseStringUTFChars(jsWsdlFileName, sWsdlFileName);
+		env->ReleaseStringUTFChars(jsBinding, sBinding);
+		env->ReleaseStringUTFChars(jsOperation, sOperation);
+		env->ReleaseStringUTFChars(jsSoapOperationStyle, sSoapOperationStyle);
+		env->ReleaseStringUTFChars(jsSoapBodyUse, sSoapBodyUse);
+		env->ReleaseStringUTFChars(jsRequestJtrFileName, sRequestJtrFileName);
+		env->ReleaseStringUTFChars(jsResponseJtrFileName, sResponseJtrFileName);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsWsdlFileName, sWsdlFileName);
+		env->ReleaseStringUTFChars(jsBinding, sBinding);
+		env->ReleaseStringUTFChars(jsOperation, sOperation);
+		env->ReleaseStringUTFChars(jsSoapOperationStyle, sSoapOperationStyle);
+		env->ReleaseStringUTFChars(jsSoapBodyUse, sSoapBodyUse);
+		env->ReleaseStringUTFChars(jsRequestJtrFileName, sRequestJtrFileName);
+		env->ReleaseStringUTFChars(jsResponseJtrFileName, sResponseJtrFileName);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+//[id(10), helpstring("method CreateScmForDB")] HRESULT CreateScmForDB([in] int iTransformationId, [in] int cSorT_type, [in] BSTR bstrScmFileName, [in] BSTR bstrDsn);
+JNIEXPORT void JNICALL Java_CDTDParser_CreateScmForDB
+  (JNIEnv *env, jobject obj, jint iTransformationId, jint cSorT_type, jstring jsScmFileName, jstring jsDsn)
+{
+	const char* sScmFileName = env->GetStringUTFChars(jsScmFileName, 0);
+	const char* sDsn = env->GetStringUTFChars(jsDsn, 0);
+	CDTDParser cdtd_parser;
+	try {
+		cdtd_parser.CreateScmForDB(iTransformationId, cSorT_type, sScmFileName, sDsn);
+		env->ReleaseStringUTFChars(jsScmFileName, sScmFileName);
+		env->ReleaseStringUTFChars(jsDsn, sDsn);
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsScmFileName, sScmFileName);
+		env->ReleaseStringUTFChars(jsDsn, sDsn);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, cdtd_parser.get_LastError().c_str());
+	}
+}
+
+//	public native String Transform(String sTemplate) throws Exception;
+JNIEXPORT jstring JNICALL Java_com_edgeways_integration_jdi_DETransform_Transform
+  (JNIEnv *env, jobject obj, jstring jsTemplate)
+{
+	const char* sTemplate = env->GetStringUTFChars(jsTemplate, 0);
+	const char* sInput = env->GetStringUTFChars(jsInput, 0);
+	DETransform detransform;
+	try {
+		std::string sOut=detransform.Transform(sTemplate,sInput);
+		env->ReleaseStringUTFChars(jsSampleXmlFileName, sSampleXmlFileName);
+		return env->NewStringUTF(sSystemRootName.c_str());
+	}
+	catch(...){
+		env->ReleaseStringUTFChars(jsSampleXmlFileName, sSampleXmlFileName);
+		jclass ec=env->FindClass("java/lang/Exception");
+		if(ec!=NULL)
+			env->ThrowNew(ec, detransform.get_LastError().c_str());
+		else
+			return NULL;
+	}
+}
+
+*/
+/*
+//	interface ITreeMapper : IDispatch
+//		[id(1), helpstring("method MapByTransformationID")] HRESULT MapByTransformationID([in] BSTR bstrDSN, [in] int TransformationID, [in] BSTR inputDataFileName, [in] BSTR outputDataFileName, [out] long* plSourceDataSize, [out] long* plTargetDataSize, [out] long *lTransformationPeriod, [out] int* nTransformationStatus, [in] BSTR bstrOverRideParams);
+HRESULT MapByTransformationID([in] BSTR bstrDSN, [in] int TransformationID, [in] BSTR inputDataFileName, [in] BSTR outputDataFileName, [out] long* plSourceDataSize, [out] long* plTargetDataSize, [out] long *lTransformationPeriod, [out] int* nTransformationStatus, [in] BSTR bstrOverRideParams);
+//		[propget, id(2), helpstring("property LastError")] HRESULT LastError([out, retval] BSTR *pVal);
+string TreeMapper_LastError();
+//		[id(3), helpstring("method MapByOperationId")] HRESULT MapByOperationId([in] BSTR bstrDSN,[in] int OperationId, [in] BSTR inputDataFileName, [in] BSTR outputDataFileName, [out] long* plSourceDataSize, [out] long* plTargetDataSize, [out] long *lTransformationPeriod, [out] int* nTransformationStatus, [in] BSTR bstrOverRideParams);
+HRESULT MapByOperationId([in] BSTR bstrDSN,[in] int OperationId, [in] BSTR inputDataFileName, [in] BSTR outputDataFileName, [out] long* plSourceDataSize, [out] long* plTargetDataSize, [out] long *lTransformationPeriod, [out] int* nTransformationStatus, [in] BSTR bstrOverRideParams);
+//		[propput, id(4), helpstring("This function should be used to send parameters for PeopleSoft Message Agent as Source")] HRESULT PpsMsgAgnSrcParamList([in] BSTR strParameterList);
+string PpsMsgAgnSrcParamList(string stParameterList);
+//		[propget, id(5), helpstring("property OutputFiles")] HRESULT OutputFiles([out, retval] BSTR *pVal);
+string OutputFiles();
+//		[propget, id(6), helpstring("property RouteId")] HRESULT RouteId([out, retval] BSTR *pVal);
+string RouteId();
+//		[propget, id(7), helpstring("property Global")] HRESULT Global([out, retval] BSTR *pVal);
+string Global();
+//		[propget, id(8), helpstring("property Variable")] HRESULT Variable(BSTR name, [out, retval] BSTR *pVal);
+string Variable(string name);
+//		[id(9), helpstring("method CreateDataTreeFile")] HRESULT CreateDataTreeFile([in] BSTR dsn,[in] int tranId,[in] BSTR inputFileName,[in] BSTR outputFileName);
+HRESULT CreateDataTreeFile(string dsn, int tranId, string inputFileName, string outputFileName);
+//		[id(10), helpstring("method CreateTargetDataTreeFile")] HRESULT CreateTargetDataTreeFile([in] BSTR dsn,[in] int tranId,[in] BSTR inputFileName,[in] BSTR outputFileName);
+HRESULT CreateTargetDataTreeFile(string dsn, int tranId, BSTR inputFileName, string outputFileName);
+//		[id(11), helpstring("method TestTransform")] HRESULT TestTransform([in] BSTR bstrDSN, [in] int TransformationID, [in] BSTR bstrInputFN, [in] BSTR bstrOutputFN);
+HRESULT TestTransform(string bstrDSN, int TransformationID, string bstrInputFN, string bstrOutputFN);
+//		[id(12), helpstring("method TestOperation")] HRESULT TestOperation([in] BSTR bstrDSN, [in] int OperationID, [in] BSTR bstrInputFN, [in] BSTR bstrOutputSFN, [in] BSTR bstrOutputTFN);
+HRESULT TestOperation([in] BSTR bstrDSN, [in] int OperationID, [in] BSTR bstrInputFN, [in] BSTR bstrOutputSFN, [in] BSTR bstrOutputTFN);
+//		[id(13), helpstring("method WebServiceTransformation")] HRESULT WebServiceTransformation([in] BSTR bstrUrl, [in] BSTR bstrSoapAction, [in] BSTR bstrSoapStyle, [in] BSTR bstrSoapBodyUse, [in] BSTR bstrTargetNamespace, [in] BSTR bstrOtherNamespaces, [in] BSTR bstrInputXmlString, [in] BSTR bstrRequestXSD, [in] BSTR bstrResponseXSD, [in] LONG lDelayMS, [in] LONG lMaxSizeBytes, [out,retval] BSTR* pbstrOutputXmlString);
+HRESULT WebServiceTransformation([in] BSTR bstrUrl, [in] BSTR bstrSoapAction, [in] BSTR bstrSoapStyle, [in] BSTR bstrSoapBodyUse, [in] BSTR bstrTargetNamespace, [in] BSTR bstrOtherNamespaces, [in] BSTR bstrInputXmlString, [in] BSTR bstrRequestXSD, [in] BSTR bstrResponseXSD, [in] LONG lDelayMS, [in] LONG lMaxSizeBytes, [out,retval] BSTR* pbstrOutputXmlString);
+//		[id(14), helpstring("method HandleWebServiceCall")] HRESULT HandleWebServiceCall([in] BSTR bstrUserName, [in] BSTR bstrPassword, [in] long lOperationId, [in] VARIANT varData, [out, retval] BSTR *pVal);
+HRESULT HandleWebServiceCall([in] BSTR bstrUserName, [in] BSTR bstrPassword, [in] long lOperationId, [in] VARIANT varData, [out, retval] BSTR *pVal);
+//	interface IDETransform : IDispatch
+//		[id(1), helpstring("method Init")] HRESULT Init([in]BSTR bstrSourceDE, [in]BSTR bstrErrLogFileName);
+HRESULT Init([in]BSTR bstrSourceDE, [in]BSTR bstrErrLogFileName);
+//		[id(2), helpstring("method ReadRecord")] HRESULT ReadRecord([in]BSTR bstrInput);
+HRESULT ReadRecord([in]BSTR bstrInput);
+//		[id(3), helpstring("method Transform")] HRESULT Transform([in]BSTR bstrTemplate, [in, out]BSTR bstrOut);
+HRESULT Transform([in]BSTR bstrTemplate, [in, out]BSTR bstrOut);
+//		[id(4), helpstring("method BulkTransform")] HRESULT BulkTransform([in]int skipFirst, [in]int skipLast, [in]BSTR bstrTemplate, [in]BSTR bstrInFileName, [in]BSTR bstrOutFileName, [in]BSTR bstrStrQual, [in]BSTR bstrNumQual, [in]BSTR bstrDelimiter);
+HRESULT BulkTransform([in]int skipFirst, [in]int skipLast, [in]BSTR bstrTemplate, [in]BSTR bstrInFileName, [in]BSTR bstrOutFileName, [in]BSTR bstrStrQual, [in]BSTR bstrNumQual, [in]BSTR bstrDelimiter);
+//		[propget, id(5), helpstring("property LastError")] HRESULT LastError([out, retval] BSTR *pVal);
+HRESULT LastError([out, retval] BSTR *pVal);
+//		[id(6), helpstring("method Tokenize")] HRESULT Tokenize([in]BSTR bstrExpression);
+HRESULT Tokenize([in]BSTR bstrExpression);
+//		[propget, id(7), helpstring("property DEString")] HRESULT DEString([out, retval] BSTR *pVal);
+HRESULT DEString([out, retval] BSTR *pVal);
+//		[propget, id(8), helpstring("property TestRun")] HRESULT TestRun(BSTR name_value_pairs, BSTR template_str, [optional] VARIANT varDSN, [out, retval] BSTR *pVal);
+HRESULT TestRun(BSTR name_value_pairs, BSTR template_str, [optional] VARIANT varDSN, [out, retval] BSTR *pVal);
+*/

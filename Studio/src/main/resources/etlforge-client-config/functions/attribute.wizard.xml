@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>What is the &amp;name of the attribute?</Label>
+		<Description>The name of the XML attribute to create.</Description>
+	</Argument>
+	<Argument>
+		<Label>What &amp;value should the attribute have?</Label>
+		<Description>The valuee of the XML attribute.</Description>
+	</Argument>
+</Wizard>

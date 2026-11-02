@@ -1,0 +1,24 @@
+<html><p>
+					The first argument is an XPath query and the second argument is the data element
+					path of a value node of an xml Any element. The function returns an array of all the
+					xml nodes that are matched by the query.
+					</p>
+					
+					<p>
+					If prefixes are used to specify the namespaces in the XPath query,
+					the prefixes must be specified as one or more string arguments after the Any node.
+					See Example 2.
+					</p>
+					
+					<p>
+					For documentation on XPath queries see
+					<a href=http://www.w3.org/TR/1999/REC-xpath-19991116>The XPath standard</a>
+					</p><br><h2>Example:</h2><h4>Example 1</h4>
+					<code><font size="4">
+					// Select all the nodes with the given names<br>
+					SelectNodesFromXmlAny("Account|Customer|Name",Root$Any#.)<br>
+					<h4>Example 2</h4>
+					// Select email addresses and phone numbers only.<br>
+					$nodes = SelectNodesFromXmlAny("cust:EmailAddress | cust:PhoneNumber",<br>
+					Customer$Any#.,"cust=urn:xmlns:25hoursaday-com:customer");<br>
+					</font></code></html>

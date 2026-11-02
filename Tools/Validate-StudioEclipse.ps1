@@ -1,7 +1,7 @@
 param([switch]$ImportOnly)
 $ErrorActionPreference='Stop'
 $root='C:\ETL\Tools\EclipseWorkspaceSetup'
-$install='C:\Program Files\eclipse'
+$install='C:\ETL\Tools\EclipseIDE\eclipse'
 $jre=Get-ChildItem "$install\plugins" -Directory -Filter 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_*' | Sort-Object Name -Descending | Select-Object -First 1 -ExpandProperty FullName
 $vm=Join-Path $jre 'jre\bin\java.exe'
 $ecj=Get-ChildItem "$install\plugins" -Filter 'org.eclipse.jdt.core.compiler.batch_*.jar' | Select-Object -First 1 -ExpandProperty FullName

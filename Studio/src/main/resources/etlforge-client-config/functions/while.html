@@ -1,0 +1,9 @@
+<html>Executes <i>expression</i> while <i>condition</i> is <i>true</i>.
+							You can use the data element <i>$etlforge.scripting.while.max_iterations</i>
+							to control how many iterations will be allowed.
+							An error is reported if the maximum number of iterations is reached.<br><h2>Example:</h2><code><font size="4">
+								$etlforge.scripting.while.max_iterations = 2000;<br>
+								$i=0;<br>
+								// Concatenates the elements of the array $arr.<br>
+								While($i&lt;Length($arr),$s = $s + "," + Get($arr,$i); $i=$i+1)
+								 </font></code></html>

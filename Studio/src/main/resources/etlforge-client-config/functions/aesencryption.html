@@ -1,0 +1,40 @@
+<html>
+This function encrypts a string using the AES algorithm.
+<p>
+The first argument is the input string to encrypt.
+</p>
+<p>
+From 2nd through 5th arguments are parameters for generating the key to encrypt.
+The key is generated according to <a href="http://tools.ietf.org/html/rfc2898#section-4.1">Password-Based Cryptography Specification Version 2.0 (PKCS5S2).</a>
+</p>
+<p>
+The 2nd argument is for the password.
+</p>
+<p>
+The optional 3rd argument is for specifying SALT parameter and, if specified, the value must be given in hex format (e.g. "A034DD").
+</p>
+<p>
+The optional 4th argument specifies the key length. The key length must be one of 128, 192 or 256. The default is 256.
+</p>
+<p>
+The optional 5th argument specifies the number of iterations to generate the key and the default is 1.
+</p>
+<p>
+The encrypted output is base64 encoded. The output from AESEncryption can be passed directly to the AESDecryption function for decryption
+(using the same parameters as when the string was encrypted).
+</p>
+<br>
+
+<h2>Example:</h2>
+<code><font size="4">
+<p>
+encrypted = AESEncryption("Hello world!", "password");<br>
+decrypted = AESDecryption(encrypted, "password");
+</p>
+<p>
+encrypted = AESEncryption("Hello world!", "password", "00FFAE01", 256, 1024);<br>
+decrypted = AESDecryption(encrypted, "password", "00FFAE01", 256, 1024);
+</p>
+</font>
+</code>
+</html>

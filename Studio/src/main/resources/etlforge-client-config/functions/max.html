@@ -1,0 +1,13 @@
+<html>
+Returns the maximum value of a data element at a particular hierarchical
+level. It will check all instances at that level and return the largest value.
+It can also be called on an array to return the largest value in that array.
+In that case all the values in the array have to be of the same type or the function
+call will fail. If the array is empty NULL is returned.<br>
+
+<h2>Example:</h2>
+Assume your database contains a field called quantity in a table called Items that is a child
+of POHeader (there are many items within one POHeader).<br>
+<code><font size="4">Max(POHeader.Items#.Quantity)</font></code> will return the maximum quantity for
+any item for a particular POHeader (purchase order).
+</html>

@@ -1,0 +1,11 @@
+<html><p>
+        Returns the instance number of the target loop that is currently being generated.
+        If it is called in a condition it returns the instance number of the last instance that was generated.
+        The first time this method is called in a loop it returns 0 (zero) if called in a condition, 1 (one) otherwise.
+        The counter is reset to 0 each time a new loop is started.
+        
+        <p>
+        <b>NOTE: This method has been deprecated and may be removed in a future version.</b>
+        Use SourceInstanceCount() or TargetInstanceCount() instead depending on what you want to accomplish.
+        TargetInstanceCount() is equivalent to this method.<br><h2>Example:</h2><code><font size="4">RecordCount()</font></code> returns a value of 5 while generating the 5th line
+				in a target loop node.</html>

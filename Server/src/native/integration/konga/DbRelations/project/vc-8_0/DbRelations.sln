@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbRelations", "DbRelations.vcproj", "{67287562-5A12-4AD0-BD95-DED07D661A2A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "..\..\..\..\..\..\common\cpp\konga\Utils\project\vc-8_0\Utils.vcproj", "{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDbRelations", "..\..\Test\project\vc-8_0\TestDbRelations.vcproj", "{F298248A-7BD2-4017-9183-A7FCE93D39FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE} = {BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}
+		{67287562-5A12-4AD0-BD95-DED07D661A2A} = {67287562-5A12-4AD0-BD95-DED07D661A2A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BoundsChecker|Win32 = BoundsChecker|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.Debug|Win32.Build.0 = Debug|Win32
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.Release|Win32.ActiveCfg = Release|Win32
+		{67287562-5A12-4AD0-BD95-DED07D661A2A}.Release|Win32.Build.0 = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.ActiveCfg = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.BoundsChecker|Win32.Build.0 = BoundsChecker|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE0CD1D-C767-43FC-B87D-65DFD2B18DCE}.Release|Win32.Build.0 = Release|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.BoundsChecker|Win32.ActiveCfg = Release|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.BoundsChecker|Win32.Build.0 = Release|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.Debug|Win32.Build.0 = Debug|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.Release|Win32.ActiveCfg = Release|Win32
+		{F298248A-7BD2-4017-9183-A7FCE93D39FA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

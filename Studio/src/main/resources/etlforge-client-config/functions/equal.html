@@ -1,0 +1,19 @@
+<html>
+Does a recursive comparison of two arrays. Returns true if the corresponding members of the two arrays are all equal, otherwise it returns false.
+
+Calling this function to compare two arrays is different from using the == operator on two arrays.
+Using operator == on two arrays returns an array of booleans containing the result of a comparison of each array member.
+In this case the size of the two arrays have to be the same. ArrayEqual always returns false if the two array arguments have different sizes.
+<h2>Example:</h2>
+<code><font size="4">
+x={1,2.0,3};<br>
+y={1,5,3};<br><br>
+
+// Returns false since 2.0!=5<br>
+Equal(x,y);<br><br>
+
+// Returns true because both arrays contain only positive numbers.<br>
+Equal(Bool(x), y);<br>
+</font>
+</code>
+</html>

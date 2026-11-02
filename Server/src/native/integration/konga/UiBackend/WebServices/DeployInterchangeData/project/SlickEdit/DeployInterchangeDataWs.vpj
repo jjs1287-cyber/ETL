@@ -1,0 +1,612 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-deploy_interchange_data-d.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/D_DEBUG"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O0 -g -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O0 -g -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-deploy_interchange_data-d.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-characterencodingconversion-d"/>
+			<Lib File="-lkonga-crypto-d"/>
+			<Lib File="-lkonga-dbrelations-d"/>
+			<Lib File="-lkonga-dbutils-d"/>
+			<Lib File="-lkonga-guidmappings-d"/>
+			<Lib File="-lkonga-httpendpoint-d"/>
+			<Lib File="-lkonga-interchangeproject-d"/>
+			<Lib File="-lkonga-itemaccess-d"/>
+			<Lib File="-lkonga-itemproperties-d"/>
+			<Lib File="-lkonga-networking-d"/>
+			<Lib File="-lkonga-operationengine-d"/>
+			<Lib File="-lkonga-operationlog-d"/>
+			<Lib File="-lkonga-operationpipeline-d"/>
+			<Lib File="-lkonga-pipelinepluginentitymanager-d"/>
+			<Lib File="-lkonga-pluginmanager-d"/>
+			<Lib File="-lkonga-projectbackup-d"/>
+			<Lib File="-lkonga-scheduleutils-d"/>
+			<Lib File="-lkonga-schemamanager-d"/>
+			<Lib File="-lkonga-server-d"/>
+			<Lib File="-lkonga-trandb-d"/>
+			<Lib File="-lkonga-trandbutils-d"/>
+			<Lib File="-lkonga-transformationengine-d"/>
+			<Lib File="-lkonga-uploadedfilesmanager-d"/>
+			<Lib File="-lkonga-utils-d"/>
+			<Lib File="-lkonga-wsutils-d"/>
+			<Lib File="-lkonga-zip-d"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-deploy_interchange_data.so"
+		CompilerConfigName="Default Compiler"
+		Defines="">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-deploy_interchange_data.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-characterencodingconversion"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-dbrelations"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-httpendpoint"/>
+			<Lib File="-lkonga-interchangeproject"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-itemproperties"/>
+			<Lib File="-lkonga-networking"/>
+			<Lib File="-lkonga-operationengine"/>
+			<Lib File="-lkonga-operationlog"/>
+			<Lib File="-lkonga-operationpipeline"/>
+			<Lib File="-lkonga-pipelinepluginentitymanager"/>
+			<Lib File="-lkonga-pluginmanager"/>
+			<Lib File="-lkonga-projectbackup"/>
+			<Lib File="-lkonga-scheduleutils"/>
+			<Lib File="-lkonga-schemamanager"/>
+			<Lib File="-lkonga-server"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-trandbutils"/>
+			<Lib File="-lkonga-transformationengine"/>
+			<Lib File="-lkonga-uploadedfilesmanager"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-lkonga-zip"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Config
+		Name="Private_Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibkonga-ws-deploy_interchange_data.so"
+		CompilerConfigName="Default Compiler"
+		Defines='"/DJB_PRIVATE"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O3 -Wall -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions="-Wno-unused-variable -Wno-reorder"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveAll"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='g++ %xup -O3 -shared -fPIC -Wall -o "%o" %objs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+		</Includes>
+		<PostBuildCommands StopOnError="1">
+			<Exec CmdLine="cp %bdlibkonga-ws-deploy_interchange_data.so ../../../../../../../../lib/konga/"/>
+		</PostBuildCommands>
+		<Libs PreObjects="0">
+			<Lib File="-L../../../../../../../../lib/konga/"/>
+			<Lib File="-lkonga-characterencodingconversion"/>
+			<Lib File="-lkonga-crypto"/>
+			<Lib File="-lkonga-dbrelations"/>
+			<Lib File="-lkonga-dbutils"/>
+			<Lib File="-lkonga-deploycheck"/>
+			<Lib File="-lkonga-guidmappings"/>
+			<Lib File="-lkonga-httpendpoint"/>
+			<Lib File="-lkonga-interchangeproject"/>
+			<Lib File="-lkonga-itemaccess"/>
+			<Lib File="-lkonga-itemproperties"/>
+			<Lib File="-lkonga-licensemanager"/>
+			<Lib File="-lkonga-lmwrapper"/>
+			<Lib File="-lkonga-networking"/>
+			<Lib File="-lkonga-operationengine"/>
+			<Lib File="-lkonga-operationlog"/>
+			<Lib File="-lkonga-operationpipeline"/>
+			<Lib File="-lkonga-pipelinepluginentitymanager"/>
+			<Lib File="-lkonga-pluginmanager"/>
+			<Lib File="-lkonga-projectbackup"/>
+			<Lib File="-lkonga-scheduleutils"/>
+			<Lib File="-lkonga-schemamanager"/>
+			<Lib File="-lkonga-server"/>
+			<Lib File="-lkonga-trandb"/>
+			<Lib File="-lkonga-trandbutils"/>
+			<Lib File="-lkonga-transformationengine"/>
+			<Lib File="-lkonga-uploadedfilesmanager"/>
+			<Lib File="-lkonga-utils"/>
+			<Lib File="-lkonga-wsutils"/>
+			<Lib File="-lkonga-zip"/>
+			<Lib File="-laxis_server"/>
+		</Libs>
+	</Config>
+	<Files>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl">
+			<F N="../../ArrayOf_xsd_string.cpp"/>
+			<F N="../../ArrayOfCDeployRename.cpp"/>
+			<F N="../../ArrayOfCDeployWarning.cpp"/>
+			<F N="../../ArrayOfCGroupPermissions.cpp"/>
+			<F N="../../ArrayOfCJtrFile.cpp"/>
+			<F N="../../ArrayOfCLastUpdate.cpp"/>
+			<F N="../../ArrayOfCPermission.cpp"/>
+			<F N="../../ArrayOfCProjectMembership.cpp"/>
+			<F N="../../ArrayOfCRequiredFile.cpp"/>
+			<F N="../../ArrayOfCUserPermissions.cpp"/>
+			<F N="../../ArrayOfInterchangeDataRow.cpp"/>
+			<F N="../../AxisServiceException.cpp"/>
+			<F N="../../CDeployProjectCheckResult.cpp"/>
+			<F N="../../CDeployRename.cpp"/>
+			<F N="../../CDeployRename_Array.cpp"/>
+			<F N="../../CDeployResults.cpp"/>
+			<F N="../../CDeployWarning.cpp"/>
+			<F N="../../CDeployWarning_Array.cpp"/>
+			<F N="../../CFileCheckResult.cpp"/>
+			<F N="../../CFileDependencies.cpp"/>
+			<F N="../../CGroupPermissions.cpp"/>
+			<F N="../../CGroupPermissions_Array.cpp"/>
+			<F N="../../CIntegrationEntity.cpp"/>
+			<F N="../../CIntegrationEntity_Array.cpp"/>
+			<F N="../../CJtrFile.cpp"/>
+			<F N="../../CJtrFile_Array.cpp"/>
+			<F N="../../CJtrFiles.cpp"/>
+			<F N="../../CLastUpdate.cpp"/>
+			<F N="../../CLastUpdate_Array.cpp"/>
+			<F N="../../CPermission.cpp"/>
+			<F N="../../CPermission_Array.cpp"/>
+			<F N="../../CProjectMembership.cpp"/>
+			<F N="../../CProjectMembership_Array.cpp"/>
+			<F N="../../CRequiredFile.cpp"/>
+			<F N="../../CRequiredFile_Array.cpp"/>
+			<F N="../../CRequiredFiles.cpp"/>
+			<F N="../../CUploadedJitterpak.cpp"/>
+			<F N="../../CUserPermissions.cpp"/>
+			<F N="../../CUserPermissions_Array.cpp"/>
+			<F N="../../DeployInterchangeData.cpp"/>
+			<F N="../../DeployInterchangeDataService.cpp"/>
+			<F N="../../DeployInterchangeDataWrapper.cpp"/>
+			<F N="../../InterchangeDataHolder.cpp"/>
+			<F N="../../InterchangeDataRow.cpp"/>
+			<F N="../../InterchangeDataRow_Array.cpp"/>
+			<F N="../../InterchangeDataTable.cpp"/>
+			<F N="../../InterchangeIdHolder.cpp"/>
+			<F N="../../PermissionsHolder.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteHttpEndpoint.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployHttpEndpoint.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceDelete.cpp"/>
+			<F N="../../Impl/UploadJitterpak.cpp"/>
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+			<F N="../../ArrayOf_xsd_string.hpp"/>
+			<F N="../../ArrayOfCDeployRename.hpp"/>
+			<F N="../../ArrayOfCDeployWarning.hpp"/>
+			<F N="../../ArrayOfCGroupPermissions.hpp"/>
+			<F N="../../ArrayOfCJtrFile.hpp"/>
+			<F N="../../ArrayOfCLastUpdate.hpp"/>
+			<F N="../../ArrayOfCPermission.hpp"/>
+			<F N="../../ArrayOfCProjectMembership.hpp"/>
+			<F N="../../ArrayOfCRequiredFile.hpp"/>
+			<F N="../../ArrayOfCUserPermissions.hpp"/>
+			<F N="../../ArrayOfInterchangeDataRow.hpp"/>
+			<F N="../../AxisServiceException.hpp"/>
+			<F N="../../CDeployProjectCheckResult.hpp"/>
+			<F N="../../CDeployRename.hpp"/>
+			<F N="../../CDeployRename_Array.hpp"/>
+			<F N="../../CDeployResults.hpp"/>
+			<F N="../../CDeployWarning.hpp"/>
+			<F N="../../CDeployWarning_Array.hpp"/>
+			<F N="../../CFileCheckResult.hpp"/>
+			<F N="../../CFileDependencies.hpp"/>
+			<F N="../../CGroupPermissions.hpp"/>
+			<F N="../../CGroupPermissions_Array.hpp"/>
+			<F N="../../CIntegrationEntity.hpp"/>
+			<F N="../../CIntegrationEntity_Array.hpp"/>
+			<F N="../../CJtrFile.hpp"/>
+			<F N="../../CJtrFile_Array.hpp"/>
+			<F N="../../CJtrFiles.hpp"/>
+			<F N="../../CLastUpdate.hpp"/>
+			<F N="../../CLastUpdate_Array.hpp"/>
+			<F N="../../CPermission.hpp"/>
+			<F N="../../CPermission_Array.hpp"/>
+			<F N="../../CProjectMembership.hpp"/>
+			<F N="../../CProjectMembership_Array.hpp"/>
+			<F N="../../CRequiredFile.hpp"/>
+			<F N="../../CRequiredFile_Array.hpp"/>
+			<F N="../../CRequiredFiles.hpp"/>
+			<F N="../../CUploadedJitterpak.hpp"/>
+			<F N="../../CUserPermissions.hpp"/>
+			<F N="../../CUserPermissions_Array.hpp"/>
+			<F N="../../DeployInterchangeData.hpp"/>
+			<F N="../../DeployInterchangeDataWrapper.hpp"/>
+			<F N="../../InterchangeDataHolder.hpp"/>
+			<F N="../../InterchangeDataRow.hpp"/>
+			<F N="../../InterchangeDataRow_Array.hpp"/>
+			<F N="../../InterchangeDataTable.hpp"/>
+			<F N="../../InterchangeIdHolder.hpp"/>
+			<F N="../../PermissionsHolder.hpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteHttpEndpoint.h"/>
+			<F N="../../Impl/SpecialHandlingDeployHttpEndpoint.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceDelete.h"/>
+		</Folder>
+		<Folder
+			Name="Impl"
+			Filters="">
+			<F N="../../Impl/DatabaseDriverManager.cpp"/>
+			<F N="../../Impl/DatabaseDriverManager.h"/>
+			<F N="../../Impl/DefaultSpecialHandlingDeploy.h"/>
+			<F N="../../Impl/DeployHistory.cpp"/>
+			<F N="../../Impl/DeployHistory.h"/>
+			<F N="../../Impl/DeployInterchangeDataImpl.cpp"/>
+			<F N="../../Impl/DeployInterchangeDataImpl.h"/>
+			<F N="../../Impl/DeployUtils.cpp"/>
+			<F N="../../Impl/DeployUtils.h"/>
+			<F N="../../Impl/ExtendedItemProperties.cpp"/>
+			<F N="../../Impl/ExtendedItemProperties.h"/>
+			<F N="../../Impl/FolderItemStruct.cpp"/>
+			<F N="../../Impl/FolderItemStruct.h"/>
+			<F N="../../Impl/HandleChangedDataImpl.cpp"/>
+			<F N="../../Impl/HandleDeletedDataImpl.cpp"/>
+			<F N="../../Impl/HandleExtendedProperties.cpp"/>
+			<F N="../../Impl/HandleOperationPipelines.cpp"/>
+			<F N="../../Impl/HandleRequiredFilesImpl.cpp"/>
+			<F N="../../Impl/InterchangeDataStructs.h"/>
+			<F N="../../Impl/InterchangeDataStructsImpl.cpp"/>
+			<F N="../../Impl/ItemWarning.h"/>
+			<F N="../../Impl/ItemWarningHolder.h"/>
+			<F N="../../Impl/PermissionsHandler.cpp"/>
+			<F N="../../Impl/PermissionsHandler.h"/>
+			<F N="../../Impl/PipelinePluginHandler.cpp"/>
+			<F N="../../Impl/PipelinePluginHandler.h"/>
+			<F N="../../Impl/RenamedItemStruct.h"/>
+			<F N="../../Impl/SourceTargetXmlHandler.cpp"/>
+			<F N="../../Impl/SourceTargetXmlHandler.h"/>
+			<F N="../../Impl/SpecialHandlingDeploy.h"/>
+			<F N="../../Impl/SpecialHandlingDeployBase64Col.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployBase64Col.h"/>
+			<F N="../../Impl/SpecialHandlingDeployCallRestrictions.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployCallRestrictions.h"/>
+			<F N="../../Impl/SpecialHandlingDeployCrypto.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployCrypto.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDelete.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDelete.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteFolder.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteFolder.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteJmsMessage.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteJmsMessage.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteOperation.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteOperation.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteSourceTarget.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteSourceTarget.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteTransformation.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteTransformation.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteWebService.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployDeleteWebService.h"/>
+			<F N="../../Impl/SpecialHandlingDeployDocumentUpdate.h"/>
+			<F N="../../Impl/SpecialHandlingDeployFolder.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployFolder.h"/>
+			<F N="../../Impl/SpecialHandlingDeployJmsMessage.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployJmsMessage.h"/>
+			<F N="../../Impl/SpecialHandlingDeployMessage.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployMessage.h"/>
+			<F N="../../Impl/SpecialHandlingDeployOperation.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployOperation.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceBulkLoad.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceBulkLoad.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceCreate.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceCreate.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceQuery.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceQuery.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceUpdate.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceUpdate.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceUpsert.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySalesforceUpsert.h"/>
+			<F N="../../Impl/SpecialHandlingDeploySourceTarget.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeploySourceTarget.h"/>
+			<F N="../../Impl/SpecialHandlingDeployTranChainLinks.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployTranChainLinks.h"/>
+			<F N="../../Impl/SpecialHandlingDeployTransformation.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployTransformation.h"/>
+			<F N="../../Impl/SpecialHandlingDeployWebService.cpp"/>
+			<F N="../../Impl/SpecialHandlingDeployWebService.h"/>
+			<F N="../../Impl/TableHandler.cpp"/>
+			<F N="../../Impl/TableHandler.h"/>
+			<F N="../../Impl/UpdateOtherServicesImpl.cpp"/>
+			<F N="../../Impl/UploadJtrFilesImpl.cpp"/>
+		</Folder>
+		<Folder
+			Name="Other Files"
+			Filters="">
+			<F N="../../deploy.wsdd"/>
+			<F N="DeployInterchangeDataWs.mak"/>
+			<F N="../../generate_stubs.bat"/>
+			<F N="../../generate_wsdl.bat"/>
+			<F N="../../konga_deploy_interchange_data.wsdl"/>
+			<F N="../../undeploy.wsdd"/>
+			<F N="../../wsdl_generation_settings.bat"/>
+		</Folder>
+	</Files>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Project>

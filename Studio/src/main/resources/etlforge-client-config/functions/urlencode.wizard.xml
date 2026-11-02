@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;String to encode</Label>
+	</Argument>
+	<Argument optional="true">
+		<Label>&amp;Encoding option (optional)</Label>
+		<DefaultValue>0</DefaultValue>
+		<Description>Determines which characters to encode. Refer to the documentation for supported values.</Description>
+	</Argument>
+</Wizard>

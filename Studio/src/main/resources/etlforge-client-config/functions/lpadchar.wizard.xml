@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>What is the &amp;string you want to left pad?</Label>
+		<Description>The input string that will be left-padded to the specified width.</Description>
+	</Argument>
+	<Argument>
+		<Label>What do you want to use as padding &amp;character?</Label>
+		<Description>The character that will be used as padding. 
+			If you enter a value that has more than one character, only the first character will be used.</Description>
+	</Argument>
+	<Argument>
+		<Label>How &amp;wide do you want the string to be?</Label>
+		<Description>Here you specify the width, in number of characters, of the output string.</Description>
+	</Argument>
+</Wizard>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.pluginmanagement.PluginManager" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.pluginmanagement.PluginManager" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.pluginmanagement.PluginManager" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.pluginmanagement.PluginManager" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="GetFilters">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="GetFiltersResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="GetFiltersReturn" type="impl:FilterAsXml"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="FilterAsXml">
+    <sequence>
+     <element name="xmlRepresentation" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="GetFiltersRequest">
+
+      <wsdl:part element="impl:GetFilters" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="GetFiltersResponse">
+
+      <wsdl:part element="impl:GetFiltersResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PluginManager">
+
+      <wsdl:operation name="GetFilters">
+
+         <wsdl:input message="impl:GetFiltersRequest" name="GetFiltersRequest"/>
+
+         <wsdl:output message="impl:GetFiltersResponse" name="GetFiltersResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_plugin_managementSoapBinding" type="impl:PluginManager">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="GetFilters">
+
+         <wsdlsoap:operation soapAction="konga_plugin_management#GetFilters"/>
+
+         <wsdl:input name="GetFiltersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="GetFiltersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PluginManagerService">
+
+      <wsdl:port binding="impl:konga_plugin_managementSoapBinding" name="konga_plugin_management">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_plugin_management"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

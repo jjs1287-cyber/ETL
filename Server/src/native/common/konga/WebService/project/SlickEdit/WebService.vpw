@@ -1,0 +1,15 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpw.dtd">
+<Workspace Version="10.0" VendorName="SlickEdit">
+	<Projects>
+		<Project File="../../../FileTransfer/project/SlickEdit/FileTransfer.vpj"/>
+		<Project File="../../../Mime/project/SlickEdit/Mime.vpj"/>
+		<Project File="../../../Soap/project/SlickEdit/Soap.vpj"/>
+		<Project File="../../../Utils/project/SlickEdit/Utils.vpj"/>
+		<Project File="WebService.vpj"/>
+		<Project File="../../Test/project/SlickEdit/WebServiceTest.vpj"/>
+		<Project File="../../../Xml/project/SlickEdit/Xml.vpj"/>
+	</Projects>
+	<CompatibleVersions>
+		<PrevVersion VersionNumber="9.1"/>
+	</CompatibleVersions>
+</Workspace>

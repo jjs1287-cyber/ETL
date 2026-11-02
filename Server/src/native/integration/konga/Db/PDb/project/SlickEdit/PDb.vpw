@@ -1,0 +1,7 @@
+<!DOCTYPE Workspace SYSTEM "http://www.slickedit.com/dtd/vse/9.1/vpw.dtd">
+<Workspace Version="9.1" VendorName="SlickEdit">
+	<Projects>
+		<Project File="../../../DtlPDb/project/SlickEdit/DtlPDb.vpj"/>
+		<Project File="PDb.vpj"/>
+	</Projects>
+</Workspace>

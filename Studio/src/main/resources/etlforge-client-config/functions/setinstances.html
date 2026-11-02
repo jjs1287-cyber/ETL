@@ -1,0 +1,41 @@
+<html>
+Define the source instances for the loop target node. This function should be called in 
+the mappings of the parent node of the intented target. If no leaf node available in the parent, 
+user can create a condition node to call this function.<p>
+The first argument of this function is the target's name, and the second is an array of instances. 
+The instance is a data element which could be a simple value, or an array of data elements.
+When creating the target, each instance will be use to generate a target instance.
+<br>
+To see how to use instance data element, see the documentation for
+<code><font size="4">GetInstance()</font></code> and <code><font size="4">ArgumentList()</font></code> functions.
+<p>
+The function should not be called more than once with the same target node, otherwise, 
+the last call override the previous ones. 
+To avoid overriden user may create multiple-mapping-folders for that.
+<p>
+Normally the loop target instance is generated from some loop source instance. But sometimes
+data may come from other sources.
+If the data is multiple sets in nature and each set would generate one target element,
+this is exactly the function cut out for doing that.
+<p>
+A null data element is return from this function, and should be ignored.
+<p>
+Example:
+<p>
+<code><font size="4">
+...<br>
+r1=DBLookupAll("&lt;TAG&gt;Sources/DB...&lt;/TAG&gt;","SELECT key_name, key_value FROM key_values");<br>
+SetInstances("DETAILS",r1);<br>
+SetInstances("DETAILS#1",r1);<br>
+// DETAILS#1 is the name of the 1st multiple-mapping-folder for DETAILS<br>
+// rename the display name, won't change the multiple-mapping-folder's name<br>
+r2={"MS","HP","Apple"};<br>
+SetInstances("COMPANIES",r2)<br>
+...
+</font></code>
+<p>
+Here we assume that,<br>
+* there is a common parent for "DETAILS" and "COMPANIES" target nodes,<br>
+* both are loop nodes,<br>
+* a multiple-mapping-folder has been created for "DETAILS" target node.
+</html>

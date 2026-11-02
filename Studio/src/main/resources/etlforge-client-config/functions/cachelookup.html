@@ -1,0 +1,21 @@
+<html>CacheLookup() is the same as DBLookup() except that the first lookup
+				caches the information and subsequent lookups use this instead of querying the database
+				again. (An alternative to caching is to use the functions Set() and Get().)
+				<p>
+				There are 2 required parameters:
+				<code><font size="4">database_id</font></code> and <code><font size="4">sql_str</font></code>.
+				<p>
+				The database used in this function call must be defined as a Source or a
+				Target of the current integration project. The available databases are shown in the
+				"Project Items" tab in the lower  section of the Formula Builder, under the node called "Databases".
+				By double clicking on a database node, the corresponding database ID will be
+				inserted into the formula expression. (The ID is constructed by wrapping the project path
+				of the selected database source or target within &lt;TAG&gt;...&lt;/TAG&gt;
+				tags.)
+				<p>
+				The <code><font size="4">sql_str</font></code> argument is the string used to perform the lookup. If
+				there are no rows returned for the query specified in <code><font size="4">sql_str</font></code> the
+        function returns NULL.
+        <p>
+        The global data element $etlforge.scripting.db.rows_affected is not set by this method.<br><h2>Example:</h2><code><font size="4"><trans>CacheLookup("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",
+				"SELECT ORDER_TYPE FROM PO_HEADER WHERE PO_NUMBER = 1")</trans></font></code></html>

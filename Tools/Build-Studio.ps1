@@ -1,6 +1,6 @@
 param([string]$Target='compile')
 $ErrorActionPreference='Stop'
-& 'C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' C:\ETL\Tools\Generate-JavaScriptPolicy.py
+& 'C:\Tools\aider-env\Scripts\python.exe' C:\ETL\Tools\Generate-JavaScriptPolicy.py
 if($LASTEXITCODE -ne 0){throw 'JavaScript policy generation failed'}
 if($Target -eq 'jar'){
  $studioProcesses=Get-CimInstance Win32_Process -Filter "Name='java.exe' OR Name='javaw.exe'" | Where-Object {$_.CommandLine -match 'org\.etlforge\.integration\.client\.main\.IntegrationMain'}

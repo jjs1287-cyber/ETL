@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Property name="questionLayout" value="true" />
+	<Argument>
+		<Label>What is the IP address you want to resolve?</Label>
+		<Description>The IP address to resolve, e.g. "127.0.0.1".</Description>
+	</Argument>
+</Wizard>

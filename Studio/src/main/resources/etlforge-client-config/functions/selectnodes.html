@@ -1,0 +1,26 @@
+<html>Runs an XPath query (See
+        <a href=http://www.w3.org/TR/1999/REC-xpath-19991116>The XPath standard</a>.)
+        on either an XML fragment or on an XML node returned from another function. If prefixes
+        are used to specify the namespaces of the node in the XPath query, the prefixes must be
+        specified as one or more string arguments after the XPath, see example 2.<br><h2>Example:</h2><b>Example 1</b>
+        <p>
+        <code><font size="4">LdapConnect("directory.finland.company.com","ghvwright","1LikesPe@ches",0)&lt;/code>
+        &lt;br>
+        &lt;code>$DirectorySearchResults = LdapSearch("CN=Users,DC=finland,DC=company,DC=com",
+        "(&amp;(objectCategory=person)(objectClass=user))", 1, "name", "whenCreated", "description",
+        "telephoneNumber")</font></code>
+        <br>
+        <code><font size="4">SelectNodes( $DirectorySearchResults,
+        "/DirectoryResults/Entry[name='Administrator']/whenCreated" )</font></code>
+        <p>
+        <b> Example 2</b>
+        <p>
+        <code><font size="4">SelectNodes(Root$Any$,"ns1:E2/ns2:E3",
+        "ns1=http://xyz1.com","ns2=http://xyz2.com/")</font></code>
+        <p>
+        Notice<br>
+        In this case the reference node is an xml node for xml "any" node.
+        In XPATH query ns1:E2 is not the reference node itself.<br>
+        Since prefixes ns1 and ns2 are used in XPATH query, they are defined as
+        arguments after the XPATH.
+        <ul></html>

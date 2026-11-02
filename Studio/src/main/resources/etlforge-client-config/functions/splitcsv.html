@@ -1,0 +1,16 @@
+<html>
+Splits a CSV formatted string and returns an array with the individual column values.
+By default the delimiter is a comma (,) and the string qualifier is a double quote (").
+This can be changed by specifying the optional second and third arguments respectively.
+Note: the 2nd or 3rd paramter can be specified with integer corresponding to the 
+ascii code of the delimiter or qualifier character.
+<br>
+<h2>Example:</h2>
+<code>
+<font size="4">
+		$arr=SplitCsv('"Donald","Minnie ""The Mouse""",Goofy');<br>
+        $donald=$arr[0];<br>
+        $minnie=$arr[1];<br>
+        $goofy=$arr[2];<br>
+</font></code>
+</html>

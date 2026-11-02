@@ -1,0 +1,88 @@
+<html><p>
+							Executes a SQL statement on a database and returns the results.
+							There are two required parameters:
+							<code><font size="4">database_id</font></code> and <code><font size="4">sql_str</font></code>.
+							</p>
+							<p>
+							If the SQL statement produces a result set, then there are two ways to retrieve the data:
+							<ul>
+							<li> 
+							If you specify only the two required parameters, the function will return
+							the full recordset as an array of rows. You can then use a <i>While()</i> loop
+							to iterate over the rows, and <i>Get()</i> to get the data. See example below.
+              If no rows are returned the method returns an empty array (i.e. Length($arr)==0).
+							</li>
+							<li> 
+							To get the values of the fields of the first row returned,
+							pass names of data elements within quotes as parameters after the first two
+							parameters. The value of the first field of the first row will be written to the
+							data element passed as the third parameter, the second field of the first row to the fourth
+							parameter, and so on. Alternatively the data element can be passed by reference
+							preceded by a $ sign, eg $output, see example below. The return value should not be used in this case.
+							</li>
+							</ul>
+							</p>
+							<p>
+							The database used in this function call must be defined as a Source or a 
+							Target of the current integration project. The available databases are shown in the
+							"Project Items" tab in the lower  section of the Formula Builder, under the node called "Databases".
+							By double clicking on a database node, the corresponding database ID will be 
+							inserted into the formula expression. (The ID is constructed by wrapping the project path
+							of the selected database source or target within
+							&lt;TAG&gt;...&lt;/TAG&gt; tags.)
+							</p>
+							<p>
+							The <code><font size="4">sql_str</font></code> argument is the SQL statement to be executed.
+							<p>
+							If this method completes successfully, $etlforge.scripting.db.rows_affected
+              will contain the number of rows affected by the query.
+							</p>
+				      <p>
+				      Set $etlforge.scripting.db.auto_commit=false to run the statement in a transaction.
+              With auto commit turned off, set $etlforge.scripting.db.transaction=true to run all the SQL statements
+              in a transaction. The transaction will be committed at the end of a successful transformation.
+              Setting auto commit to true and transaction to true will result in an error.
+
+				      </p>
+							<p>
+							Set $etlforge.scripting.db.max_rows to limit the number of records to return.
+              The default is 10,000 rows.
+							</p>
+				<p>
+				The returned values are always strings. Binary data is returned as its hex-string representation.
+				</p><br><h2>Example:</h2><h3>Example 1</h3>
+							<p>
+							<code><font size="4">
+							$rows = DbExecute("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",
+								"SELECT ORDER_TYPE, ORDER_AMMOUNT FROM PO_HEADER WHERE PO_NUMBER = 1")
+							</font></code>
+							</p>
+							<p>
+							The value of the database column ORDER_TYPE can then be accessed with
+							<code><font size="4">Get($rows, $i, 0)</font></code> where <i>$i</i> is the 0-based count of the row
+							you want to get.
+							</p>
+							<h3>Example 2</h3>
+							<p>
+							<code><font size="4">
+							DbExecute("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",
+								"SELECT CustomerName, CustomerAddress FROM Customers WHERE CustomerId = " + $cust_id,
+								$cust_name, $cust_addr)
+							</font></code>
+							</p>
+							<p>
+							The value of the database column CustomerName can then be accessed with
+							<code><font size="4">Get("cust_name")</font></code> or just <code><font size="4">$cust_name</font></code>.
+							</p>
+							<h3>Example 3</h3>
+							<p>
+							<code><font size="4">
+							DbExecute("&lt;TAG&gt;MyProject/Targets/myDbTarget&lt;/TAG&gt;",
+								"SELECT ORDER_TYPE, ORDER_AMMOUNT FROM PO_HEADER WHERE PO_NUMBER = 1", "OrderType",
+								"OrderAmmount")
+							</font></code>
+							</p>
+							<p>
+							The value of the database column ORDER_TYPE can then be accessed with
+							<code><font size="4">Get("OrderType")</font></code> or just <code><font size="4">$OrderType</font></code>.
+							</p></html>

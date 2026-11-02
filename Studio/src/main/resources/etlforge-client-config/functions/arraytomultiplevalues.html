@@ -1,0 +1,7 @@
+<html>Signals that an array should be used to populate multiple valued LDAP attributes when mapping
+        to an LDAP target. The array will be converted to XML and interpreted when the LDAP target is
+        written to.<br><h2>Example:</h2>// Create two LDAP attributes using an array<br>
+        $arr = Null();<br>
+        Set($arr, "First instance", 0);<br>
+        Set($arr, "Second instance", 1);<br>
+        ArrayToMultipleValues($arr)<br></html>

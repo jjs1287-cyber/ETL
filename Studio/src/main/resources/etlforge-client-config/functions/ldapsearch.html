@@ -1,0 +1,46 @@
+<html><p>
+				Searches a directory.
+        </p>
+        <p>
+				<i>path</i> -- this is the distinguished name used as the base of the search
+				<br>
+				<i>filter</i> -- this is the query string as defined by
+				<a href=http://rfc.net/rfc4515.html>RFC 4515</a>
+				<br>
+				<i>iDetail</i>:
+				<ul>
+				<li>pass 0 to return a simple string that is the first attribute found that
+				matches your filter</li>
+				<li>pass 1 to return an XML representation of the search results. This can be set to a
+				data element using the <code><font size="4">Set()</font></code> function and then accessed in this or
+				later scripts using <code><font size="4">Get()</font></code> and an XPath query using
+				<code><font size="4">SelectSingleNode()</font></code>.</li>
+				<li>pass 2 to return a 2 dimensional array, where each row represents an LDAP entry, where
+				the elements of the row are the values of the attributes. You can access the elements using
+				the <code><font size="4">Get()</font></code> function.
+				</ul>
+				<br>
+				<i>attribute1</i> -- an attribute that you wish to be included in the search result.
+				I.e., the attribute you are searching for. You can specify as many as you like, separated by
+				commas. See example below.
+        </p>
+				<p>
+				You can control the scope of the query by setting the data element <i>$etlforge.scripting.ldap.scope</i>
+				to one of the following values:
+				<ul>
+				<li>0 -- Search the base-entry only.</li>
+				<li>1 -- Search all entries in the first level below the base-entry, excluding the base-entry..</li>
+				<li>2 -- Search the base-entry and all entries in the tree below the base.</li>
+				</ul>
+        </p>
+        <p>
+				Set <code><font size="4">$etlforge.scripting.ldap.include_dn_in_results = true</font></code> to include the distinguished name in the search result.<br>
+				Set <code><font size="4">$etlforge.scripting.ldap.use_paged_search = true</font></code> to use a paged search. This option is useful for retrieving large result sets.<br>
+				Set <code><font size="4">$etlforge.scripting.ldap.max_search_results</font></code> to limit the number of search results. A default is usually set by the LDAP server.<br>
+				Set <code><font size="4">$etlforge.scripting.ldap.return_null_if_no_results = true</font></code> to make <code><font size="4">LdapSearch()</font></code> return null if the search did not return any results.
+        </p><br><h2>Example:</h2><code><font size="4">
+        LdapConnect("directory.finland.company.com","ghvwright","1LikesPe@ches",0)<br>
+				$DirectorySearchResults = LdapSearch("CN=Users,DC=finland,DC=company,DC=com",<br>
+				"(&amp;(objectCategory=person)(objectClass=user))", 1, "name", "whenCreated",<br>
+				"description", "telephoneNumber")
+        </font></code></html>

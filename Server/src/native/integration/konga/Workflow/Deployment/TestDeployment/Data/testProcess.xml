@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE Process SYSTEM "WebWorkflow.dtd">
+<Process Name="Complete Process" ProcessPriority="6">
+	<Description>A process with all supported actions.</Description>
+	<Font Name="Arial" Size="15" Style="Regular"/>
+			<Data Name="$i" Type="integer" Origin="Process" Required="0" InitValue="123"/>
+			<Data Name="$li" Type="long_integer" Origin="Process" Required="0" InitValue="1234"/>
+			<Data Name="$text" Type="long_string" Origin="Process" Required="0" InitValue="&quot;long_string&quot;"/>
+			<Data Name="$si" Type="short_integer" Origin="Process" Required="0" InitValue="12"/>
+			<Data Name="$s" Type="string" Origin="Process" Required="0" InitValue="&quot;initial value&quot;"/>
+			<Data Name="$f" Type="float" Origin="Process" Required="0" InitValue="1.2"/>
+			<Data Name="$dbl" Type="double" Origin="Process" Required="0" InitValue="1.23"/>
+			<Data Name="$b" Type="boolean" Origin="Process" Required="0" InitValue="true"/>
+	<Task Name="Task0" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="413" y="217"/> 
+			<rect left="358" top="200" right="468" bottom="234"/> </DisplayProperty>
+		<Document Type="InitTask">
+			<InitDEColWidths x1="214" x2="70" x3="68" x4="-1"/>		</Document>
+		<ActivityItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i=0" Instance="0" IsCommentedOut="No">			<Data Name="i" Type="integer" IO="O" Origin="Task" Required="0" Path="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="bb=true" Instance="0" IsCommentedOut="No">			<Data Name="bb" Type="boolean" IO="O" Origin="Task" Required="0" Path="true"/>
+		</ActivityItem>
+		<ActivityItem Type="TrueAction" Text="$b == bb" IsCommentedOut="No">			<Data Name="$b" Type="boolean" IO="I" Origin="Task" Required="0"/>
+			<Data Name="bb" Type="boolean" IO="I" Origin="Task" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i=$i" Instance="0" IsCommentedOut="No">			<Data Name="$i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="i" Type="integer" IO="O" Origin="Task" Required="0" Path="$i"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i2=2" Instance="0" IsCommentedOut="No">			<Data Name="i2" Type="integer" IO="O" Origin="Task" Required="0" Path="2"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="i3=i + 3" Instance="0" IsCommentedOut="No">			<Data Name="i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="i3" Type="integer" IO="O" Origin="Task" Required="0" Path="i + 3"/>
+		</ActivityItem>
+		<ActivityItem Type="FalseAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleAction" Text="s=&quot;och &amp; och&quot;" Instance="0" IsCommentedOut="No">			<Data Name="s" Type="string" IO="O" Origin="Task" Required="0" Path="&quot;och &amp; och&quot;"/>
+		</ActivityItem>
+		<ActivityItem Type="EndifAction" Text="" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="FileXfer" Instance="1" IsCommentedOut="No">		<FileXferObject URL="http://windev" FileOrString="$s" Transfer="2" Operation="1" ProvideLogonCredentials="1" StoreUIDPWDWithModel="1" UID="guest" PWD="DoesntExist" Timeout="210"/>
+			<Data Name="$s" Type="string" IO="O" Origin="Task" Required="0" Path="$s"/>
+		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="CreateScheduledEvent" Instance="0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="468" y1="217" x2="489" y2="217" x3="489" y3="134" x4="510" y4="132" c4="L"/>
+			<Data Name="I&apos;m a scheduled task" Type="string" Origin="TaskName" Required="0"/>
+			<Data Name="$i" Type="integer" IO="I" Origin="Task" Required="0"/>
+			<Data Name="tiid" Type="integer" IO="O" Origin="InFcn" Required="0"/>
+		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Task1" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ReportDataElements" Instance="0" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="ResetLastError" Instance="0" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="TargetTask" Text="Task2" IsCommentedOut="No">		</ActivityItem>
+		<ActivityItem Type="SimpleInFcnObject" Text="RaiseError" Instance="0" IsCommentedOut="No">			<Data Name="0" Type="boolean" IO="I" Origin="Constant" Required="0" Path="0"/>
+			<Data Name="&quot;Ouch!&quot;" Type="string" IO="I" Origin="Constant" Required="0" Path="&quot;Ouch!&quot;"/>
+		</ActivityItem>
+	</Task>
+	<Task Name="Task1" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="563" y="217"/> 
+			<rect left="508" top="200" right="618" bottom="234"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="TargetTask" Text="Task3" IsCommentedOut="No">		</ActivityItem>
+	</Task>
+	<Task Name="Task2" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="565" y="309"/> 
+			<rect left="510" top="292" right="620" bottom="326"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="TargetTask" Text="Task3" IsCommentedOut="No">		</ActivityItem>
+		<Escalation TaskName="I am an escalation task" RemindMinutes="1 D">
+			<LinkDisplay c1="R" x1="620" y1="309" x2="653" y2="309" x3="653" y3="439" x4="688" y4="439" c4="L"/>
+</Escalation>
+	</Task>
+	<Task Name="Task3" TaskPriority="0" Terminate="True">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="783" y="266"/> 
+			<rect left="728" top="249" right="838" bottom="283"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+	</Task>
+	<Task Name="I&apos;m a scheduled task" TaskPriority="0">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="576" y="131"/> 
+			<rect left="510" top="103" right="642" bottom="160"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+	</Task>
+	<Task Name="I am an escalation task" TaskPriority="0" Special="IsEscalationTask">		<Description>none</Description>
+		<DisplayProperty>
+			<pos x="751" y="439"/> 
+			<rect left="688" top="411" right="814" bottom="467"/> </DisplayProperty>
+		<Document Type="Unknown">
+		</Document>
+		<ActivityItem Type="SimpleInFcnObject" Text="BlockEscalatedTask" Instance="0" IsCommentedOut="No">		</ActivityItem>
+	</Task>
+	<Route Target="Task1">
+		<RouteItem Type="SourceTask" Text="Task0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="468" y1="217" x2="488" y2="217" x3="488" y3="217" x4="508" y4="217" c4="L"/>
+		</RouteItem>
+	</Route>
+	<Route Target="Task2">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Task0" IsCommentedOut="No">		<LinkDisplay c1="R" x1="468" y1="217" x2="489" y2="217" x3="489" y3="309" x4="510" y4="309" c4="L"/>
+		</RouteItem>
+	</Route>
+	<Route Target="Task3">
+		<RouteItem Type="SourceTask" Text="Task1" IsCommentedOut="No">		<LinkDisplay c1="R" x1="618" y1="217" x2="673" y2="217" x3="673" y3="266" x4="728" y4="266" c4="L"/>
+		</RouteItem>
+		<RouteItem Type="SourceTask" Text="Task2" IsCommentedOut="No">		<LinkDisplay c1="R" x1="620" y1="309" x2="674" y2="309" x3="674" y3="266" x4="728" y4="266" c4="L"/>
+		</RouteItem>
+	</Route>
+	<Route Target="Task0">
+		<RouteItem Type="BeginItem" Text="Begin" IsCommentedOut="No">		</RouteItem>
+	</Route>
+</Process>

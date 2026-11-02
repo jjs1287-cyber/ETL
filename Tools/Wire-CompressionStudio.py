@@ -1,0 +1,11 @@
+from pathlib import Path
+r=Path('C:/ETL/Studio'); p=r/'src/main/java/org/etlforge/integration/client/ui/interchange/location/panel/FileLocationPanel.java';s=p.read_text()
+s=s.replace('private final SourceTarget sourceTarget;','private final SourceTarget sourceTarget;\n   private final EndpointCompressionPanel compressionPanel;')
+s=s.replace('this.sourceTarget = var2;','this.sourceTarget = var2;\n      this.compressionPanel = new EndpointCompressionPanel(var2);\n      this.inputPanel.addInputPanel(this.compressionPanel);')
+s=s.replace('private void populateFields(FileLocation var1) {','private void populateFields(FileLocation var1) {\n      this.compressionPanel.reset(var1);')
+s=s.replace('public void apply(FileLocation var1) {','public void apply(FileLocation var1) {\n      this.compressionPanel.apply(var1);')
+s=s.replace('var1.add(this.afterProcessingPanel.getUi());','var1.add(this.compressionPanel);\n      var1.add(this.afterProcessingPanel.getUi());')
+s=s.replace('var1.add(this.skipEmptyTargets);','var1.add(this.compressionPanel);\n      var1.add(this.skipEmptyTargets);')
+p.write_text(s)
+p=r/'src/main/java/org/etlforge/integration/data/location/FileLocation.java';s=p.read_text().replace('"character_encoding"\n','"character_encoding",\n         "compression_enabled", "compression_format", "compression_mode", "compression_archive_name", "compression_password"\n');p.write_text(s)
+p=r/'metadata/includes/etlforge-integration-client-interchange-locatable.includes';p.write_text(p.read_text()+'\norg/etlforge/integration/client/ui/interchange/location/panel/EndpointCompressionPanel*.class\n')

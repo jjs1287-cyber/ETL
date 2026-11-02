@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.activity.ActivityInfoProvider" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.activity.ActivityInfoProvider" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.activity.ActivityInfoProvider" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.activity.ActivityInfoProvider" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getOperationLog">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element name="filter" type="impl:WsOperationInstanceFilter"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_long">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_int">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsOperationInstanceFilter">
+    <sequence>
+     <element name="OperationInstances" nillable="true" type="impl:ArrayOf_xsd_long"/>
+     <element name="Guids" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="GuidTypes" nillable="true" type="impl:ArrayOf_xsd_int"/>
+     <element name="LogStatuses" nillable="true" type="impl:ArrayOf_xsd_int"/>
+     <element name="StartDate" nillable="true" type="xsd:string"/>
+     <element name="EndDate" nillable="true" type="xsd:string"/>
+     <element name="SearchString" nillable="true" type="xsd:string"/>
+     <element name="OperationName" nillable="true" type="xsd:string"/>
+     <element name="MaxRecords" type="xsd:int"/>
+     <element name="SortType" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="getOperationLogResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getOperationLogReturn" type="impl:WsOperationLogInstance"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsOperationMessage">
+    <sequence>
+     <element name="FieldName" nillable="true" type="xsd:string"/>
+     <element name="Message" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfWsOperationMessage">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:WsOperationMessage"/>
+    </sequence>
+   </complexType>
+   <complexType name="WsOperationLogInstance">
+    <sequence>
+     <element name="OperationGuid" nillable="true" type="xsd:string"/>
+     <element name="OperationName" nillable="true" type="xsd:string"/>
+     <element name="OperationInstanceId" type="xsd:long"/>
+     <element name="ParentOperationInstanceId" type="xsd:long"/>
+     <element name="MsgId" type="xsd:long"/>
+     <element name="From" nillable="true" type="xsd:string"/>
+     <element name="Status" type="xsd:int"/>
+     <element name="ReceivedTimeStamp" nillable="true" type="xsd:string"/>
+     <element name="StartTimeStamp" nillable="true" type="xsd:string"/>
+     <element name="StatusTimeStamp" nillable="true" type="xsd:string"/>
+     <element name="Message" nillable="true" type="xsd:string"/>
+     <element name="OperationMessages" nillable="true" type="impl:ArrayOfWsOperationMessage"/>
+     <element name="NumberOfSourceFiles" type="xsd:int"/>
+     <element name="NumberOfTargetFiles" type="xsd:int"/>
+     <element name="SourceTransferBytes" type="xsd:long"/>
+     <element name="TargetTransferBytes" type="xsd:long"/>
+     <element name="NumberOfSourceRecords" type="xsd:long"/>
+     <element name="NumberOfTargetRecords" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="getOperationProgress">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element name="filter" type="impl:WsOperationInstanceFilter"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOperationProgressResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getOperationProgressReturn" type="impl:WsOperationProgress"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsOperationProgress">
+    <sequence>
+     <element name="OperationInstanceId" type="xsd:long"/>
+     <element name="OperationGuid" nillable="true" type="xsd:string"/>
+     <element name="Section" nillable="true" type="xsd:string"/>
+     <element name="Message" nillable="true" type="xsd:string"/>
+     <element name="PercentageDone" type="xsd:int"/>
+     <element name="EstimatedEndTimeUtc" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getSourceFileHistoryLog">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element name="filter" type="impl:WsOperationInstanceFilter"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSourceFileHistoryLogResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getSourceFileHistoryLogReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteSourceFileHistory">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="sourceIds" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteSourceFileHistoryResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="deleteSourceFileHistoryReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteOperationLogEntry">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="operationInstances" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteOperationLogEntryResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="deleteOperationLogEntryReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelOperations">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="operationInstances" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelOperationsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="cancelOperationsReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="cancelOperationsResponse">
+
+      <wsdl:part element="impl:cancelOperationsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelOperationsRequest">
+
+      <wsdl:part element="impl:cancelOperations" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteSourceFileHistoryResponse">
+
+      <wsdl:part element="impl:deleteSourceFileHistoryResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteSourceFileHistoryRequest">
+
+      <wsdl:part element="impl:deleteSourceFileHistory" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationProgressResponse">
+
+      <wsdl:part element="impl:getOperationProgressResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationLogResponse">
+
+      <wsdl:part element="impl:getOperationLogResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSourceFileHistoryLogResponse">
+
+      <wsdl:part element="impl:getSourceFileHistoryLogResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationProgressRequest">
+
+      <wsdl:part element="impl:getOperationProgress" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOperationLogRequest">
+
+      <wsdl:part element="impl:getOperationLog" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSourceFileHistoryLogRequest">
+
+      <wsdl:part element="impl:getSourceFileHistoryLog" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteOperationLogEntryRequest">
+
+      <wsdl:part element="impl:deleteOperationLogEntry" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteOperationLogEntryResponse">
+
+      <wsdl:part element="impl:deleteOperationLogEntryResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ActivityInfoProvider">
+
+      <wsdl:operation name="getOperationLog">
+
+         <wsdl:input message="impl:getOperationLogRequest" name="getOperationLogRequest"/>
+
+         <wsdl:output message="impl:getOperationLogResponse" name="getOperationLogResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationProgress">
+
+         <wsdl:input message="impl:getOperationProgressRequest" name="getOperationProgressRequest"/>
+
+         <wsdl:output message="impl:getOperationProgressResponse" name="getOperationProgressResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSourceFileHistoryLog">
+
+         <wsdl:input message="impl:getSourceFileHistoryLogRequest" name="getSourceFileHistoryLogRequest"/>
+
+         <wsdl:output message="impl:getSourceFileHistoryLogResponse" name="getSourceFileHistoryLogResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteSourceFileHistory">
+
+         <wsdl:input message="impl:deleteSourceFileHistoryRequest" name="deleteSourceFileHistoryRequest"/>
+
+         <wsdl:output message="impl:deleteSourceFileHistoryResponse" name="deleteSourceFileHistoryResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteOperationLogEntry">
+
+         <wsdl:input message="impl:deleteOperationLogEntryRequest" name="deleteOperationLogEntryRequest"/>
+
+         <wsdl:output message="impl:deleteOperationLogEntryResponse" name="deleteOperationLogEntryResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelOperations">
+
+         <wsdl:input message="impl:cancelOperationsRequest" name="cancelOperationsRequest"/>
+
+         <wsdl:output message="impl:cancelOperationsResponse" name="cancelOperationsResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_activity_infoproviderSoapBinding" type="impl:ActivityInfoProvider">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getOperationLog">
+
+         <wsdlsoap:operation soapAction="getOperationLog"/>
+
+         <wsdl:input name="getOperationLogRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOperationLogResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOperationProgress">
+
+         <wsdlsoap:operation soapAction="getOperationProgress"/>
+
+         <wsdl:input name="getOperationProgressRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOperationProgressResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSourceFileHistoryLog">
+
+         <wsdlsoap:operation soapAction="getSourceFileHistoryLog"/>
+
+         <wsdl:input name="getSourceFileHistoryLogRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSourceFileHistoryLogResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteSourceFileHistory">
+
+         <wsdlsoap:operation soapAction="deleteSourceFileHistory"/>
+
+         <wsdl:input name="deleteSourceFileHistoryRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteSourceFileHistoryResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteOperationLogEntry">
+
+         <wsdlsoap:operation soapAction="deleteOperationLogEntry"/>
+
+         <wsdl:input name="deleteOperationLogEntryRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteOperationLogEntryResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelOperations">
+
+         <wsdlsoap:operation soapAction="cancelOperations"/>
+
+         <wsdl:input name="cancelOperationsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancelOperationsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ActivityInfoProviderService">
+
+      <wsdl:port binding="impl:konga_activity_infoproviderSoapBinding" name="konga_activity_infoprovider">
+
+         <wsdlsoap:address location="http://localhost/axis/konga_activity_infoprovider"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

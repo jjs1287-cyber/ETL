@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>Input string</Label>
+		<Description>An UUID string, e.g. "2f46dad9-e5c2-457e-b1fd-ad1b49b99aff". 
+			Refer to the documentation regarding the format of this value.</Description>
+	</Argument>
+</Wizard>

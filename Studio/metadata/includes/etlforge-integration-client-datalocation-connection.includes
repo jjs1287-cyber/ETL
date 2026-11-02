@@ -1,0 +1,16 @@
+org/etlforge/integration/client/datalocation/connection/MatchingFileList.class
+org/etlforge/integration/client/datalocation/connection/MatchingFileList$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/DatabaseConnectionCallback.class
+org/etlforge/integration/client/datalocation/connection/serverapi/DatabaseConnectionCallback$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/FileConnectionCallback.class
+org/etlforge/integration/client/datalocation/connection/serverapi/FileConnectionCallback$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/LdapConnectionCallback.class
+org/etlforge/integration/client/datalocation/connection/serverapi/LdapConnectionCallback$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/MockTestSourceConnectionApi.class
+org/etlforge/integration/client/datalocation/connection/serverapi/MockTestSourceConnectionApi$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/MockTestTargetConnectionApi.class
+org/etlforge/integration/client/datalocation/connection/serverapi/MockTestTargetConnectionApi$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/TestSourceConnectionApi.class
+org/etlforge/integration/client/datalocation/connection/serverapi/TestSourceConnectionApi$*.class
+org/etlforge/integration/client/datalocation/connection/serverapi/TestTargetConnectionApi.class
+org/etlforge/integration/client/datalocation/connection/serverapi/TestTargetConnectionApi$*.class

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JTR Type="Xml">
+    <ElementTypes>
+        <ElementType Name="1">
+            <CROM Name="JobInfo" Type="0x8000000">
+                <Xml Type="3" TypeNS="2" />
+                <CROM Name="id" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="operation" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="7" TypeNS="2" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="object" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="createdById" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="createdDate" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="8" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr Format="dateTime" ValType="9" />
+                    </CROM>
+                </CROM>
+                <CROM Name="systemModstamp" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="8" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr Format="dateTime" ValType="9" />
+                    </CROM>
+                </CROM>
+                <CROM Name="state" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="10" TypeNS="2" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="externalIdFieldName" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="concurrencyMode" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="11" TypeNS="2" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="contentType" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="12" TypeNS="2" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberBatchesQueued" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberBatchesInProgress" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberBatchesCompleted" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberBatchesFailed" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberBatchesTotal" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberRecordsProcessed" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberRetries" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="apiVersion" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="assignmentRuleId" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="5" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="6" />
+                    </CROM>
+                </CROM>
+                <CROM Name="numberRecordsFailed" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="13" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="14" />
+                    </CROM>
+                </CROM>
+                <CROM Name="totalProcessingTime" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="15" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="16" />
+                    </CROM>
+                </CROM>
+                <CROM Name="apiActiveProcessingTime" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="15" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="16" />
+                    </CROM>
+                </CROM>
+                <CROM Name="apexProcessingTime" Type="0x21">
+                    <Xml Min="0" NS="2" NSQual="true" Type="15" TypeNS="4" />
+                    <CROM Type="0x2">
+                        <Attr ValType="16" />
+                    </CROM>
+                </CROM>
+            </CROM>
+        </ElementType>
+    </ElementTypes>
+    <CROM Name="jobInfo" Type="0x1">
+        <Xml NS="2" NSQual="true" Type="3" TypeNS="2" />
+    </CROM>
+    <Strings>
+        <String idx="11" val="ConcurrencyModeEnum" />
+        <String idx="12" val="ContentType" />
+        <String idx="9" val="Date" />
+        <String idx="14" val="Integer" />
+        <String idx="3" val="JobInfo" />
+        <String idx="10" val="JobStateEnum" />
+        <String idx="16" val="Long" />
+        <String idx="7" val="OperationEnum" />
+        <String idx="6" val="String" />
+        <String idx="8" val="dateTime" />
+        <String idx="2" val="http://www.force.com/2009/06/asyncapi/dataload" />
+        <String idx="4" val="http://www.w3.org/2001/XMLSchema" />
+        <String idx="13" val="int" />
+        <String idx="15" val="long" />
+        <String idx="5" val="string" />
+        <String idx="1" val="{http://www.force.com/2009/06/asyncapi/dataload}JobInfo" />
+    </Strings>
+</JTR>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.JobControl" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.JobControl" xmlns:intf="urn:org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.JobControl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.2
+Built on May 03, 2005 (02:20:24 EDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="urn:org.etlforge.integration.server.implementation.webservice.interchange.jobcontrol.JobControl" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="RunOperation">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="RunOperationResponse">
+    <complexType/>
+   </element>
+   <element name="RunOperationMD5Password">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="RunOperationMD5PasswordResponse">
+    <complexType/>
+   </element>
+   <element name="RunOperationWithSourceData">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element name="operationGuid" type="xsd:string"/>
+      <element name="compressedAndbase64EncodedSourceData" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="RunOperationWithSourceDataResponse">
+    <complexType>
+     <sequence>
+      <element name="RunOperationWithSourceDataReturn" type="impl:WsRunOperationResult"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="WsRunOperationResult">
+    <sequence>
+     <element name="OperationInstanceId" type="xsd:long"/>
+     <element name="OperationInstanceInfo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="RunOperationInstanceMD5Password">
+    <complexType>
+     <sequence>
+      <element name="user" type="xsd:string"/>
+      <element name="md5Password" type="xsd:string"/>
+      <element name="operationGuid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="RunOperationInstanceMD5PasswordResponse">
+    <complexType>
+     <sequence>
+      <element name="RunOperationInstanceMD5PasswordReturn" type="impl:WsRunOperationResult"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="RunOperationInstanceMD5PasswordRequest">
+
+      <wsdl:part element="impl:RunOperationInstanceMD5Password" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationWithSourceDataResponse">
+
+      <wsdl:part element="impl:RunOperationWithSourceDataResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationRequest">
+
+      <wsdl:part element="impl:RunOperation" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationMD5PasswordRequest">
+
+      <wsdl:part element="impl:RunOperationMD5Password" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationResponse">
+
+      <wsdl:part element="impl:RunOperationResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationInstanceMD5PasswordResponse">
+
+      <wsdl:part element="impl:RunOperationInstanceMD5PasswordResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationWithSourceDataRequest">
+
+      <wsdl:part element="impl:RunOperationWithSourceData" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="RunOperationMD5PasswordResponse">
+
+      <wsdl:part element="impl:RunOperationMD5PasswordResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="JobControl">
+
+      <wsdl:operation name="RunOperation">
+
+         <wsdl:input message="impl:RunOperationRequest" name="RunOperationRequest"/>
+
+         <wsdl:output message="impl:RunOperationResponse" name="RunOperationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationMD5Password">
+
+         <wsdl:input message="impl:RunOperationMD5PasswordRequest" name="RunOperationMD5PasswordRequest"/>
+
+         <wsdl:output message="impl:RunOperationMD5PasswordResponse" name="RunOperationMD5PasswordResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationWithSourceData">
+
+         <wsdl:input message="impl:RunOperationWithSourceDataRequest" name="RunOperationWithSourceDataRequest"/>
+
+         <wsdl:output message="impl:RunOperationWithSourceDataResponse" name="RunOperationWithSourceDataResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationInstanceMD5Password">
+
+         <wsdl:input message="impl:RunOperationInstanceMD5PasswordRequest" name="RunOperationInstanceMD5PasswordRequest"/>
+
+         <wsdl:output message="impl:RunOperationInstanceMD5PasswordResponse" name="RunOperationInstanceMD5PasswordResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="konga_jobcontrolSoapBinding" type="impl:JobControl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="RunOperation">
+
+         <wsdlsoap:operation soapAction="konga_jobcontrol#RunOperation"/>
+
+         <wsdl:input name="RunOperationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="RunOperationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationMD5Password">
+
+         <wsdlsoap:operation soapAction="konga_jobcontrol#RunOperationMD5Password"/>
+
+         <wsdl:input name="RunOperationMD5PasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="RunOperationMD5PasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationWithSourceData">
+
+         <wsdlsoap:operation soapAction="konga_jobcontrol#RunOperationWithSourceData"/>
+
+         <wsdl:input name="RunOperationWithSourceDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="RunOperationWithSourceDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="RunOperationInstanceMD5Password">
+
+         <wsdlsoap:operation soapAction="konga_jobcontrol#RunOperationInstanceMD5Password"/>
+
+         <wsdl:input name="RunOperationInstanceMD5PasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="RunOperationInstanceMD5PasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="JobControlService">
+
+      <wsdl:port binding="impl:konga_jobcontrolSoapBinding" name="konga_jobcontrol">
+
+         <wsdlsoap:address location="http://localhost:46908/axis/konga_jobcontrol"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

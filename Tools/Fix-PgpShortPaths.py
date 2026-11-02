@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/ETL/Server/src/native/ssh/PgpFiles.cpp');s=p.read_text(encoding='utf-8-sig');s=s.replace('auto s=fs::absolute(p).generic_u8string();','auto absolute=fs::absolute(p);wchar_t alias[32768];DWORD length=GetShortPathNameW(absolute.c_str(),alias,32768);if(length&&length<32768)absolute=fs::path(alias);auto s=absolute.generic_u8string();');p.write_text(s,encoding='utf-8')

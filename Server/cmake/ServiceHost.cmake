@@ -1,0 +1,4 @@
+add_executable(etlforge_service_host src/native/service-host/Main.cpp)
+target_compile_definitions(etlforge_service_host PRIVATE NOMINMAX _WIN32_WINNT=0x0602 _CRT_SECURE_NO_WARNINGS)
+target_link_libraries(etlforge_service_host PRIVATE advapi32 iphlpapi ws2_32)
+set_target_properties(etlforge_service_host PROPERTIES OUTPUT_NAME ETLForgeServiceHost RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/dist/bin")

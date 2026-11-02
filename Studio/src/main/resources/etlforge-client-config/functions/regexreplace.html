@@ -1,0 +1,15 @@
+<html>Replaces all substrings in <i>input</i> that match <i>expression</i>,
+				using the format specified in <i>format</i>.<br><h2>Example:</h2>To remove any white space from a string:
+				<code><font size="4"><pre>RegExReplace("  t	e st
+
+				ss s","\\s","")</pre></font></code>
+
+				Result: "testsss"
+
+				To swap the order of sub-strings:
+				<code><font size="4"><pre>RegExReplace("abc(first)123(second)xyz","(.*)(\\(.*\\))(.*)(\\(.*\\))(.*)","\\1aaa\\4\\2\\3\\5")</pre></font></code>
+
+				Result: "abcaaa(second)(first)123xyz"<P>
+
+				<i>Note:</i> "\" has to be escaped in literal strings since it has special meaning.
+				If you really need "\" (like in this example) you need to use "\\".</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Wizard class="com.etlforge.integration.client.ui.script.fcn.ArgumentBasedFunctionInserter">
+	<Argument>
+		<Label>&amp;Value</Label>
+		<Description>The value from which to extract a sub-string.</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Start position (0-based)</Label>
+		<Description>The position of the first character, starting at 0. 
+			For example, if Value = "ETLForge", position 2 corresponds to the first "t".</Description>
+	</Argument>
+	<Argument>
+		<Label>&amp;Length</Label>
+		<Description>The length of the sub-string to extract.</Description>
+	</Argument>
+</Wizard>
