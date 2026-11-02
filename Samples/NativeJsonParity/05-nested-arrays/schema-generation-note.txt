@@ -1,0 +1,1 @@
+Legacy schema inference rejects this heterogeneous array. Explicit path/type test schema supplied to both conversion implementations.

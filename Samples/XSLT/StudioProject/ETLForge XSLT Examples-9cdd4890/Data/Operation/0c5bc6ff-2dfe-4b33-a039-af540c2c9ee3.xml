@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Operation">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="0c5bc6ff-2dfe-4b33-a039-af540c2c9ee3" Name="Run XSLT from script">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="operation_type_id" value="8"/>
+  </Properties>
+  <Pipeline opType="Script">
+    <Activities>
+      <SCRIPT activityId="a2ca1b50-1619-48e3-905a-9ed5c1b6b143" contentId="83259244-2f9b-4272-9cba-173fdfa68944" role="Script" type="23"/>
+    </Activities>
+  </Pipeline>
+  <Siblings/>
+  <Functions/>
+</Entity>

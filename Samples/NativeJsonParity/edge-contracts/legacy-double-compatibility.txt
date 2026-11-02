@@ -1,0 +1,5 @@
+Exact XML scalar text matches: true
+JAVA
+json{{object=true, xmlns:xs=http://www.w3.org/2001/XMLSchema, xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance}}[large{{}}"9.999999999999999E22"][tiny{{}}"4.9E-324"]
+CPP
+json{{object=true, xmlns:xs=http://www.w3.org/2001/XMLSchema, xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance}}[large{{}}"9.999999999999999E22"][tiny{{}}"4.9E-324"]

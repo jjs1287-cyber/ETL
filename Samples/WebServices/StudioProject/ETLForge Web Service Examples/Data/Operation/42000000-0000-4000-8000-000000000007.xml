@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Operation">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="42000000-0000-4000-8000-000000000007" Name="Hosted Web Service - Echo">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="transformation_id" value="42000000-0000-4000-8000-000000000003"/>
+    <Item key="operation_id" value="42000000-0000-4000-8000-000000000007"/>
+    <Item key="hosted_webservice_id" value="42000000-0000-4000-8000-000000000002"/>
+    <Item key="operation_type_id" value="7"/>
+  </Properties>
+  <Pipeline opType="HostedWebService">
+    <Activities>
+      <WEBSERVICECALL activityId="7241edca-c7f4-4469-b102-5318b8f44164" contentId="42000000-0000-4000-8000-000000000002" role="Web Service Call" type="10"/>
+      <TRANSFORMATION activityId="b1f21258-d4c9-498f-939d-b3503e6ba051" contentId="42000000-0000-4000-8000-000000000003" role="Transformation" type="4"/>
+    </Activities>
+  </Pipeline>
+  <Siblings/>
+  <Functions>
+    <Fcn type="Transformation" value="42000000-0000-4000-8000-000000000003"/>
+  </Functions>
+</Entity>

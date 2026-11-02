@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Transformation">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="42000000-0000-4000-8000-000000000003" Name="Hosted Echo request to response">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="natureofsource" value="Tree"/>
+    <Item key="targetdtd_root" value=""/>
+    <Item key="target_type_id" value="14"/>
+    <Item key="natureoftarget" value="Tree"/>
+    <Item key="target_dtd_url" value=""/>
+    <Item key="source_type_id" value="12"/>
+    <Item key="target_xml" value=""/>
+    <Item key="XmlSourceIsEdi" value="0"/>
+    <Item key="transformation_id" value="42000000-0000-4000-8000-000000000003"/>
+    <Item key="XmlTargetIsEdi" value="0"/>
+    <Item key="sourcedtd_root" value=""/>
+    <Item key="source_xml" value=""/>
+    <Item key="NoSourceDataUsedInMapping" value="1"/>
+  </Properties>
+  <InputStructure wsCallId="42000000-0000-4000-8000-000000000002"/>
+  <OutputStructure wsCallId="42000000-0000-4000-8000-000000000002"/>
+  <Mappings>
+    <Mapping>
+      <konga.string name="expr">root$transaction$body$EchoResponse$Text$	&lt;trans&gt;
+root$transaction$body$Echo$Text$
+&lt;/trans&gt;</konga.string>
+    </Mapping>
+  </Mappings>
+  <InvalidMappings/>
+  <RenamedNodes/>
+</Entity>

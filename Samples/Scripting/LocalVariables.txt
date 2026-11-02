@@ -1,0 +1,6 @@
+<trans>
+$NewGlobalVariable = 'hello world';
+NewLocalVariable = 'hello script';
+WriteToOperationLog($NewGlobalVariable);
+WriteToOperationLog(NewLocalVariable);
+</trans>

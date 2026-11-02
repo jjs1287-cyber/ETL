@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin><extension id="importStudio" point="org.eclipse.core.runtime.applications"><application><run class="etlforge.eclipse.setup.ImportStudio"/></application></extension></plugin>

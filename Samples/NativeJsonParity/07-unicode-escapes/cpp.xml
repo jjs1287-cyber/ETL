@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><text>café 中文 &amp; &lt; &gt; &quot; &apos; \ line
+next	col</text>
+<spaced>  keep spaces  </spaced>
+</json>

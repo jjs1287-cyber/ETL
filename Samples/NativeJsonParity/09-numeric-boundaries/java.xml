@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <minLong>-9223372036854775808</minLong>
+  <maxLong>9223372036854775807</maxLong>
+  <big>123456789012345678901234567890</big>
+  <fraction>0.125</fraction>
+  <small>1.0E-8</small>
+  <large>1.0E20</large>
+  <negativeZero>-0.0</negativeZero>
+  <scaled>12.5</scaled>
+</json>

@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:template name='start_here'><merged><xsl:copy-of select="doc(concat('param',1))/* | doc('urn:etlforge:xslt:param2')/*"/></merged></xsl:template></xsl:stylesheet>

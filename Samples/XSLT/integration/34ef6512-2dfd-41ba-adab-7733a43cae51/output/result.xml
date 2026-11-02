@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outbox>
+   <entry>
+      <xml>
+         <CustomerPartyMaster>
+            <ID>1837</ID>
+            <Name>Sichuan Jinjiang Electronic Science &amp; Tech Co.,Ltd</Name>
+            <AttentionOfName>Sichuan Jinjiang Electronic Science &amp; Tech Co.,Ltd</AttentionOfName>
+            <AddressLine1>No. 5 Wuke Dongsanlu, Wuhou National Science Park</AddressLine1>
+            <AddressLine2>in High-Tech</AddressLine2>
+            <AddressLine3/>
+            <AddressLine4/>
+            <CityName>Chengdu</CityName>
+            <CountrySubDivisionCodeState/>
+            <CountryCode>CN</CountryCode>
+            <Country>China</Country>
+            <PostalCode>610045</PostalCode>
+            <Indicator>true</Indicator>
+            <DialNumber/>
+            <DefaultLanguageCode>en-US</DefaultLanguageCode>
+            <DialNumberFax>610045</DialNumberFax>
+            <URIWebsite/>
+            <URIEmail/>
+            <PaymentTermID>1116</PaymentTermID>
+            <Code>Open</Code>
+            <ParentCustomer/>
+            <CustomerAccount>50000</CustomerAccount>
+            <AccountNumber/>
+            <DUETAccountOpened>2017-04-03 00:00:00</DUETAccountOpened>
+            <AccountOwner>0058W00000CZearQAD</AccountOwner>
+            <AccountRecordType>0123t000000u8NlAAI</AccountRecordType>
+            <AccountSite/>
+            <AccountSource/>
+            <DUETAccountingEntityId>3375</DUETAccountingEntityId>
+            <DUETActive>Yes</DUETActive>
+            <AnnualRevenue/>
+            <BillingAddress/>
+            <ShippingStreet1>No. 5 Wuke Dongsanlu, Wuhou National Science Park</ShippingStreet1>
+            <ShippingStreet2>in High-Tech</ShippingStreet2>
+            <ShippingStreet3/>
+            <ShippingStreet4/>
+            <ShippingCity>Chengdu</ShippingCity>
+            <ShippingState/>
+            <ShippingZip>610045</ShippingZip>
+            <ShippingCountry>China</ShippingCountry>
+            <ShippingCountryCode>CN</ShippingCountryCode>
+            <BuyerAccount>ENG01</BuyerAccount>
+            <DUETConfiguration>a023t00000cQJiEAAW</DUETConfiguration>
+            <DUETCorporateCustomerNumber/>
+            <CreatedBy>0053t0000084rASAAY</CreatedBy>
+            <DUETCreditHoldReason>MANUAL</DUETCreditHoldReason>
+            <DUETCreditLimit/>
+            <CustomerPortalAccount>false</CustomerPortalAccount>
+            <DUETCustomerPriority/>
+            <DUETCustomerType>CUS</DUETCustomerType>
+            <DatacomKey/>
+            <Description/>
+            <DUETEmail/>
+            <Employees>0</Employees>
+            <DUETERPCreatedDate>2017-04-03 00:00:00</DUETERPCreatedDate>
+            <DUETInSync>true</DUETInSync>
+            <DUETIncoTerm>CIP HONG KONG</DUETIncoTerm>
+            <DUETIndustry>24</DUETIndustry>
+            <Industry>24</Industry>
+            <LastModifiedBy>0053t0000084rASAAY</LastModifiedBy>
+            <DUETLocationId/>
+            <DUETLogicalId>epicor.ndi.3375</DUETLogicalId>
+            <DUETMarket/>
+            <DUETNAICS/>
+            <DUETNameonAccount>Sichuan Jinjiang Electronic Science &amp; Tech Co.,Ltd</DUETNameonAccount>
+            <DUETNumberofLocations/>
+            <Ownership/>
+            <DUETParentAccount/>
+            <ParentAccount>001hP000002aap1QAA</ParentAccount>
+            <DUETPaymentDescription>Net 14</DUETPaymentDescription>
+            <DUETPaymentMethod>0</DUETPaymentMethod>
+            <DUETPaymentTerm>1116</DUETPaymentTerm>
+            <Rating/>
+            <DUETReason/>
+            <DUETReasonCode/>
+            <DUETSalesPersonId>WF0033</DUETSalesPersonId>
+            <DUETSalesPersonName>David Xu</DUETSalesPersonName>
+            <ShippingAddress>System.Address[getCity=Chengdu;getCountry=China;getCountryCode=CN;getGeocodeAccuracy=null;getPostalCode=610045;getState=null;getStateCode=null;getStreet=No. 5 Wuke Dongsanlu, Wuhou National Science Park in High-Tech;]</ShippingAddress>
+            <SICCode/>
+            <SICDescription/>
+            <DUETSiteId/>
+            <DUETSLA/>
+            <DUETSLAExpirationDate/>
+            <DUETSLASerialNumber/>
+            <Type>Customer</Type>
+            <DUETStatusCode>Active</DUETStatusCode>
+            <DUETTermDescription>Net 14</DUETTermDescription>
+            <DUETTermDiscount>0.00</DUETTermDiscount>
+            <DUETTermDuration/>
+            <DUETTermId>1116</DUETTermId>
+            <DUETTermPaymentBasisCode>0</DUETTermPaymentBasisCode>
+            <DUETTerritory>T0004</DUETTerritory>
+            <TickerSymbol/>
+            <DUETTotalCreditLimitAmount>50000.00</DUETTotalCreditLimitAmount>
+            <DUETUniqueId>epicor.ndi.3375:3375:1837</DUETUniqueId>
+            <DUETUpsellOpportunity/>
+            <Website/>
+            <AccountCurrency>USD</AccountCurrency>
+            <DUETCustomerId>5097</DUETCustomerId>
+            <CustomApprovalStatus/>
+            <CustomEpicorCustomerNumber>5097</CustomEpicorCustomerNumber>
+            <CustomProductCategories>EM - Aurora</CustomProductCategories>
+            <CustomTerritoryDisposables/>
+            <CustomType/>
+            <LangNameId>enu_c</LangNameId>
+         </CustomerPartyMaster>
+      </xml>
+      <id>a0DhP000001stuzUAA</id>
+      <wasProcessed>Submitted</wasProcessed>
+      <SFDC_ID>0013t00001bnFUMAA2</SFDC_ID>
+      <fromLogicalId>epicor.ndi.3375</fromLogicalId>
+   </entry>
+</outbox>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Script">
+  <Header Deleted="false" DeployDirty="true" Deployed="false" HasMoved="false" ID="d601768c-0a8d-407c-92dd-2957bf27d646" Name="Run named XSLT">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties/>
+  <konga.string name="script">&lt;trans&gt;
+FileContent=ReadFile("s.a45cb4a4-5e08-4670-a0a2-5555c699ed25");
+output=RunXSLT("xs.6ec7e67b-e299-4a1b-9696-48080bcd364b",FileContent);
+FileContent=output[0];
+WriteToOperationLog(FileContent);
+&lt;/trans&gt;</konga.string>
+</Entity>

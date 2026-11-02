@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="XsltTransform">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="5fed386f-d34c-4d76-9a82-67fa398e187d" Name="Expand Embedded XML">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties/>
+  <konga.string name="xslt">&lt;xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:output method="xml" encoding="UTF-8" indent="yes"/&gt;
+  &lt;xsl:mode on-no-match="shallow-copy"/&gt;
+  &lt;xsl:template match="/outbox/entry/xml"&gt;
+    &lt;xsl:copy&gt;
+      &lt;xsl:copy-of select="@*"/&gt;
+      &lt;xsl:sequence select="parse-xml(string(.))/*"/&gt;
+    &lt;/xsl:copy&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;&#13;
+</konga.string>
+</Entity>

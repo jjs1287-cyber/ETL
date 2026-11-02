@@ -54,11 +54,15 @@ __pycache__/
 .env.*
 .aider*
 
-# Local integration accounts, captured output and exported projects are not source.
-/Samples/
-!/Samples/README.md
+# Generated Eclipse helper configuration.
 /Tools/EclipseWorkspaceSetup/bin/
 /Tools/EclipseWorkspaceSetup/configuration*/
 /Tools/EclipseWorkspaceSetup/p2/
 /Tools/EclipseWorkspaceSetup/artifacts.xml
 
+
+# Authorized SSH test fixtures.
+/Samples/SftpKeys/known_hosts
+
+# Legacy reserved Windows basename; equivalent bytes are in nul-bytes.bin.
+/Samples/GlobalVariableEndpoints/nul.bin

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="WebServiceCall">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="42000000-0000-4000-8000-000000000002" Name="Local Echo SOAP">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="soapstyle" value="document"/>
+    <Item key="wsdl_id" value="ETLForgeEcho.wsdl"/>
+    <Item key="soapaction" value="urn:etlforge:echo/Echo"/>
+    <Item key="webservice_id" value="42000000-0000-4000-8000-000000000002"/>
+    <Item key="targetnamespace" value="urn:etlforge:echo"/>
+    <Item key="binding" value="EchoBinding"/>
+    <Item key="webservice_url" value="http://127.0.0.1:47100/etlforge/soap?id=42000000-0000-4000-8000-000000000007"/>
+    <Item key="httpusername" value="Admin"/>
+    <Item key="port" value="EchoPort"/>
+    <Item key="service" value="EchoService"/>
+    <Item key="soapbodyuse" value="literal"/>
+    <Item key="soapversion" value="1"/>
+    <Item key="operation" value="Echo"/>
+  </Properties>
+  <WsdlFile>
+    <Item key="wsdl_id" value="ETLForgeEcho.wsdl"/>
+    <Item key="wsdlname" value="ETLForgeEcho.wsdl"/>
+    <Item key="status" value="0"/>
+  </WsdlFile>
+</Entity>

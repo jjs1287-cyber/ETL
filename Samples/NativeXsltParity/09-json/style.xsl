@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:output method='json' indent='no'/><xsl:template match='/'><xsl:sequence select="map {'name':string(root/name),'count':count(root/r),'items':array {root/r/string()}}"/></xsl:template></xsl:stylesheet>

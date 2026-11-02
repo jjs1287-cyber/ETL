@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DeploySuccess ResultId="335f635e-cbcf-4571-8cd9-3a60d389b30c" ServerId="62567e27-6268-4c6f-a4ae-f6f05f5ccc21" ServerName="localhost" ServerVersion="42.0.0.0" Time="1793129985590" User="Admin">
+  <DataRoot>
+    <EntityDescriptor EntityId="c798db30-3f37-4789-a0c3-2b854c0d4ed2" EntityName="ETLForge XSLT Examples" EntityType="Project">
+      <EntityDescriptor EntityId="c61a6640-30cd-4a33-88cc-7c7445af79a7" EntityName="Operations" EntityType="RootFolder">
+        <EntityDescriptor EntityId="98adcf84-1417-42a0-be19-b4eccb740b20" EntityName="Source to XSLT to Target" EntityType="Operation"/>
+        <EntityDescriptor EntityId="0c5bc6ff-2dfe-4b33-a039-af540c2c9ee3" EntityName="Run XSLT from script" EntityType="Operation"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="444fe1fb-b55e-4d78-98a5-a8c8630b9e18" EntityName="Sources" EntityType="RootFolder">
+        <EntityDescriptor EntityId="5723226c-2fb5-432a-acc1-0a4e3f55a9c9" EntityName="Sample XML" EntityType="Source"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="da28e350-23b1-4d9b-9c47-3b1235d24d9d" EntityName="Targets" EntityType="RootFolder">
+        <EntityDescriptor EntityId="9a846856-1b40-4775-95c5-887afb713b4c" EntityName="Expanded XML" EntityType="Target"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="05d186bd-faa9-4f44-85a2-6a2464476e1c" EntityName="Scripts" EntityType="RootFolder">
+        <EntityDescriptor EntityId="83259244-2f9b-4272-9cba-173fdfa68944" EntityName="Run named XSLT" EntityType="Script"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="ba340129-305a-4dad-a948-e71c17e1b042" EntityName="XSLT Transforms" EntityType="RootFolder">
+        <EntityDescriptor EntityId="5fed386f-d34c-4d76-9a82-67fa398e187d" EntityName="Expand Embedded XML" EntityType="XsltTransform"/>
+      </EntityDescriptor>
+    </EntityDescriptor>
+  </DataRoot>
+</DeploySuccess>

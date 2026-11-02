@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:output indent='no'/><xsl:template match='/'><results count='{count(rows/row)}' total='{sum(rows/row/amount)}'><xsl:for-each select='rows/row'><customer id='{@id}'><xsl:value-of select='name'/></customer></xsl:for-each></results></xsl:template></xsl:stylesheet>

@@ -1,0 +1,18 @@
+#Properties for the integration project "ETLForge Web Service Examples"
+#Tue Oct 27 07:20:52 CDT 2026
+deleted-file=ETLForge Web Service Examples_deleted.xml
+project-id=42000000-0000-4000-8000-000000000001
+saved-edition=enterprise
+saved-version=42.0.0.0
+uistate-file=ETLForge Web Service Examples_ui.xml
+deploy-dirty=false
+client-version=42.0.0.0
+accessed=1793103631768
+structure-file=ETLForge Web Service Examples.xml
+deployed=true
+jitterpack-comment=
+pipeline-plugin-file=ETLForge Web Service Examples_pipeline_plugins.xml
+deployable=true
+modified=1793103652272
+description=
+requires_version=5.4.0.1

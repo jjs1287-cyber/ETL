@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json array="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <item object="true">
+    <id>1</id>
+    <name>A</name>
+  </item>
+  <item object="true">
+    <id>2</id>
+    <name>B</name>
+  </item>
+  <item object="true">
+    <id>3</id>
+    <name>C</name>
+  </item>
+</json>

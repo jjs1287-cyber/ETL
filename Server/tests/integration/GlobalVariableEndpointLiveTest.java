@@ -14,8 +14,8 @@ public class GlobalVariableEndpointLiveTest {
  static void check(boolean condition,String label){if(!condition)throw new AssertionError(label);checks++;System.out.println("PASS "+label);}
  static String scriptOutput(int target,String value){return "WriteFile('t."+id(target)+"',"+value+");FlushFile('t."+id(target)+"');";}
  static void setup()throws Exception{
-  Files.createDirectories(ROOT);Files.write(ROOT.resolve("input.txt"),"café 世界 😀\r\nsecond line\t\"quotes\"".getBytes(StandardCharsets.UTF_8));
-  Files.write(ROOT.resolve("bad.bin"),new byte[]{(byte)0xc3,0x28});Files.write(ROOT.resolve("nul.bin"),new byte[]{'a',0,'b'});
+  Files.createDirectories(ROOT);Files.write(ROOT.resolve("input.txt"),"cafÃ© ä¸–ç•Œ ðŸ˜€\r\nsecond line\t\"quotes\"".getBytes(StandardCharsets.UTF_8));
+  Files.write(ROOT.resolve("bad.bin"),new byte[]{(byte)0xc3,0x28});Files.write(ROOT.resolve("nul-bytes.bin"),new byte[]{'a',0,'b'});
   Files.write(ROOT.resolve("multi1.txt"),"first".getBytes(StandardCharsets.UTF_8));Files.write(ROOT.resolve("multi2.txt"),"second".getBytes(StandardCharsets.UTF_8));
   InterchangeDataHolder data=new InterchangeDataHolder();
   data.setInterchangeProjectsTab(table(new String[]{"InterchangeProject_ID","InterchangeProject_Name"},new String[]{id(1),"Global variable endpoints verification"}));
@@ -24,14 +24,14 @@ public class GlobalVariableEndpointLiveTest {
    new String[]{id(11),"Local reference text","16",ROOT.toString(),"input.txt",null,null,null,null,null},
    new String[]{id(12),"Unset global text source","17","MissingPayload",null,null,null,null,null,null},
    new String[]{id(13),"Malformed UTF8 fixture","16",ROOT.toString(),"bad.bin",null,null,null,null,null},
-   new String[]{id(14),"NUL text fixture","16",ROOT.toString(),"nul.bin",null,null,null,null,null},
+   new String[]{id(14),"NUL text fixture","16",ROOT.toString(),"nul-bytes.bin",null,null,null,null,null},
    new String[]{id(15),"Multiple files fixture","16",ROOT.toString(),"multi*.txt",null,null,null,null,null}));
   data.setTargetsTab(table(new String[]{"Target_ID","Target_Name","Source_Type_ID","Locator","File_Name","Login","Password","Driver","DriverType","ConnectString","Target_Target_ID"},
    new String[]{id(20),"Global text target","17","Payload",null,null,null,null,null,null,"-1"},
    new String[]{id(21),"Global endpoint output","16",ROOT.toString(),"result.txt",null,null,null,null,null,"-1"}));
   String[] expressions={
-   "$Payload='café 世界 😀';"+scriptOutput(21,"ReadFile('s."+id(10)+"')"),
-   scriptOutput(20,"'café 世界 😀\\r\\nsecond line'")+scriptOutput(21,"$Payload"),
+   "$Payload='cafÃ© ä¸–ç•Œ ðŸ˜€';"+scriptOutput(21,"ReadFile('s."+id(10)+"')"),
+   scriptOutput(20,"'cafÃ© ä¸–ç•Œ ðŸ˜€\\r\\nsecond line'")+scriptOutput(21,"$Payload"),
    "$Payload='';"+scriptOutput(21,"'['+ReadFile('s."+id(10)+"')+']'"),
    "ReadFile('s."+id(12)+"');",
    "$Payload=123;ReadFile('s."+id(10)+"');",
@@ -53,7 +53,7 @@ public class GlobalVariableEndpointLiveTest {
   NativeJavaScriptMappingTest.upload(schema,"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='rows'><xs:complexType><xs:sequence><xs:element name='row' minOccurs='0' maxOccurs='unbounded'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='name' type='xs:string'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>");
   data.setTransformationsTab_New(table(new String[]{"transformation_id","transformation_name","source_type_id","target_type_id","source_text_doc","target_text_doc","source_sourceid","target_targetid","source_xml","target_xml","natureofsource","natureoftarget","sourcedtd_root","targetdtd_root","sourcejmsmessageid","targetjmsmessageid"},new String[]{id(60),"Global endpoint XML identity","4","4",null,null,null,null,schema,schema,"1","1","rows","rows",null,null}));
   data.setTransformation_DefinitionsTab(table(new String[]{"transformation_id","target_field_id","transformation"},new String[]{id(60),"rows$row.id$",encoded("<trans>rows$row.id$</trans>")},new String[]{id(60),"rows$row.name$",encoded("<trans>rows$row.name$</trans>")}));
-  scripts.add(new String[]{id(37),"Seed global XML",encoded("<trans>$Payload='<rows><row><id>1</id><name>café 世界 😀</name></row><row><id>2</id><name>second</name></row></rows>';</trans>")});
+  scripts.add(new String[]{id(37),"Seed global XML",encoded("<trans>$Payload='<rows><row><id>1</id><name>cafÃ© ä¸–ç•Œ ðŸ˜€</name></row><row><id>2</id><name>second</name></row></rows>';</trans>")});
   ops.add(new String[]{id(52),"Global XML transformation","3",id(10),id(20),"1",id(60)});
   pipeline.add(new String[]{id(52),"1",id(37)});pipeline.add(new String[]{id(52),"3",id(10)});pipeline.add(new String[]{id(52),"5",id(60)});pipeline.add(new String[]{id(52),"4",id(20)});pipeline.add(new String[]{id(52),"1",id(36)});
   for(int i=0;i<3;i++){
@@ -81,18 +81,18 @@ public class GlobalVariableEndpointLiveTest {
  static void success(int operation,String expected,String label)throws Exception{check(run(operation).equals("3"),label+" status");check(output().equals(expected),label+" exact output");}
  public static void main(String[] args)throws Exception{
   LocalVariablesRuntimeTest.init();hash=LocalVariablesRuntimeTest.hash;setup();
-  success(40,"café 世界 😀","ReadFile reads a global variable with optional dollar prefix");
-  success(41,"café 世界 😀\r\nsecond line","WriteFile/FlushFile sets the global variable");
+  success(40,"cafÃ© ä¸–ç•Œ ðŸ˜€","ReadFile reads a global variable with optional dollar prefix");
+  success(41,"cafÃ© ä¸–ç•Œ ðŸ˜€\r\nsecond line","WriteFile/FlushFile sets the global variable");
   success(42,"[]","empty text is distinct from an unset variable");
   check(!run(43).equals("3"),"unset source fails");
   check(!run(44).equals("3"),"non-text source fails");
   success(45,"new value","a second flush replaces the previous value");
   success(50,new String(Files.readAllBytes(ROOT.resolve("input.txt")),StandardCharsets.UTF_8),"archive local file to global variable then read it in a script");
-  success(51,"café 世界 😀","archive global variable to a local file");
+  success(51,"cafÃ© ä¸–ç•Œ ðŸ˜€","archive global variable to a local file");
   check(run(52).equals("3"),"global source to XML transformation to global target status");
   javax.xml.parsers.DocumentBuilderFactory factory=javax.xml.parsers.DocumentBuilderFactory.newInstance();factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
   org.w3c.dom.Document document=factory.newDocumentBuilder().parse(ROOT.resolve("result.txt").toFile());
-  check(document.getElementsByTagName("row").getLength()==2&&document.getElementsByTagName("name").item(0).getTextContent().equals("café 世界 😀"),"XML mapping preserves all rows and Unicode");
+  check(document.getElementsByTagName("row").getLength()==2&&document.getElementsByTagName("name").item(0).getTextContent().equals("cafÃ© ä¸–ç•Œ ðŸ˜€"),"XML mapping preserves all rows and Unicode");
   check(!run(53).equals("3"),"malformed UTF8 target is rejected");
   check(!run(54).equals("3"),"NUL-containing target is rejected");
   check(!run(55).equals("3"),"multiple output files are rejected instead of losing data");

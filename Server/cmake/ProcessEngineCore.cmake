@@ -33,5 +33,5 @@ add_library(etlforge_process_engine_core_probe STATIC EXCLUDE_FROM_ALL
   "${ETLFORGE_INTEGRATION}/konga/ProcessEngine/Engine/Messenger/parseSMTP.cpp"
 )
 get_target_property(engine_core_includes etlforge_processengine_probe INCLUDE_DIRECTORIES)
-target_include_directories(etlforge_process_engine_core_probe PRIVATE ${engine_core_includes} C:/ETL/Tools/vcpkg/installed/x64-windows/include C:/ETL/Dependencies/icu-78.3-x64/include C:/ETL/Tools/jdk8u504-b01/include C:/ETL/Tools/jdk8u504-b01/include/win32)
+target_include_directories(etlforge_process_engine_core_probe PRIVATE ${engine_core_includes} ${ETLFORGE_ROOT}/Tools/vcpkg/installed/x64-windows/include ${ETLFORGE_ROOT}/Dependencies/icu-78.3-x64/include ${ETLFORGE_ROOT}/Tools/jdk8u504-b01/include ${ETLFORGE_ROOT}/Tools/jdk8u504-b01/include/win32)
 target_compile_definitions(etlforge_process_engine_core_probe PRIVATE WIN32 NOMINMAX _WIN32_WINNT=0x0602 _CRT_SECURE_NO_WARNINGS BOOST_ALL_NO_LIB)

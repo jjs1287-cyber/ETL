@@ -1,0 +1,1 @@
+<catalog xmlns='urn:oasis:names:tc:entity:xmlns:xml:catalog'><uri name='urn:etlforge:xslt:param1' uri='file:///C:/ETL/Samples/NativeXsltParity/negative-8/input1.xml'/><uri name='urn:/etlforge/xslt/param1' uri='file:///C:/ETL/Samples/NativeXsltParity/negative-8/input1.xml'/></catalog>

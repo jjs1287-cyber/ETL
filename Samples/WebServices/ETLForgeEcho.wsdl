@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:etlforge:echo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="urn:etlforge:echo" name="ETLForgeEcho">
+ <types><xs:schema targetNamespace="urn:etlforge:echo" elementFormDefault="qualified">
+  <xs:element name="Echo"><xs:complexType><xs:sequence><xs:element name="Text" type="xs:string"/></xs:sequence></xs:complexType></xs:element>
+  <xs:element name="EchoResponse"><xs:complexType><xs:sequence><xs:element name="Text" type="xs:string"/></xs:sequence></xs:complexType></xs:element>
+ </xs:schema></types>
+ <message name="EchoRequest"><part name="parameters" element="tns:Echo"/></message>
+ <message name="EchoResponse"><part name="parameters" element="tns:EchoResponse"/></message>
+ <portType name="EchoPortType"><operation name="Echo"><input message="tns:EchoRequest"/><output message="tns:EchoResponse"/></operation></portType>
+ <binding name="EchoBinding" type="tns:EchoPortType"><soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/><operation name="Echo"><soap:operation soapAction="urn:etlforge:echo/Echo"/><input><soap:body use="literal"/></input><output><soap:body use="literal"/></output></operation></binding>
+ <service name="EchoService"><port name="EchoPort" binding="tns:EchoBinding"><soap:address location="http://127.0.0.1:47100/etlforge/soap?id=42000000-0000-4000-8000-000000000007"/></port></service>
+</definitions>

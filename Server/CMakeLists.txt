@@ -1,5 +1,17 @@
 cmake_minimum_required(VERSION 3.24)
 project(ETLForge VERSION 42.0.0.0 LANGUAGES CXX)
+get_filename_component(ETLFORGE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+list(PREPEND CMAKE_PREFIX_PATH
+  "${ETLFORGE_ROOT}/Tools/vcpkg/installed/x64-windows"
+  "${ETLFORGE_ROOT}/Dependencies/windows-x64")
+if(DEFINED ENV{ETLFORGE_PYTHON} AND NOT "$ENV{ETLFORGE_PYTHON}" STREQUAL "")
+  set(Python3_EXECUTABLE "$ENV{ETLFORGE_PYTHON}" CACHE FILEPATH "Python interpreter" FORCE)
+endif()
+if(NOT Python3_EXECUTABLE)
+  find_program(Python3_EXECUTABLE NAMES python.exe python3.12.exe python3 python
+    HINTS "C:/Tools/aider-env/Scripts" "$ENV{USERPROFILE}/.local/bin")
+endif()
+find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter)
 if(NOT WIN32)
   message(FATAL_ERROR "ETLForge currently targets Windows only")
 endif()

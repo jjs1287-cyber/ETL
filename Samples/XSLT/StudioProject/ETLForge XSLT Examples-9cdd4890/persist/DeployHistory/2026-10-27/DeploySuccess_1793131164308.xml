@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DeploySuccess ResultId="b26cd6e0-49a0-49a8-a96f-7145e2257231" ServerId="62567e27-6268-4c6f-a4ae-f6f05f5ccc21" ServerName="localhost" ServerVersion="42.0.0.0" Time="1793131164308" User="Admin">
+  <DataRoot>
+    <EntityDescriptor EntityId="c798db30-3f37-4789-a0c3-2b854c0d4ed2" EntityName="ETLForge XSLT Examples" EntityType="Project">
+      <EntityDescriptor EntityId="444fe1fb-b55e-4d78-98a5-a8c8630b9e18" EntityName="Sources" EntityType="RootFolder">
+        <EntityDescriptor EntityId="5723226c-2fb5-432a-acc1-0a4e3f55a9c9" EntityName="Sample XML" EntityType="Source"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="05d186bd-faa9-4f44-85a2-6a2464476e1c" EntityName="Scripts" EntityType="RootFolder">
+        <EntityDescriptor EntityId="83259244-2f9b-4272-9cba-173fdfa68944" EntityName="Run named XSLT" EntityType="Script"/>
+      </EntityDescriptor>
+      <EntityDescriptor EntityId="ba340129-305a-4dad-a948-e71c17e1b042" EntityName="XSLT Transforms" EntityType="RootFolder">
+        <EntityDescriptor EntityId="5fed386f-d34c-4d76-9a82-67fa398e187d" EntityName="Expand Embedded XML" EntityType="XsltTransform"/>
+      </EntityDescriptor>
+    </EntityDescriptor>
+  </DataRoot>
+</DeploySuccess>

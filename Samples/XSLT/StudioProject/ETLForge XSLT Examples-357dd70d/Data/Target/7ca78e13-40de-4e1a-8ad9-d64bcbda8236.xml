@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Target">
+  <Header Deleted="false" DeployDirty="true" Deployed="false" HasMoved="false" ID="7ca78e13-40de-4e1a-8ad9-d64bcbda8236" Name="Expanded XML">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties/>
+  <Location type="LocalFile">
+    <Data>
+      <Properties>
+        <Item key="file_name" value="result.xml"/>
+        <Item key="filterOption.ignoreCase" value="0"/>
+        <Item key="filterOption.regularExpression" value="0"/>
+        <Item key="locator" value="C:\ETL\Samples\XSLT\StudioProject\ETLForge XSLT Examples-357dd70d\output"/>
+      </Properties>
+    </Data>
+  </Location>
+</Entity>

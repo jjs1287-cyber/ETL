@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="json">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="first_name" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="_123" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="a_b" nillable="true" type="xs:double"/>
+        <xs:element minOccurs="0" name="___Value" nillable="true" type="xs:boolean"/>
+        <xs:element minOccurs="0" name="a-b.c_d" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="école" nillable="true" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute fixed="true" name="object" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

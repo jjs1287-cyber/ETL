@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><customer object="true"><id>7</id>
+<address object="true"><city>Austin</city>
+<zip>00767</zip>
+</address>
+</customer>
+<metadata object="true"><version>1</version>
+</metadata>
+</json>

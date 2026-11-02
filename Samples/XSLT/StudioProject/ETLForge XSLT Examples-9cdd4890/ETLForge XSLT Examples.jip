@@ -1,0 +1,18 @@
+#Properties for the integration project "ETLForge XSLT Examples"
+#Tue Oct 27 14:59:24 CDT 2026
+deleted-file=ETLForge XSLT Examples_deleted.xml
+project-id=c798db30-3f37-4789-a0c3-2b854c0d4ed2
+saved-edition=enterprise
+saved-version=42.0.0.0
+uistate-file=ETLForge XSLT Examples_ui.xml
+deploy-dirty=false
+client-version=42.0.0.0
+accessed=1793130790669
+structure-file=ETLForge XSLT Examples.xml
+deployed=true
+jitterpack-comment=
+pipeline-plugin-file=ETLForge XSLT Examples_pipeline_plugins.xml
+deployable=true
+modified=1793131164418
+description=
+requires_version=5.4.0.1

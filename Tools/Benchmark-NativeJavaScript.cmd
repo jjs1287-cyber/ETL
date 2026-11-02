@@ -1,8 +1,7 @@
 @echo off
-call "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+call "%~dp0Set-DevEnvironment.cmd"
 if errorlevel 1 exit /b %errorlevel%
-set "PATH=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja;%PATH%"
-cmake --build C:\ETL\Server\build\windows-x64 --target etlforge_javascript_benchmark --parallel 4
+cmake --build %ETLFORGE_ROOT%\Server\build\windows-x64 --target etlforge_javascript_benchmark --parallel 4
 if errorlevel 1 exit /b %errorlevel%
-C:\ETL\Server\build\windows-x64\etlforge_javascript_benchmark.exe
+%ETLFORGE_ROOT%\Server\build\windows-x64\etlforge_javascript_benchmark.exe
 exit /b %errorlevel%

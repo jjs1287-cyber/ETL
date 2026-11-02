@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Operation">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="98adcf84-1417-42a0-be19-b4eccb740b20" Name="Source to XSLT to Target">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="target_id" value="9a846856-1b40-4775-95c5-887afb713b4c"/>
+    <Item key="source_id" value="5723226c-2fb5-432a-acc1-0a4e3f55a9c9"/>
+    <Item key="operation_type_id" value="23"/>
+  </Properties>
+  <Pipeline opType="XsltOperation">
+    <Activities>
+      <SOURCE activityId="065aa93c-02eb-4197-9627-98da5ef615eb" contentId="5723226c-2fb5-432a-acc1-0a4e3f55a9c9" role="Source" type="2"/>
+      <XSLT_TRANSFORM activityId="60d1ed2d-4eac-4586-954c-d6fef2ff0c19" contentId="5fed386f-d34c-4d76-9a82-67fa398e187d" role="XSLT" type="34"/>
+      <TARGET activityId="b9bbae5a-2ac3-4d27-ac73-7377e70d87b6" contentId="9a846856-1b40-4775-95c5-887afb713b4c" role="Target" type="3"/>
+    </Activities>
+  </Pipeline>
+  <Siblings/>
+  <Functions/>
+</Entity>

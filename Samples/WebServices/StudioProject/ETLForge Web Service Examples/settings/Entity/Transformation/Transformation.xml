@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Transformation>
+  <ClassSettings MappingTree.Zoom="11"/>
+  <ID-42000000-0000-4000-8000-000000000003>
+    <MappingTreeExpansion>
+      <konga.string name="Source">rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldLpEhZWWuLc0AwAAeHB3DAAAABA/QAAAAAAAAnQAAltddAAHW3Jvb3QkXXg=</konga.string>
+      <konga.string name="Target">rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldLpEhZWWuLc0AwAAeHB3DAAAABA/QAAAAAAAA3QAE1tyb290JHRyYW5zYWN0aW9uJF10AAJbXXQAB1tyb290JF14</konga.string>
+    </MappingTreeExpansion>
+    <MapAreaDisplay ATTRIBUTES="true" ERRORS="true" GENERATORS="true"/>
+  </ID-42000000-0000-4000-8000-000000000003>
+</Transformation>

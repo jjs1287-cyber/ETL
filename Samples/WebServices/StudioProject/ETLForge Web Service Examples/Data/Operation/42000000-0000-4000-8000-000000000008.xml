@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Operation">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="42000000-0000-4000-8000-000000000008" Name="Web Service Call - Local Echo">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="transformation_id" value="42000000-0000-4000-8000-000000000004"/>
+    <Item key="operation_id" value="42000000-0000-4000-8000-000000000008"/>
+    <Item key="target_id" value="42000000-0000-4000-8000-000000000006"/>
+    <Item key="operation_type_id" value="6"/>
+  </Properties>
+  <Pipeline opType="WebServiceCall">
+    <Activities>
+      <TRANSFORMATION activityId="9d5a9fe2-e4d0-4f42-a6ea-0cf9021485ae" contentId="42000000-0000-4000-8000-000000000004" role="Request" type="4"/>
+      <WEBSERVICECALL activityId="af96bf8d-6de6-4d2a-906a-3543e2084f84" contentId="42000000-0000-4000-8000-000000000002" role="Web Service Call" type="10"/>
+      <TRANSFORMATION activityId="34a0b3cc-1d0b-4ab8-aea6-99c34b6125b4" contentId="42000000-0000-4000-8000-000000000005" role="Response" type="4"/>
+      <TARGET activityId="1ee1df25-c51a-468f-8eba-662fd1840d21" contentId="42000000-0000-4000-8000-000000000006" role="Target" type="3"/>
+    </Activities>
+  </Pipeline>
+  <Siblings/>
+  <Functions>
+    <Fcn type="Transformation" value="42000000-0000-4000-8000-000000000004"/>
+    <Fcn type="WebServiceCall" value="42000000-0000-4000-8000-000000000002"/>
+    <Fcn type="Transformation" value="42000000-0000-4000-8000-000000000005"/>
+  </Functions>
+</Entity>

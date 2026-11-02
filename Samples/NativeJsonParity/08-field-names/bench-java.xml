@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <first_name>Ada</first_name>
+  <_123>digits</_123>
+  <a_b>7</a_b>
+  <___Value>true</___Value>
+  <a-b.c_d>ok</a-b.c_d>
+  <école>yes</école>
+</json>

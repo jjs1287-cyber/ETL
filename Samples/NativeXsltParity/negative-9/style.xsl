@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:template match='/'><xsl:result-document href='file:///C:/ETL/Samples/NativeXsltParity/forbidden.xml'><r/></xsl:result-document></xsl:template></xsl:stylesheet>

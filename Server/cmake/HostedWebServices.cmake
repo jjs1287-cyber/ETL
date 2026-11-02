@@ -1,5 +1,5 @@
 set(hosted_dir "${ETLFORGE_INTEGRATION}/konga/mod_konga_ws")
-set(apache_root "C:/ETL/Server/runtime/apache-httpd-2.4.69/Apache24")
+set(apache_root "${ETLFORGE_ROOT}/Server/runtime/apache-httpd-2.4.69/Apache24")
 add_library(etlforge_hosted_webservice MODULE EXCLUDE_FROM_ALL
  "${hosted_dir}/ETLForgeHostedModule.cpp"
  "${hosted_dir}/ApacheUtils.cpp"

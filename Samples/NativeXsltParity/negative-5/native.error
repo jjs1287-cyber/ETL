@@ -1,0 +1,3 @@
+Error in stylesheet:
+   URI scheme 'file' has been disallowed
+  In template rule with match="/" of stylesheet

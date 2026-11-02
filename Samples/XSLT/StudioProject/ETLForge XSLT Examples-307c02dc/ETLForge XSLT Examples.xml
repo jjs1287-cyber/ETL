@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project name="ETLForge XSLT Examples" projectId="f90141d3-7557-4672-8fbf-651947b56e7f">
+  <EntityType name="Operation">
+    <Entity entityId="fa72fdde-fdbb-4848-b658-84bd93a51262" name="Source to XSLT to Target"/>
+    <Entity entityId="0103ae7b-942e-4b87-9340-a6b72754592c" name="Run XSLT from script"/>
+  </EntityType>
+  <EntityType name="Source">
+    <Entity entityId="38a9ccb5-8d51-4db4-9602-971572e1408d" name="Sample XML"/>
+  </EntityType>
+  <EntityType name="Target">
+    <Entity entityId="fcda3b06-517e-4af0-9c57-71060428ef83" name="Expanded XML"/>
+  </EntityType>
+  <EntityType name="Script">
+    <Entity entityId="97ca0d62-3cb1-4fa0-bfcc-16de680eea9d" name="Run named XSLT"/>
+  </EntityType>
+  <EntityType name="XsltTransform">
+    <Entity entityId="c7d71411-f82b-4431-8b47-bd20d337b003" name="Expand Embedded XML"/>
+  </EntityType>
+</Project>

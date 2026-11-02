@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Target">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="42000000-0000-4000-8000-000000000006" Name="SOAP response file">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties>
+    <Item key="target_id" value="42000000-0000-4000-8000-000000000006"/>
+  </Properties>
+  <Location type="LocalFile">
+    <Data>
+      <Properties>
+        <Item key="file_name" value="echo-[unique].xml"/>
+        <Item key="filterOption.ignoreCase" value="0"/>
+        <Item key="filterOption.regularExpression" value="0"/>
+        <Item key="locator" value="C:\ETL\Samples\WebServices\output"/>
+      </Properties>
+    </Data>
+  </Location>
+</Entity>

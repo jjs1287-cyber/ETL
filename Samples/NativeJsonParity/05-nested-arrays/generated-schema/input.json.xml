@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <matrix array="true">
+    <array array="true">
+      <item xsi:type="xs:double">1</item>
+      <item xsi:type="xs:double">2</item>
+    </array>
+  </matrix>
+  <mixed array="true">
+    <item xsi:type="xs:string">text</item>
+    <item xsi:type="xs:double">7</item>
+    <item xsi:type="xs:boolean">true</item>
+<item xsi:nil="true"/>
+    <item object="true">
+    </item>
+  </mixed>
+</json>

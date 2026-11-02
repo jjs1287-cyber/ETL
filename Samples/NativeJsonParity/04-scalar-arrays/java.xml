@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <strings array="true">
+    <item>a</item>
+    <item>b</item>
+    <item></item>
+  </strings>
+  <numbers array="true">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+  </numbers>
+  <flags array="true">
+    <item>true</item>
+    <item>false</item>
+  </flags>
+  <nullable array="true">
+<item xsi:nil="true"/>
+    <item>value</item>
+<item xsi:nil="true"/>
+  </nullable>
+</json>

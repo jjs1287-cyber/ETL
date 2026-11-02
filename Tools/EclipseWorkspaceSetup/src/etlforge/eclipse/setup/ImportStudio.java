@@ -11,18 +11,19 @@ import org.eclipse.jdt.core.*;
 import org.eclipse.jdt.launching.*;
 public final class ImportStudio implements IApplication {
  public Object start(IApplicationContext context) throws Exception {
+  File root=new File(System.getProperty("etlforge.root"));
   boolean build=Arrays.asList((String[])context.getArguments().get(IApplicationContext.APPLICATION_ARGS)).contains("--build");
   IWorkspace ws=ResourcesPlugin.getWorkspace();
   IWorkspaceDescription wd=ws.getDescription(); wd.setAutoBuilding(false); ws.setDescription(wd);
-  IProjectDescription pd=ws.loadProjectDescription(new Path("C:/ETL/Studio/.project"));
-  pd.setLocation(new Path("C:/ETL/Studio"));
+  IProjectDescription pd=ws.loadProjectDescription(new Path(new File(root,"Studio/.project").getPath()));
+  pd.setLocation(new Path(new File(root,"Studio").getPath()));
   IProject project=ws.getRoot().getProject(pd.getName());
   if(!project.exists()) project.create(pd,null);
   if(!project.isOpen()) project.open(null);
   IVMInstallType type=JavaRuntime.getVMInstallType("org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType");
   IVMInstall vm=type.findVMInstall("etlforge-jdk8");
   if(vm==null) vm=type.createVMInstall("etlforge-jdk8");
-  vm.setName("ETLForge Java 8"); vm.setInstallLocation(new File("C:/ETL/Tools/jdk8u504-b01"));
+  vm.setInstallLocation(new File(System.getProperty("etlforge.jdk8",new File(root,"Tools/jdk8u504-b01").getPath()))); vm.setName("ETLForge Java 8");
   JavaRuntime.setDefaultVMInstall(vm,null); JavaRuntime.saveVMConfiguration();
   project.refreshLocal(IResource.DEPTH_INFINITE,null);
   IJavaProject jp=JavaCore.create(project);
@@ -41,7 +42,7 @@ public final class ImportStudio implements IApplication {
   if(build && errors==0){IWorkspaceDescription ready=ws.getDescription();ready.setAutoBuilding(true);ws.setDescription(ready);}
   report.append("Automatic build enabled: ").append(ws.getDescription().isAutoBuilding()).append('\n');
   report.append("Build requested: ").append(build).append("\nError markers: ").append(errors).append('\n');
-  Files.write(new File("C:/ETL/Reports/eclipse-studio-validation.txt").toPath(),report.toString().getBytes(StandardCharsets.UTF_8));
+  Files.write(new File(root,"Reports/eclipse-studio-validation.txt").toPath(),report.toString().getBytes(StandardCharsets.UTF_8));
   System.out.print(report.toString()); ws.save(true,null);
   return Integer.valueOf(build && errors>0 ? 1 : 0);
  }

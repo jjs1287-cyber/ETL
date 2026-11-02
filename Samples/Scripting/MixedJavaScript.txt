@@ -1,0 +1,14 @@
+Literal text before.
+<trans>$greeting = 'Hello world'; $greeting</trans>
+<javascript>
+var message = ETLForge.GetVar('$greeting');
+WriteToOperationLog(message);
+ETLForge.SetVar('example.counter', 1);
+SetScriptResult(JSON.stringify({message:message, counter:1}));
+</javascript>
+Between blocks.
+<javascript>SetScriptOutput(message.toUpperCase());</javascript>
+Literal text after.
+
+Mapping formula example (replace the source path with a field inserted by Studio):
+<javascript>SetScriptResult(ETLForge.GetSource('rows$row.name$'));</javascript>

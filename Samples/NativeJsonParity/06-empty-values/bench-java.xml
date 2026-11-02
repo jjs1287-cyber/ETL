@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <emptyString></emptyString>
+  <emptyObject object="true">
+  </emptyObject>
+  <emptyArray array="true">
+  </emptyArray>
+<nil xsi:nil="true"/>
+  <records array="true">
+    <item object="true">
+    </item>
+    <item object="true">
+    </item>
+  </records>
+</json>

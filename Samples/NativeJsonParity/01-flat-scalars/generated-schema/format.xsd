@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="json">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="age" nillable="true" type="xs:double"/>
+        <xs:element minOccurs="0" name="active" nillable="true" type="xs:boolean"/>
+        <xs:element minOccurs="0" name="disabled" nillable="true" type="xs:boolean"/>
+        <xs:element minOccurs="0" name="balance" nillable="true" type="xs:double"/>
+        <xs:element minOccurs="0" name="missing" nillable="true" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute fixed="true" name="object" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

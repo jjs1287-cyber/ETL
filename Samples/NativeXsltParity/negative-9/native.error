@@ -1,0 +1,2 @@
+Error at /xsl:stylesheet/xsl:template[1]/xsl:result-document[1] in stylesheet:
+  XTSE0010  xsl:result-document is disabled when extension functions are disabled

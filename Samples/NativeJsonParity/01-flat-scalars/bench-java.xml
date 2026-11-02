@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json object="true" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>Ada</name>
+  <age>42</age>
+  <active>true</active>
+  <disabled>false</disabled>
+  <balance>12.5</balance>
+<missing xsi:nil="true"/>
+</json>

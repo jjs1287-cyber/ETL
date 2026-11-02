@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entity type="Source">
+  <Header Deleted="false" DeployDirty="false" Deployed="true" HasMoved="false" ID="5723226c-2fb5-432a-acc1-0a4e3f55a9c9" Name="Sample XML">
+    <konga.string name="Description"/>
+  </Header>
+  <Properties/>
+  <Location type="LocalFile">
+    <Data>
+      <Properties>
+        <Item key="file_name" value="input.xml"/>
+        <Item key="filterOption.ignoreCase" value="0"/>
+        <Item key="filterOption.regularExpression" value="0"/>
+        <Item key="locator" value="C:\ETL\Samples\XSLT\ExpandEmbeddedXml"/>
+      </Properties>
+    </Data>
+  </Location>
+</Entity>

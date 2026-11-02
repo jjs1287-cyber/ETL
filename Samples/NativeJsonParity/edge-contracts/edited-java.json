@@ -1,0 +1,8 @@
+{
+  "name": "  spaced & value  ",
+  "age": null,
+  "active": true,
+  "disabled": false,
+  "balance": 12.500,
+  "missing": null
+}

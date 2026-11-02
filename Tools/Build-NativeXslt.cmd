@@ -1,9 +1,8 @@
 @echo off
-call "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64
+call "%~dp0Set-DevEnvironment.cmd"
 if errorlevel 1 exit /b %errorlevel%
-set "PATH=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja;%PATH%"
-cmake -S C:\ETL\Server\src\native\xslt -B C:\ETL\Server\build-probe\native-xslt -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake -S %ETLFORGE_ROOT%\Server\src\native\xslt -B %ETLFORGE_ROOT%\Server\build-probe\native-xslt -G Ninja -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM:FILEPATH=%ETLFORGE_NINJA%\ninja.exe"
 if errorlevel 1 exit /b %errorlevel%
-cmake --build C:\ETL\Server\build-probe\native-xslt --parallel 4
+cmake --build %ETLFORGE_ROOT%\Server\build-probe\native-xslt --parallel 4
 if errorlevel 1 exit /b %errorlevel%
-copy /y C:\ETL\Dependencies\saxonc-12.10.1\SaxonCCoreHE\bin\saxonc-core-he.dll C:\ETL\Server\build-probe\native-xslt\bin\ >nul
+copy /y %ETLFORGE_ROOT%\Dependencies\saxonc-12.10.1\SaxonCCoreHE\bin\saxonc-core-he.dll %ETLFORGE_ROOT%\Server\build-probe\native-xslt\bin\ >nul

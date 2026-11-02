@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-root=Path('C:/ETL')
+root=Path(__file__).resolve().parents[1]
 policy=json.loads((root/'Server/features/javascript/host-policy.json').read_text(encoding='utf-8'))
 functions=policy['functions']
 expected=['ReadFile','WriteFile','DbExecute','DbLookup','GetVar','SetVar','WriteToOperationLog','SetScriptResult','SetScriptOutput','GetSource']

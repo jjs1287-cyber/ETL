@@ -1,0 +1,3 @@
+Error in stylesheet:
+  FODC0005  Access to URI http://127.0.0.1:1/blocked has been prohibited
+  In template rule with match="/" of stylesheet

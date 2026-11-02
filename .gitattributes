@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.gif binary
+*.jpg binary
+*.jpk binary
+*.jip binary
+
+# Preserve the exact bytes of test inputs and exported fixture projects.
+Samples/** -text
+Server/tests/**/fixtures/** -text
+Studio/src/test/resources/** -text

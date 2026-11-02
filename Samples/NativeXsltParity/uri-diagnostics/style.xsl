@@ -1,0 +1,1 @@
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:output method="text"/><xsl:template name="start_here"><xsl:value-of select="static-base-uri()"/><xsl:text>&#10;</xsl:text><xsl:value-of select="document-uri(doc('param2'))"/></xsl:template></xsl:stylesheet>

@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:template match='/'><xsl:sequence select="doc('http://127.0.0.1:1/blocked')"/></xsl:template></xsl:stylesheet>

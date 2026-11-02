@@ -1,0 +1,6 @@
+Error in stylesheet:
+  FODC0002  I/O error reported by XML parser processing urn:etlforge:xslt:param99. Caused by
+  java.net.MalformedURLException: Accessing a URL protocol that was not enabled. The URL
+  protocol urn is not tested and might not work as expected. It can be enabled by adding the
+  --enable-url-protocols=urn option to the native-image command.
+  In template rule with match="/" of stylesheet

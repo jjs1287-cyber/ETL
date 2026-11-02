@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:root xmlns="urn:etlforge:echo" xmlns:ns="http://www.etlforge.invalid/XsdFromWsdl">
+	<ns:transaction>
+		<ns:body>
+			<Echo>
+				<Text>Hello from ETLForge 42 — SOAP round trip</Text>
+			</Echo>
+		</ns:body>
+	</ns:transaction>
+</ns:root>

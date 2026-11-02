@@ -1,0 +1,1 @@
+<xsl:stylesheet version='3.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'><xsl:template match='/'><groups><xsl:for-each-group select='rows/r' group-by='@key'><xsl:sort select='current-grouping-key()'/><group key='{current-grouping-key()}' total='{sum(current-group()/@n)}'/></xsl:for-each-group></groups></xsl:template></xsl:stylesheet>

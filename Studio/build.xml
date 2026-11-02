@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ETLForge-Studio" default="compile" basedir=".">
-  <property name="jdk.home" location="C:/ETL/Tools/jdk8u504-b01"/>
+  <property name="jdk.home" location="../Tools/jdk8u504-b01"/>
   <property name="source.dir" location="src/main/java"/>
   <property name="classes.dir" location="build/classes"/>
     <property file="features.properties"/>
@@ -8,7 +8,7 @@
   <condition property="profiling.source.dir" value="features/profiling/src/main/java" else="build/disabled-profiling-source">
     <istrue value="${feature.profiling.enabled}"/>
   </condition>
-  <path id="dependencies"><fileset dir="lib" includes="*.jar" excludes="wsc-22.jar,sfdc-partner-wsdl-24.jar"/><fileset dir="C:/ETL/Dependencies/java/salesforce" includes="*.jar"/></path>
+  <path id="dependencies"><fileset dir="lib" includes="*.jar" excludes="wsc-22.jar,sfdc-partner-wsdl-24.jar"/><fileset dir="../Dependencies/java/salesforce" includes="*.jar"/></path>
   <target name="compile">
     <mkdir dir="${classes.dir}"/><mkdir dir="build/disabled-profiling-source"/>
     <javac srcdir="${source.dir}" destdir="${classes.dir}" source="1.8" target="1.8" encoding="UTF-8"

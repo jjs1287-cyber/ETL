@@ -256,7 +256,7 @@ public class BulkLoadQueryResult implements BulkLoadResultProcess {
       String var1 = "Z:/dev/dataloader/bulkload/test/bulkquery.csv";
       Charset var2 = ETLForgeSystemProperty.getCharset("");
       String var3 = "https://na14-api.salesforce.com/services/async/24.0/job/750d0000000PcOVAA0";
-      String var4 = "00Dd0000000cV0m!ARUAQOgnTG132lYTB_LvvWU9TQ0vnSNq9MtuGITwBh2UGNB874ecTxz3_8AIqT2hgaDp6Jj7mDUAe1KzOdxT5Zy_Dgcjj5uA";
+      String var4 = "TEST_SESSION_ID_NOT_A_REAL_SALESFORCE_TOKEN";
       System.out.println("start...");
       System.out.println("end...");
    }

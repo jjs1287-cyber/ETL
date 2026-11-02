@@ -1,0 +1,7 @@
+Error in stylesheet:
+  FODC0006  First argument to parse-xml() is not a well-formed and namespace-well-formed XML
+  document. org.xml.sax.SAXParseException; systemId: urn:/etlforge/xslt/stylesheet;
+  lineNumber: 1; columnNumber: 10; DOCTYPE is disallowed when the feature
+  "http://apache.org/xml/features/disallow-doctype-decl" set to true.DOCTYPE is disallowed
+  when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+  In template rule with match="/" of stylesheet

@@ -1,0 +1,8 @@
+{
+  "name": "Ada",
+  "age": 42,
+  "active": true,
+  "disabled": false,
+  "balance": 12.5,
+  "missing": null
+}

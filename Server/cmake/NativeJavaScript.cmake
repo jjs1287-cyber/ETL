@@ -1,7 +1,7 @@
 enable_language(C)
-execute_process(COMMAND C:/Tools/aider-env/Scripts/python.exe C:/ETL/Tools/Generate-JavaScriptPolicy.py COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND "${Python3_EXECUTABLE}" ${ETLFORGE_ROOT}/Tools/Generate-JavaScriptPolicy.py COMMAND_ERROR_IS_FATAL ANY)
 option(ETLFORGE_ENABLE_JAVASCRIPT "Enable bounded native JavaScript script blocks" ON)
-set(ETLFORGE_QUICKJS "C:/ETL/Dependencies/quickjs-ng-0.17.0")
+set(ETLFORGE_QUICKJS "${ETLFORGE_ROOT}/Dependencies/quickjs-ng-0.17.0")
 add_library(etlforge_quickjs STATIC
  "${ETLFORGE_QUICKJS}/quickjs.c" "${ETLFORGE_QUICKJS}/dtoa.c"
  "${ETLFORGE_QUICKJS}/libregexp.c" "${ETLFORGE_QUICKJS}/libunicode.c")
@@ -15,7 +15,7 @@ target_link_libraries(etlforge_native_javascript PUBLIC etlforge_quickjs)
 target_link_libraries(etlforge_transformation_engine_probe PUBLIC etlforge_native_javascript)
 target_compile_definitions(etlforge_transformation_engine_probe PRIVATE ETLFORGE_NATIVE_JAVASCRIPT_ENABLED=$<BOOL:${ETLFORGE_ENABLE_JAVASCRIPT}>)
 add_library(etlforge_studio_javascript SHARED src/native/javascript/StudioJavaScriptJNI.cpp)
-target_include_directories(etlforge_studio_javascript PRIVATE C:/ETL/Tools/jdk8u504-b01/include C:/ETL/Tools/jdk8u504-b01/include/win32)
+target_include_directories(etlforge_studio_javascript PRIVATE ${ETLFORGE_ROOT}/Tools/jdk8u504-b01/include ${ETLFORGE_ROOT}/Tools/jdk8u504-b01/include/win32)
 target_link_libraries(etlforge_studio_javascript PRIVATE etlforge_native_javascript)
 set_target_properties(etlforge_studio_javascript PROPERTIES OUTPUT_NAME ETLForgeJavaScript)
 set(ETLFORGE_JAVASCRIPT_STAGE_BIN "" CACHE PATH "Optional staging directory for reviewed server deployment")

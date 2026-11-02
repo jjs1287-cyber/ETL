@@ -44,23 +44,23 @@ target_compile_definitions(etlforge_legacy_utils_probe PRIVATE WIN32 NOMINMAX _W
 if(ETLFORGE_DEPENDENCY_INCLUDE_DIRS)
   target_include_directories(etlforge_legacy_utils_probe PRIVATE ${ETLFORGE_DEPENDENCY_INCLUDE_DIRS})
 endif()
-if(EXISTS "C:/ETL/Dependencies/boost_1_86_0/boost/version.hpp")
-  target_include_directories(etlforge_legacy_utils_probe PRIVATE "C:/ETL/Dependencies/boost_1_86_0")
+if(EXISTS "${ETLFORGE_ROOT}/Dependencies/boost_1_86_0/boost/version.hpp")
+  target_include_directories(etlforge_legacy_utils_probe PRIVATE "${ETLFORGE_ROOT}/Dependencies/boost_1_86_0")
   target_compile_definitions(etlforge_legacy_utils_probe PRIVATE BOOST_ALL_NO_LIB)
 endif()
 
-target_include_directories(etlforge_legacy_utils_probe PRIVATE "C:/ETL/Dependencies/getpot-legacy")
-if(EXISTS "C:/ETL/Dependencies/windows-x64/include/xercesc/util/XercesVersion.hpp" AND CMAKE_SIZEOF_VOID_P EQUAL 8)
-  target_include_directories(etlforge_legacy_utils_probe PRIVATE "C:/ETL/Dependencies/windows-x64/include")
+target_include_directories(etlforge_legacy_utils_probe PRIVATE "${ETLFORGE_ROOT}/Dependencies/getpot-legacy")
+if(EXISTS "${ETLFORGE_ROOT}/Dependencies/windows-x64/include/xercesc/util/XercesVersion.hpp" AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+  target_include_directories(etlforge_legacy_utils_probe PRIVATE "${ETLFORGE_ROOT}/Dependencies/windows-x64/include")
 endif()
 
 
-if(EXISTS "C:/ETL/Dependencies/build/xalan-x64/src/xalanc/Include/PlatformDefinitions.hpp")
+if(EXISTS "${ETLFORGE_ROOT}/Dependencies/build/xalan-x64/src/xalanc/Include/PlatformDefinitions.hpp")
   target_include_directories(etlforge_legacy_utils_probe PRIVATE
-    "C:/ETL/Dependencies/xalan_c-1.12/src"
-    "C:/ETL/Dependencies/build/xalan-x64/src")
+    "${ETLFORGE_ROOT}/Dependencies/xalan_c-1.12/src"
+    "${ETLFORGE_ROOT}/Dependencies/build/xalan-x64/src")
 endif()
-target_include_directories(etlforge_legacy_utils_probe PRIVATE "C:/ETL/Dependencies/build/xalan-x64/src/xalanc/NLS/gen")
+target_include_directories(etlforge_legacy_utils_probe PRIVATE "${ETLFORGE_ROOT}/Dependencies/build/xalan-x64/src/xalanc/NLS/gen")
 
 
 set_source_files_properties("${ETLFORGE_COMMON}/konga/Utils/FileUtils.cpp" PROPERTIES COMPILE_OPTIONS "/std:c++17" COMPILE_DEFINITIONS "_HAS_AUTO_PTR_ETC=1")
